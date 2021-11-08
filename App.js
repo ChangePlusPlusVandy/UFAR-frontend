@@ -12,7 +12,7 @@ export default function App() {
     <View>
       <StatusBar style="auto" />
 
-      {/* <Hamburger /> */}
+      <Hamburger></Hamburger>
       <GreetingHeader name="John Doe" />
       <DashboardSummary />
       <RecentsList />

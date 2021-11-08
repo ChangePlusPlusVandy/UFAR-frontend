@@ -1,5 +1,7 @@
 import React from 'react';
-import {Pressable, StyleSheet, View} from 'react-native';
+import {Pressable, StyleSheet , TouchableOpacity, View} from 'react-native';
+import {Icon} from 'react-native-elements';
+
 
 export default function Hamburger () {
     const onPress = () => {
@@ -8,8 +10,9 @@ export default function Hamburger () {
     }
 
     return (
-        <Pressable onPress={onPress} style={styles.hamburger}>
-        </Pressable>
+        <TouchableOpacity onPress={onPress} style={styles.hamburger}>
+            <Icon name="menu" color = '#FFFFFF' size = {44} iconStyle = {styles.burgerbun} />
+        </TouchableOpacity>
     );
 }
 
@@ -19,5 +22,12 @@ const styles = StyleSheet.create({
         width: 54,
         backgroundColor: '#EC1C24',
         borderRadius: 27,
-    }
+        alignContent: "center",
+        marginLeft: 15,
+        marginTop: 30,
+    },
+    burgerbun:{
+        marginTop: 5,
+        marginLeft: 2,
+    },
 })
