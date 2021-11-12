@@ -11,7 +11,7 @@ export default function Hamburger () {
 
     return (
         <TouchableOpacity onPress={onPress} style={styles.hamburger}>
-            <Icon name="menu" color = '#FFFFFF' size = {44} iconStyle = {styles.burgerbun} />
+            <Icon name="menu" color = '#FFFFFF' size = {44} iconStyle = {styles.icon} />
         </TouchableOpacity>
     );
 }
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         marginTop: 30,
     },
-    burgerbun:{
+    icon:{
         marginTop: 5,
         marginLeft: 2,
     },

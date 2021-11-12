@@ -1,20 +1,21 @@
 import React from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
-
-function Button({onPress}) {
-    return (
-        <Pressable onPress={onPress} style={styles.button}>
-        </Pressable>
-    )
-}
+import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
+import {Icon} from 'react-native-elements';
 
 export default function DashboardSummary() {
+    const onPress = () => {
+        // Do something
+        return;
+    }
+
     return (
         <View>
             <View style={styles.container}>
                 <Text style={styles.title}>Dashboard Summary</Text>
             </View>
-            <Button />
+            <TouchableOpacity onPress={onPress} style={styles.button}>
+                <Icon name = "east" color = '#FFFFFF' size = {44} iconStyle = {styles.icon} />
+            </TouchableOpacity>
         </View>
     );
 }
@@ -58,5 +59,9 @@ const styles = StyleSheet.create({
         width: 54,
         backgroundColor: '#EC1C24',
         borderRadius: 27,
-    }
+    },
+    icon:{
+        marginTop: 5,
+        marginLeft: 2,
+    },
 })
