@@ -1,25 +1,43 @@
 import React from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View, TouchableOpacity, ScrollView} from 'react-native';
+import {Icon} from 'react-native-elements';
 
 const DATA = [
     {
       id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      title: "First Item",
+      timestamp: "10 min",
+      name: "Arnold Adams",
     },
     {
       id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      title: "Second Item",
+      timestamp: "15 min",
+      name: "Barry Brown",
     },
     {
       id: "58694a0f-3da1-471f-bd96-145571e29d72",
-      title: "Third Item",
+      timestamp: "2 hrs",
+      name: "Christine Cowan",
+    },
+    {
+      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+      timestamp: "15 hrs",
+      name: "Donald Dover",
+    },
+    {
+      id: "58694a0f-3da1-471f-bd96-145571e29d72",
+      timestamp: "3 days",
+      name: "Elise Elliot",
     },
 ];
 
 export default function RecentsList() {
     const renderItem = ({item}) => (
-        <View style={styles.itemName}>
-            <Text>{item.title}</Text>
+        <View style={styles.timestamp}>
+            <Text style={styles.graytext}>{item.timestamp}</Text>
+            <Text style={styles.namelist}>{item.name}</Text>
+            <TouchableOpacity style={styles.edit}>
+                <Icon name="edit" color = '#000000' size = {25} />
+            </TouchableOpacity>
         </View>
     );
 
@@ -38,15 +56,31 @@ const styles = StyleSheet.create({
     header: {
         // fontFamily: 'Helvetica Neue',
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 25,
         lineHeight: 25,
-        left: 39,
+        left: 17,
+        marginBottom: 5,
     },
-    itemName: {
+    timestamp: {
         borderWidth: 1,
         marginHorizontal: 7,
-        marginVertical: 2,
+        marginVertical: 3,
         paddingHorizontal: 10,
         paddingVertical: 10,
-    }
+        flexDirection: "row",
+    },
+    graytext: {
+        color: '#555555',
+        flex: 2,
+        textAlignVertical: "center",
+        marginTop: 5,
+    },
+    namelist: {
+        color: '#000000',
+        fontSize: 20,
+        flex: 5,
+    },
+    edit: {
+        flex: 1,
+    },
 })

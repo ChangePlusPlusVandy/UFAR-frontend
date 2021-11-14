@@ -1,18 +1,11 @@
 import React from 'react';
+import Hamburger from './Hamburger';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {Icon} from 'react-native-elements';
 
 export default function GreetingHeader({name}) {
-    const onPress = () => {
-        // Do something
-        return;
-    }
-
     return (
         <View style = {styles.over}>
-                <TouchableOpacity onPress={onPress} style={styles.hamburger}>
-                    <Icon name="menu" color = '#FFFFFF' size = {44} iconStyle = {styles.icon} />
-                </TouchableOpacity>
+            <Hamburger/>
             <View style={styles.container}>
                 <Text style={styles.greeting}>Welcome</Text>
                 <Text style={styles.name}>{name}</Text>
@@ -45,18 +38,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 30,
         lineHeight: 32,
-    },
-    hamburger: {
-        height: 54,
-        width: 54,
-        backgroundColor: '#EC1C24',
-        borderRadius: 27,
-        alignContent: "center",
-        marginLeft: 15,
-        marginTop: 30,
-    },
-    icon:{
-        marginTop: 5,
-        marginLeft: 2,
     },
 });

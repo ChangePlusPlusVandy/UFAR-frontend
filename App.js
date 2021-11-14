@@ -11,7 +11,6 @@ export default function App() {
   return (
     <ScrollView>
       <StatusBar style="auto" />
-
       <GreetingHeader name="John Doe" />
       <DashboardSummary/>
       <RecentsList />

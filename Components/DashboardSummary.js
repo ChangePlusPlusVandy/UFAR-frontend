@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
 
         /* Android Drop Shadow Styling */
-        // elevation: 10,
+        elevation: 10,
         
         /* iOS Drop Shadow Styling */
         // shadowColor: '#0000004B',
@@ -47,8 +47,9 @@ const styles = StyleSheet.create({
     title: {
         // fontFamily: 'Avenir',
         fontWeight: 'bold',
-        fontSize: 29,
+        fontSize: 32,
         lineHeight: 40,
+        marginTop: 8,
     },
     button: {
         position: 'absolute',
