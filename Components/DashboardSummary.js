@@ -9,10 +9,8 @@ export default function DashboardSummary() {
     }
 
     return (
-        <View>
-            <View style={styles.container}>
-                <Text style={styles.title}>Dashboard Summary</Text>
-            </View>
+        <View style={[styles.container, styles.shadowbox]}>
+            <Text style={styles.title}>Dashboard Summary</Text>
             <TouchableOpacity onPress={onPress} style={styles.button}>
                 <Icon name = "east" color = '#FFFFFF' size = {44} iconStyle = {styles.icon} />
             </TouchableOpacity>
@@ -23,26 +21,24 @@ export default function DashboardSummary() {
 const styles = StyleSheet.create({
     container: {
         marginTop: 29,
-        marginHorizontal: 7,
+        marginHorizontal: 10,
         height: 286,
         borderRadius: 11,
-
-        /* temp placeholder styling for drop shadow */
-        borderColor: 'black',
-        borderWidth: 1,
-
+        backgroundColor: "white",
+        alignItems: 'center',
+    },
+    shadowbox: {
         /* Android Drop Shadow Styling */
         elevation: 10,
         
         /* iOS Drop Shadow Styling */
-        // shadowColor: '#0000004B',
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 3,
-        // },
-        // shadowRadius: 10,
-
-        alignItems: 'center',
+        shadowColor: "black",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 10,
+        shadowOpacity: 0.3,
     },
     title: {
         // fontFamily: 'Avenir',

@@ -1,6 +1,7 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, View, TouchableOpacity, ScrollView} from 'react-native';
 import {Icon} from 'react-native-elements';
+//uses material icons
 
 const DATA = [
     {
@@ -32,8 +33,8 @@ const DATA = [
 
 export default function RecentsList() {
     const renderItem = ({item}) => (
-        <View style={styles.timestamp}>
-            <Text style={styles.graytext}>{item.timestamp}</Text>
+        <View style={styles.listitem}>
+            <Text style={styles.timelist}>{item.timestamp}</Text>
             <Text style={styles.namelist}>{item.name}</Text>
             <TouchableOpacity style={styles.edit}>
                 <Icon name="edit" color = '#000000' size = {25} />
@@ -61,15 +62,16 @@ const styles = StyleSheet.create({
         left: 17,
         marginBottom: 5,
     },
-    timestamp: {
+    listitem: {
         borderWidth: 1,
         marginHorizontal: 7,
         marginVertical: 3,
         paddingHorizontal: 10,
         paddingVertical: 10,
         flexDirection: "row",
+        borderRadius: 10,
     },
-    graytext: {
+    timelist: {
         color: '#555555',
         flex: 2,
         textAlignVertical: "center",
