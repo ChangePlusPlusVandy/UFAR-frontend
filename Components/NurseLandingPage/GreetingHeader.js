@@ -7,7 +7,7 @@ export default function GreetingHeader({name}) {
         <View style = {styles.over}>
             <Hamburger/>
             <View style={styles.container}>
-                <Text style={styles.greeting}>Welcome</Text>
+                <Text style={styles.greeting}>Bienvenue</Text>
                 <Text style={styles.name}>{name}</Text>
             </View>
         </View>

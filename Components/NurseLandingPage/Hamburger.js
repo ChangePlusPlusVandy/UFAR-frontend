@@ -25,6 +25,18 @@ const styles = StyleSheet.create({
         alignContent: "center",
         marginLeft: 15,
         marginTop: 30,
+
+        /* Android Drop Shadow Styling */
+        elevation: 10,
+        
+        /* iOS Drop Shadow Styling */
+        shadowColor: "black",
+        shadowOffset: {
+            width: 5,
+            height: 5,
+        },
+        shadowRadius: 5,
+        shadowOpacity: 0.3,
     },
     icon:{
         marginTop: 5,
