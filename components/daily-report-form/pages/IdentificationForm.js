@@ -12,7 +12,7 @@ export default function IdentificationForm(props) {
                 </View>
                 <TextInput onChange={(e) => props.setProvinceName(e.nativeEvent.text)} style={styles.inputField} defaultValue={props.provinceName}  placeholder="Name of Province/Region" />
                 <TextInput onChange={(e) => props.setHealthZoneName(e.nativeEvent.text)}  style={styles.inputField} defaultValue={props.healthZoneName} placeholder="Health Zone Name" />
-                <TextInput onChange={(e) => props.setHelthArea(e.nativeEvent.text)} style={styles.inputField} defaultValue={props.healthArea} placeholder="Aire de santé" />
+                <TextInput onChange={(e) => props.setHealthArea(e.nativeEvent.text)} style={styles.inputField} defaultValue={props.healthArea} placeholder="Aire de santé" />
                 <TextInput onChange={(e) => props.setVillageName(e.nativeEvent.text)} style={styles.inputField} defaultValue={props.villageName} placeholder="Village/Community Name" />
                 <TextInput style={styles.inputField} placeholder="GPS Location (autofill)" />
             </View>

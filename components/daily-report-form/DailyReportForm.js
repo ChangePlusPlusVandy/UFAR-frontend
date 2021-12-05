@@ -26,9 +26,8 @@ export default function DailyReportForm() {
     const[villageName, setVillageName] = useState("");
 
     const pages = [
-        <IdentificationForm props={setDMMDay, DMMDay, registeredNurse,
-             setRegisteredNurse, provinceName, setProvinceName, healthZoneName, setHealthZoneName,
-            healthArea, setHealthArea, villageName, setVillageName} />, 
+        <IdentificationForm setActivePage={setActivePage} setDMMDay={setDMMDay} setRegisteredNurse={setRegisteredNurse} setProvinceName={setProvinceName} setHealthZoneName={setHealthZoneName} setHealthArea={setHealthArea} setVillageName={setVillageName}
+        DMMDay={DMMDay} registeredNurse={registeredNurse} provinceName={provinceName} healthZoneName={healthZoneName} healthArea={healthArea} villageName={villageName}/>,
         <TreatmentInformationForm />, 
         <DatesForm />, 
         <DistributorsForm />, 
