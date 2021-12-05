@@ -3,11 +3,20 @@ import {Platform, Pressable, StatusBar, StyleSheet, Text, View} from 'react-nati
 
 import BackButton from './BackButton';
 import CrossIcon from './CrossIcon';
-import IdentificationForm from './IdentificationForm';
 import NextButton from './NextButton';
 import ProgressBar from './ProgressBar';
 
-const pages = [<IdentificationForm />, null, null, null, null];  // Ordered array of page components
+import DatesForm from './pages/DatesForm';
+import Denumber1Form from './pages/Denumber1Form';
+import Denumber2Form from './pages/Denumber2Form';
+import Denumber3Form from './pages/Denumber3Form';
+import DistributorsForm from './pages/DistributorsForm';
+import IdentificationForm from './pages/IdentificationForm';
+import TreatmentInformationForm from './pages/TreatmentInformationForm';
+import MorbidityEstimationForm from './pages/MorbidityEstimationForm';
+import Summary from './pages/Summary';
+
+const pages = [<IdentificationForm />, <TreatmentInformationForm />, <DatesForm />, <DistributorsForm />, <Denumber1Form />, <Denumber2Form />, <Denumber3Form />, <MorbidityEstimationForm />, <Summary />];
 
 export default function DailyReportForm() {
     const [activePage, setActivePage] = useState(null);
