@@ -1,19 +1,19 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-export default function IdentificationForm() {
+export default function IdentificationForm(props) {
     return (
         <View>
             <Text style={styles.header}>Identification</Text>
             <View style={styles.inputContainer}>
                 <View style={{flexDirection: 'row'}}>
-                    <TextInput style={{...styles.inputField, flex: 1, marginRight: 5.5}} placeholder="DMM Day" />
-                    <TextInput style={{...styles.inputField, flex: 2, marginLeft: 5.5}} placeholder="Name of Registered Nurse" />
+                    <TextInput style={{...styles.inputField, flex: 1, marginRight: 5.5}} onChange={(e) => props.setDMMDay(e.nativeEvent.text)} defaultValue={props.DMMDay} placeholder="DMM Day" />
+                    <TextInput style={{...styles.inputField, flex: 2, marginLeft: 5.5}} onChange={(e) => props.setRegisteredNurse(e.nativeEvent.text)} defaultValue={props.registeredNurse} placeholder="Name of Registered Nurse" />
                 </View>
-                <TextInput style={styles.inputField} placeholder="Name of Province/Region" />
-                <TextInput style={styles.inputField} placeholder="Health Zone Name" />
-                <TextInput style={styles.inputField} placeholder="Aire de santé" />
-                <TextInput style={styles.inputField} placeholder="Village/Community Name" />
+                <TextInput onChange={(e) => props.setProvinceName(e.nativeEvent.text)} style={styles.inputField} defaultValue={props.provinceName}  placeholder="Name of Province/Region" />
+                <TextInput onChange={(e) => props.setHealthZoneName(e.nativeEvent.text)}  style={styles.inputField} defaultValue={props.healthZoneName} placeholder="Health Zone Name" />
+                <TextInput onChange={(e) => props.setHelthArea(e.nativeEvent.text)} style={styles.inputField} defaultValue={props.healthArea} placeholder="Aire de santé" />
+                <TextInput onChange={(e) => props.setVillageName(e.nativeEvent.text)} style={styles.inputField} defaultValue={props.villageName} placeholder="Village/Community Name" />
                 <TextInput style={styles.inputField} placeholder="GPS Location (autofill)" />
             </View>
         </View>
