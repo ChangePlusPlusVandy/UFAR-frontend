@@ -21,10 +21,10 @@ const styles = StyleSheet.create({
         height: 20,
         width: 20,
         justifyContent: 'center',
-        display: 'flex',
+        position: 'absolute',
     },
     containerInactive: {
-        top: 0,
+        top: null,
         left: 95,
         transform: [{rotate: '45deg'}],
     },

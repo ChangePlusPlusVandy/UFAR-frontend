@@ -1,36 +1,56 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Platform, Pressable, StatusBar, StyleSheet, Text, View} from 'react-native';
 
+import BackButton from './BackButton';
 import CrossIcon from './CrossIcon';
 import IdentificationForm from './IdentificationForm';
+import NextButton from './NextButton';
 import ProgressBar from './ProgressBar';
 
-const pages = [<IdentificationForm />];  // Ordered array of page componenets
+const pages = [<IdentificationForm />, null, null, null, null];  // Ordered array of page components
 
-export default function DailyReportForm ({activePage, setActivePage}) {
+export default function DailyReportForm() {
+    const [activePage, setActivePage] = useState(null);
+
     const openForm = () => setActivePage(0);  // Opens form by setting currently active page to 0 (first page)
 
+    // Conditional rendering page navigation
+    const renderPageContent = () => {
+        if (activePage === null) {
+            return (
+                <>
+                    <Pressable onPress={openForm} style={styles.newReportPressable} >
+                        <Text style={styles.newReportText}>New Report</Text>
+                    </Pressable>
+                </>
+            );
+        } else {
+            return (
+                <>
+                    {pages[activePage]}
+                    <View style={styles.buttonsContainer}>
+                        {activePage > 0 && <BackButton setActivePage={setActivePage}/>}
+                        {activePage < pages.length - 1 && <NextButton setActivePage={setActivePage}/>}
+                    </View>
+                    <ProgressBar progress={(activePage + 1) / pages.length} />
+                </>
+            );
+        }
+    }
+
+    // Render form component
     return (
         <View style={activePage !== null ? styles.container : {...styles.container, ...styles.containerInactive}}>
             <CrossIcon activePage={activePage} setActivePage={setActivePage} />
-
-            {  // Render active page component
-                activePage !== null ? pages[activePage] :
-                    // Special case: inactive form
-                    <>
-                        <Pressable onPress={openForm} style={styles.newReportPressable} >
-                            <Text style={styles.newReportText}>New Report</Text>
-                        </Pressable>
-                    </>
-            }
-
-            {activePage !== null && <ProgressBar progress={(activePage + 1) / pages.length} />}
+            {renderPageContent()}
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
+        justifyContent: 'space-between',
         position: 'absolute',
         left: 0,
         right: 0,
@@ -59,13 +79,12 @@ const styles = StyleSheet.create({
         fontSize: 23,
         lineHeight: 28,
     },
-    progressBarBackground: {
-        backgroundColor: 'gray',
-        height: 10,
+    buttonsContainer: {
         position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        bottom: 30
     }
 });
 

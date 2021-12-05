@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-export default function IdentificationForm () {
+export default function IdentificationForm() {
     return (
-        <>
+        <View>
             <Text style={styles.header}>Identification</Text>
             <View style={styles.inputContainer}>
                 <View style={{flexDirection: 'row'}}>
@@ -16,13 +16,13 @@ export default function IdentificationForm () {
                 <TextInput style={styles.inputField} placeholder="Village/Community Name" />
                 <TextInput style={styles.inputField} placeholder="GPS Location (autofill)" />
             </View>
-        </>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     header: {
-        paddingBottom: 18,
+        paddingVertical: 18,
         alignSelf: 'center',
         fontFamily: 'Helvetica Neue',
         fontWeight: 'bold',
