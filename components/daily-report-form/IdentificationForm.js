@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     header: {
         paddingVertical: 18,
         alignSelf: 'center',
-        fontFamily: 'Helvetica Neue',
+        fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Helvetica Neue',
         fontWeight: 'bold',
         fontSize: 23,
         lineHeight: 28,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         borderRadius: 17,
         backgroundColor: 'white',
-        fontFamily: 'Avenir LT 55 Roman',
+        fontFamily: Platform.OS === 'android' ? 'sans-serif-medium' : 'Avenir-Roman',
         fontSize: 11,
         lineHeight: 13,
     }

@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     text: {
         paddingVertical: 3,
         color: 'white',
-        fontFamily: 'Avenir LT 55 Roman',
+        fontFamily: Platform.OS === 'android' ? 'sans-serif-medium' : 'Avenir-Roman',
         fontSize: 13,
         lineHeight: 15,
     }

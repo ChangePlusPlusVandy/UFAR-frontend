@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0,
         right: 0,
-        top: Platform.OS === 'android' ? StatusBar.currentHeight: 45,
+        top: Platform.OS === 'android' ? StatusBar.currentHeight : 45,
         bottom: 0,
         backgroundColor: '#EC1C24',
         borderTopLeftRadius: 11,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     newReportText: {
         textAlign: 'center',
         color: 'white',
-        fontFamily: 'Helvetica Neue',
+        fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Helvetica Neue',
         fontWeight: 'bold',
         fontSize: 23,
         lineHeight: 28,
