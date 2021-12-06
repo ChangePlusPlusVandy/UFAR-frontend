@@ -18,6 +18,8 @@ import Summary from './pages/Summary';
 
 export default function DailyReportForm() {
     const [activePage, setActivePage] = useState(null);
+
+    // Identification state
     const [DMMDay, setDMMDay] = useState("");
     const [registeredNurse, setRegisteredNurse] = useState("");
     const [provinceName, setProvinceName] = useState("");
@@ -25,9 +27,29 @@ export default function DailyReportForm() {
     const [healthArea, setHealthArea] = useState("");
     const [villageName, setVillageName] = useState("");
 
+    // Treatment Information state
+
+    // Dates state
+
+    // Distributors state
+
+    // Estimation of Morbidity Cases state
+
     const pages = [
-        <IdentificationForm setActivePage={setActivePage} setDMMDay={setDMMDay} setRegisteredNurse={setRegisteredNurse} setProvinceName={setProvinceName} setHealthZoneName={setHealthZoneName} setHealthArea={setHealthArea} setVillageName={setVillageName}
-        DMMDay={DMMDay} registeredNurse={registeredNurse} provinceName={provinceName} healthZoneName={healthZoneName} healthArea={healthArea} villageName={villageName}/>,
+        <IdentificationForm
+            setDMMDay={setDMMDay}
+            DMMDay={DMMDay}
+            setRegisteredNurse={setRegisteredNurse}
+            registeredNurse={registeredNurse}
+            setProvinceName={setProvinceName}
+            provinceName={provinceName}
+            setHealthZoneName={setHealthZoneName}
+            healthZoneName={healthZoneName}
+            setHealthArea={setHealthArea}
+            healthArea={healthArea}
+            setVillageName={setVillageName}
+            villageName={villageName}
+        />,
         <TreatmentInformationForm />, 
         <DatesForm />, 
         <DistributorsForm />, 
