@@ -1,11 +1,20 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-export default function DistributorsForm() {
+export default function DistributorsForm(props) {
     return (
         <View>
             <Text style={styles.header}>Distributors</Text>
-            {/* TODO: input fields */}
+            <View style={styles.inputContainer}>
+                <Text style={styles.inputLabel}>DC Distributors</Text>
+                <View style={styles.rowContainer}>
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumMenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenDistributors || '').toString()} placeholder="# of Men" />
+                    <Text style={styles.text}>+</Text>
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenDistributors || '').toString()} placeholder="# of Women" />
+                    <Text style={styles.text}>=</Text>
+                    <TextInput style={styles.inputField} value={props.totalNumDistributors.toString()} placeholder="Total" />
+                </View>
+            </View>
         </View>
     );
 }
@@ -20,7 +29,37 @@ const styles = StyleSheet.create({
         lineHeight: 28,
         color: 'white',
     },
+    rowContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
     inputContainer: {
         marginHorizontal: 34,
     },
+    inputLabel: {
+        fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
+        fontSize: 11,
+        lineHeight: 13,
+        color: 'white',
+    },
+    inputField: {
+        marginVertical: 5,
+        paddingVertical: 5,
+        paddingHorizontal: 15,
+        borderRadius: 17,
+        backgroundColor: 'white',
+        fontFamily: Platform.OS === 'android' ? 'sans-serif-medium' : 'Avenir-Roman',
+        fontSize: 11,
+        lineHeight: 13,
+        color: 'black',
+        width: 95,
+        textAlign: 'center',
+    },
+    text: {
+        color: 'white',
+        fontFamily: Platform.OS === 'android' ? 'sans-serif-medium' : 'Avenir-Roman',
+        fontSize: 12,
+        lineHeight: 14,
+    }
 })

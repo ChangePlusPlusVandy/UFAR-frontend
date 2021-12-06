@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Platform, Pressable, StatusBar, StyleSheet, Text, View} from 'react-native';
 
 import BackButton from './BackButton';
@@ -38,7 +38,14 @@ export default function DailyReportForm() {
     const [reportTransmissionDate, setReportTransmissionDate] = useState("");
 
     // Distributors state
-    // TODO: Insert state
+    const [numMenDistributors, setNumMenDistributors] = useState(0);
+    const [numWomenDistributors, setNumWomenDistributors] = useState(0);
+    const [totalNumDistributors, setTotalNumDistributors] = useState(numMenDistributors + numWomenDistributors);
+
+    // Update total anytime # men or # women is updated
+    useEffect(() => {
+        setTotalNumDistributors(numMenDistributors + numWomenDistributors)
+    }, [numMenDistributors, numWomenDistributors]);
 
     // Denumbers state
     // TODO: Insert state
@@ -74,7 +81,13 @@ export default function DailyReportForm() {
             setReportTransmissionDate={setReportTransmissionDate}
             reportTransmissionDate={reportTransmissionDate}
         />, 
-        <DistributorsForm />, 
+        <DistributorsForm
+            setNumMenDistributors={setNumMenDistributors}
+            numMenDistributors={numMenDistributors}
+            setNumWomenDistributors={setNumWomenDistributors}
+            numWomenDistributors={numWomenDistributors}
+            totalNumDistributors={totalNumDistributors}
+        />, 
         <Denumber1Form />, 
         <Denumber2Form />, 
         <Denumber3Form />, 
