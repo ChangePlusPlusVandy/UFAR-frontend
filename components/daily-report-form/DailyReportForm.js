@@ -16,10 +16,27 @@ import TreatmentInformationForm from './pages/TreatmentInformationForm';
 import MorbidityEstimationForm from './pages/MorbidityEstimationForm';
 import Summary from './pages/Summary';
 
-const pages = [<IdentificationForm />, <TreatmentInformationForm />, <DatesForm />, <DistributorsForm />, <Denumber1Form />, <Denumber2Form />, <Denumber3Form />, <MorbidityEstimationForm />, <Summary />];
-
 export default function DailyReportForm() {
     const [activePage, setActivePage] = useState(null);
+    const [DMMDay, setDMMDay] = useState("");
+    const [registeredNurse, setRegisteredNurse] = useState("");
+    const [provinceName, setProvinceName] = useState("");
+    const [healthZoneName, setHealthZoneName] = useState("");
+    const [healthArea, setHealthArea] = useState("");
+    const [villageName, setVillageName] = useState("");
+
+    const pages = [
+        <IdentificationForm setActivePage={setActivePage} setDMMDay={setDMMDay} setRegisteredNurse={setRegisteredNurse} setProvinceName={setProvinceName} setHealthZoneName={setHealthZoneName} setHealthArea={setHealthArea} setVillageName={setVillageName}
+        DMMDay={DMMDay} registeredNurse={registeredNurse} provinceName={provinceName} healthZoneName={healthZoneName} healthArea={healthArea} villageName={villageName}/>,
+        <TreatmentInformationForm />, 
+        <DatesForm />, 
+        <DistributorsForm />, 
+        <Denumber1Form />, 
+        <Denumber2Form />, 
+        <Denumber3Form />, 
+        <MorbidityEstimationForm />, 
+        <Summary />
+    ];
 
     const openForm = () => setActivePage(0);  // Opens form by setting currently active page to 0 (first page)
 
