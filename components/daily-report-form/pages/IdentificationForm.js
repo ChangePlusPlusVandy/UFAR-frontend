@@ -9,19 +9,19 @@ const provinceNames = [
     { label: 'Kwilu', value: 'kwilu' },
 ];
 const healthZoneNames = [
-    { label: 'Health Zone 1', value: 'healthZone1' },
-    { label: 'Health Zone 2', value: 'healthZone2' },
-    { label: 'Health Zone 3', value: 'healthZone3' },
+    { label: 'Koshibanda', value: 'koshibanda' },
+    { label: 'Kimputu', value: 'kimputu' },
+    { label: 'Pay-Kongila', value: 'payKongila' },
 ];
 const healthAreas = [
-    { label: 'Health Area 1', value: 'healthArea1' },
-    { label: 'Health Area 2', value: 'healthArea2' },
-    { label: 'Health Area 3', value: 'healthArea3' },
+    { label: 'Balaka', value: 'balaka' },
+    { label: 'Bamba', value: 'bamba' },
+    { label: 'Banda', value: 'banda' },
 ];
 const villageNames = [
-    { label: 'Village 1', value: 'village1' },
-    { label: 'Village 2', value: 'village2' },
-    { label: 'Village 3', value: 'village3' },
+    { label: 'Balaka Village', value: 'balakaVillage' },
+    { label: 'Balaka Mic P', value: 'balakaMicP' },
+    { label: 'Munga', value: 'munga' },
 ];
 
 export default function IdentificationForm(props) {

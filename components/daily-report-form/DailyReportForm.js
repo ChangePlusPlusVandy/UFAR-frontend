@@ -28,12 +28,23 @@ export default function DailyReportForm() {
     const [villageName, setVillageName] = useState("");
 
     // Treatment Information state
+    // TODO: Insert state
 
     // Dates state
+    const [DCTrainingCompletionDate, setDCTrainingCompletionDate] = useState("");
+    const [medicineArrivalDate, setMedicineArrivalDate] = useState("");
+    const [MDDStartDate, setMDDStartDate] = useState("");
+    const [DMMEndDate, setDMMEndDate] = useState("");
+    const [reportTransmissionDate, setReportTransmissionDate] = useState("");
 
     // Distributors state
+    // TODO: Insert state
+
+    // Denumbers state
+    // TODO: Insert state
 
     // Estimation of Morbidity Cases state
+    // TODO: Insert state
 
     const pages = [
         <IdentificationForm
@@ -51,7 +62,18 @@ export default function DailyReportForm() {
             villageName={villageName}
         />,
         <TreatmentInformationForm />, 
-        <DatesForm />, 
+        <DatesForm
+            setDCTrainingCompletionDate={setDCTrainingCompletionDate}
+            DCTrainingCompletionDate={DCTrainingCompletionDate}
+            setMedicineArrivalDate={setMedicineArrivalDate}
+            medicineArrivalDate={medicineArrivalDate}
+            setMDDStartDate={setMDDStartDate}
+            MDDStartDate={MDDStartDate}
+            setDMMEndDate={setDMMEndDate}
+            DMMEndDate={DMMEndDate}
+            setReportTransmissionDate={setReportTransmissionDate}
+            reportTransmissionDate={reportTransmissionDate}
+        />, 
         <DistributorsForm />, 
         <Denumber1Form />, 
         <Denumber2Form />, 
