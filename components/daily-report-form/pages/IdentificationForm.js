@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 
 export default function IdentificationForm() {
     return (
@@ -10,7 +11,15 @@ export default function IdentificationForm() {
                     <TextInput style={{...styles.inputField, flex: 1, marginRight: 5.5}} placeholder="DMM Day" />
                     <TextInput style={{...styles.inputField, flex: 2, marginLeft: 5.5}} placeholder="Name of Registered Nurse" />
                 </View>
-                <TextInput style={styles.inputField} placeholder="Name of Province/Region" />
+                <RNPickerSelect
+                    useNativeAndroidPickerStyle={false}
+                    style={{inputAndroid: {...styles.inputField}}}
+                    onValueChange={(value) => console.log(value)}
+                    items={[
+                        { label: 'Kwango', value: 'kwango' },
+                        { label: 'Kwilu', value: 'kwilu' },
+                    ]}
+                    placeholder={{label: "Name of Province/Region", value: null}}/>
                 <TextInput style={styles.inputField} placeholder="Health Zone Name" />
                 <TextInput style={styles.inputField} placeholder="Aire de santé" />
                 <TextInput style={styles.inputField} placeholder="Village/Community Name" />
@@ -42,5 +51,6 @@ const styles = StyleSheet.create({
         fontFamily: Platform.OS === 'android' ? 'sans-serif-medium' : 'Avenir-Roman',
         fontSize: 11,
         lineHeight: 13,
+        color: 'black',
     }
 })
