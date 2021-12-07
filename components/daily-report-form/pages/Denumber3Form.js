@@ -1,18 +1,31 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-export default function Denumber3Form() {
+export default function Denumber3Form(props) {
     return (
         <View>
             <Text style={styles.header}>Denumber</Text>
             <View style={styles.inputContainer}>
                 <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Households</Text>
                 <Text style={styles.inputLabel}>Number of households visited</Text>
-                <TextInput style={styles.inputField} />
+                <TextInput style={styles.inputField} 
+                    onChange={(e) => props.setNumHouseholdsVisited(parseInt(e.nativeEvent.text) || 0)}
+                    defaultValue={(props.numHouseholdsVisited || '').toString()}   
+                    placeholder='# visited'
+                    />
+
                 <Text style={styles.inputLabel}>Total number of households treated</Text>
-                <TextInput style={styles.inputField} />
+                <TextInput style={styles.inputField} 
+                    onChange={(e) => props.setNumHouseholdsTreated(parseInt(e.nativeEvent.text) || 0)}
+                    defaultValue={(props.numHouseholdsTreated || '').toString()} 
+                    placeholder='# treated' 
+                />
+
+
                 <Text style={styles.inputLabel}>Greographical coverage of the households</Text>
-                <TextInput style={styles.inputField} />
+                <TextInput style={styles.inputField} 
+                    value={ (props.geographicalCoverageOfHouseholds || 0).toString() + "%"}
+                />
             </View>
         </View>
     );

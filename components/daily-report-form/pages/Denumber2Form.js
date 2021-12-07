@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-export default function Denumber2Form() {
+export default function Denumber2Form(props) {
     return (
         <View>
             <Text style={styles.header}>Denumber</Text>
@@ -10,17 +10,17 @@ export default function Denumber2Form() {
                         <View style={styles.leftContainer}>
                             <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Totals</Text>
                             <Text style={styles.inputLabel}>Total children {'<'} 6 months</Text>
-                            <TextInput style={styles.inputField} />
+                            <TextInput style={styles.inputField} value={props.totalChildrenUnderSixMonths.toString()} />
                             <Text style={styles.inputLabel}>Total children 6 months - {'<'}5 years</Text>
-                            <TextInput style={styles.inputField} />
+                            <TextInput style={styles.inputField} value={props.totalchilrenSixMonthsToveFiveYears.toString()} />
                             <Text style={styles.inputLabel}>Total children 5 - {'<'}15 years</Text>
-                            <TextInput style={styles.inputField} />
+                            <TextInput style={styles.inputField} value={props.totalFiveToFourteenYears.toString()}/>
                             <Text style={styles.inputLabel}>Total Persons 15 years and older</Text>
-                            <TextInput style={styles.inputField} />
+                            <TextInput style={styles.inputField} value={props.totalFifteenAndOlder.toString()} />
                         </View>
                         <View style={styles.rightContainer}>
                             <Text style={styles.inputLabel}>Total Number of Persons</Text>
-                            <TextInput style={styles.inputField} />
+                            <TextInput style={styles.inputField} value={props.totalNumPersons.toString()} />
                         </View>
                     </View>
                 </View>

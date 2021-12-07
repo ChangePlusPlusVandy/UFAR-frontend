@@ -47,8 +47,49 @@ export default function DailyReportForm() {
         setTotalNumDistributors(numMenDistributors + numWomenDistributors)
     }, [numMenDistributors, numWomenDistributors]);
 
-    // Denumbers state
-    // TODO: Insert state
+    // DENUMBER
+    // women and men count
+    const [menUnderSixMonths, setMenLessThanSixMonths] = useState(0);
+    const [menSixMonthsToFiveYears, setMenSixMonthsToFiveYears] = useState(0);
+    const [menFiveToFourteenYears, setMenFiveToFourteenYears] = useState(0);
+    const [menFifteenAndOlder, setMenFifteenAndOlder] = useState(0);
+
+    const [womenLessThanSixMonths, setWomenLessThanSixMonths] = useState(0);
+    const [womenSixMonthsToFiveYears, setWomenSixMonthsToFiveYears] = useState(0);
+    const [womenFiveToFourteenYears, setWomenFiveToFourteenYears] = useState(0);
+    const [womenFifteenAndOlder, setWomenFifteenAndOlder] = useState(0);
+
+    // total count
+    const [totalChildrenUnderSixMonths, setTotalChildrenUnderSixMonths] = useState(0);
+    const [totalchilrenSixMonthsToveFiveYears, setTotalchilrenSixMonthsToveFiveYears] = useState(0);
+    const [totalFiveToFourteenYears, setTotalFiveToFourteenYears] = useState(0);
+    const [totalFifteenAndOlder, setTotalFifteenAndOlder] = useState(0);
+
+    const [totalNumMen, setTotalNumMen] = useState(0);
+    const [totalNumWomen, setTotalNumWomen] = useState(0);
+
+    const [totalNumPersons, setTotalNumPersons] = useState(0);
+
+    // set all totals depending on their variables
+    useEffect(() => {
+        setTotalNumMen(menUnderSixMonths + menSixMonthsToFiveYears + menFiveToFourteenYears + menFifteenAndOlder);
+        setTotalNumWomen(womenLessThanSixMonths + womenSixMonthsToFiveYears + womenFiveToFourteenYears + womenFifteenAndOlder);
+        setTotalNumPersons(totalNumMen + totalNumWomen);
+        setTotalChildrenUnderSixMonths(menUnderSixMonths + womenLessThanSixMonths);
+        setTotalchilrenSixMonthsToveFiveYears(menSixMonthsToFiveYears + womenSixMonthsToFiveYears);
+        setTotalFiveToFourteenYears(menFiveToFourteenYears + womenFiveToFourteenYears);
+        setTotalFifteenAndOlder(menFifteenAndOlder + womenFifteenAndOlder);
+    }, [menUnderSixMonths, menSixMonthsToFiveYears, menFiveToFourteenYears, menFifteenAndOlder, womenLessThanSixMonths, womenSixMonthsToFiveYears, womenFiveToFourteenYears, womenFifteenAndOlder]);
+        
+    // Households
+    const [numHouseholdsVisited, setNumHouseholdsVisited] = useState(0);
+    const [numHouseholdsTreated, setNumHouseholdsTreated] = useState(0);
+    const [geographicalCoverageOfHouseholds, setGeographicalCoverageOfHouseholds] = useState(0);
+    // calculating the theurapical coverage of households
+    useEffect(() => {
+        setGeographicalCoverageOfHouseholds((numHouseholdsTreated / numHouseholdsVisited) * 100);
+    }, [numHouseholdsVisited, numHouseholdsTreated]);
+
 
     // Estimation of Morbidity Cases state
     const [numMenBlind, setNumMenBlind] = useState(0);
@@ -96,9 +137,42 @@ export default function DailyReportForm() {
             numWomenDistributors={numWomenDistributors}
             totalNumDistributors={totalNumDistributors}
         />, 
-        <Denumber1Form />, 
-        <Denumber2Form />, 
-        <Denumber3Form />, 
+        <Denumber1Form
+            setMenLessThanSixMonths={setMenLessThanSixMonths}
+            menUnderSixMonths={menUnderSixMonths}
+            setMenSixMonthsToFiveYears={setMenSixMonthsToFiveYears}
+            menSixMonthsToFiveYears={menSixMonthsToFiveYears}
+            setMenFiveToFourteenYears={setMenFiveToFourteenYears}
+            menFiveToFourteenYears={menFiveToFourteenYears}
+            setMenFifteenAndOlder={setMenFifteenAndOlder}
+            menFifteenAndOlder={menFifteenAndOlder}
+
+            setWomenLessThanSixMonths={setWomenLessThanSixMonths}
+            womenLessThanSixMonths={womenLessThanSixMonths}
+            setWomenSixMonthsToFiveYears={setWomenSixMonthsToFiveYears}
+            womenSixMonthsToFiveYears={womenSixMonthsToFiveYears}
+            setWomenFiveToFourteenYears={setWomenFiveToFourteenYears}
+            womenFiveToFourteenYears={womenFiveToFourteenYears}
+            setWomenFifteenAndOlder={setWomenFifteenAndOlder}
+            womenFifteenAndOlder={womenFifteenAndOlder}
+
+            totalNumMen={totalNumMen}
+            totalNumWomen={totalNumWomen}
+        />, 
+        <Denumber2Form
+            totalChildrenUnderSixMonths={totalChildrenUnderSixMonths}
+            totalchilrenSixMonthsToveFiveYears={totalchilrenSixMonthsToveFiveYears}
+            totalFiveToFourteenYears={totalFiveToFourteenYears}
+            totalFifteenAndOlder={totalFifteenAndOlder}
+            totalNumPersons={totalNumPersons}
+        />, 
+        <Denumber3Form 
+            setNumHouseholdsVisited={setNumHouseholdsVisited}
+            numHouseholdsVisited={numHouseholdsVisited}
+            setNumHouseholdsTreated={setNumHouseholdsTreated}
+            numHouseholdsTreated={numHouseholdsTreated}
+            geographicalCoverageOfHouseholds={geographicalCoverageOfHouseholds}
+        />, 
         <MorbidityEstimationForm
             setNumMenBlind={setNumMenBlind}
             numMenBlind={numMenBlind}
