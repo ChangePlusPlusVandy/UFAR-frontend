@@ -88,5 +88,5 @@ const styles = StyleSheet.create({
     rightContainer: {
         flex: 1,
         alignItems: 'center',
-    }
+    },
 })
