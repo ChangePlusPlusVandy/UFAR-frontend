@@ -87,6 +87,17 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         marginHorizontal: 34,
+        /* Android Drop Shadow Styling */
+        elevation: 10,
+        
+        /* iOS Drop Shadow Styling */
+        shadowColor: "black",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 10,
+        shadowOpacity: 0.3,
     },
     inputField: {
         marginVertical: 5,

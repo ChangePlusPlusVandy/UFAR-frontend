@@ -4,7 +4,7 @@ import {Pressable, StyleSheet, View} from 'react-native';
 export default function CheckBox({isChecked, style, onPress}) {
     return (
         <Pressable style={{...styles.checkBox, ...style}} onPress={onPress}>
-            {isChecked && <View style={{...styles.checkBoxFill, backgroundColor: (style.fillColor || '#8AC566')}} />}
+            {isChecked && <View style={{...styles.checkBoxFill, backgroundColor: (style.fillColor || '#EC1C24')}} />}
         </Pressable>
     );
 }

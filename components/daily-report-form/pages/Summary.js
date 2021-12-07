@@ -6,7 +6,7 @@ export default function Summary() {
         <View>
             <Text style={styles.header}>Summary</Text>
             <Text style={styles.line}>_________________</Text>
-            <View>
+            <View style={styles.marginedView}>
                 <Text style={styles.bod}>DMM Day: 1</Text>
                 <Text style={styles.bod}>Name: Varun Sangal</Text>
                 <Text style={styles.bod}>Province/Region: Kwango</Text>
@@ -18,6 +18,9 @@ export default function Summary() {
 }
 
 const styles = StyleSheet.create({
+    marginedView: {
+        paddingVertical: 10,
+    },
     header: {
         paddingVertical: 5,
         alignSelf: 'center',

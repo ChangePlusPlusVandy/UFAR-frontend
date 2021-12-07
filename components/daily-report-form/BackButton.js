@@ -6,7 +6,7 @@ export default function BackButton({setActivePage}) {
     const decremenetActivePage = () => setActivePage((prev) => prev - 1);
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, styles.shadowbox]}>
             <Pressable onPress={decremenetActivePage} style={styles.button}>
                 <Icon name='arrow-left' type='feather' color='white' size={45}/>
             </Pressable>
@@ -18,6 +18,19 @@ export default function BackButton({setActivePage}) {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
+    },
+    shadowbox: {
+        /* Android Drop Shadow Styling */
+        elevation: 10,
+        
+        /* iOS Drop Shadow Styling */
+        shadowColor: "black",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 10,
+        shadowOpacity: 0.3,
     },
     button: {
         backgroundColor: '#CCCDCF',
@@ -33,5 +46,5 @@ const styles = StyleSheet.create({
         fontFamily: Platform.OS === 'android' ? 'sans-serif-medium' : 'Avenir-Roman',
         fontSize: 13,
         lineHeight: 15,
-    }
+    },
 });

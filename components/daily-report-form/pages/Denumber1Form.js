@@ -80,6 +80,17 @@ const styles = StyleSheet.create({
     inputContainer: {
         marginHorizontal: 34,
         marginBottom: 175,
+        /* Android Drop Shadow Styling */
+        elevation: 10,
+        
+        /* iOS Drop Shadow Styling */
+        shadowColor: "black",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 10,
+        shadowOpacity: 0.3,
     },
     inputLabel: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
