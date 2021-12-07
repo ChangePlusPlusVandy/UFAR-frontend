@@ -51,6 +51,14 @@ export default function DailyReportForm() {
     // TODO: Insert state
 
     // Estimation of Morbidity Cases state
+    const [numMenBlind, setNumMenBlind] = useState(0);
+    const [numWomenBlind, setNumWomenBlind] = useState(0);
+    const [totalNumBlind, setTotalNumBlind] = useState(numMenBlind + numWomenBlind);
+
+    // Update total anytime # men or # women is updated
+    useEffect(() => {
+        setTotalNumBlind(numMenBlind + numWomenBlind)
+    }, [numMenBlind, numWomenBlind]);
     // TODO: Insert state
 
     const pages = [
@@ -91,7 +99,13 @@ export default function DailyReportForm() {
         <Denumber1Form />, 
         <Denumber2Form />, 
         <Denumber3Form />, 
-        <MorbidityEstimationForm />, 
+        <MorbidityEstimationForm
+            setNumMenBlind={setNumMenBlind}
+            numMenBlind={numMenBlind}
+            setNumWomenBlind={setNumWomenBlind}
+            numWomenBlind={numWomenBlind}
+            totalNumBlind={totalNumBlind}
+        />, 
         <Summary />
     ];
 
