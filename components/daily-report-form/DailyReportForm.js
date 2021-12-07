@@ -28,7 +28,37 @@ export default function DailyReportForm() {
     const [villageName, setVillageName] = useState("");
 
     // Treatment Information state
-    // TODO: Insert state
+    const [onchocerciasis, setOnchocerciasis] = useState(false);
+    const [onchocerciasisFirst, setOnchocerciasisFirst] = useState(false);
+    const [onchocerciasisSecond, setOnchocerciasisSecond] = useState(false);
+    const [lymphaticFilariasis, setLymphaticFilariasis] = useState(false);
+    const [LFMectizanAlbendazole, setLFMectizanAlbendazole] = useState(false);
+    const [numCyclesLFMectizanAlbendazole, setNumCyclesLFMectizanAlbendazole] = useState(0);
+    const [numCyclesLFAlbendazole, setNumCyclesLFAlbendazole] = useState(0);
+    const [LFAlbendazoleFirst, setLFAlbendazoleFirst] = useState(false);
+    const [LFAlbendazoleSecond, setLFAlbendazoleSecond] = useState(false);
+    const [schistosomiasis, setSchistosomiasis] = useState(false);
+    const [soilTransmittedHelminthiasis, setSoilTransmittedHelminthiasis] = useState(false);
+    const [trachoma, setTrachoma] = useState(false);
+
+    // Update onchocerciasis rounds when onchocerciasis is not selected
+    useEffect(() => {
+        if (!onchocerciasis) {
+            setOnchocerciasisFirst(false);
+            setOnchocerciasisSecond(false);
+        }
+    }, [onchocerciasis]);
+
+    // Update LF rounds when LF is not selected
+    useEffect(() => {
+        if (!lymphaticFilariasis) {
+            setLFMectizanAlbendazole(false);
+            setLFAlbendazoleFirst(false);
+            setLFAlbendazoleSecond(false);
+            setNumCyclesLFMectizanAlbendazole(0);
+            setNumCyclesLFAlbendazole(0);
+        }
+    }, [lymphaticFilariasis]);
 
     // Dates state
     const [DCTrainingCompletionDate, setDCTrainingCompletionDate] = useState("");
@@ -117,7 +147,35 @@ export default function DailyReportForm() {
             setVillageName={setVillageName}
             villageName={villageName}
         />,
-        <TreatmentInformationForm />, 
+        <TreatmentInformationForm
+            setOnchocerciasis={setOnchocerciasis}
+            onchocerciasis={onchocerciasis}
+            setOnchocerciasisFirst={setOnchocerciasisFirst}
+            onchocerciasisFirst={onchocerciasisFirst}
+            setOnchocerciasisSecond={setOnchocerciasisSecond}
+            onchocerciasisSecond={onchocerciasisSecond}
+
+            setLymphaticFilariasis={setLymphaticFilariasis}
+            lymphaticFilariasis={lymphaticFilariasis}
+            setLFMectizanAlbendazole={setLFMectizanAlbendazole}
+            LFMectizanAlbendazole={LFMectizanAlbendazole}
+            setLFAlbendazoleFirst={setLFAlbendazoleFirst}
+            LFAlbendazoleFirst={LFAlbendazoleFirst}
+            setLFAlbendazoleSecond={setLFAlbendazoleSecond}
+            LFAlbendazoleSecond={LFAlbendazoleSecond}
+
+            setNumCyclesLFMectizanAlbendazole={setNumCyclesLFMectizanAlbendazole}
+            numCyclesLFMectizanAlbendazole={numCyclesLFMectizanAlbendazole}
+            setNumCyclesLFAlbendazole={setNumCyclesLFAlbendazole}
+            numCyclesLFAlbendazole={numCyclesLFAlbendazole}
+            
+            setSchistosomiasis={setSchistosomiasis}
+            schistosomiasis={schistosomiasis}
+            setSoilTransmittedHelminthiasis={setSoilTransmittedHelminthiasis}
+            soilTransmittedHelminthiasis={soilTransmittedHelminthiasis}
+            setTrachoma={setTrachoma}
+            trachoma={trachoma}
+        />, 
         <DatesForm
             setDCTrainingCompletionDate={setDCTrainingCompletionDate}
             DCTrainingCompletionDate={DCTrainingCompletionDate}
