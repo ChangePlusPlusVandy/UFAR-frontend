@@ -8,7 +8,7 @@ export default function Denumber2Form() {
             <View style={styles.inputContainer}>
                 <View style={styles.rowContainer}>
                         <View style={styles.leftContainer}>
-                            <Text style={{...styles.inputLabel, fontSize: 17, lineHeight: 20}} >Totals</Text>
+                            <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Totals</Text>
                             <Text style={styles.inputLabel}>Total children {'<'} 6 months</Text>
                             <TextInput style={styles.inputField} />
                             <Text style={styles.inputLabel}>Total children 6 months - {'<'}5 years</Text>

@@ -8,7 +8,7 @@ export default function Denumber1Form() {
             <ScrollView style={styles.inputContainer}>
                 <View style={styles.rowContainer}>
                     <View style={styles.leftContainer}>
-                        <Text style={{...styles.inputLabel, fontSize: 17, lineHeight: 20}} >Men</Text>
+                        <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Men</Text>
                         <Text style={styles.inputLabel}># of children {'<'} 6 months</Text>
                         <TextInput style={styles.inputField} />
                         <Text style={styles.inputLabel}># of children 6 months - {'<'}5 years</Text>
