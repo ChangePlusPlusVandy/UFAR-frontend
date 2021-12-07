@@ -114,17 +114,6 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         marginHorizontal: 34,
-        /* Android Drop Shadow Styling */
-        elevation: 10,
-        
-        /* iOS Drop Shadow Styling */
-        shadowColor: "black",
-        shadowOffset: {
-            width: 10,
-            height: 10,
-        },
-        shadowRadius: 10,
-        shadowOpacity: 0.3,
     },
     inputLabel: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
@@ -149,6 +138,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         
+        /* Android Drop Shadow Styling */
+        elevation: 10,
+        
+        /* iOS Drop Shadow Styling */
+        shadowColor: "black",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 10,
+        shadowOpacity: 0.3,
     },
     inputSubfield1: {
         top: -40,
@@ -162,6 +162,18 @@ const styles = StyleSheet.create({
         height: 90,
         justifyContent: 'flex-end',
         alignItems: 'center',
+
+        /* Android Drop Shadow Styling */
+        elevation: 9,
+        
+        /* iOS Drop Shadow Styling */
+        shadowColor: "black",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 10,
+        shadowOpacity: 0.3,
     },
     inputSubfield2: {
         top: -40,
@@ -175,6 +187,18 @@ const styles = StyleSheet.create({
         height: 140,
         alignItems: 'flex-end',
         flexDirection: 'row',
+
+        /* Android Drop Shadow Styling */
+        elevation: 9,
+        
+        /* iOS Drop Shadow Styling */
+        shadowColor: "black",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 10,
+        shadowOpacity: 0.3,
     },
     checkBox: {
         position: 'absolute',

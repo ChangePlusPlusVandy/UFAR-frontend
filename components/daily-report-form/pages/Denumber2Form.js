@@ -40,17 +40,6 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         marginHorizontal: 34,
-        /* Android Drop Shadow Styling */
-        elevation: 10,
-        
-        /* iOS Drop Shadow Styling */
-        shadowColor: "black",
-        shadowOffset: {
-            width: 10,
-            height: 10,
-        },
-        shadowRadius: 10,
-        shadowOpacity: 0.3,
     },
     inputLabel: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
@@ -70,6 +59,18 @@ const styles = StyleSheet.create({
         color: 'black',
         width: 95,
         textAlign: 'center',
+        
+        /* Android Drop Shadow Styling */
+        elevation: 10,
+        
+        /* iOS Drop Shadow Styling */
+        shadowColor: "black",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 10,
+        shadowOpacity: 0.3,
     },
     rowContainer: {
         flexDirection: 'row',
