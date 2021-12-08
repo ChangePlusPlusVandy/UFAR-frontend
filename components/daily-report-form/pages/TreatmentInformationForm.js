@@ -43,11 +43,11 @@ export default function TreatmentInformationForm(props) {
                         <View style={styles.singleRowContainer1}>
                             <View>
                                 <Text style={styles.inputSubfieldLabel}>1st Round</Text>
-                                <CheckBox isChecked={props.onchocerciasisFirst} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisFirst} />
+                                <CheckBox isChecked={props.onchocerciasisFirst} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisFirst} fillColor='#EC1C24' />
                             </View>
                             <View>
                                 <Text style={styles.inputSubfieldLabel}>2nd Round</Text>
-                                <CheckBox isChecked={props.onchocerciasisSecond} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisSecond} />
+                                <CheckBox isChecked={props.onchocerciasisSecond} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisSecond} fillColor='#EC1C24' />
                             </View>
                         </View>
                     </View>
@@ -68,18 +68,18 @@ export default function TreatmentInformationForm(props) {
                                 <Text style={styles.choiceLabel}>Mectizan + Albendazole</Text>
                                 <View style={{marginHorizontal: 12}}>
                                     <Text style={styles.inputSubfieldLabel}>Select</Text>
-                                    <CheckBox isChecked={props.LFMectizanAlbendazole} style={styles.subfieldCheckBox} onPress={toggleLFMectizanAlbendazole} />
+                                    <CheckBox isChecked={props.LFMectizanAlbendazole} style={styles.subfieldCheckBox} onPress={toggleLFMectizanAlbendazole} fillColor='#EC1C24' />
                                 </View>
                             </View>
                             <View style={styles.singleRowContainer2}>
                                 <Text style={styles.choiceLabel}>Albendazole</Text>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>1st Round</Text>
-                                    <CheckBox isChecked={props.LFAlbendazoleFirst} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleFirst} />
+                                    <CheckBox isChecked={props.LFAlbendazoleFirst} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleFirst} fillColor='#EC1C24' />
                                 </View>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>2nd Round</Text>
-                                    <CheckBox isChecked={props.LFAlbendazoleSecond} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleSecond} />
+                                    <CheckBox isChecked={props.LFAlbendazoleSecond} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleSecond} fillColor='#EC1C24' />
                                 </View>
                             </View>
                         </View>
@@ -206,7 +206,6 @@ const styles = StyleSheet.create({
     },
     subfieldCheckBox: {
         borderColor: '#EC1C24',
-        fillColor: '#EC1C24',
     },
     choiceLabel: {
         color: '#EC1C24',
