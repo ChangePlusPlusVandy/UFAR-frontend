@@ -1,21 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView } from 'react-native';
+
+import GreetingHeader from './components/NurseLandingPage/GreetingHeader';
+import DashboardSummary from './components/NurseLandingPage/DashboardSummary';
+import RecentsList from './components/NurseLandingPage/RecentsList';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <ScrollView>
       <StatusBar style="auto" />
-    </View>
+      <GreetingHeader name="Jean Dupont" />
+      <DashboardSummary />
+      <RecentsList />
+    </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
