@@ -59,7 +59,7 @@ export default function TreatmentInformationForm(props) {
                 {props.lymphaticFilariasis && 
                     <View style={styles.inputSubfield2}>
                         <View style={styles.cyclesInputContainer}>
-                            <Text style={styles.inputSubfieldLabel}>Cycles</Text>
+                            <Text style={styles.inputSubfieldLabel}># de Cycle</Text>
                             <TextInput style={styles.cyclesInput} defaultValue={props.numCyclesLFMectizanAlbendazole.toString()} onChange={(e) => props.setNumCyclesLFMectizanAlbendazole(parseInt(e.nativeEvent.text) || 0)} />
                             <TextInput style={{...styles.cyclesInput, marginTop: 22}} defaultValue={props.numCyclesLFAlbendazole.toString()} onChange={(e) => props.setNumCyclesLFAlbendazole(parseInt(e.nativeEvent.text) || 0)} />
                         </View>

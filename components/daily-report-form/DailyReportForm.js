@@ -16,6 +16,9 @@ import TreatmentInformationForm from './pages/TreatmentInformationForm';
 import MorbidityEstimationForm from './pages/MorbidityEstimationForm';
 import TrichiasisForm from './pages/TrichiasisForm';
 import GuineaWormForm from './pages/GuineaWormForm';
+import IvermectinForm from './pages/IvermectinForm';
+import AlbendazoleForm from './pages/AlbendazoleForm';
+import PraziquantelForm from './pages/PraziquantelForm';
 import Summary from './pages/Summary';
 
 export default function DailyReportForm() {
@@ -154,6 +157,42 @@ export default function DailyReportForm() {
          setTotalNumGuineaWorm(numMenGuineaWorm + numWomenGuineaWorm)
      }, [numMenGuineaWorm, numWomenGuineaWorm]);
 
+     // Ivermectin updated
+    const [ivermectinReceived, setIvermectinReceived] = useState(0);
+    const [ivermectinUsed, setIvermectinUsed] = useState(0);
+    const [ivermectinLost, setIvermectinLost] = useState(0);
+    const [ivermectinReturned, setIvermectinReturned] = useState(0);
+    const [ivermectinRemaining, setIvermectinRemaining] = useState(ivermectinReceived - ivermectinUsed - ivermectinLost);
+    
+    // update the total amount of ivermectin remaining once the other values change
+    useEffect(() => {
+        setIvermectinRemaining(ivermectinReceived - (ivermectinUsed + ivermectinLost))
+    }, [ivermectinReceived, ivermectinUsed, ivermectinLost]);
+
+    // Albendazole updated
+    const [albendazoleReceived, setAlbendazoleReceived] = useState(0);
+    const [albendazoleUsed, setAlbendazoleUsed] = useState(0);
+    const [albendazoleLost, setAlbendazoleLost] = useState(0);
+    const [albendazoleReturned, setAlbendazoleReturned] = useState(0);
+    const [albendazoleRemaining, setAlbendazoleRemaining] = useState(albendazoleReceived - albendazoleUsed - albendazoleLost);
+    
+    // update the total amount of albendazole remaining once the other values change
+    useEffect(() => {
+        setAlbendazoleRemaining(albendazoleReceived - (albendazoleUsed + albendazoleLost))
+    }, [albendazoleReceived, albendazoleUsed, albendazoleLost]);
+
+    // Albendazole updated
+    const [praziquantelReceived, setPraziquantelReceived] = useState(0);
+    const [praziquantelUsed, setPraziquantelUsed] = useState(0);
+    const [praziquantelLost, setPraziquantelLost] = useState(0);
+    const [praziquantelReturned, setPraziquantelReturned] = useState(0);
+    const [praziquantelRemaining, setPraziquantelRemaining] = useState(praziquantelReceived - praziquantelUsed - praziquantelLost);
+    
+    // update the total amount of albendazole remaining once the other values change
+    useEffect(() => {
+        setPraziquantelRemaining(praziquantelReceived - (praziquantelUsed + praziquantelLost))
+    }, [praziquantelReceived, praziquantelUsed, praziquantelLost]);
+
     const pages = [
         <IdentificationForm
             setDMMDay={setDMMDay}
@@ -273,6 +312,39 @@ export default function DailyReportForm() {
             setNumWomenGuineaWorm={setNumWomenGuineaWorm}
             numWomenGuineaWorm={numWomenGuineaWorm}
             totalNumGuineaWorm={totalNumGuineaWorm}
+        />,
+        <IvermectinForm
+            setIvermectinReceived={setIvermectinReceived}
+            ivermectinReceived={ivermectinReceived}
+            setIvermectinUsed={setIvermectinUsed}
+            ivermectinUsed={ivermectinUsed}
+            setIvermectinLost ={setIvermectinLost}
+            ivermectinLost = {ivermectinLost}
+            setIvermectinReturned = {setIvermectinReturned}
+            ivermectinReturned = {ivermectinReturned}
+            ivermectinRemaining = {ivermectinRemaining}
+        />,
+        <AlbendazoleForm
+            setAlbendazoleReceived={setAlbendazoleReceived}
+            albendazoleReceived={albendazoleReceived}
+            setAlbendazoleUsed={setAlbendazoleUsed}
+            albendazoleUsed={albendazoleUsed}
+            setAlbendazoleLost ={setAlbendazoleLost}
+            albendazoleLost = {albendazoleLost}
+            setAlbendazoleReturned = {setAlbendazoleReturned}
+            albendazoleReturned = {albendazoleReturned}
+            albendazoleRemaining = {albendazoleRemaining}
+        />,
+        <PraziquantelForm
+            setPraziquantelReceived={setPraziquantelReceived}
+            praziquantelReceived={praziquantelReceived}
+            setPraziquantelUsed={setPraziquantelUsed}
+            praziquantelUsed={praziquantelUsed}
+            setPraziquantelLost ={setPraziquantelLost}
+            praziquantelLost = {praziquantelLost}
+            setPraziquantelReturned = {setPraziquantelReturned}
+            praziquantelReturned = {praziquantelReturned}
+            praziquantelRemaining = {praziquantelRemaining}
         />,
         <Summary />
     ];
