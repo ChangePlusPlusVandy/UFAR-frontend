@@ -4,15 +4,15 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 export default function DistributorsForm(props) {
     return (
         <View>
-            <Text style={styles.header}>Distributors</Text>
+            <Text style={styles.header}>Distributeurs communautaires</Text>
             <View style={styles.inputContainer}>
                 <Text style={styles.inputLabel}>DC Distributors</Text>
                 <View style={styles.rowContainer}>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumMenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenDistributors || '').toString()} placeholder="# of Men" />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumMenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenDistributors || '').toString()} placeholder="# de DC Homme" />
                     <Text style={styles.text}>+</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenDistributors || '').toString()} placeholder="# of Women" />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenDistributors || '').toString()} placeholder="# de DC Femmes" />
                     <Text style={styles.text}>=</Text>
-                    <TextInput style={styles.inputField} value={props.totalNumDistributors.toString()} placeholder="Total" />
+                    <TextInput style={styles.inputField} value={props.totalNumDistributors.toString()} placeholder="Total de DCs" />
                 </View>
             </View>
         </View>

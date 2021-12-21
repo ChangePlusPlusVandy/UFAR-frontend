@@ -4,17 +4,17 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 export default function Denumber3Form(props) {
     return (
         <View>
-            <Text style={styles.header}>Denumber</Text>
+            <Text style={styles.header}>Ménages</Text>
             <View style={styles.inputContainer}>
                 <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Households</Text>
-                <Text style={styles.inputLabel}>Number of households visited</Text>
+                <Text style={styles.inputLabel}>Total des ménages visités</Text>
                 <TextInput style={styles.inputField} 
                     onChange={(e) => props.setNumHouseholdsVisited(parseInt(e.nativeEvent.text) || 0)}
                     defaultValue={(props.numHouseholdsVisited || '').toString()}   
                     placeholder='# visited'
                     />
 
-                <Text style={styles.inputLabel}>Total number of households treated</Text>
+                <Text style={styles.inputLabel}>Total des ménages traités</Text>
                 <TextInput style={styles.inputField} 
                     onChange={(e) => props.setNumHouseholdsTreated(parseInt(e.nativeEvent.text) || 0)}
                     defaultValue={(props.numHouseholdsTreated || '').toString()} 
@@ -22,7 +22,7 @@ export default function Denumber3Form(props) {
                 />
 
 
-                <Text style={styles.inputLabel}>Greographical coverage of the households</Text>
+                <Text style={styles.inputLabel}>Couverture géographique des ménages</Text>
                 <TextInput style={styles.inputField} 
                     value={ (props.geographicalCoverageOfHouseholds || 0).toString() + "%"}
                 />

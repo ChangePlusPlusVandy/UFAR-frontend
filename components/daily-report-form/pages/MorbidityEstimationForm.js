@@ -4,38 +4,38 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 export default function MorbidityEstimationForm(props) {
     return (
         <View>
-            <Text style={styles.header}>Estimation of Morbidity Cases</Text>
+            <Text style={styles.header}>Estimation Des Cas Des Morbidites</Text>
             <View style={styles.inputContainer}>
-                <Text style={styles.inputLabelBigger}>Blind</Text>
+                <Text style={styles.inputLabelBigger}>Aveugles</Text>
                 <View style={styles.rowContainer}>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumMenBlind(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenBlind || '').toString()} placeholder="# of Men" />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumMenBlind(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenBlind || '').toString()} placeholder="# des hommes" />
                     <Text style={styles.text}>+</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenBlind(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenBlind || '').toString()} placeholder="# of Women" />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenBlind(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenBlind || '').toString()} placeholder="# des femmes" />
                     <Text style={styles.text}>=</Text>
-                    <TextInput style={styles.inputField} value={props.totalNumBlind.toString()} placeholder="Total" />
+                    <TextInput style={styles.inputField} value={props.totalNumBlind.toString()} placeholder="Total des personnes" />
                 </View>
-                <Text style={{...styles.inputLabelBigger, marginVertical: 10}}>Lymphedema</Text>
+                <Text style={{...styles.inputLabelBigger, marginVertical: 10}}>Lymphœdème</Text>
                 <View>
-                    <Text style={styles.inputLabel}>Men</Text>
+                    <Text style={styles.inputLabel}>Hommes</Text>
                     <View>
                         <View style={styles.rowContainer}>
-                            <TextInput style={styles.inputFieldBigger} placeholder="Upper Left Limb"/>
-                            <TextInput style={styles.inputFieldBigger} placeholder="Upper Right Limb"/>
+                            <TextInput style={styles.inputFieldBigger} placeholder="Membre Supérieur Gauche"/>
+                            <TextInput style={styles.inputFieldBigger} placeholder="Membre Supérieur Droit"/>
                         </View>
                         <View style={styles.rowContainer}>
-                            <TextInput style={styles.inputFieldBigger} placeholder="Lower Left Limb"/>
-                            <TextInput style={styles.inputFieldBigger} placeholder="Lower Right Limb"/>
+                            <TextInput style={styles.inputFieldBigger} placeholder="Membre Inférieur Gauche"/>
+                            <TextInput style={styles.inputFieldBigger} placeholder="Membre Inférieur Droit"/>
                         </View>
                     </View>
                     <Text style={styles.inputLabel}>Women</Text>
                     <View>
                         <View style={styles.rowContainer}>
-                            <TextInput style={styles.inputFieldBigger} placeholder="Upper Left Limb"/>
-                            <TextInput style={styles.inputFieldBigger} placeholder="Upper Right Limb"/>
+                            <TextInput style={styles.inputFieldBigger} placeholder="Membre Supérieur Gauche"/>
+                            <TextInput style={styles.inputFieldBigger} placeholder="Membre Supérieur Droit"/>
                         </View>
                         <View style={styles.rowContainer}>
-                            <TextInput style={styles.inputFieldBigger} placeholder="Lower Left Limb"/>
-                            <TextInput style={styles.inputFieldBigger} placeholder="Lower Right Limb"/>
+                            <TextInput style={styles.inputFieldBigger} placeholder="Membre Inférieur Gauche"/>
+                            <TextInput style={styles.inputFieldBigger} placeholder="Membre Inférieur Droit"/>
                         </View>
                     </View>
                 </View>
@@ -49,10 +49,10 @@ const styles = StyleSheet.create({
         paddingVertical: 18,
         alignSelf: 'center',
         textAlign: 'center',
-        maxWidth: 178,
+        maxWidth: 186,
         fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Helvetica Neue',
         fontWeight: 'bold',
-        fontSize: 23,
+        fontSize: 22,
         lineHeight: 28,
         color: 'white'
     },

@@ -31,22 +31,22 @@ export default function TreatmentInformationForm(props) {
 
     return (
         <View>
-            <Text style={styles.header}>Treatment Information</Text>
+            <Text style={styles.header}>Maladies traitées</Text>
             <View style={styles.inputContainer}>
                 <Text style={styles.inputLabel}>Select</Text>
                 <Pressable style={styles.inputField} onPress={toggleOnchocerciasis}>
                     <CheckBox isChecked={props.onchocerciasis} style={styles.checkBox} />
-                    <Text style={styles.choiceLabel}>Onchocerciasis</Text>
+                    <Text style={styles.choiceLabel}>Onchocercose</Text>
                 </Pressable>
                 {props.onchocerciasis && 
                     <View style={styles.inputSubfield1}>
                         <View style={styles.singleRowContainer1}>
                             <View>
-                                <Text style={styles.inputSubfieldLabel}>1st Round</Text>
+                                <Text style={styles.inputSubfieldLabel}>1st Tour</Text>
                                 <CheckBox isChecked={props.onchocerciasisFirst} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisFirst} fillColor='#EC1C24' />
                             </View>
                             <View>
-                                <Text style={styles.inputSubfieldLabel}>2nd Round</Text>
+                                <Text style={styles.inputSubfieldLabel}>2nd Tour</Text>
                                 <CheckBox isChecked={props.onchocerciasisSecond} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisSecond} fillColor='#EC1C24' />
                             </View>
                         </View>
@@ -54,7 +54,7 @@ export default function TreatmentInformationForm(props) {
                 }
                 <Pressable style={styles.inputField} onPress={toggleLymphaticFilariasis}>
                     <CheckBox isChecked={props.lymphaticFilariasis} style={styles.checkBox} />
-                    <Text style={styles.choiceLabel}>Lymphatic filariasis</Text>
+                    <Text style={styles.choiceLabel}>Filariose lymphatique</Text>
                 </Pressable>
                 {props.lymphaticFilariasis && 
                     <View style={styles.inputSubfield2}>
@@ -72,13 +72,13 @@ export default function TreatmentInformationForm(props) {
                                 </View>
                             </View>
                             <View style={styles.singleRowContainer2}>
-                                <Text style={styles.choiceLabel}>Albendazole</Text>
+                                <Text style={styles.choiceLabel}>Albendazole seul</Text>
                                 <View>
-                                    <Text style={styles.inputSubfieldLabel}>1st Round</Text>
+                                    <Text style={styles.inputSubfieldLabel}>1st Tour</Text>
                                     <CheckBox isChecked={props.LFAlbendazoleFirst} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleFirst} fillColor='#EC1C24' />
                                 </View>
                                 <View>
-                                    <Text style={styles.inputSubfieldLabel}>2nd Round</Text>
+                                    <Text style={styles.inputSubfieldLabel}>2nd Tour</Text>
                                     <CheckBox isChecked={props.LFAlbendazoleSecond} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleSecond} fillColor='#EC1C24' />
                                 </View>
                             </View>
@@ -87,15 +87,15 @@ export default function TreatmentInformationForm(props) {
                 }
                 <Pressable style={styles.inputField} onPress={toggleSchistosomiasis}>
                     <CheckBox isChecked={props.schistosomiasis} style={styles.checkBox} />
-                    <Text style={styles.choiceLabel}>Schistosomiasis</Text>
+                    <Text style={styles.choiceLabel}>Schistosomiase</Text>
                 </Pressable>
                 <Pressable style={styles.inputField} onPress={toggleSoilTransmittedHelminthiasis}>
                     <CheckBox isChecked={props.soilTransmittedHelminthiasis} style={styles.checkBox} />
-                    <Text style={styles.choiceLabel}>Soil-transmitted helminthiasis</Text>
+                    <Text style={styles.choiceLabel}>Géohelminthiases</Text>
                 </Pressable>
                 <Pressable style={styles.inputField} onPress={toggleTrachoma}>
                     <CheckBox isChecked={props.trachoma} style={styles.checkBox} />
-                    <Text style={styles.choiceLabel}>Trachoma</Text>
+                    <Text style={styles.choiceLabel}>Trachome</Text>
                 </Pressable>
             </View>
         </View>

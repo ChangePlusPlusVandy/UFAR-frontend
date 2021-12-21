@@ -4,18 +4,18 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 export default function Denumber2Form(props) {
     return (
         <View>
-            <Text style={styles.header}>Denumber</Text>
+            <Text style={styles.header}>Denombrement</Text>
             <View style={styles.inputContainer}>
                 <View style={styles.rowContainer}>
                         <View style={styles.leftContainer}>
                             <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Totals</Text>
-                            <Text style={styles.inputLabel}>Total children {'<'} 6 months</Text>
+                            <Text style={styles.inputLabel}>Total général d'enfants {'<'} 6 mois</Text>
                             <TextInput style={styles.inputField} value={props.totalChildrenUnderSixMonths.toString()} />
-                            <Text style={styles.inputLabel}>Total children 6 months - {'<'}5 years</Text>
+                            <Text style={styles.inputLabel}>Total général d'enfants 6 mois - {'<'}5 ans</Text>
                             <TextInput style={styles.inputField} value={props.totalchilrenSixMonthsToveFiveYears.toString()} />
-                            <Text style={styles.inputLabel}>Total children 5 - {'<'}15 years</Text>
+                            <Text style={styles.inputLabel}>Total général d'enfants 5 - 14 ans</Text>
                             <TextInput style={styles.inputField} value={props.totalFiveToFourteenYears.toString()}/>
-                            <Text style={styles.inputLabel}>Total Persons 15 years and older</Text>
+                            <Text style={styles.inputLabel}>Total général de Personnes de 15 ans et plus</Text>
                             <TextInput style={styles.inputField} value={props.totalFifteenAndOlder.toString()} />
                         </View>
                         <View style={styles.rightContainer}>

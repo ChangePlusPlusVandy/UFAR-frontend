@@ -4,61 +4,61 @@ import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 export default function Denumber1Form(props) {
     return (
         <View>
-            <Text style={styles.header}>Denumber</Text>
+            <Text style={styles.header}>Denombrement</Text>
             <ScrollView style={styles.inputContainer}>
                 <View style={styles.rowContainer}>
                     <View style={styles.leftContainer}>
-                        <Text  style={styles.inputLabelBigger}>Men</Text>
-                        <Text style={styles.inputLabel}># of children {'<'} 6 months</Text>
+                        <Text  style={styles.inputLabelBigger}>Hommes</Text>
+                        <Text style={styles.inputLabel}># d'enfants {'<'} 6 mois</Text>
                         <TextInput  style={styles.inputField} 
                         defaultValue={props.menUnderSixMonths.toString()} 
                         onChange={(e) => props.setMenLessThanSixMonths(parseInt(e.nativeEvent.text) || 0)}/>
 
-                        <Text style={styles.inputLabel}># of children 6 months - {'<'}5 years</Text>
+                        <Text style={styles.inputLabel}># d'enfants 6 mois - {'<'}5 ans</Text>
                         <TextInput style={styles.inputField}
                         defaultValue={props.menSixMonthsToFiveYears.toString()}
                         onChange={(e) => props.setMenSixMonthsToFiveYears(parseInt(e.nativeEvent.text) || 0)}/>
 
-                        <Text style={styles.inputLabel}># of children 5 - {'<'}15 years</Text>
+                        <Text style={styles.inputLabel}># d'enfants 5 - {'<'}14 ans</Text>
                         <TextInput  style={styles.inputField}
                         defaultValue={props.menFiveToFourteenYears.toString()} 
                         onChange={(e) => props.setMenFiveToFourteenYears(parseInt(e.nativeEvent.text) || 0)}/>
 
-                        <Text style={styles.inputLabel}># of Persons 15 years and older</Text>
+                        <Text style={styles.inputLabel}># de Personnes de 15 ans et plus</Text>
                         <TextInput  style={styles.inputField}
                         defaultValue={props.menFifteenAndOlder.toString()} 
                         onChange={(e) => props.setMenFifteenAndOlder(parseInt(e.nativeEvent.text) || 0)}/>
                     </View>
                     <View style={styles.rightContainer}>
-                        <Text style={styles.inputLabel}>Total Number of Men</Text>
+                        <Text style={styles.inputLabel}># Total des Hommes</Text>
                         <TextInput  style={styles.inputField} value={props.totalNumMen.toString()} />
                     </View>
                 </View>
                 <View style={{...styles.rowContainer, marginTop: 20}}>
                     <View style={styles.leftContainer}>
-                        <Text style={styles.inputLabelBigger}>Women</Text>
-                        <Text style={styles.inputLabel}># of children {'<'} 6 months</Text>
+                        <Text style={styles.inputLabelBigger}>Femmes</Text>
+                        <Text style={styles.inputLabel}># d'enfants {'<'} 6 mois</Text>
                         <TextInput  style={styles.inputField} 
                         defaultValue={props.womenLessThanSixMonths.toString()} 
                         onChange={(e) => props.setWomenLessThanSixMonths(parseInt(e.nativeEvent.text) || 0)}/>
 
-                        <Text style={styles.inputLabel}># of children 6 months - {'<'}5 years</Text>
+                        <Text style={styles.inputLabel}># d'enfants 6 mois - {'<'}5 ans</Text>
                         <TextInput  style={styles.inputField} 
                         defaultValue={props.womenSixMonthsToFiveYears.toString()}
                         onChange={(e) => props.setWomenSixMonthsToFiveYears(parseInt(e.nativeEvent.text) || 0)}/>
 
-                        <Text style={styles.inputLabel}># of children 5 - {'<'}15 years</Text>
+                        <Text style={styles.inputLabel}># d'enfants 5 - {'<'}14 ans</Text>
                         <TextInput  style={styles.inputField} 
                         defaultValue={props.womenFiveToFourteenYears.toString()}
                         onChange={(e) => props.setWomenFiveToFourteenYears(parseInt(e.nativeEvent.text) || 0)}/>
 
-                        <Text style={styles.inputLabel}># of Persons 15 years and older</Text>
+                        <Text style={styles.inputLabel}># de Personnes de 15 ans et plus</Text>
                         <TextInput  style={styles.inputField} 
                         defaultValue={props.womenFifteenAndOlder.toString()}
                         onChange={(e) => props.setWomenFifteenAndOlder(parseInt(e.nativeEvent.text) || 0)}/>
                     </View>
                     <View style={styles.rightContainer}>
-                        <Text style={styles.inputLabel}>Total Number of Women</Text>
+                        <Text style={styles.inputLabel}># Total des Femmes</Text>
                         <TextInput style={styles.inputField} value={props.totalNumWomen.toString()}/>
                     </View>
                 </View>
