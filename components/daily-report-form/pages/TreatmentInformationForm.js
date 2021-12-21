@@ -33,7 +33,7 @@ export default function TreatmentInformationForm(props) {
         <View>
             <Text style={styles.header}>Maladies traitées</Text>
             <View style={styles.inputContainer}>
-                <Text style={styles.inputLabel}>Select</Text>
+                <Text style={styles.inputLabel}>Sélectionner</Text>
                 <Pressable style={styles.inputField} onPress={toggleOnchocerciasis}>
                     <CheckBox isChecked={props.onchocerciasis} style={styles.checkBox} />
                     <Text style={styles.choiceLabel}>Onchocercose</Text>

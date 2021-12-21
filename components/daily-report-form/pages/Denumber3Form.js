@@ -6,7 +6,7 @@ export default function Denumber3Form(props) {
         <View>
             <Text style={styles.header}>Ménages</Text>
             <View style={styles.inputContainer}>
-                <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Households</Text>
+                <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Ménages</Text>
                 <Text style={styles.inputLabel}>Total des ménages visités</Text>
                 <TextInput style={styles.inputField} 
                     onChange={(e) => props.setNumHouseholdsVisited(parseInt(e.nativeEvent.text) || 0)}

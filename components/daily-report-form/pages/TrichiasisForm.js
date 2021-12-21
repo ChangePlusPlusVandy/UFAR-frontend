@@ -1,18 +1,18 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-export default function DistributorsForm(props) {
+export default function TrichiasisForm(props) {
     return (
         <View>
-            <Text style={styles.header}>Distributeurs communautaires</Text>
+            <Text style={styles.header}>Trichiasis</Text>
             <View style={styles.inputContainer}>
-                <Text style={styles.inputLabel}>Distributeurs</Text>
+                <Text style={styles.inputLabel}>Trichiasis</Text>
                 <View style={styles.rowContainer}>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumMenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenDistributors || '').toString()} placeholder="# de DC Homme" />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumMenTrichiasis(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenTrichiasis || '').toString()} placeholder="# des Hommes avec Trichiasis" />
                     <Text style={styles.text}>+</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenDistributors || '').toString()} placeholder="# de DC Femmes" />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenTrichiasis(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenTrichiasis || '').toString()} placeholder="# des Femmes avec Trichiasis" />
                     <Text style={styles.text}>=</Text>
-                    <TextInput style={styles.inputField} value={props.totalNumDistributors.toString()} placeholder="Total de DCs" />
+                    <TextInput style={styles.inputField} value={props.totalNumTrichiasis.toString()} placeholder="Total des personnes avec trichiasis" />
                 </View>
             </View>
         </View>

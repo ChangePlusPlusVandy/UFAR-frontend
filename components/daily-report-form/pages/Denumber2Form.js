@@ -8,7 +8,7 @@ export default function Denumber2Form(props) {
             <View style={styles.inputContainer}>
                 <View style={styles.rowContainer}>
                         <View style={styles.leftContainer}>
-                            <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Totals</Text>
+                            <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Total</Text>
                             <Text style={styles.inputLabel}>Total général d'enfants {'<'} 6 mois</Text>
                             <TextInput style={styles.inputField} value={props.totalChildrenUnderSixMonths.toString()} />
                             <Text style={styles.inputLabel}>Total général d'enfants 6 mois - {'<'}5 ans</Text>

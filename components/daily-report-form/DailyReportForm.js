@@ -14,6 +14,8 @@ import DistributorsForm from './pages/DistributorsForm';
 import IdentificationForm from './pages/IdentificationForm';
 import TreatmentInformationForm from './pages/TreatmentInformationForm';
 import MorbidityEstimationForm from './pages/MorbidityEstimationForm';
+import TrichiasisForm from './pages/TrichiasisForm';
+import GuineaWormForm from './pages/GuineaWormForm';
 import Summary from './pages/Summary';
 
 export default function DailyReportForm() {
@@ -132,6 +134,26 @@ export default function DailyReportForm() {
     }, [numMenBlind, numWomenBlind]);
     // TODO: Insert state
 
+    // Estimation of Trichiasis
+    const [numMenTrichiasis, setNumMenTrichiasis] = useState(0);
+    const [numWomenTrichiasis, setNumWomenTrichiasis] = useState(0);
+    const [totalNumTrichiasis, setTotalNumTrichiasis] = useState(numMenTrichiasis + numWomenTrichiasis);
+
+    // update total anytime the number of men or women is updated
+    useEffect(() => {
+        setTotalNumTrichiasis(numMenTrichiasis + numWomenTrichiasis)
+    }, [numMenTrichiasis, numWomenTrichiasis]);
+
+     // Estimation of Guinea Worm
+     const [numMenGuineaWorm, setNumMenGuineaWorm] = useState(0);
+     const [numWomenGuineaWorm, setNumWomenGuineaWorm] = useState(0);
+     const [totalNumGuineaWorm, setTotalNumGuineaWorm] = useState(numMenGuineaWorm + numWomenGuineaWorm);
+ 
+     // update total anytime the number of men or women is updated
+     useEffect(() => {
+         setTotalNumGuineaWorm(numMenGuineaWorm + numWomenGuineaWorm)
+     }, [numMenGuineaWorm, numWomenGuineaWorm]);
+
     const pages = [
         <IdentificationForm
             setDMMDay={setDMMDay}
@@ -238,6 +260,20 @@ export default function DailyReportForm() {
             numWomenBlind={numWomenBlind}
             totalNumBlind={totalNumBlind}
         />, 
+        <TrichiasisForm
+            setNumMenTrichiasis={setNumMenTrichiasis}
+            numMenTrichiasis={numMenTrichiasis}
+            setNumWomenTrichiasis={setNumWomenTrichiasis}
+            numWomenTrichiasis={numWomenTrichiasis}
+            totalNumTrichiasis={totalNumTrichiasis}
+        />,
+        <GuineaWormForm
+            setNumMenGuineaWorm={setNumMenGuineaWorm}
+            numMenGuineaWorm={numMenGuineaWorm}
+            setNumWomenGuineaWorm={setNumWomenGuineaWorm}
+            numWomenGuineaWorm={numWomenGuineaWorm}
+            totalNumGuineaWorm={totalNumGuineaWorm}
+        />,
         <Summary />
     ];
 
