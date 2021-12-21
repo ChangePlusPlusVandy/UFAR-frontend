@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
     header: {
         paddingVertical: 18,
         alignSelf: 'center',
+        textAlign: 'center',
+        maxWidth: 300,
         fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Helvetica Neue',
         fontWeight: 'bold',
         fontSize: 23,

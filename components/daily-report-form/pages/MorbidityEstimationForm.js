@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         paddingVertical: 18,
         alignSelf: 'center',
         textAlign: 'center',
-        maxWidth: 186,
+        maxWidth: 300,
         fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Helvetica Neue',
         fontWeight: 'bold',
         fontSize: 22,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
         fontSize: 11,
         lineHeight: 13,
         color: 'black',
-        width: 125,
+        width: 150,
         textAlign: 'center',
 
         /* Android Drop Shadow Styling */
