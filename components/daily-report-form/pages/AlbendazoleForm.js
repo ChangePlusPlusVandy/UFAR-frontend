@@ -6,9 +6,9 @@ export default function AlbendazoleForm(props) {
         <View>
             <Text style={styles.header}>Gestion Des Medicaments</Text>
             <View style={styles.inputContainer}>
+                <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Albendazole (FL/STH)</Text>
                 <View style={styles.rowContainer}>
                         <View style={styles.leftContainer}>
-                            <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Albendazole (FL/STH)</Text>
                             <Text style={styles.inputLabel}>Quantité reçue</Text>
                             <TextInput style={styles.inputField} value={props.albendazoleReceived.toString()} />
                             <Text style={styles.inputLabel}>Quantité utilisée</Text>
