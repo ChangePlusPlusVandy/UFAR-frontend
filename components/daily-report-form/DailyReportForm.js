@@ -31,6 +31,7 @@ export default function DailyReportForm() {
 
     // Treatment Information state
     const [onchocerciasis, setOnchocerciasis] = useState(false);
+    const [numCyclesOnchocerciasis, setNumCyclesOnchocerciasis] = useState(0);
     const [onchocerciasisFirst, setOnchocerciasisFirst] = useState(false);
     const [onchocerciasisSecond, setOnchocerciasisSecond] = useState(false);
     const [lymphaticFilariasis, setLymphaticFilariasis] = useState(false);
@@ -186,6 +187,8 @@ export default function DailyReportForm() {
             setLFAlbendazoleSecond={setLFAlbendazoleSecond}
             LFAlbendazoleSecond={LFAlbendazoleSecond}
 
+            setNumCyclesOnchocerciasis={setNumCyclesOnchocerciasis}
+            numCyclesOnchocerciasis={numCyclesOnchocerciasis}
             setNumCyclesLFMectizanAlbendazole={setNumCyclesLFMectizanAlbendazole}
             numCyclesLFMectizanAlbendazole={numCyclesLFMectizanAlbendazole}
             setNumCyclesLFAlbendazole={setNumCyclesLFAlbendazole}
