@@ -1,26 +1,26 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-export default function Denumber2Form(props) {
+export default function PraziquantelForm(props) {
     return (
         <View>
-            <Text style={styles.header}>Denombrement</Text>
+            <Text style={styles.header}>Gestion Des Medicaments</Text>
             <View style={styles.inputContainer}>
                 <View style={styles.rowContainer}>
                         <View style={styles.leftContainer}>
-                            <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Total</Text>
-                            <Text style={styles.inputLabel}>Total général d'enfants {'<'} 6 mois</Text>
-                            <TextInput style={styles.inputField} value={props.totalChildrenUnderSixMonths.toString()} />
-                            <Text style={styles.inputLabel}>Total général d'enfants 6 mois - {'<'}5 ans</Text>
-                            <TextInput style={styles.inputField} value={props.totalchilrenSixMonthsToveFiveYears.toString()} />
-                            <Text style={styles.inputLabel}>Total général d'enfants 5 - 14 ans</Text>
-                            <TextInput style={styles.inputField} value={props.totalFiveToFourteenYears.toString()}/>
-                            <Text style={styles.inputLabel}>Total général de Personnes de 15 ans et plus</Text>
-                            <TextInput style={styles.inputField} value={props.totalFifteenAndOlder.toString()} />
+                            <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Praziquantel (SCH)</Text>
+                            <Text style={styles.inputLabel}>Quantité reçue</Text>
+                            <TextInput style={styles.inputField} value={props.praziquantelReceived.toString()} />
+                            <Text style={styles.inputLabel}>Quantité utilisée</Text>
+                            <TextInput style={styles.inputField} value={props.praziquantelUsed.toString()} />
+                            <Text style={styles.inputLabel}>Quantité perdue</Text>
+                            <TextInput style={styles.inputField} value={props.praziquantelLost.toString()}/>
+                            <Text style={styles.inputLabel}>Quantité rendue au C.S.</Text>
+                            <TextInput style={styles.inputField} value={props.praziquantelReturned.toString()} />
                         </View>
                         <View style={styles.rightContainer}>
-                            <Text style={styles.inputLabel}>Total personnes</Text>
-                            <TextInput style={styles.inputField} value={props.totalNumPersons.toString()} />
+                            <Text style={styles.inputLabel}>Quantité restante</Text>
+                            <TextInput style={styles.inputField} value={props.praziquantelRemaining.toString()} />
                         </View>
                     </View>
                 </View>
