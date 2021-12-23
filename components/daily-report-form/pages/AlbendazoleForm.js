@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-export default function IvermectinForm(props) {
+export default function AlbendazoleForm(props) {
     return (
         <View>
             <Text style={styles.header}>Gestion Des Medicaments</Text>
