@@ -4,8 +4,12 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 export default function TrichiasisForm(props) {
     return (
         <View>
-            <Text style={styles.header}>Trichiasis</Text>
+            <Text style={styles.header}>Estimation Des Cas Des Morbidites</Text>
             <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>Hydrocèles</Text>
+            <View style={styles.rowContainer}>
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumMenHydroceles(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenHydroceles || '').toString()} placeholder="# des Hommes avec Hydrocèles" />
+                    </View>
                 <Text style={styles.inputLabel}>Trichiasis</Text>
                 <View style={styles.rowContainer}>
                     <TextInput style={styles.inputField} onChange={(e) => props.setNumMenTrichiasis(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenTrichiasis || '').toString()} placeholder="# des Hommes avec Trichiasis" />
@@ -23,9 +27,11 @@ const styles = StyleSheet.create({
     header: {
         paddingVertical: 18,
         alignSelf: 'center',
+        textAlign: 'center',
+        maxWidth: 300,
         fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Helvetica Neue',
         fontWeight: 'bold',
-        fontSize: 23,
+        fontSize: 22,
         lineHeight: 28,
         color: 'white',
     },

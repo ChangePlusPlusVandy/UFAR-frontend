@@ -4,7 +4,7 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 export default function GuineaWormForm(props) {
     return (
         <View>
-            <Text style={styles.header}>Ver de guinée</Text>
+            <Text style={styles.header}>Estimation Des Cas Des Morbidites</Text>
             <View style={styles.inputContainer}>
                 <Text style={styles.inputLabel}>Ver de guinée</Text>
                 <View style={styles.rowContainer}>
@@ -23,9 +23,11 @@ const styles = StyleSheet.create({
     header: {
         paddingVertical: 18,
         alignSelf: 'center',
+        textAlign: 'center',
+        maxWidth: 300,
         fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Helvetica Neue',
         fontWeight: 'bold',
-        fontSize: 23,
+        fontSize: 22,
         lineHeight: 28,
         color: 'white',
     },
