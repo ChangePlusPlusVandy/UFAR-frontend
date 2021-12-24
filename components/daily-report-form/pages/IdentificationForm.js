@@ -3,7 +3,21 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import {Chevron} from 'react-native-shapes';
 
+const locations = require('../../../location_data.json');
+
+function stockMenuItems(source){
+    var target = [];
+    source.forEach(element => target.push({label: element.name, value: element.name}));
+    return target;
+}
+
 // Dropdown items
+const provinceNames = stockMenuItems(locations.provinces);
+const healthZoneNames = [];
+const healthAreas = [];
+const villageNames = [];
+
+/*
 const provinceNames = [
     { label: 'Kwango', value: 'kwango' },
     { label: 'Kwilu', value: 'kwilu' },
@@ -23,6 +37,7 @@ const villageNames = [
     { label: 'Balaka Mic P', value: 'balakaMicP' },
     { label: 'Munga', value: 'munga' },
 ];
+*/
 
 export default function IdentificationForm(props) {
     return (
