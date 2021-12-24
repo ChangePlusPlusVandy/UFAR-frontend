@@ -16,6 +16,7 @@ import TreatmentInformationForm from './pages/TreatmentInformationForm';
 import MorbidityEstimationForm from './pages/MorbidityEstimationForm';
 import TrichiasisForm from './pages/TrichiasisForm';
 import GuineaWormForm from './pages/GuineaWormForm';
+import UntreatedForm from './pages/UntreatedForm';
 import IvermectinForm from './pages/IvermectinForm';
 import AlbendazoleForm from './pages/AlbendazoleForm';
 import PraziquantelForm from './pages/PraziquantelForm';
@@ -144,6 +145,9 @@ export default function DailyReportForm() {
     const [numWomenTrichiasis, setNumWomenTrichiasis] = useState(0);
     const [totalNumTrichiasis, setTotalNumTrichiasis] = useState(numMenTrichiasis + numWomenTrichiasis);
 
+    // Estimation of Hydroceles
+    const [numMenHydroceles, setNumMenHydroceles] = useState(0);
+
     // update total anytime the number of men or women is updated
     useEffect(() => {
         setTotalNumTrichiasis(numMenTrichiasis + numWomenTrichiasis)
@@ -158,6 +162,22 @@ export default function DailyReportForm() {
      useEffect(() => {
          setTotalNumGuineaWorm(numMenGuineaWorm + numWomenGuineaWorm)
      }, [numMenGuineaWorm, numWomenGuineaWorm]);
+
+     // untreated persons form updates
+     const [numInfants, setNumInfants] = useState(0);
+     const [numPregnant, setNumPregnant] = useState(0);
+     const [numBreastfeeding, setNumBreastfeeding] = useState(0);
+     const [numBedridden, setNumBedridden] = useState(0);
+     const [numRefused, setNumRefused] = useState(0);
+     const [numAbsent, setNumAbsent] = useState(0);
+     const [totalUntreated, setTotalUntreated] = useState(numInfants + numPregnant + numBreastfeeding + numBedridden
+        + numRefused + numAbsent);
+
+    // update total anytime the number is changed for any of the values
+    useEffect(() => {
+            setTotalUntreated(numInfants + numPregnant + numBreastfeeding + numBedridden
+                + numRefused + numAbsent)
+        }, [numInfants, numPregnant, numBreastfeeding, numBedridden, numRefused, numAbsent]);
 
      // Ivermectin updated
     const [ivermectinReceived, setIvermectinReceived] = useState(0);
@@ -183,7 +203,7 @@ export default function DailyReportForm() {
         setAlbendazoleRemaining(albendazoleReceived - (albendazoleUsed + albendazoleLost))
     }, [albendazoleReceived, albendazoleUsed, albendazoleLost]);
 
-    // Albendazole updated
+    // Praziquantel updated
     const [praziquantelReceived, setPraziquantelReceived] = useState(0);
     const [praziquantelUsed, setPraziquantelUsed] = useState(0);
     const [praziquantelLost, setPraziquantelLost] = useState(0);
@@ -309,6 +329,8 @@ export default function DailyReportForm() {
             setNumWomenTrichiasis={setNumWomenTrichiasis}
             numWomenTrichiasis={numWomenTrichiasis}
             totalNumTrichiasis={totalNumTrichiasis}
+            numMenHydroceles = {numMenHydroceles}
+            setNumMenHydroceles = {setNumMenHydroceles}
         />,
         <GuineaWormForm
             setNumMenGuineaWorm={setNumMenGuineaWorm}
@@ -316,6 +338,21 @@ export default function DailyReportForm() {
             setNumWomenGuineaWorm={setNumWomenGuineaWorm}
             numWomenGuineaWorm={numWomenGuineaWorm}
             totalNumGuineaWorm={totalNumGuineaWorm}
+        />,
+        <UntreatedForm
+            setNumInfants={setNumInfants}
+            numInfants={numInfants}
+            setNumPregnant={setNumPregnant}
+            numPregnant={numPregnant}
+            setNumBreastfeeding={setNumBreastfeeding}
+            numBreastfeeding={numBreastfeeding}
+            setNumBedridden={setNumBedridden}
+            numBedridden={numBedridden}
+            setNumRefused={setNumRefused}
+            numRefused={numRefused}
+            setNumAbsent={setNumAbsent}
+            numAbsent={numAbsent}
+            totalUntreated = {totalUntreated}
         />,
         <IvermectinForm
             setIvermectinReceived={setIvermectinReceived}
