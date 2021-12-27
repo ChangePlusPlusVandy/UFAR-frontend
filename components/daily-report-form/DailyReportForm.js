@@ -288,6 +288,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#EC1C24',
         borderTopLeftRadius: 11,
         borderTopRightRadius: 11,
+        
+        /* Android Drop Shadow Styling */
+        elevation: 10,
+        
+        /* iOS Drop Shadow Styling */
+        shadowColor: "black",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 10,
+        shadowOpacity: 0.3,
     },
     containerInactive: {
         top: null,

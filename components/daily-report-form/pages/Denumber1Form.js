@@ -8,7 +8,7 @@ export default function Denumber1Form(props) {
             <ScrollView style={styles.inputContainer}>
                 <View style={styles.rowContainer}>
                     <View style={styles.leftContainer}>
-                        <Text  style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Men</Text>
+                        <Text  style={styles.inputLabelBigger}>Men</Text>
                         <Text style={styles.inputLabel}># of children {'<'} 6 months</Text>
                         <TextInput  style={styles.inputField} 
                         defaultValue={props.menUnderSixMonths.toString()} 
@@ -36,7 +36,7 @@ export default function Denumber1Form(props) {
                 </View>
                 <View style={{...styles.rowContainer, marginTop: 20}}>
                     <View style={styles.leftContainer}>
-                        <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Women</Text>
+                        <Text style={styles.inputLabelBigger}>Women</Text>
                         <Text style={styles.inputLabel}># of children {'<'} 6 months</Text>
                         <TextInput  style={styles.inputField} 
                         defaultValue={props.womenLessThanSixMonths.toString()} 
@@ -79,23 +79,17 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         marginHorizontal: 34,
-        marginBottom: 175,
-        /* Android Drop Shadow Styling */
-        elevation: 10,
-        
-        /* iOS Drop Shadow Styling */
-        shadowColor: "black",
-        shadowOffset: {
-            width: 10,
-            height: 10,
-        },
-        shadowRadius: 10,
-        shadowOpacity: 0.3,
     },
     inputLabel: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
         fontSize: 11,
         lineHeight: 13,
+        color: 'white',
+    },
+    inputLabelBigger: {
+        fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
+        fontSize: 19,
+        lineHeight: 22,
         color: 'white',
     },
     inputField: {
@@ -110,6 +104,18 @@ const styles = StyleSheet.create({
         color: 'black',
         width: 95,
         textAlign: 'center',
+        
+        /* Android Drop Shadow Styling */
+        elevation: 10,
+        
+        /* iOS Drop Shadow Styling */
+        shadowColor: "black",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 10,
+        shadowOpacity: 0.3,
     },
     rowContainer: {
         flexDirection: 'row',

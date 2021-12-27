@@ -1,10 +1,10 @@
 import React from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
 
-export default function CheckBox({isChecked, style, onPress}) {
+export default function CheckBox({isChecked, style, onPress, fillColor='#8AC566'}) {
     return (
         <Pressable style={{...styles.checkBox, ...style}} onPress={onPress}>
-            {isChecked && <View style={{...styles.checkBoxFill, backgroundColor: (style.fillColor || '#EC1C24')}} />}
+            {isChecked && <View style={{...styles.checkBoxFill, backgroundColor: fillColor}} />}
         </Pressable>
     );
 }
