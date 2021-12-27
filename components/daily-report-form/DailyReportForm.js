@@ -21,6 +21,8 @@ import IvermectinForm from './pages/IvermectinForm';
 import AlbendazoleForm from './pages/AlbendazoleForm';
 import PraziquantelForm from './pages/PraziquantelForm';
 import Summary from './pages/Summary';
+import data from './pages/locations';
+
 
 export default function DailyReportForm() {
     const [activePage, setActivePage] = useState(null);
@@ -28,10 +30,23 @@ export default function DailyReportForm() {
     // Identification state
     const [DMMDay, setDMMDay] = useState("");
     const [registeredNurse, setRegisteredNurse] = useState("");
-    const [provinceName, setProvinceName] = useState("");
-    const [healthZoneName, setHealthZoneName] = useState("");
-    const [healthArea, setHealthArea] = useState("");
-    const [villageName, setVillageName] = useState("");
+
+    const [provinceName, setProvinceName] = useState(Object(data.provinces).keys()[0]);
+    const [provinceId, setProvinceId] = useState(data.provinces[provinceName].id);
+
+    const [healthZoneName, setHealthZoneName] = useState(Object(data.provinces[provinceName].health_zones).keys()[0]);
+    const [healthZoneId, setHealthZoneId] = useState(data.provinces[provinceName].health_zones[healthZoneName].id);
+
+    const [healthArea, setHealthArea] = useState(Object(data.provinces[provinceName].health_zones[healthZoneName].health_areas).keys()[0]);
+    const [healthAreaId, setHealthAreaId] = useState(data.provinces[provinceName].health_zones[healthZoneName].health_areas[healthArea].id);
+
+    const [villageName, setVillageName] = useState(Object(data.provinces[provinceName].health_zones[healthZoneName].health_areas[healthArea].villages).keys()[0]);
+    const [villageId, setVillageId] = useState(data.provinces[provinceName].health_zones[healthZoneName].health_areas[healthArea].villages[villageName].id);
+
+    // todo: to be used 
+    useEffect(() => {
+
+    }, [numHouseholdsVisited, numHouseholdsTreated]);
 
     // Treatment Information state
     const [onchocerciasis, setOnchocerciasis] = useState(false);
@@ -223,12 +238,20 @@ export default function DailyReportForm() {
             registeredNurse={registeredNurse}
             setProvinceName={setProvinceName}
             provinceName={provinceName}
+            provinceId={provinceId}
+            setProvinceId={setProvinceId}
             setHealthZoneName={setHealthZoneName}
             healthZoneName={healthZoneName}
+            healthZoneId={healthZoneId}
+            setHealthZoneId={setHealthZoneId}
             setHealthArea={setHealthArea}
             healthArea={healthArea}
+            setHealthAreaId={setHealthAreaId}
+            healthAreaId={healthAreaId}
             setVillageName={setVillageName}
             villageName={villageName}
+            villageId={villageId}
+            setVillageId={setVillageId}
         />,
         <TreatmentInformationForm
             setOnchocerciasis={setOnchocerciasis}

@@ -2,27 +2,8 @@ import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import {Chevron} from 'react-native-shapes';
+import data  from './locations'; // fixme: remove this
 
-// Dropdown items
-const provinceNames = [
-    { label: 'Kwango', value: 'kwango' },
-    { label: 'Kwilu', value: 'kwilu' },
-];
-const healthZoneNames = [
-    { label: 'Koshibanda', value: 'koshibanda' },
-    { label: 'Kimputu', value: 'kimputu' },
-    { label: 'Pay-Kongila', value: 'payKongila' },
-];
-const healthAreas = [
-    { label: 'Balaka', value: 'balaka' },
-    { label: 'Bamba', value: 'bamba' },
-    { label: 'Banda', value: 'banda' },
-];
-const villageNames = [
-    { label: 'Balaka Village', value: 'balakaVillage' },
-    { label: 'Balaka Mic P', value: 'balakaMicP' },
-    { label: 'Munga', value: 'munga' },
-];
 
 export default function IdentificationForm(props) {
     return (
@@ -37,8 +18,19 @@ export default function IdentificationForm(props) {
                     <RNPickerSelect
                         useNativeAndroidPickerStyle={false}
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
-                        onValueChange={(value) => props.setProvinceName(value)}
-                        items={provinceNames}
+                        onValueChange={(value) => { 
+                            props.setProvinceName(value);
+                            props.setProvinceId(data.provinces[value].id);
+                        }}
+                        items={ () => {
+                                provinceNames = [];
+
+                                Object(data.provinces).keys().forEach(function(province) {
+                                    provinceNames.push({label: province, value: province});
+                                });
+                                return provinceNames;
+                            }
+                        }
                         value={props.provinceName}
                         placeholder={{label: 'Nom de la Province/Région', value: null}}
                         Icon={() => <Chevron size={1.5} color='#9D9D9D' />}
@@ -48,8 +40,19 @@ export default function IdentificationForm(props) {
                     <RNPickerSelect
                         useNativeAndroidPickerStyle={false}
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
-                        onValueChange={(value) => props.setHealthZoneName(value)}
-                        items={healthZoneNames}
+                        onValueChange={(value) => {
+                            props.setHealthZoneName(value);
+                            props.setHealthZoneId(data.provinces[props.provinceName].healthZones[value].id);
+                        }}
+                        items={() => {
+                            healthZoneNames = [];
+                            
+                            Object(data.provinces[props.provinceName].health_zones).keys().forEach(function(healthZone) {
+                                healthZoneNames.push({label: healthZone, value: healthZone});
+                            });
+                            return healthZoneNames;
+                        }}
+            
                         value={props.healthZoneName}
                         placeholder={{label: 'Nom de la Zone de santé', value: null}}
                         Icon={() => <Chevron size={1.5} color='#9D9D9D' />}
@@ -59,8 +62,18 @@ export default function IdentificationForm(props) {
                     <RNPickerSelect
                         useNativeAndroidPickerStyle={false}
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
-                        onValueChange={(value) => props.setHealthArea(value)}
-                        items={healthAreas}
+                        onValueChange={(value) => {
+                            props.setHealthArea(value);
+                            props.setHealthAreaId(data.provinces[props.provinceName].healthZones[props.healthZoneName].healthAreas[value].id);
+                        }}
+                        items={() => {
+                            healthAreas = [];
+                            
+                            Object(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas).keys().forEach(function(healthArea) {
+                                healthAreas.push({label: healthArea, value: healthArea});
+                            });
+                            return healthAreas;
+                        }}
                         value={props.healthArea}
                         placeholder={{label: 'Aire de santé', value: null}}
                         Icon={() => <Chevron size={1.5} color='#9D9D9D' />}
@@ -70,8 +83,18 @@ export default function IdentificationForm(props) {
                     <RNPickerSelect
                         useNativeAndroidPickerStyle={false}
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
-                        onValueChange={(value) => props.setVillageName(value)}
-                        items={villageNames}
+                        onValueChange={(value) => {
+                            props.setVillageName(value);
+                            props.setVillageId(data.provinces[props.provinceName].healthZones[props.healthZoneName].healthAreas[props.healthArea].villages[value].id);
+                        }}
+                        items={() => {
+                            villageNames = [];
+                            
+                            Object(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas[props.healthArea].villages).keys().forEach(function(village) {
+                                villageNames.push({label: village, value: village});
+                            });
+                            return villageNames;
+                        }}
                         value={props.villageName}
                         placeholder={{label: 'Nom du Village/Communauté', value: null}}
                         Icon={() => <Chevron size={1.5} color='#9D9D9D' />}
