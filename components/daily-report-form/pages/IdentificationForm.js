@@ -6,8 +6,54 @@ import data  from './locations'; // fixme: remove this
 
 
 export default function IdentificationForm(props) {
+
+    function getProvinces(){
+        let provinceNames = [];
+    
+        Object.keys(data.provinces).forEach(function(province) {
+            provinceNames.push({label: province, value: province});
+        });
+        return provinceNames;
+    }
+
+    function getHealthZones(){
+        let healthZoneNames = [];
+        
+        if (props.provinceName){
+            Object.keys(data.provinces[props.provinceName].health_zones).forEach(function(healthZone) {
+                healthZoneNames.push({label: healthZone, value: healthZone});
+            });
+        }
+    
+        return healthZoneNames;
+    }
+
+    function getHealthAreas(){
+        let healthAreas = [];
+        
+        if (props.provinceName && props.healthZoneName){
+            Object.keys(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas).forEach(function(healthArea) {
+                healthAreas.push({label: healthArea, value: healthArea});
+            });
+        }
+        
+        return healthAreas;
+    }
+
+    function getVillages(){
+        let villageNames = [];
+        
+        if (props.provinceName && props.healthZoneName && props.healthAreaName){
+            Object.keys(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas[props.healthAreaName].villages).forEach(function(village) {
+                villageNames.push({label: village, value: village});
+            });
+        }
+        return villageNames;
+    }
+    
     return (
         <View>
+            
             <Text style={styles.header}>Identification</Text>
             <View style={styles.inputContainer}>
                 <View style={{flexDirection: 'row'}}>
@@ -22,15 +68,8 @@ export default function IdentificationForm(props) {
                             props.setProvinceName(value);
                             props.setProvinceId(data.provinces[value].id);
                         }}
-                        items={ () => {
-                                provinceNames = [];
-
-                                Object(data.provinces).keys().forEach(function(province) {
-                                    provinceNames.push({label: province, value: province});
-                                });
-                                return provinceNames;
-                            }
-                        }
+                        items={ getProvinces() }
+            
                         value={props.provinceName}
                         placeholder={{label: 'Nom de la Province/Région', value: null}}
                         Icon={() => <Chevron size={1.5} color='#9D9D9D' />}
@@ -42,16 +81,9 @@ export default function IdentificationForm(props) {
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
                         onValueChange={(value) => {
                             props.setHealthZoneName(value);
-                            props.setHealthZoneId(data.provinces[props.provinceName].healthZones[value].id);
+                            value && props.setHealthZoneId(data.provinces[props.provinceName].health_zones[value].id);
                         }}
-                        items={() => {
-                            healthZoneNames = [];
-                            
-                            Object(data.provinces[props.provinceName].health_zones).keys().forEach(function(healthZone) {
-                                healthZoneNames.push({label: healthZone, value: healthZone});
-                            });
-                            return healthZoneNames;
-                        }}
+                        items={ getHealthZones() }
             
                         value={props.healthZoneName}
                         placeholder={{label: 'Nom de la Zone de santé', value: null}}
@@ -63,18 +95,11 @@ export default function IdentificationForm(props) {
                         useNativeAndroidPickerStyle={false}
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
                         onValueChange={(value) => {
-                            props.setHealthArea(value);
-                            props.setHealthAreaId(data.provinces[props.provinceName].healthZones[props.healthZoneName].healthAreas[value].id);
+                            props.setHealthAreaName(value);
+                            value && props.setHealthAreaId(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas[value].id);
                         }}
-                        items={() => {
-                            healthAreas = [];
-                            
-                            Object(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas).keys().forEach(function(healthArea) {
-                                healthAreas.push({label: healthArea, value: healthArea});
-                            });
-                            return healthAreas;
-                        }}
-                        value={props.healthArea}
+                        items={ getHealthAreas() }
+                        value={props.healthAreaName}
                         placeholder={{label: 'Aire de santé', value: null}}
                         Icon={() => <Chevron size={1.5} color='#9D9D9D' />}
                     />
@@ -85,16 +110,9 @@ export default function IdentificationForm(props) {
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
                         onValueChange={(value) => {
                             props.setVillageName(value);
-                            props.setVillageId(data.provinces[props.provinceName].healthZones[props.healthZoneName].healthAreas[props.healthArea].villages[value].id);
+                            value && props.setVillageId(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas[props.healthAreaName].villages[value].id);
                         }}
-                        items={() => {
-                            villageNames = [];
-                            
-                            Object(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas[props.healthArea].villages).keys().forEach(function(village) {
-                                villageNames.push({label: village, value: village});
-                            });
-                            return villageNames;
-                        }}
+                        items={ getVillages() }
                         value={props.villageName}
                         placeholder={{label: 'Nom du Village/Communauté', value: null}}
                         Icon={() => <Chevron size={1.5} color='#9D9D9D' />}

@@ -27,26 +27,24 @@ import data from './pages/locations';
 export default function DailyReportForm() {
     const [activePage, setActivePage] = useState(null);
 
+
     // Identification state
     const [DMMDay, setDMMDay] = useState("");
     const [registeredNurse, setRegisteredNurse] = useState("");
 
-    const [provinceName, setProvinceName] = useState(Object(data.provinces).keys()[0]);
-    const [provinceId, setProvinceId] = useState(data.provinces[provinceName].id);
+    const [provinceName, setProvinceName] = useState("");
+    const [provinceId, setProvinceId] = useState("");
 
-    const [healthZoneName, setHealthZoneName] = useState(Object(data.provinces[provinceName].health_zones).keys()[0]);
-    const [healthZoneId, setHealthZoneId] = useState(data.provinces[provinceName].health_zones[healthZoneName].id);
+    const [healthZoneName, setHealthZoneName] = useState("");
+    const [healthZoneId, setHealthZoneId] = useState("");
 
-    const [healthArea, setHealthArea] = useState(Object(data.provinces[provinceName].health_zones[healthZoneName].health_areas).keys()[0]);
-    const [healthAreaId, setHealthAreaId] = useState(data.provinces[provinceName].health_zones[healthZoneName].health_areas[healthArea].id);
+    const [healthAreaName, setHealthAreaName] = useState("");
+    const [healthAreaId, setHealthAreaId] = useState("");
 
-    const [villageName, setVillageName] = useState(Object(data.provinces[provinceName].health_zones[healthZoneName].health_areas[healthArea].villages).keys()[0]);
-    const [villageId, setVillageId] = useState(data.provinces[provinceName].health_zones[healthZoneName].health_areas[healthArea].villages[villageName].id);
+    const [villageName, setVillageName] = useState("");
+    const [villageId, setVillageId] = useState("");
 
-    // todo: to be used 
-    useEffect(() => {
-
-    }, [numHouseholdsVisited, numHouseholdsTreated]);
+    
 
     // Treatment Information state
     const [onchocerciasis, setOnchocerciasis] = useState(false);
@@ -244,8 +242,8 @@ export default function DailyReportForm() {
             healthZoneName={healthZoneName}
             healthZoneId={healthZoneId}
             setHealthZoneId={setHealthZoneId}
-            setHealthArea={setHealthArea}
-            healthArea={healthArea}
+            setHealthAreaName={setHealthAreaName}
+            healthAreaName={healthAreaName}
             setHealthAreaId={setHealthAreaId}
             healthAreaId={healthAreaId}
             setVillageName={setVillageName}
