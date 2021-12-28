@@ -6,16 +6,16 @@ export default function DatesForm(props) {
         <View>
             <Text style={styles.header}>Dates</Text>
             <View style={styles.inputContainer}>
-                <Text style={styles.inputLabel}>DCs Training Completion Date</Text>
+                <Text style={styles.inputLabel}>Date de la fin de la formation des DCs</Text>
                 {/* TODO: calendar/date picker? */}
                 <TextInput style={styles.inputField} onChange={(e) => props.setDCTrainingCompletionDate(e.nativeEvent.text)} defaultValue={props.DCTrainingCompletionDate} placeholder="DD/MM/YYYY" />
-                <Text style={styles.inputLabel}>Medicine Arrival Date</Text>
+                <Text style={styles.inputLabel}>Date d'arrivée de médicaments</Text>
                 <TextInput style={styles.inputField} onChange={(e) => props.setMedicineArrivalDate(e.nativeEvent.text)} defaultValue={props.medicineArrivalDate} placeholder="DD/MM/YYYY" />
-                <Text style={styles.inputLabel}>MDD Start Date</Text>
+                <Text style={styles.inputLabel}>Date du début de la DMM</Text>
                 <TextInput style={styles.inputField} onChange={(e) => props.setMDDStartDate(e.nativeEvent.text)} defaultValue={props.MDDStartDate} placeholder="DD/MM/YYYY" />
-                <Text style={styles.inputLabel}>DMM End Date</Text>
+                <Text style={styles.inputLabel}>Date de la fin de la DMM</Text>
                 <TextInput style={styles.inputField} onChange={(e) => props.setDMMEndDate(e.nativeEvent.text)} defaultValue={props.DMMEndDate} placeholder="DD/MM/YYYY" />
-                <Text style={styles.inputLabel}>Report Transmission Date</Text>
+                <Text style={styles.inputLabel}>Date de la transmission du rapport</Text>
                 <TextInput style={styles.inputField} onChange={(e) => props.setReportTransmissionDate(e.nativeEvent.text)} defaultValue={props.reportTransmissionDate} placeholder="DD/MM/YYYY" />
             </View>
         </View>

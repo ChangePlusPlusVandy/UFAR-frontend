@@ -1,18 +1,18 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-export default function DistributorsForm(props) {
+export default function GuineaWormForm(props) {
     return (
         <View>
-            <Text style={styles.header}>Distributeurs communautaires</Text>
+            <Text style={styles.header}>Estimation Des Cas Des Morbidites</Text>
             <View style={styles.inputContainer}>
-                <Text style={styles.inputLabel}>Distributeurs</Text>
+                <Text style={styles.inputLabel}>Ver de guinée</Text>
                 <View style={styles.rowContainer}>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumMenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenDistributors || '').toString()} placeholder="# de DC Homme" />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumMenGuineaWorm(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenTrichiasis || '').toString()} placeholder="# des Hommes avec ver de guinée" />
                     <Text style={styles.text}>+</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenDistributors || '').toString()} placeholder="# de DC Femmes" />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenGuineaWorm(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenGuineaWorm || '').toString()} placeholder="# des Femmes avec guinée" />
                     <Text style={styles.text}>=</Text>
-                    <TextInput style={styles.inputField} value={props.totalNumDistributors.toString()} placeholder="Total de DCs" />
+                    <TextInput style={styles.inputField} value={props.totalNumGuineaWorm.toString()} placeholder="Total des personnes avec ver de guinée" />
                 </View>
             </View>
         </View>
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         maxWidth: 300,
         fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Helvetica Neue',
         fontWeight: 'bold',
-        fontSize: 23,
+        fontSize: 22,
         lineHeight: 28,
         color: 'white',
     },

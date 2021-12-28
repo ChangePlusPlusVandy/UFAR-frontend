@@ -45,8 +45,8 @@ export default function IdentificationForm(props) {
             <Text style={styles.header}>Identification</Text>
             <View style={styles.inputContainer}>
                 <View style={{flexDirection: 'row'}}>
-                    <TextInput style={{...styles.inputField, flex: 1, marginRight: 5.5}} onChange={(e) => props.setDMMDay(e.nativeEvent.text)} defaultValue={props.DMMDay} placeholder="DMM Day" />
-                    <TextInput style={{...styles.inputField, flex: 2, marginLeft: 5.5}} onChange={(e) => props.setRegisteredNurse(e.nativeEvent.text)} defaultValue={props.registeredNurse} placeholder="Name of Registered Nurse" />
+                    <TextInput style={{...styles.inputField, flex: 1, marginRight: 5.5}} onChange={(e) => props.setDMMDay(e.nativeEvent.text)} defaultValue={props.DMMDay} placeholder="Jour de la DMM" />
+                    <TextInput style={{...styles.inputField, flex: 2, marginLeft: 5.5}} onChange={(e) => props.setRegisteredNurse(e.nativeEvent.text)} defaultValue={props.registeredNurse} placeholder="Nom de l'infirmier titulaire" />
                 </View>
                 <View style={styles.RNPickerSelectContainer}>
                     <RNPickerSelect
@@ -55,7 +55,7 @@ export default function IdentificationForm(props) {
                         onValueChange={(value) => props.setProvinceName(value)}
                         items={provinceNames}
                         value={props.provinceName}
-                        placeholder={{label: 'Name of Province/Region', value: null}}
+                        placeholder={{label: 'Nom de la Province/Région', value: null}}
                         Icon={() => <Chevron size={1.5} color='#9D9D9D' />}
                     />
                 </View>
@@ -66,7 +66,7 @@ export default function IdentificationForm(props) {
                         onValueChange={(value) => props.setHealthZoneName(value)}
                         items={healthZoneNames}
                         value={props.healthZoneName}
-                        placeholder={{label: 'Health Zone Name', value: null}}
+                        placeholder={{label: 'Nom de la Zone de santé', value: null}}
                         Icon={() => <Chevron size={1.5} color='#9D9D9D' />}
                     />
                 </View>
@@ -88,7 +88,7 @@ export default function IdentificationForm(props) {
                         onValueChange={(value) => props.setVillageName(value)}
                         items={villageNames}
                         value={props.villageName}
-                        placeholder={{label: 'Village/Community Name', value: null}}
+                        placeholder={{label: 'Nom du Village/Communauté', value: null}}
                         Icon={() => <Chevron size={1.5} color='#9D9D9D' />}
                     />
                 </View>

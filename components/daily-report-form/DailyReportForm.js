@@ -14,6 +14,12 @@ import DistributorsForm from './pages/DistributorsForm';
 import IdentificationForm from './pages/IdentificationForm';
 import TreatmentInformationForm from './pages/TreatmentInformationForm';
 import MorbidityEstimationForm from './pages/MorbidityEstimationForm';
+import TrichiasisForm from './pages/TrichiasisForm';
+import GuineaWormForm from './pages/GuineaWormForm';
+import UntreatedForm from './pages/UntreatedForm';
+import IvermectinForm from './pages/IvermectinForm';
+import AlbendazoleForm from './pages/AlbendazoleForm';
+import PraziquantelForm from './pages/PraziquantelForm';
 import Summary from './pages/Summary';
 
 export default function DailyReportForm() {
@@ -29,6 +35,7 @@ export default function DailyReportForm() {
 
     // Treatment Information state
     const [onchocerciasis, setOnchocerciasis] = useState(false);
+    const [numCyclesOnchocerciasis, setNumCyclesOnchocerciasis] = useState(0);
     const [onchocerciasisFirst, setOnchocerciasisFirst] = useState(false);
     const [onchocerciasisSecond, setOnchocerciasisSecond] = useState(false);
     const [lymphaticFilariasis, setLymphaticFilariasis] = useState(false);
@@ -46,6 +53,7 @@ export default function DailyReportForm() {
         if (!onchocerciasis) {
             setOnchocerciasisFirst(false);
             setOnchocerciasisSecond(false);
+            setNumCyclesOnchocerciasis(0);
         }
     }, [onchocerciasis]);
 
@@ -132,6 +140,81 @@ export default function DailyReportForm() {
     }, [numMenBlind, numWomenBlind]);
     // TODO: Insert state
 
+    // Estimation of Trichiasis
+    const [numMenTrichiasis, setNumMenTrichiasis] = useState(0);
+    const [numWomenTrichiasis, setNumWomenTrichiasis] = useState(0);
+    const [totalNumTrichiasis, setTotalNumTrichiasis] = useState(numMenTrichiasis + numWomenTrichiasis);
+
+    // Estimation of Hydroceles
+    const [numMenHydroceles, setNumMenHydroceles] = useState(0);
+
+    // update total anytime the number of men or women is updated
+    useEffect(() => {
+        setTotalNumTrichiasis(numMenTrichiasis + numWomenTrichiasis)
+    }, [numMenTrichiasis, numWomenTrichiasis]);
+
+     // Estimation of Guinea Worm
+     const [numMenGuineaWorm, setNumMenGuineaWorm] = useState(0);
+     const [numWomenGuineaWorm, setNumWomenGuineaWorm] = useState(0);
+     const [totalNumGuineaWorm, setTotalNumGuineaWorm] = useState(numMenGuineaWorm + numWomenGuineaWorm);
+ 
+     // update total anytime the number of men or women is updated
+     useEffect(() => {
+         setTotalNumGuineaWorm(numMenGuineaWorm + numWomenGuineaWorm)
+     }, [numMenGuineaWorm, numWomenGuineaWorm]);
+
+     // untreated persons form updates
+     const [numInfants, setNumInfants] = useState(0);
+     const [numPregnant, setNumPregnant] = useState(0);
+     const [numBreastfeeding, setNumBreastfeeding] = useState(0);
+     const [numBedridden, setNumBedridden] = useState(0);
+     const [numRefused, setNumRefused] = useState(0);
+     const [numAbsent, setNumAbsent] = useState(0);
+     const [totalUntreated, setTotalUntreated] = useState(numInfants + numPregnant + numBreastfeeding + numBedridden
+        + numRefused + numAbsent);
+
+    // update total anytime the number is changed for any of the values
+    useEffect(() => {
+            setTotalUntreated(numInfants + numPregnant + numBreastfeeding + numBedridden
+                + numRefused + numAbsent)
+        }, [numInfants, numPregnant, numBreastfeeding, numBedridden, numRefused, numAbsent]);
+
+     // Ivermectin updated
+    const [ivermectinReceived, setIvermectinReceived] = useState(0);
+    const [ivermectinUsed, setIvermectinUsed] = useState(0);
+    const [ivermectinLost, setIvermectinLost] = useState(0);
+    const [ivermectinReturned, setIvermectinReturned] = useState(0);
+    const [ivermectinRemaining, setIvermectinRemaining] = useState(ivermectinReceived - ivermectinUsed - ivermectinLost);
+    
+    // update the total amount of ivermectin remaining once the other values change
+    useEffect(() => {
+        setIvermectinRemaining(ivermectinReceived - (ivermectinUsed + ivermectinLost))
+    }, [ivermectinReceived, ivermectinUsed, ivermectinLost]);
+
+    // Albendazole updated
+    const [albendazoleReceived, setAlbendazoleReceived] = useState(0);
+    const [albendazoleUsed, setAlbendazoleUsed] = useState(0);
+    const [albendazoleLost, setAlbendazoleLost] = useState(0);
+    const [albendazoleReturned, setAlbendazoleReturned] = useState(0);
+    const [albendazoleRemaining, setAlbendazoleRemaining] = useState(albendazoleReceived - albendazoleUsed - albendazoleLost);
+    
+    // update the total amount of albendazole remaining once the other values change
+    useEffect(() => {
+        setAlbendazoleRemaining(albendazoleReceived - (albendazoleUsed + albendazoleLost))
+    }, [albendazoleReceived, albendazoleUsed, albendazoleLost]);
+
+    // Praziquantel updated
+    const [praziquantelReceived, setPraziquantelReceived] = useState(0);
+    const [praziquantelUsed, setPraziquantelUsed] = useState(0);
+    const [praziquantelLost, setPraziquantelLost] = useState(0);
+    const [praziquantelReturned, setPraziquantelReturned] = useState(0);
+    const [praziquantelRemaining, setPraziquantelRemaining] = useState(praziquantelReceived - praziquantelUsed - praziquantelLost);
+    
+    // update the total amount of albendazole remaining once the other values change
+    useEffect(() => {
+        setPraziquantelRemaining(praziquantelReceived - (praziquantelUsed + praziquantelLost))
+    }, [praziquantelReceived, praziquantelUsed, praziquantelLost]);
+
     const pages = [
         <IdentificationForm
             setDMMDay={setDMMDay}
@@ -164,6 +247,8 @@ export default function DailyReportForm() {
             setLFAlbendazoleSecond={setLFAlbendazoleSecond}
             LFAlbendazoleSecond={LFAlbendazoleSecond}
 
+            setNumCyclesOnchocerciasis={setNumCyclesOnchocerciasis}
+            numCyclesOnchocerciasis={numCyclesOnchocerciasis}
             setNumCyclesLFMectizanAlbendazole={setNumCyclesLFMectizanAlbendazole}
             numCyclesLFMectizanAlbendazole={numCyclesLFMectizanAlbendazole}
             setNumCyclesLFAlbendazole={setNumCyclesLFAlbendazole}
@@ -238,6 +323,70 @@ export default function DailyReportForm() {
             numWomenBlind={numWomenBlind}
             totalNumBlind={totalNumBlind}
         />, 
+        <TrichiasisForm
+            setNumMenTrichiasis={setNumMenTrichiasis}
+            numMenTrichiasis={numMenTrichiasis}
+            setNumWomenTrichiasis={setNumWomenTrichiasis}
+            numWomenTrichiasis={numWomenTrichiasis}
+            totalNumTrichiasis={totalNumTrichiasis}
+            numMenHydroceles = {numMenHydroceles}
+            setNumMenHydroceles = {setNumMenHydroceles}
+        />,
+        <GuineaWormForm
+            setNumMenGuineaWorm={setNumMenGuineaWorm}
+            numMenGuineaWorm={numMenGuineaWorm}
+            setNumWomenGuineaWorm={setNumWomenGuineaWorm}
+            numWomenGuineaWorm={numWomenGuineaWorm}
+            totalNumGuineaWorm={totalNumGuineaWorm}
+        />,
+        <UntreatedForm
+            setNumInfants={setNumInfants}
+            numInfants={numInfants}
+            setNumPregnant={setNumPregnant}
+            numPregnant={numPregnant}
+            setNumBreastfeeding={setNumBreastfeeding}
+            numBreastfeeding={numBreastfeeding}
+            setNumBedridden={setNumBedridden}
+            numBedridden={numBedridden}
+            setNumRefused={setNumRefused}
+            numRefused={numRefused}
+            setNumAbsent={setNumAbsent}
+            numAbsent={numAbsent}
+            totalUntreated = {totalUntreated}
+        />,
+        <IvermectinForm
+            setIvermectinReceived={setIvermectinReceived}
+            ivermectinReceived={ivermectinReceived}
+            setIvermectinUsed={setIvermectinUsed}
+            ivermectinUsed={ivermectinUsed}
+            setIvermectinLost ={setIvermectinLost}
+            ivermectinLost = {ivermectinLost}
+            setIvermectinReturned = {setIvermectinReturned}
+            ivermectinReturned = {ivermectinReturned}
+            ivermectinRemaining = {ivermectinRemaining}
+        />,
+        <AlbendazoleForm
+            setAlbendazoleReceived={setAlbendazoleReceived}
+            albendazoleReceived={albendazoleReceived}
+            setAlbendazoleUsed={setAlbendazoleUsed}
+            albendazoleUsed={albendazoleUsed}
+            setAlbendazoleLost ={setAlbendazoleLost}
+            albendazoleLost = {albendazoleLost}
+            setAlbendazoleReturned = {setAlbendazoleReturned}
+            albendazoleReturned = {albendazoleReturned}
+            albendazoleRemaining = {albendazoleRemaining}
+        />,
+        <PraziquantelForm
+            setPraziquantelReceived={setPraziquantelReceived}
+            praziquantelReceived={praziquantelReceived}
+            setPraziquantelUsed={setPraziquantelUsed}
+            praziquantelUsed={praziquantelUsed}
+            setPraziquantelLost ={setPraziquantelLost}
+            praziquantelLost = {praziquantelLost}
+            setPraziquantelReturned = {setPraziquantelReturned}
+            praziquantelReturned = {praziquantelReturned}
+            praziquantelRemaining = {praziquantelRemaining}
+        />,
         <Summary />
     ];
 

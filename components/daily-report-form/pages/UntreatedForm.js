@@ -1,26 +1,30 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-export default function Denumber2Form(props) {
+export default function UntreatedForm(props) {
     return (
         <View>
-            <Text style={styles.header}>Denombrement</Text>
+            <Text style={styles.header}>Personnes Non Traitées</Text>
             <View style={styles.inputContainer}>
+                <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} ># des personnes non traitées à l’Oncho et/ou à la FL</Text>
                 <View style={styles.rowContainer}>
                         <View style={styles.leftContainer}>
-                            <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Total</Text>
-                            <Text style={styles.inputLabel}>Total général d'enfants {'<'} 6 mois</Text>
-                            <TextInput style={styles.inputField} value={props.totalChildrenUnderSixMonths.toString()} />
-                            <Text style={styles.inputLabel}>Total général d'enfants 6 mois - {'<'}5 ans</Text>
-                            <TextInput style={styles.inputField} value={props.totalchilrenSixMonthsToveFiveYears.toString()} />
-                            <Text style={styles.inputLabel}>Total général d'enfants 5 - 14 ans</Text>
-                            <TextInput style={styles.inputField} value={props.totalFiveToFourteenYears.toString()}/>
-                            <Text style={styles.inputLabel}>Total général de Personnes de 15 ans et plus</Text>
-                            <TextInput style={styles.inputField} value={props.totalFifteenAndOlder.toString()} />
+                            <Text style={styles.inputLabel}>Enfants de {'<'} 5 ans (E)</Text>
+                            <TextInput style={styles.inputField} value={props.numInfants.toString()} />
+                            <Text style={styles.inputLabel}>Femmes enceintes (G)</Text>
+                            <TextInput style={styles.inputField} value={props.numPregnant.toString()} />
+                            <Text style={styles.inputLabel}>Femmes allaitantes de {'<'} 7jrs (FA)</Text>
+                            <TextInput style={styles.inputField} value={props.numBreastfeeding.toString()}/>
+                            <Text style={styles.inputLabel}>Malades grabataires (MG)</Text>
+                            <TextInput style={styles.inputField} value={props.numBedridden.toString()} />
+                            <Text style={styles.inputLabel}>Refus (R)</Text>
+                            <TextInput style={styles.inputField} value={props.numRefused.toString()} />
+                            <Text style={styles.inputLabel}>Absents (A)</Text>
+                            <TextInput style={styles.inputField} value={props.numAbsent.toString()} />
                         </View>
                         <View style={styles.rightContainer}>
-                            <Text style={styles.inputLabel}>Total personnes</Text>
-                            <TextInput style={styles.inputField} value={props.totalNumPersons.toString()} />
+                            <Text style={styles.inputLabel}>Total de personnes non traitées</Text>
+                            <TextInput style={styles.inputField} value={props.totalUntreated.toString()} />
                         </View>
                     </View>
                 </View>
