@@ -43,7 +43,6 @@ export default function DailyReportForm() {
 
     const [villageName, setVillageName] = useState("");
     const [villageId, setVillageId] = useState("");
-
     
 
     // Treatment Information state

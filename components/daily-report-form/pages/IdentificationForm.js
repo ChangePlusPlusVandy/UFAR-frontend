@@ -7,6 +7,7 @@ import data  from './locations'; // fixme: remove this
 
 export default function IdentificationForm(props) {
 
+    // looks up all provinces and returns an array of objects
     function getProvinces(){
         let provinceNames = [];
     
@@ -16,6 +17,7 @@ export default function IdentificationForm(props) {
         return provinceNames;
     }
 
+    // looks up all healthZones in a province and returns an array of objects
     function getHealthZones(){
         let healthZoneNames = [];
         
@@ -28,6 +30,7 @@ export default function IdentificationForm(props) {
         return healthZoneNames;
     }
 
+    // looks up all healthAreas in a healthZone and returns an array of objects
     function getHealthAreas(){
         let healthAreas = [];
         
@@ -40,6 +43,7 @@ export default function IdentificationForm(props) {
         return healthAreas;
     }
 
+    // looks up all villages in a healthArea and returns an array of objects
     function getVillages(){
         let villageNames = [];
         
@@ -65,8 +69,13 @@ export default function IdentificationForm(props) {
                         useNativeAndroidPickerStyle={false}
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
                         onValueChange={(value) => { 
+                            // set province name and initialize health zone and health area to prevent errors
                             props.setProvinceName(value);
-                            props.setProvinceId(data.provinces[value].id);
+                            value && props.setHealthZoneName(Object.keys(data.provinces[value].health_zones)[0]);
+                            props.setHealthAreaName(Object.keys(data.provinces[value].health_zones[Object.keys(data.provinces[value].health_zones)[0]].health_areas)[0]);
+
+                            // set province id
+                            value && props.setProvinceId(data.provinces[value].id);
                         }}
                         items={ getProvinces() }
             
@@ -80,7 +89,11 @@ export default function IdentificationForm(props) {
                         useNativeAndroidPickerStyle={false}
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
                         onValueChange={(value) => {
+                            // set health zone name and initialize health area to prevent errors
                             props.setHealthZoneName(value);
+                            value && props.setHealthAreaName(Object.keys(data.provinces[props.provinceName].health_zones[value].health_areas)[0]);
+
+                            // set health zone id
                             value && props.setHealthZoneId(data.provinces[props.provinceName].health_zones[value].id);
                         }}
                         items={ getHealthZones() }
@@ -95,7 +108,11 @@ export default function IdentificationForm(props) {
                         useNativeAndroidPickerStyle={false}
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
                         onValueChange={(value) => {
+                            // set health area name and initialize village to prevent errors
                             props.setHealthAreaName(value);
+                            value && props.setVillageName(Object.keys(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas[value].villages)[0]);
+
+                            // set health area id
                             value && props.setHealthAreaId(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas[value].id);
                         }}
                         items={ getHealthAreas() }
@@ -110,6 +127,8 @@ export default function IdentificationForm(props) {
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
                         onValueChange={(value) => {
                             props.setVillageName(value);
+
+                            // set village id
                             value && props.setVillageId(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas[props.healthAreaName].villages[value].id);
                         }}
                         items={ getVillages() }
