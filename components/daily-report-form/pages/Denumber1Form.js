@@ -55,7 +55,7 @@ export default function Denumber1Form(props) {
                     onChange={(e) => props.setWomenFifteenAndOlder(parseInt(e.nativeEvent.text) || 0)}/>
                     <View style={{alignItems: 'center'}}>
                         <Text style={styles.inputLabel}># Total des Femmes</Text>
-                        <TextInput style={{...styles.inputField, width: 100}} value={props.totalNumWomen.toString()} />
+                        <TextInput style={styles.inputField} value={props.totalNumWomen.toString()} />
                     </View>
                 </View>
             </ScrollView>
@@ -74,8 +74,8 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     inputContainer: {
-        marginHorizontal: 34,
-        paddingHorizontal: 20,
+        marginHorizontal: 15,
+        paddingHorizontal: 19,
         marginBottom: 185,
     },
     inputLabel: {
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
         lineHeight: 13,
         color: 'black',
         textAlign: 'center',
+        minWidth: 100,
         
         /* Android Drop Shadow Styling */
         elevation: 10,
