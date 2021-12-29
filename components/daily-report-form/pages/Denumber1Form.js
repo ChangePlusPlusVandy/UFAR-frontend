@@ -5,61 +5,57 @@ export default function Denumber1Form(props) {
     return (
         <View>
             <Text style={styles.header}>Denombrement</Text>
-            <ScrollView style={styles.inputContainer}>
-                <View style={styles.rowContainer}>
-                    <View style={styles.leftContainer}>
-                        <Text  style={styles.inputLabelBigger}>Hommes</Text>
-                        <Text style={styles.inputLabel}># d'enfants {'<'} 6 mois</Text>
-                        <TextInput  style={styles.inputField} 
-                        defaultValue={props.menUnderSixMonths.toString()} 
-                        onChange={(e) => props.setMenLessThanSixMonths(parseInt(e.nativeEvent.text) || 0)}/>
+            <ScrollView style={styles.inputContainer} persistentScrollbar={true}>
+                <View>
+                    <Text style={styles.inputLabelBigger}>Hommes</Text>
+                    <Text style={styles.inputLabel}># d'enfants {'<'} 6 mois</Text>
+                    <TextInput style={styles.inputField} 
+                    defaultValue={props.menUnderSixMonths.toString()} 
+                    onChange={(e) => props.setMenLessThanSixMonths(parseInt(e.nativeEvent.text) || 0)}/>
 
-                        <Text style={styles.inputLabel}># d'enfants 6 mois - {'<'}5 ans</Text>
-                        <TextInput style={styles.inputField}
-                        defaultValue={props.menSixMonthsToFiveYears.toString()}
-                        onChange={(e) => props.setMenSixMonthsToFiveYears(parseInt(e.nativeEvent.text) || 0)}/>
+                    <Text style={styles.inputLabel}># d'enfants 6 mois - {'<'}5 ans</Text>
+                    <TextInput style={styles.inputField}
+                    defaultValue={props.menSixMonthsToFiveYears.toString()}
+                    onChange={(e) => props.setMenSixMonthsToFiveYears(parseInt(e.nativeEvent.text) || 0)}/>
 
-                        <Text style={styles.inputLabel}># d'enfants 5 - {'<'}14 ans</Text>
-                        <TextInput  style={styles.inputField}
-                        defaultValue={props.menFiveToFourteenYears.toString()} 
-                        onChange={(e) => props.setMenFiveToFourteenYears(parseInt(e.nativeEvent.text) || 0)}/>
+                    <Text style={styles.inputLabel}># d'enfants 5 - {'<'}14 ans</Text>
+                    <TextInput  style={styles.inputField}
+                    defaultValue={props.menFiveToFourteenYears.toString()} 
+                    onChange={(e) => props.setMenFiveToFourteenYears(parseInt(e.nativeEvent.text) || 0)}/>
 
-                        <Text style={styles.inputLabel}># de Personnes de 15 ans et plus</Text>
-                        <TextInput  style={styles.inputField}
-                        defaultValue={props.menFifteenAndOlder.toString()} 
-                        onChange={(e) => props.setMenFifteenAndOlder(parseInt(e.nativeEvent.text) || 0)}/>
-                    </View>
-                    <View style={styles.rightContainer}>
+                    <Text style={styles.inputLabel}># de Personnes de 15 ans et plus</Text>
+                    <TextInput  style={styles.inputField}
+                    defaultValue={props.menFifteenAndOlder.toString()} 
+                    onChange={(e) => props.setMenFifteenAndOlder(parseInt(e.nativeEvent.text) || 0)}/>
+                    <View style={{alignItems: 'center'}}>
                         <Text style={styles.inputLabel}># Total des Hommes</Text>
-                        <TextInput  style={styles.inputField} value={props.totalNumMen.toString()} />
+                        <TextInput  style={{...styles.inputField, width: 100}} value={props.totalNumMen.toString()} />
                     </View>
                 </View>
-                <View style={{...styles.rowContainer, marginTop: 20}}>
-                    <View style={styles.leftContainer}>
-                        <Text style={styles.inputLabelBigger}>Femmes</Text>
-                        <Text style={styles.inputLabel}># d'enfants {'<'} 6 mois</Text>
-                        <TextInput  style={styles.inputField} 
-                        defaultValue={props.womenLessThanSixMonths.toString()} 
-                        onChange={(e) => props.setWomenLessThanSixMonths(parseInt(e.nativeEvent.text) || 0)}/>
+                <View style={{marginTop: 20}}>
+                    <Text style={styles.inputLabelBigger}>Femmes</Text>
+                    <Text style={styles.inputLabel}># d'enfants {'<'} 6 mois</Text>
+                    <TextInput  style={styles.inputField} 
+                    defaultValue={props.womenLessThanSixMonths.toString()} 
+                    onChange={(e) => props.setWomenLessThanSixMonths(parseInt(e.nativeEvent.text) || 0)}/>
 
-                        <Text style={styles.inputLabel}># d'enfants 6 mois - {'<'}5 ans</Text>
-                        <TextInput  style={styles.inputField} 
-                        defaultValue={props.womenSixMonthsToFiveYears.toString()}
-                        onChange={(e) => props.setWomenSixMonthsToFiveYears(parseInt(e.nativeEvent.text) || 0)}/>
+                    <Text style={styles.inputLabel}># d'enfants 6 mois - {'<'}5 ans</Text>
+                    <TextInput  style={styles.inputField} 
+                    defaultValue={props.womenSixMonthsToFiveYears.toString()}
+                    onChange={(e) => props.setWomenSixMonthsToFiveYears(parseInt(e.nativeEvent.text) || 0)}/>
 
-                        <Text style={styles.inputLabel}># d'enfants 5 - {'<'}14 ans</Text>
-                        <TextInput  style={styles.inputField} 
-                        defaultValue={props.womenFiveToFourteenYears.toString()}
-                        onChange={(e) => props.setWomenFiveToFourteenYears(parseInt(e.nativeEvent.text) || 0)}/>
+                    <Text style={styles.inputLabel}># d'enfants 5 - {'<'}14 ans</Text>
+                    <TextInput  style={styles.inputField} 
+                    defaultValue={props.womenFiveToFourteenYears.toString()}
+                    onChange={(e) => props.setWomenFiveToFourteenYears(parseInt(e.nativeEvent.text) || 0)}/>
 
-                        <Text style={styles.inputLabel}># de Personnes de 15 ans et plus</Text>
-                        <TextInput  style={styles.inputField} 
-                        defaultValue={props.womenFifteenAndOlder.toString()}
-                        onChange={(e) => props.setWomenFifteenAndOlder(parseInt(e.nativeEvent.text) || 0)}/>
-                    </View>
-                    <View style={styles.rightContainer}>
+                    <Text style={styles.inputLabel}># de Personnes de 15 ans et plus</Text>
+                    <TextInput  style={styles.inputField} 
+                    defaultValue={props.womenFifteenAndOlder.toString()}
+                    onChange={(e) => props.setWomenFifteenAndOlder(parseInt(e.nativeEvent.text) || 0)}/>
+                    <View style={{alignItems: 'center'}}>
                         <Text style={styles.inputLabel}># Total des Femmes</Text>
-                        <TextInput style={styles.inputField} value={props.totalNumWomen.toString()}/>
+                        <TextInput style={{...styles.inputField, width: 100}} value={props.totalNumWomen.toString()} />
                     </View>
                 </View>
             </ScrollView>
@@ -79,6 +75,8 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         marginHorizontal: 34,
+        paddingHorizontal: 20,
+        marginBottom: 185,
     },
     inputLabel: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
@@ -102,7 +100,6 @@ const styles = StyleSheet.create({
         fontSize: 11,
         lineHeight: 13,
         color: 'black',
-        width: 95,
         textAlign: 'center',
         
         /* Android Drop Shadow Styling */
@@ -116,16 +113,5 @@ const styles = StyleSheet.create({
         },
         shadowRadius: 10,
         shadowOpacity: 0.3,
-    },
-    rowContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    leftContainer: {
-        flex: 1,
-    },
-    rightContainer: {
-        flex: 1,
-        alignItems: 'center',
     },
 })
