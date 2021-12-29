@@ -4,16 +4,14 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 export default function DistributorsForm(props) {
     return (
         <View>
-            <Text style={styles.header}>Distributeurs communautaires</Text>
+            <Text style={styles.header}>DC distributeurs</Text>
             <View style={styles.inputContainer}>
-                <Text style={styles.inputLabel}>Distributeurs</Text>
-                <View style={styles.rowContainer}>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumMenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenDistributors || '').toString()} placeholder="# de DC Homme" />
-                    <Text style={styles.text}>+</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenDistributors || '').toString()} placeholder="# de DC Femmes" />
-                    <Text style={styles.text}>=</Text>
-                    <TextInput style={styles.inputField} value={props.totalNumDistributors.toString()} placeholder="Total de DCs" />
-                </View>
+                <Text style={styles.inputLabel}># de DC homme</Text>
+                <TextInput style={styles.inputField} onChange={(e) => props.setNumMenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenDistributors || '').toString()} />
+                <Text style={styles.inputLabel}># de DC femmes</Text>
+                <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenDistributors || '').toString()}/>
+                <Text style={styles.inputLabelBigger}>Total</Text>
+                <TextInput style={styles.inputField} value={props.totalNumDistributors.toString()} placeholder="Total de DCs" />
             </View>
         </View>
     );
@@ -25,16 +23,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textAlign: 'center',
         maxWidth: 300,
-        fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Helvetica Neue',
+        fontFamily: Platform.OS == 'android' ? 'Roboto' : 'Helvetica Neue',
         fontWeight: 'bold',
         fontSize: 23,
         lineHeight: 28,
         color: 'white',
-    },
-    rowContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
     },
     inputContainer: {
         marginHorizontal: 34,
@@ -43,6 +36,13 @@ const styles = StyleSheet.create({
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
         fontSize: 11,
         lineHeight: 13,
+        color: 'white',
+    },
+    inputLabelBigger: {
+        textAlign: 'center',
+        fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
+        fontSize: 14,
+        lineHeight: 18,
         color: 'white',
     },
     inputField: {
@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
         fontSize: 11,
         lineHeight: 13,
         color: 'black',
-        width: 95,
         textAlign: 'center',
         
         /* Android Drop Shadow Styling */
