@@ -13,9 +13,7 @@ import Denumber3Form from './pages/Denumber3Form';
 import DistributorsForm from './pages/DistributorsForm';
 import IdentificationForm from './pages/IdentificationForm';
 import TreatmentInformationForm from './pages/TreatmentInformationForm';
-import MorbidityEstimationForm from './pages/MorbidityEstimationForm';
-import TrichiasisForm from './pages/TrichiasisForm';
-import GuineaWormForm from './pages/GuineaWormForm';
+import MorbidityCasesForm from './pages/MorbidityCasesForm';
 import MectizanForm from './pages/MectizanForm';
 import MectAlbForm from './pages/MectAlbForm';
 import AlbendazoleTreatmentForm from './pages/AlbendazoleTreatmentForm';
@@ -434,28 +432,24 @@ export default function DailyReportForm() {
             numHouseholdsTreated={numHouseholdsTreated}
             geographicalCoverageOfHouseholds={geographicalCoverageOfHouseholds}
         />, 
-        <MorbidityEstimationForm
+        <MorbidityCasesForm
             setNumMenBlind={setNumMenBlind}
             numMenBlind={numMenBlind}
             setNumWomenBlind={setNumWomenBlind}
             numWomenBlind={numWomenBlind}
             totalNumBlind={totalNumBlind}
-        />, 
-        <TrichiasisForm
             setNumMenTrichiasis={setNumMenTrichiasis}
             numMenTrichiasis={numMenTrichiasis}
             setNumWomenTrichiasis={setNumWomenTrichiasis}
             numWomenTrichiasis={numWomenTrichiasis}
             totalNumTrichiasis={totalNumTrichiasis}
-            numMenHydroceles = {numMenHydroceles}
-            setNumMenHydroceles = {setNumMenHydroceles}
-        />,
-        <GuineaWormForm
             setNumMenGuineaWorm={setNumMenGuineaWorm}
             numMenGuineaWorm={numMenGuineaWorm}
             setNumWomenGuineaWorm={setNumWomenGuineaWorm}
             numWomenGuineaWorm={numWomenGuineaWorm}
             totalNumGuineaWorm={totalNumGuineaWorm}
+            numMenHydroceles = {numMenHydroceles}
+            setNumMenHydroceles = {setNumMenHydroceles}
         />,
         <MectizanForm
             setNumYoungMenMectizan={setNumYoungMenMectizan}
