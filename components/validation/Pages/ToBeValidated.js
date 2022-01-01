@@ -1,8 +1,8 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {StyleSheet , View} from 'react-native';
-import GreetingHeader from './GreetingHeader';
-import TaskList from './TaskList';
+import GreetingHeader from '../GreetingHeader';
+import TaskList from '../TaskList';
 
 
 export default function ToBeValidated () {

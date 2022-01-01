@@ -4,12 +4,14 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 
 import ToBeValidated from './components/validation/Pages/ToBeValidated';
 import RecentlyValidated from './components/validation/Pages/RecentlyValidated';
+import RecentsList from './components/validation/RecentsList';
 //import GreetingHeader from './components/nurse-landing-page/GreetingHeader';
 //import DashboardSummary from './components/nurse-landing-page/DashboardSummary';
 //import DailyReportForm from './components/daily-report-form/DailyReportForm';
 //import RecentsList from './components/nurse-landing-page/RecentsList';
 
 export default function App() {
+  /*
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -21,6 +23,13 @@ export default function App() {
       <DailyReportForm />
     </View>
   );
+  */
+  
+  return (
+    <View style = {styles.admin}>
+      <ToBeValidated />
+    </View>
+  );
 
   /*
   return (
@@ -29,6 +38,7 @@ export default function App() {
     </View>
   );
   */
+  
 }
 
 const styles = StyleSheet.create({
