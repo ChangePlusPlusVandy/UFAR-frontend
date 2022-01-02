@@ -1,41 +1,27 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
-//uses material icons
+import { connect } from 'react-redux';
 
-const DATA = [
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      date: "04/12",
-      dayNumber: "Jour 1",
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      date: "05/12",
-      dayNumber: "Jour 2",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571e29d72",
-      date: "06/12",
-      dayNumber: "Jour 3",
-    },
-    {
-        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-        date: "07/12",
-        dayNumber: "Jour 4",
-      },
-      {
-        id: "58694a0f-3da1-471f-bd96-145571e29d72",
-        date: "08/12",
-        dayNumber: "Jour 5",
-      },
-];
 
-export default function RecentsList() {
+
+export default connect(mapStateToProps)(function RecentsList(props){
+
+    const convertDateToString = (date) => {
+        let dateString = new Date(date);
+        return `${dateString.getMonth()}/${dateString.getDay()}/${dateString.getFullYear()}`;
+    }
+
+
+    // todo: edit functionality
+        //- repopulate the states with information from the specific report
+        //- pull up the first page of the report
+        //- find a way to distinguish between an edit and a new report (maybe a boolean?) 
+        //- depending on the type of the process, the submit button should either be "edit" or "submit"
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
-            <Text style={styles.timelist}>{item.date}</Text>
-            <Text style={styles.namelist}>{item.dayNumber}</Text>
+            <Text style={styles.timelist}>{ convertDateToString(item.date)}</Text>
+            <Text style={styles.namelist}>{`Joul #${item.DMM_day}`}</Text>
             <TouchableOpacity style={styles.edit}>
                 <Icon name="edit" color = '#000000' size = {25} />
             </TouchableOpacity>
@@ -45,10 +31,18 @@ export default function RecentsList() {
     return (
         <View style={styles.container}>
             <Text style={styles.header}>Récent</Text>
-            <FlatList data={DATA} renderItem={renderItem} keyExtractor={item => item.id}/>
+            <FlatList data={ props.reports }renderItem={renderItem} keyExtractor={item => item.id}/>
         </View>
     );
+});
+
+function mapStateToProps(state) {
+    return {
+      name: state.reducer.name,
+      reports: state.reducer.reports,
+    };
 }
+
 
 const styles = StyleSheet.create({
     container: {

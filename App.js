@@ -1,29 +1,59 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import UfarApp from './src/UfarApp';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { reducer as network } from 'react-native-offline';
+import { ReduxNetworkProvider } from 'react-native-offline';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+import { persistStore, persistReducer } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
+import  AsyncStorage from '@react-native-async-storage/async-storage';
 
-import GreetingHeader from './components/nurse-landing-page/GreetingHeader';
-import DashboardSummary from './components/nurse-landing-page/DashboardSummary';
-import DailyReportForm from './components/daily-report-form/DailyReportForm';
-import RecentsList from './components/nurse-landing-page/RecentsList';
+const initialState = {
+  name: 'Jean Deport', // todo: get this from the server
+  reports: [], // holds report objects for the day
+  // todo: add more state for unchanging data - to be done later
+};
+  
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'ADD_REPORT':
+      return { reports: [...state.reports, action.report]}
+    case 'SET_NAME':
+      return { name: action.name }
+  } 
+  return state;
+  
+};
+
+const rootReducer = combineReducers({
+  reducer,
+  network,
+});
+
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+};
+
+// persist reducer
+const pReducer = persistReducer(persistConfig, rootReducer);
+const middleware = applyMiddleware(thunk, logger);
+
+const store = createStore(pReducer, middleware);
+const persistor = persistStore(store);
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-        <ScrollView>
-            <StatusBar style="auto" />
-            <GreetingHeader name="Jean Dupont" />
-            <DashboardSummary />
-            <RecentsList />
-        </ScrollView>
-        <DailyReportForm />
-    </View>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}> 
+        <ReduxNetworkProvider>
+          <UfarApp />
+        </ReduxNetworkProvider>
+      </PersistGate> 
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
-});

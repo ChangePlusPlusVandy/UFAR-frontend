@@ -4,6 +4,7 @@ import {Platform, Pressable, StatusBar, StyleSheet, Text, View} from 'react-nati
 import BackButton from './BackButton';
 import CrossIcon from './CrossIcon';
 import NextButton from './NextButton';
+import SubmitButton from './SubmitButton';
 import ProgressBar from './ProgressBar';
 
 import DatesForm from './pages/DatesForm';
@@ -406,9 +407,195 @@ export default function DailyReportForm() {
             setPraziquantelReturned = {setPraziquantelReturned}
             praziquantelReturned = {praziquantelReturned}
             praziquantelRemaining = {praziquantelRemaining}
-        />,
-        <Summary />
+        />
     ];
+
+    // resets all states to default values
+    const resetAllStates = () => {
+        setRegisteredNurse(""); setProvinceName(""); setProvinceId(""); setHealthZoneName("");
+        setHealthZoneId(""); setHealthAreaName(""); setHealthAreaId("");setVillageName("");
+        setVillageId("");
+        // todo: implement resetting the rest
+    }
+
+    // report object to be sent to the server
+    var report = {
+        // IDENTIFICATION
+        "DMM_day": DMMDay,
+        "nurse": registeredNurse,
+        "village": villageId,
+        "health_area": healthAreaId,
+        "health_zone": healthZoneId,
+        // DATE
+        "date": Date.now(),
+        // 1.11 diseases treated
+        "onchocerciasis": {
+            "first_round": onchocerciasisFirst,
+            "second_round": onchocerciasisSecond,
+        },
+        "lymphatic_filariasis": {
+            "mectizan_and_albendazole": LFMectizanAlbendazole,
+            "albendazole_alone": {
+                "first_round": LFAlbendazoleFirst,
+                "second_round": LFAlbendazoleSecond,
+            },
+        },
+        "schistosomiasis": schistosomiasis,
+        "soil_transmitted_helminthiasis": soilTransmittedHelminthiasis,
+        "trachoma": trachoma,
+        // 1.12 number of treatment cycles 
+        // treatment_circles: //todo: not implmented yet
+
+        "dcs_training_completion_date": DCTrainingCompletionDate,
+        "medicines_arrival_date": medicineArrivalDate,
+        "MDD_start_date": MDDStartDate,
+        "MDD_end_date": DMMEndDate,
+        "date_of_transmission": reportTransmissionDate,
+        "distributors": {
+            "men": numMenDistributors,
+            "women": numWomenDistributors
+        },
+        // II. DENUMBER
+        "patients": {
+            "men": {
+                "lessThanSixMonths": menUnderSixMonths,
+                "sixMonthsToFiveYears": menSixMonthsToFiveYears,
+                "fiveToFourteen": menFiveToFourteenYears,
+                "fifteenAndAbove": menFifteenAndOlder,
+            },
+            "women": {
+                "lessThanSixMonths": womenLessThanSixMonths,
+                "sixMonthsToFiveYears": womenSixMonthsToFiveYears,
+                "fiveToFourteen": womenFiveToFourteenYears,
+                "fifteenAndAbove": womenFifteenAndOlder
+            }
+        },
+        "households": {
+            "visited": numHouseholdsVisited,
+            "treated": numHouseholdsTreated
+        },
+        // III. MORBIDITY
+        "blind": {
+            "men": numMenBlind,
+            "women": numWomenBlind
+        },
+        // TODO: state functionality not done yet
+        // lymphedema: {
+        //     men: {
+        //         upper_limbs: {
+        //             left: ,
+        //             right:
+        //         },
+        //         lower_limbs: {
+        //             left: ,
+        //             right: 
+        //         }
+        //     },
+        //     women: {
+        //         upper_limbs: {
+        //             left:,
+        //             right:
+        //         },
+        //         lower_limbs: {
+        //             left:,
+        //             right:
+        //         },
+        //         breast:
+        //     }
+        // },
+        "hydroceles": {
+            "men": numMenHydroceles
+        },
+        "trichiasis": {
+            "men": numMenTrichiasis, 
+            "women": numWomenTrichiasis
+        },
+        "guinea_worm": {
+            "men": numMenGuineaWorm,
+            "women": numWomenGuineaWorm
+        },
+
+        // IV. PROCESSING
+        // TODO: implement state functionality
+        // mectizan: {
+        //     men: {
+        //         fiveToFourteen: 0,
+        //         fifteenAndOver:0
+        //     },
+        //     women: {
+        //         fiveToFourteen: 0,
+        //         fifteenAndOver: 0
+        //     }, 
+        // },
+        // mectizan_and_albendazole: {
+        //     men: {
+        //         fiveToFourteen: 0,
+        //         fifteenAndOver: 0
+        //     },
+        //     women: {
+        //         fiveToFourteen: 0,
+        //         fifteenAndOver: 0
+        //     },
+            
+        // },
+        // albendazole: {
+        //     men: {
+        //         fiveToFourteen: 0,
+        //         fifteenAndOver: 0
+        //     },
+        //     women: {
+        //         fiveToFourteen: 0,
+        //         fifteenAndOver: 0
+        //     },
+            
+        // },
+        // praziquantel: {
+        //     men: {
+        //         fiveToFourteen: 0,
+        //     },
+        //     men: {
+        //         fiveToFourteen: 0,
+        //     }
+        // },
+        // albendazole_soil_transmitted: {
+        //     men: {
+        //         fiveToFourteen: 0
+        //     },
+        //     women: {
+        //         fiveToFourteen: 0
+        //     }
+        // },
+        // side_effects_num: 0,
+
+        // V. UNTREATED PERSONS
+        "untreated_persons": {
+            "childrenYoungerThanFive": numInfants,
+            "pregnantWomen": numPregnant,
+            "breastfeedingWomen": numBreastfeeding,
+            "bedriddenPatients": numBedridden,
+            "refusals": numRefused,
+            "absent": numAbsent,
+        },
+        // VI. DRUG management is done by the DRUG model
+        "ivermectin_management": {
+            "quantityReceived": ivermectinReceived,
+            "quantityUsed": ivermectinUsed,
+            "amountLost": ivermectinLost,
+            "quantityReturnedToCS": ivermectinReturned,        
+        },
+        "albendazole_management": {
+            "quantityReceived": albendazoleReceived,
+            "quantityUsed": albendazoleUsed,
+            "amountLost": albendazoleLost,
+            "quantityReturnedToCS": albendazoleReturned      
+        },
+        "praziquantel_management": {
+            "quantityReceived": praziquantelReceived,
+            "quantityUsed": praziquantelUsed,
+            "amountLost": praziquantelLost,
+            "quantityReturnedToCS": praziquantelReturned        
+        },
+    }
 
     const openForm = () => setActivePage(0);  // Opens form by setting currently active page to 0 (first page)
 
@@ -429,6 +616,13 @@ export default function DailyReportForm() {
                     <View style={styles.buttonsContainer}>
                         {activePage > 0 && <BackButton setActivePage={setActivePage}/>}
                         {activePage < pages.length - 1 && <NextButton setActivePage={setActivePage}/>}
+                        {activePage === pages.length - 1 && 
+                        <SubmitButton 
+                            activePage={activePage} 
+                            setActivePage={setActivePage}
+                            report={report}
+                            resetAllStates={resetAllStates}
+                        />}
                     </View>
                     <ProgressBar progress={(activePage + 1) / pages.length} />
                 </>
