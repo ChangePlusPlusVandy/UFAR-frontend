@@ -10,6 +10,7 @@
         "eject": "expo eject"
     },
     "dependencies": {
+        "assets": "^3.0.1",
         "expo": "^43.0.0",
         "expo-status-bar": "~1.1.0",
         "metro": "^0.66.2",
