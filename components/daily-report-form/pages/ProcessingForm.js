@@ -7,7 +7,7 @@ import ProcessingMectizanForm from './processing-pages/ProcessingMectizanForm';
 import ProcessingMectAlbForm from './processing-pages/ProcessingMectAlbForm';
 import ProcessingAlbendazoleForm from './processing-pages/ProcessingAlbendazoleForm';
 import ProcessingPraziquantelForm from './processing-pages/ProcessingPraziquantelForm';
-import ProcessingAlbendazoleHelminthiasisForm from './processing-pages/ProcessingAlbedazoleHelminthiasis';
+import ProcessingAlbendazoleHelminthiasisForm from './processing-pages/ProcessingAlbedazoleHelminthiasisForm';
 
 export default function ProcessingForm(props) {
     const pages = [
@@ -85,7 +85,7 @@ export default function ProcessingForm(props) {
                 totalCoveragePrazi={props.totalCoveragePrazi}
                 setNumSideEffectsReportedPrazi={props.setNumSideEffectsReportedPrazi}
                 numSideEffectsReportedPrazi={props.numSideEffectsReportedPrazi}
-            />
+            />,
         },
         {
             title: "Albendazole (Soil-transmitted helminthiasis)",
@@ -101,7 +101,7 @@ export default function ProcessingForm(props) {
                 totalCoverageAlbendazoleHelminthiasis={props.totalCoverageAlbendazoleHelminthiasis}
                 setNumSideEffectsReportedAlbendazoleHelminthiasis={props.setNumSideEffectsReportedAlbendazoleHelminthiasis}
                 numSideEffectsReportedAlbendazoleHelminthiasis={props.numSideEffectsReportedAlbendazoleHelminthiasis}
-            />
+            />,
         },
     ]
 
