@@ -2,13 +2,14 @@ import React from 'react';
 import UfarApp from './src/UfarApp';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { reducer as network } from 'react-native-offline';
+import { reducer as network, createNetworkMiddleware } from 'react-native-offline';
 import { ReduxNetworkProvider } from 'react-native-offline';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { persistStore, persistReducer, createTransform } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import  AsyncStorage from '@react-native-async-storage/async-storage';
+import { offlineActionTypes } from 'react-native-offline';
 
 // todo: new try
 import { addReport } from './src/actions.js';
@@ -17,7 +18,7 @@ const actions = {
     addReport,
 };
 
-// Transform how the persistor reads the network state
+// @credit: https://www.npmjs.com/package/react-native-offline#offline-queue
 const networkTransform = createTransform(
   (inboundState, key) => {
     const actionQueue = [];
@@ -74,14 +75,22 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_REPORT':
       return { reports: { ...state.reports, [action.id]: action.report } };
+
     case 'SET_NAME':
       return { name: action.name }
+
     case 'REMOVE_REPORT':
-      return { reports: () => {
         const newReports = { ...state.reports };
         delete newReports[action.id];
-        return newReports;
-      }}
+      return {reports: newReports};
+
+    case offlineActionTypes.FETCH_OFFLINE_MODE:
+      // todo: better way not to include literals
+      if (action.meta.name === 'addReport'){
+        var report = action.meta.args[0];
+        var id = action.meta.args[1];
+        return { reports: { ...state.reports, [id]: report } };
+      }
   } 
   return state;
   
@@ -92,18 +101,25 @@ const rootReducer = combineReducers({
   network,
 });
 
+const networkMiddleware = createNetworkMiddleware(
+  {
+    queueReleaseThrottle: 200,
+  },
+);
+
 // persist reducer
 const pReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore(pReducer, applyMiddleware(thunk, logger));
+const store = createStore(pReducer, applyMiddleware(networkMiddleware, thunk, logger));
 const persistor = persistStore(store);
 
 
 export default function App() {
+  // todo: change the ping interval to a more reasonable value
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}> 
-        <ReduxNetworkProvider>
+        <ReduxNetworkProvider pingInterval={3000} shouldPing={true} pingServerUrl='http://10.74.1.110:3000'>
           <UfarApp />
         </ReduxNetworkProvider>
       </PersistGate> 

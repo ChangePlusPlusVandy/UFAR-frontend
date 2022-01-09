@@ -21,7 +21,7 @@ const AppNavigator = createStackNavigator({
   NurseApp: {
     screen: NurseApp,
     navigationOptions: {
-      header: null,
+      headerShown: false,
     }
   },
 

@@ -1,25 +1,33 @@
+import { offlineActionCreators } from 'react-native-offline';
+
 export const addReport = (report, id) => {
-    function thunk(dispatch){
-
-
+    async function thunk(dispatch){
         // submit the report to the server
         // todo: better way to pass in url
-        fetch('http://10.74.1.110:3000/form/insert', {
+        try {
+            const response = await fetch('http://10.74.1.110:3000/form/insert', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
             body: JSON.stringify(report),
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("report submitted successfully: ", data);
-            dispatch({type: 'ADD_REPORT', report: report, id: id})
-        })
-        .catch(err => {
-            console.log("error while submitting report: ", err);
-        });
+            })
+            if (response.status == 200){
+                console.log("report submitted successfully: ", response);
+                // dispatch({type: 'ADD_REPORT', report: report, id: id})
+            }  else {
+                // todo: if there's an error, remove the report from redux and notify the user
+                console.log("error while submitting report1: ", err);
+                // dispatch(offlineActionCreators.fetchOfflineMode(thunk))
+            }
+        } catch (err) {
+            
+            // todo: if there's an error, remove the report from redux and notify the user
+            console.log("error while submitting report2: ", err);
+            // dispatch(offlineActionCreators.fetchOfflineMode(thunk))
+        }
+
     }
 
     thunk.interceptInOffline = true;
