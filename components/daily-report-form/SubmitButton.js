@@ -3,16 +3,35 @@ import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { connect } from 'react-redux';
+import uuid from 'react-native-uuid';
+import { addReport } from '../../src/actions.js'
 
 export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButton(props){
     return (
         <View style={styles.container}>
             <Pressable onPress={ () => {
                 // save the report to redux, reset all states, and navigate to home
-                props.addReport(props.report);
-                props.resetAllStates();
-                if (props.activePage !== null) props.setActivePage(null);
+                if (props.editMode) {
+                    //todo: edit mode is not fully
+                    // // update the report
+                    // props.addReport(props.report, props.editReportId);
 
+                    // // remove the report from the redux store after 24 hours
+                    // setTimeout(() => {
+                    //     props.removeReport(props.editReportId);
+                    // }, 86400000);
+
+                    // props.setEditMode(false);
+                } else {
+                    props.addReport(props.report, uuid.v4());
+                    // remove the report from the redux store after 24 hours
+                    setTimeout(() => {
+                        props.removeReport(uuid.v4());
+                    }, 86400000);
+
+                    props.resetAllStates();
+                }
+                if (props.activePage !== null) props.setActivePage(null);
             }} 
             style={styles.button}>
                 <Icon name='sc-telegram' type='evilicon' color='white' size={45}/>
@@ -26,12 +45,17 @@ function mapStateToProps(state) {
     return {
       name: state.reducer.name,
       reports: state.reducer.reports,
+      isConnected: state.network.isConected,
     };
 }
 
 function mapDispatchToProps(dispatch){
     return {
-      addReport: (report) => dispatch({type: 'ADD_REPORT', report: report}),
+        // addReport: (report, id) => dispatch({type: 'ADD_REPORT', report: report, id: id, meta: {
+        //     retry: true,
+        //   },}),
+        addReport: (report, id) => dispatch(addReport(report, id)),  
+        removeReport: (id) => dispatch({type: 'REMOVE_REPORT', id: id}),  
     };
 }
 

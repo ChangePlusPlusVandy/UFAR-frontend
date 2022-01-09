@@ -1,30 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-import GreetingHeader from '../components/nurse-landing-page/GreetingHeader';
-import DashboardSummary from '../components/nurse-landing-page/DashboardSummary';
-import DailyReportForm from '../components/daily-report-form/DailyReportForm';
-import RecentsList from '../components/nurse-landing-page/RecentsList';
+import NurseApp from './NurseApp';
 
-export default function UfarApp(props){
+
+export default function UfarApp() {
   return (
-    <View style={styles.container}>
-        <ScrollView>
-            <StatusBar style="auto" />
-            <GreetingHeader />
-            <DashboardSummary />
-            <RecentsList />
-        </ScrollView>
-        <DailyReportForm />
-    </View>
+    <AppContainer />
   );
-};
+}
 
+const AppNavigator = createStackNavigator({
+  // home page will be the default page
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
+  // home page
+
+  // nurse app
+  NurseApp: {
+    screen: NurseApp,
+    navigationOptions: {
+      header: null,
+    }
+  },
+
+  // admin app
+
+  // initial route  
+}, 
+{
+  initialRouteName: 'NurseApp',
 });
+
+const AppContainer = createAppContainer(AppNavigator);

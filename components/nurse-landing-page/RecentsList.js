@@ -2,10 +2,15 @@ import React from 'react';
 import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { connect } from 'react-redux';
+import DailyReportForm from '../daily-report-form/DailyReportForm';
 
 
 
 export default connect(mapStateToProps)(function RecentsList(props){
+    // const [editMode, setEditMode] = React.useState(false);
+    // const [reportId, setReportId] = React.useState(null);
+    // clear all reports from redux store if it's 12:00 AM
+    
 
     const convertDateToString = (date) => {
         let dateString = new Date(date);
@@ -20,20 +25,32 @@ export default connect(mapStateToProps)(function RecentsList(props){
         //- depending on the type of the process, the submit button should either be "edit" or "submit"
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
-            <Text style={styles.timelist}>{ convertDateToString(item.date)}</Text>
-            <Text style={styles.namelist}>{`Joul #${item.DMM_day}`}</Text>
-            <TouchableOpacity style={styles.edit}>
+            <Text style={styles.timelist}>{ convertDateToString(props.reports[item].date)}</Text>
+            <Text style={styles.namelist}>{`Joul #${props.reports[item].DMM_day}`}</Text>
+            <TouchableOpacity style={styles.edit} onPress={() => {
+                // props.setEditMode(true);
+                // props.setActivePage(0);
+                // props.setReportId(item);
+                // console.log("The edit button has been clicked")
+            }}>
                 <Icon name="edit" color = '#000000' size = {25} />
             </TouchableOpacity>
         </View>
     );
+    
+    // if (editMode) {
+    //     return (
+    //         <DailyReportForm activePage={0} editMode={editMode} reportId={reportId} />
+    //     );
+    // } else {
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.header}>Récent</Text>
-            <FlatList data={ props.reports }renderItem={renderItem} keyExtractor={item => item.id}/>
-        </View>
-    );
+        return (
+            <View style={styles.container}>
+                <Text style={styles.header}>Récent</Text>
+                <FlatList data={ props.reports? Object.keys(props.reports): []}renderItem={renderItem} keyExtractor={item => item.id}/>
+            </View>
+        );
+    // }
 });
 
 function mapStateToProps(state) {
@@ -42,6 +59,7 @@ function mapStateToProps(state) {
       reports: state.reducer.reports,
     };
 }
+
 
 
 const styles = StyleSheet.create({
