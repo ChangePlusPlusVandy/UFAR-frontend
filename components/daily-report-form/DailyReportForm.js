@@ -17,6 +17,11 @@ import TreatmentInformationForm from './pages/TreatmentInformationForm';
 import MorbidityEstimationForm from './pages/MorbidityEstimationForm';
 import TrichiasisForm from './pages/TrichiasisForm';
 import GuineaWormForm from './pages/GuineaWormForm';
+import MectizanForm from './pages/MectizanForm';
+import MectAlbForm from './pages/MectAlbForm';
+import AlbendazoleTreatmentForm from './pages/AlbendazoleTreatmentForm';
+import PraziTreatmentForm from './pages/PraziTreatmentForm';
+import AlbendazoleTreatment2Form from './pages/AlbendazoleTreatment2Form';
 import UntreatedForm from './pages/UntreatedForm';
 import IvermectinForm from './pages/IvermectinForm';
 import AlbendazoleForm from './pages/AlbendazoleForm';
@@ -179,6 +184,119 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
          setTotalNumGuineaWorm(numMenGuineaWorm + numWomenGuineaWorm)
      }, [numMenGuineaWorm, numWomenGuineaWorm]);
 
+     // Mectizan Form
+     const [numYoungMenMectizan, setNumYoungMenMectizan] = useState(0);
+     const [numOldWomenMectizan, setNumOldWomenMectizan] = useState(0);
+     const [numOldMenMectizan, setNumOldMenMectizan] = useState(0);
+     const [numYoungWomenMectizan, setNumYoungWomenMectizan] = useState(0);
+     const [totalNumMenMectizan, setTotalMenMectizan] = useState(numYoungMenMectizan + numOldMenMectizan);
+     const [totalNumWomenMectizan, setTotalWomenMectizan] = useState(numYoungWomenMectizan + numOldWomenMectizan);
+     const [totalNumMectizan, setTotalNumMectizan] = useState(totalNumMenMectizan + totalNumWomenMectizan);
+     const [totalCoverageMectizan, setTotalCoverageMectizan] = useState((totalNumMectizan * 100)/(totalNumMen + totalNumWomen));
+
+     // updates for the totals
+     useEffect(() => {
+        setTotalMenMectizan(numYoungMenMectizan + numOldMenMectizan)
+    }, [numYoungMenMectizan, numOldMenMectizan]);
+
+    useEffect(() => {
+        setTotalWomenMectizan(numYoungWomenMectizan + numOldWomenMectizan)
+    }, [numYoungWomenMectizan, numOldWomenMectizan]);
+
+    useEffect(() => {
+        setTotalNumMectizan(totalNumMenMectizan + totalNumWomenMectizan)
+    }, [totalNumMenMectizan, totalNumWomenMectizan]);
+
+    useEffect(() => {
+        setTotalCoverageMectizan((totalNumMectizan * 100)/(totalNumMen + totalNumWomen))
+    }, [totalNumMectizan, totalNumMen, totalNumWomen]);
+
+    // mectAlb Form
+    const [numYoungMenMectAlb, setNumYoungMenMectAlb] = useState(0);
+    const [numOldWomenMectAlb, setNumOldWomenMectAlb] = useState(0);
+    const [numOldMenMectAlb, setNumOldMenMectAlb] = useState(0);
+    const [numYoungWomenMectAlb, setNumYoungWomenMectAlb] = useState(0);
+    const [totalNumMenMectAlb, setTotalMenMectAlb] = useState(numYoungMenMectAlb + numOldMenMectAlb);
+    const [totalNumWomenMectAlb, setTotalWomenMectAlb] = useState(numYoungWomenMectAlb + numOldWomenMectAlb);
+    const [totalNumMectAlb, setTotalNumMectAlb] = useState(totalNumMenMectAlb + totalNumWomenMectAlb);
+    const [totalCoverageMectAlb, setTotalCoverageMectAlb] = useState((totalNumMectAlb * 100)/(totalNumMen + totalNumWomen));
+
+// updates for the totals
+    useEffect(() => {
+        setTotalMenMectAlb(numYoungMenMectAlb + numOldMenMectAlb)
+    }, [numYoungMenMectAlb, numOldMenMectAlb]);
+
+    useEffect(() => {
+        setTotalWomenMectAlb(numYoungWomenMectAlb + numOldWomenMectAlb)
+    }, [numYoungWomenMectAlb, numOldWomenMectAlb]);
+
+    useEffect(() => {
+        setTotalNumMectAlb(totalNumMenMectAlb + totalNumWomenMectAlb)
+    }, [totalNumMenMectAlb, totalNumWomenMectAlb]);
+
+    useEffect(() => {
+        setTotalCoverageMectAlb((totalNumMectAlb * 100)/(totalNumMen + totalNumWomen))
+    }, [totalNumMectAlb, totalNumMen, totalNumWomen]);
+
+    // AlbendazoleTreat Form
+    const [numYoungMenAlbendazoleTreat, setNumYoungMenAlbendazoleTreat] = useState(0);
+    const [numOldWomenAlbendazoleTreat, setNumOldWomenAlbendazoleTreat] = useState(0);
+    const [numOldMenAlbendazoleTreat, setNumOldMenAlbendazoleTreat] = useState(0);
+    const [numYoungWomenAlbendazoleTreat, setNumYoungWomenAlbendazoleTreat] = useState(0);
+    const [totalNumMenAlbendazoleTreat, setTotalMenAlbendazoleTreat] = useState(numYoungMenAlbendazoleTreat + numOldMenAlbendazoleTreat);
+    const [totalNumWomenAlbendazoleTreat, setTotalWomenAlbendazoleTreat] = useState(numYoungWomenAlbendazoleTreat + numOldWomenAlbendazoleTreat);
+    const [totalNumAlbendazoleTreat, setTotalNumAlbendazoleTreat] = useState(totalNumMenAlbendazoleTreat + totalNumWomenAlbendazoleTreat);
+    const [totalCoverageAlbendazoleTreat, setTotalCoverageAlbendazoleTreat] = useState((totalNumAlbendazoleTreat * 100)/(totalNumMen + totalNumWomen));
+
+// updates for the totals
+    useEffect(() => {
+        setTotalMenAlbendazoleTreat(numYoungMenAlbendazoleTreat + numOldMenAlbendazoleTreat)
+    }, [numYoungMenAlbendazoleTreat, numOldMenAlbendazoleTreat]);
+
+    useEffect(() => {
+        setTotalWomenAlbendazoleTreat(numYoungWomenAlbendazoleTreat + numOldWomenAlbendazoleTreat)
+    }, [numYoungWomenAlbendazoleTreat, numOldWomenAlbendazoleTreat]);
+
+    useEffect(() => {
+        setTotalNumAlbendazoleTreat(totalNumMenAlbendazoleTreat + totalNumWomenAlbendazoleTreat)
+    }, [totalNumMenAlbendazoleTreat, totalNumWomenAlbendazoleTreat]);
+
+    useEffect(() => {
+        setTotalCoverageAlbendazoleTreat((totalNumAlbendazoleTreat * 100)/(totalNumMen + totalNumWomen))
+    }, [totalNumAlbendazoleTreat, totalNumMen, totalNumWomen]);
+
+
+    // praziquantel treatment processing
+    const [numMenPrazi, setNumMenPrazi] = useState(0);
+    const [numWomenPrazi, setNumWomenPrazi] = useState(0);
+    const [totalNumPrazi, setTotalNumPrazi] = useState(numMenPrazi + numWomenPrazi);
+    const [totalSchistosomiaseCoverage, setTotalSchistosomiaseCoverage] = useState((totalNumPrazi * 100)/(totalNumMen + totalNumWomen));
+
+    // updates for praziquantel totals
+    useEffect(() => {
+        setTotalNumPrazi(numMenPrazi + numWomenPrazi)
+    }, [numMenPrazi, numWomenPrazi]);
+
+    useEffect(() => {
+        setTotalSchistosomiaseCoverage((totalNumPrazi * 100)/(totalNumMen + totalNumWomen))
+    }, [totalNumPrazi, totalNumMen, totalNumWomen]);
+
+    // albendazole 2 treatment processing (soil transmitted disease)
+    const [numMenAlb, setNumMenAlb] = useState(0);
+    const [numWomenAlb, setNumWomenAlb] = useState(0);
+    const [totalNumAlb, setTotalNumAlb] = useState(numMenAlb + numWomenAlb);
+    const [totalGeohelminthiasesCoverage, setTotalGeohelminthiasesCoverage] = useState((totalNumAlb * 100)/(totalNumMen + totalNumWomen));
+    const [numSideEffects, setNumSideEffects] = useState(0);
+
+    // updates for praziquantel totals
+    useEffect(() => {
+        setTotalNumAlb(numMenAlb + numWomenAlb)
+    }, [numMenAlb, numWomenAlb]);
+
+    useEffect(() => {
+        setTotalGeohelminthiasesCoverage((totalNumAlb * 100)/(totalNumMen + totalNumWomen))
+    }, [totalNumAlb, totalNumMen, totalNumWomen]);
+    
      // untreated persons form updates
      const [numInfants, setNumInfants] = useState(0);
      const [numPregnant, setNumPregnant] = useState(0);
@@ -362,6 +480,66 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
             setNumWomenGuineaWorm={setNumWomenGuineaWorm}
             numWomenGuineaWorm={numWomenGuineaWorm}
             totalNumGuineaWorm={totalNumGuineaWorm}
+        />,
+        <MectizanForm
+            setNumYoungMenMectizan={setNumYoungMenMectizan}
+            setNumOldMenMectizan={setNumOldMenMectizan}
+            setNumYoungWomenMectizan={setNumYoungWomenMectizan}
+            setNumOldWomenMectizan={setNumOldWomenMectizan}
+            numYoungMenMectizan={numYoungMenMectizan}
+            numYoungWomenMectizan={numYoungWomenMectizan}
+            numOldMenMectizan = {numOldMenMectizan}
+            numOldWomenMectizan={numOldWomenMectizan}
+            totalNumWomenMectizan = {totalNumWomenMectizan}
+            totalNumMenMectizan = {totalNumMenMectizan}
+            totalNumMectizan = {totalNumMectizan}
+            totalCoverageMectizan = {totalCoverageMectizan}
+        />,
+        <MectAlbForm
+            setNumYoungMenMectAlb={setNumYoungMenMectAlb}
+            setNumOldMenMectAlb={setNumOldMenMectAlb}
+            setNumYoungWomenMectAlb={setNumYoungWomenMectAlb}
+            setNumOldWomenMectAlb={setNumOldWomenMectAlb}
+            numYoungMenMectAlb={numYoungMenMectAlb}
+            numYoungWomenMectAlb={numYoungWomenMectAlb}
+            numOldMenMectAlb = {numOldMenMectAlb}
+            numOldWomenMectAlb={numOldWomenMectAlb}
+            totalNumWomenMectAlb = {totalNumWomenMectAlb}
+            totalNumMenMectAlb = {totalNumMenMectAlb}
+            totalNumMectAlb = {totalNumMectAlb}
+            totalCoverageMectAlb = {totalCoverageMectAlb}
+        />,
+        <AlbendazoleTreatmentForm
+            setNumYoungMenAlbendazoleTreat={setNumYoungMenAlbendazoleTreat}
+            setNumOldMenAlbendazoleTreat={setNumOldMenAlbendazoleTreat}
+            setNumYoungWomenAlbendazoleTreat={setNumYoungWomenAlbendazoleTreat}
+            setNumOldWomenAlbendazoleTreat={setNumOldWomenAlbendazoleTreat}
+            numYoungMenAlbendazoleTreat={numYoungMenAlbendazoleTreat}
+            numYoungWomenAlbendazoleTreat={numYoungWomenAlbendazoleTreat}
+            numOldMenAlbendazoleTreat = {numOldMenAlbendazoleTreat}
+            numOldWomenAlbendazoleTreat={numOldWomenAlbendazoleTreat}
+            totalNumWomenAlbendazoleTreat = {totalNumWomenAlbendazoleTreat}
+            totalNumMenAlbendazoleTreat = {totalNumMenAlbendazoleTreat}
+            totalNumAlbendazoleTreat = {totalNumAlbendazoleTreat}
+            totalCoverageAlbendazoleTreat = {totalCoverageAlbendazoleTreat}
+        />,
+        <PraziTreatmentForm
+            setNumMenPrazi={setNumMenPrazi}
+            numMenPrazi={numMenPrazi}
+            setNumWomenPrazi={setNumWomenPrazi}
+            numWomenPrazi = {numWomenPrazi}
+            totalNumGuineaWorm={totalNumGuineaWorm}
+            totalSchistosomiaseCoverage = {totalSchistosomiaseCoverage}
+        />,
+        <AlbendazoleTreatment2Form
+            setNumMenAlb={setNumMenAlb}
+            numMenAlb={numMenAlb}
+            setNumWomenAlb={setNumWomenAlb}
+            numWomenAlb = {numWomenAlb}
+            totalNumAlb={totalNumAlb}
+            totalGeohelminthiasesCoverage = {totalGeohelminthiasesCoverage}
+            numSideEffects = {numSideEffects}
+            setNumSideEffects = {setNumSideEffects}
         />,
         <UntreatedForm
             setNumInfants={setNumInfants}

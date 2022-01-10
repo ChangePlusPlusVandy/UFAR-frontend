@@ -8,7 +8,7 @@ export default function GuineaWormForm(props) {
             <View style={styles.inputContainer}>
                 <Text style={styles.inputLabel}>Ver de guinée</Text>
                 <View style={styles.rowContainer}>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumMenGuineaWorm(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenTrichiasis || '').toString()} placeholder="# des Hommes avec ver de guinée" />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumMenGuineaWorm(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenGuineaWorm || '').toString()} placeholder="# des Hommes avec ver de guinée" />
                     <Text style={styles.text}>+</Text>
                     <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenGuineaWorm(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenGuineaWorm || '').toString()} placeholder="# des Femmes avec guinée" />
                     <Text style={styles.text}>=</Text>
