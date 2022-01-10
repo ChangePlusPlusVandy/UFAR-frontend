@@ -9,33 +9,16 @@ import RecentsList from '../components/nurse-landing-page/RecentsList';
 import NetworkBar from '../components/nurse-landing-page/NetworkBar';
 
 export default function NurseApp(props){
-  const [activePage, setActivePage] = useState(null);
-  const [editMode, setEditMode] = useState(false);
-  const [reportId, setReportId] = useState(null);
   return (
     <View style={styles.container}>
         <NetworkBar />
         <ScrollView>
             <StatusBar style="auto" />
             <GreetingHeader />
-            <DashboardSummary />
-            <RecentsList 
-              activePage={activePage} 
-              setActivePage={setActivePage}
-              editMode={editMode}
-              setEditMode={setEditMode}
-              reportId={reportId}
-              setReportId={setReportId}
-              />
+            {/* <DashboardSummary /> */}
+            <RecentsList/>
         </ScrollView>
-        <DailyReportForm 
-          activePage={activePage} 
-          setActivePage={setActivePage}
-          editMode={editMode}
-          setEditMode={setEditMode}
-          reportId={reportId}
-          setReportId={setReportId}
-        />
+        <DailyReportForm/>
     </View>
   );
 };

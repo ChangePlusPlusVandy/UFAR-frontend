@@ -9,27 +9,19 @@ import { addReport } from '../../src/actions.js'
 export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButton(props){
     const [modalVisible, setModalVisible] = React.useState(false);
 
+    /**
+     * Submits report, resets all states, sets in motion a function 
+     * to delete it after 24 hours, and navigates back to nurse landing page
+     */
     const submitReport = () => {
-        if (props.editMode) {
-            //todo: edit mode is not fully
-            // // update the report
-            // props.addReport(props.report, props.editReportId);
+        props.addReport(props.report, uuid.v4());
+        // remove the report from the redux store after 24 hours
+        setTimeout(() => {
+            props.removeReport(uuid.v4());
+        }, 86400000);
 
-            // // remove the report from the redux store after 24 hours
-            // setTimeout(() => {
-            //     props.removeReport(props.editReportId);
-            // }, 86400000);
-
-            // props.setEditMode(false);
-        } else {
-            props.addReport(props.report, uuid.v4());
-            // remove the report from the redux store after 24 hours
-            setTimeout(() => {
-                props.removeReport(uuid.v4());
-            }, 86400000);
-
-            props.resetAllStates();
-        }
+        props.resetAllStates();
+        
 
         if (props.activePage !== null) props.setActivePage(null);
     }
@@ -43,9 +35,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                     visible={modalVisible}
                     onRequestClose={() => {
                     setModalVisible(!modalVisible);
-                    }}
-                    onDismiss={() => {
-                        submitReport();
                     }}
                 >
                     <View style={styles.centeredView}>
@@ -72,7 +61,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                     } else {
                         setModalVisible(true);
                     }
-                    
                 }} 
                 style={styles.button}>
                     <Icon name='sc-telegram' type='evilicon' color='white' size={45}/>
@@ -93,6 +81,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
     return {
+        // todo: delete first argument: only for deubg
         // addReport: (report, id) => dispatch({type: 'ADD_REPORT', report: report, id: id, meta: {
         //     retry: true,
         //   },}),

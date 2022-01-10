@@ -2,7 +2,8 @@ import React from 'react';
 import UfarApp from './src/UfarApp';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { reducer as network, createNetworkMiddleware } from 'react-native-offline';
+import { createNetworkMiddleware } from 'react-native-offline';
+import { createReducer as createNetworkReducer } from 'react-native-offline';
 import { ReduxNetworkProvider } from 'react-native-offline';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
@@ -11,8 +12,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import  AsyncStorage from '@react-native-async-storage/async-storage';
 import { offlineActionTypes } from 'react-native-offline';
 
-// todo: new try
 import { addReport } from './src/actions.js';
+import { comparisonFn } from './src/utils.js';
 
 const actions = {
     addReport,
@@ -74,8 +75,9 @@ const persistConfig = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_REPORT':
-      return { reports: { ...state.reports, [action.id]: action.report } };
-
+      // adds or updates the report in the state
+      return { reports: { ...state.reports, [action.id]: {report: action.report, isSubmitted: true} } };
+      
     case 'SET_NAME':
       return { name: action.name }
 
@@ -89,7 +91,7 @@ const reducer = (state = initialState, action) => {
       if (action.meta.name === 'addReport'){
         var report = action.meta.args[0];
         var id = action.meta.args[1];
-        return { reports: { ...state.reports, [id]: report } };
+        return { reports: { ...state.reports, [id]: {report: report, isSbumitted: false} } };
       }
   } 
   return state;
@@ -98,7 +100,7 @@ const reducer = (state = initialState, action) => {
 
 const rootReducer = combineReducers({
   reducer,
-  network,
+  network: createNetworkReducer(comparisonFn),
 });
 
 const networkMiddleware = createNetworkMiddleware(
@@ -119,7 +121,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}> 
-        <ReduxNetworkProvider pingInterval={3000} shouldPing={true} pingServerUrl='http://10.74.1.110:3000'>
+        <ReduxNetworkProvider pingInterval={3000} shouldPing={true} pingServerUrl='http://10.76.170.134:3000'>
           <UfarApp />
         </ReduxNetworkProvider>
       </PersistGate> 

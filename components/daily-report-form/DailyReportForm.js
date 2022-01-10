@@ -30,22 +30,6 @@ import { connect } from 'react-redux';
 export default connect(mapStateToProps)(function DailyReportForm(props) {
     console.log("DailyReportForm props: ", props);
     const [activePage, setActivePage] = useState(null);
-    const [editMode, setEditMode] = useState(false);
-
-    // useEffect(() => {
-    //     console.log("Global edit mode changed to: ", props.editMode);
-    //     if (props.editMode) setEditMode(true);
-    // }), [props.editMode]
-
-    
-    // useEffect(() => {
-    //     console.log("local edit mode changed to: ", editMode);
-    //     if (editMode) {
-    //         repopulateEditReport();
-    //         setEditMode(false);
-    //     }
-        
-    // }), [editMode]
 
 
     // Identification state
@@ -618,54 +602,12 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         },
     }
 
-    // todo: needs to be finished
-    const repopulateEditReport = () => {
-        console.log("In the repopulate edit report function")
-        const report = props.reports[props.reportId];
 
-        setDMMDay(report.DMM_day);
-        setRegisteredNurse(report.nurse);
-        
-        // setOnchocerciasisFirst(report.onchocerciasis.first_round);
-        // setOnchocerciasisSecond(report.onchocerciasis.second_round);
-        // setLFMectizanAlbendazole(report.lymphatic_filariasis.mectizan_and_albendazole);
-        // setLFAlbendazoleFirst(report.lymphatic_filariasis.albendazole_alone.first_round);
-        // setLFAlbendazoleSecond(report.lymphatic_filariasis.albendazole_alone.second_round);
-        // setSchistosomiasis(report.schistosomiasis);
-        // setSoilTransmittedHelminthiasis(report.soil_transmitted_helminthiasis);
-        // setTrachoma(report.trachoma);
-
-        // // 1.12 number of treatment cycles 
-        // // treatment_circles: //todo: not implmented yet
-        // setDCTrainingCompletionDate(report.dcs_training_completion_date);
-        // setMedicineArrivalDate(report.medicines_arrival_date);
-        // setMDDStartDate(report.MDD_start_date);
-        // setDMMEndDate(report.MDD_end_date);
-        // setReportTransmissionDate(report.date_of_transmission);
-        // setNumMenDistributors(report.distributors.men);
-        // setNumWomenDistributors(report.distributors.women);
-        // setMenLessThanSixMonths(report.patients.men.lessThanSixMonths);
-        // setMenSixMonthsToFiveYears(report.patients.men.menSixMonthsToFiveYears);
-        // setMenFiveToFourteenYears(report.patients.men.menFiveToFourteenYears);
-        // setMenFifteenAndOlder(report.patients.men.fifteenAndAbove);
-        // setWomenLessThanSixMonths(report.patients.women.lessThanSixMonths);
-        // setWomenSixMonthsToFiveYears(report.patients.women.sixMonthsToFiveYears);
-        // setWomenFifteenAndOlder(report.patients.women.fifteenAndAbove);
-        // setNumHouseholdsVisited(report.households.visited);
-        // setNumHouseholdsTreated(report.households.treated);
-        // setNumMenBlind(report.blind.men);
-        // setNumWomenBlind(report.blind.women);
-        // TODO: state functionality not done yet
-
-        // todo: implement the rest of the states
-
-    }
-
-    const openForm = () => props.setActivePage(0);  // Opens form by setting currently active page to 0 (first page)
+    const openForm = () => setActivePage(0);  // Opens form by setting currently active page to 0 (first page)
 
     // Conditional rendering page navigation
     const renderPageContent = () => {
-        if (props.activePage === null) {
+        if (activePage === null) {
             return (
                 <>
                     <Pressable onPress={openForm} style={styles.newReportPressable} >
@@ -676,45 +618,31 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         } else {
             return (
                 <>
-                    {pages[props.activePage]}
+                    {pages[activePage]}
                     <View style={styles.buttonsContainer}>
-                        {props.activePage > 0 && <BackButton setActivePage={props.setActivePage}/>}
-                        {props.activePage < pages.length - 1 && <NextButton setActivePage={props.setActivePage}/>}
-                        {props.activePage === pages.length - 1 && 
+                        {activePage > 0 && <BackButton setActivePage={setActivePage}/>}
+                        {activePage < pages.length - 1 && <NextButton setActivePage={setActivePage}/>}
+                        {activePage === pages.length - 1 && 
                         <SubmitButton 
-                            activePage={props.activePage} 
-                            setActivePage={props.setActivePage}
+                            activePage={activePage} 
+                            setActivePage={setActivePage}
                             report={report}
                             resetAllStates={resetAllStates}
-                            editReportId={props.reportId? props.reportId : null}
-                            editMode={props.editMode? true : false}
-                            setEditMode={props.setEditMode}
                         />}
                     </View>
-                    <ProgressBar progress={(props.activePage + 1) / pages.length} />
+                    <ProgressBar progress={(activePage + 1) / pages.length} />
                 </>
             );
         }
     }
 
-    // Render form component depending on local edit
-    // console.log("Edit mode: ", props.editMode, "local edit: ", editMode);
-    // if (editMode && props.editMode) {
-    //     repopulateEditReport();
-    //     if (registeredNurse == props.reports[props.reportId].nurse){
-    //         console.log("registered nurse name", registeredNurse);
-    //         setEditMode(false);
-    //     };
-    // }
     
     return (
-        <View style={props.activePage !== null ? styles.container : {...styles.container, ...styles.containerInactive}}>
-            <CrossIcon activePage={props.activePage} setActivePage={props.setActivePage} editMode={props.editMode} setEditMode={props.setEditMode} />
+        <View style={activePage !== null ? styles.container : {...styles.container, ...styles.containerInactive}}>
+            <CrossIcon activePage={activePage} setActivePage={setActivePage}/>
             {renderPageContent()}
         </View>
     );
-    
-
 });
 
 function mapStateToProps(state) {

@@ -1,59 +1,42 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {Icon} from 'react-native-elements';
+import {Icon, CheckBox} from 'react-native-elements';
 import { connect } from 'react-redux';
 import DailyReportForm from '../daily-report-form/DailyReportForm';
 
 
 
-export default connect(mapStateToProps)(function RecentsList(props){
-    // const [editMode, setEditMode] = React.useState(false);
-    // const [reportId, setReportId] = React.useState(null);
-    // clear all reports from redux store if it's 12:00 AM
-    
+export default connect(mapStateToProps)(function RecentsList(props){    
+
 
     const convertDateToString = (date) => {
         let dateString = new Date(date);
         return `${dateString.getMonth()}/${dateString.getDay()}/${dateString.getFullYear()}`;
     }
 
-
-    // todo: edit functionality
-        //- repopulate the states with information from the specific report
-        //- pull up the first page of the report
-        //- find a way to distinguish between an edit and a new report (maybe a boolean?) 
-        //- depending on the type of the process, the submit button should either be "edit" or "submit"
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
-            <Text style={styles.timelist}>{ convertDateToString(props.reports[item].date)}</Text>
-            <Text style={styles.namelist}>{`Joul #${props.reports[item].DMM_day}`}</Text>
-            <TouchableOpacity style={styles.edit} onPress={() => {
-                // props.setEditMode(true);
-                // props.setActivePage(0);
-                // props.setReportId(item);
-                // console.log("The edit button has been clicked")
-            }}>
-                <Icon name="edit" color = '#000000' size = {25} />
+            <Text style={styles.timelist}>{ convertDateToString(props.reports[item].report.date)}</Text>
+            <Text style={styles.namelist}>{`Joul #${props.reports[item].report.DMM_day}`}</Text>
+            <TouchableOpacity style={styles.edit}>
+                {props.reports[item].isSubmitted ? 
+                <Icon name="check" color = 'green' size = {25} /> :
+                <Icon name="close" color = 'green' size = {25} />}
+                
             </TouchableOpacity>
         </View>
     );
     
-    // if (editMode) {
-    //     return (
-    //         <DailyReportForm activePage={0} editMode={editMode} reportId={reportId} />
-    //     );
-    // } else {
-
         return (
             <View style={styles.container}>
                 <Text style={styles.header}>Récent</Text>
                 <FlatList data={ props.reports? Object.keys(props.reports): []}renderItem={renderItem} keyExtractor={item => item.id}/>
             </View>
         );
-    // }
 });
 
 function mapStateToProps(state) {
+    console.log("recentslist mapstatetoprops", state);
     return {
       name: state.reducer.name,
       reports: state.reducer.reports,
