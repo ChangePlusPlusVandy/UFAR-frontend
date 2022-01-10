@@ -6,28 +6,24 @@ export default function UntreatedForm(props) {
         <View>
             <Text style={styles.header}>Personnes Non Traitées</Text>
             <View style={styles.inputContainer}>
-                <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} ># des personnes non traitées à l’Oncho et/ou à la FL</Text>
-                <View style={styles.rowContainer}>
-                        <View style={styles.leftContainer}>
-                            <Text style={styles.inputLabel}>Enfants de {'<'} 5 ans (E)</Text>
-                            <TextInput style={styles.inputField} value={props.numInfants.toString()} />
-                            <Text style={styles.inputLabel}>Femmes enceintes (G)</Text>
-                            <TextInput style={styles.inputField} value={props.numPregnant.toString()} />
-                            <Text style={styles.inputLabel}>Femmes allaitantes de {'<'} 7jrs (FA)</Text>
-                            <TextInput style={styles.inputField} value={props.numBreastfeeding.toString()}/>
-                            <Text style={styles.inputLabel}>Malades grabataires (MG)</Text>
-                            <TextInput style={styles.inputField} value={props.numBedridden.toString()} />
-                            <Text style={styles.inputLabel}>Refus (R)</Text>
-                            <TextInput style={styles.inputField} value={props.numRefused.toString()} />
-                            <Text style={styles.inputLabel}>Absents (A)</Text>
-                            <TextInput style={styles.inputField} value={props.numAbsent.toString()} />
-                        </View>
-                        <View style={styles.rightContainer}>
-                            <Text style={styles.inputLabel}>Total de personnes non traitées</Text>
-                            <TextInput style={styles.inputField} value={props.totalUntreated.toString()} />
-                        </View>
-                    </View>
+                <Text style={styles.inputLabelBigger} ># de personnes non traitées</Text>
+                <Text style={styles.inputLabel}>Enfants de {'<'} 5 ans (E)</Text>
+                <TextInput style={styles.inputField} value={props.numInfants.toString()} />
+                <Text style={styles.inputLabel}>Femmes enceintes (G)</Text>
+                <TextInput style={styles.inputField} value={props.numPregnant.toString()} />
+                <Text style={styles.inputLabel}>Femmes allaitantes de {'<'} 7jrs (FA)</Text>
+                <TextInput style={styles.inputField} value={props.numBreastfeeding.toString()}/>
+                <Text style={styles.inputLabel}>Malades grabataires (MG)</Text>
+                <TextInput style={styles.inputField} value={props.numBedridden.toString()} />
+                <Text style={styles.inputLabel}>Refus (R)</Text>
+                <TextInput style={styles.inputField} value={props.numRefused.toString()} />
+                <Text style={styles.inputLabel}>Absents (A)</Text>
+                <TextInput style={styles.inputField} value={props.numAbsent.toString()} />
+                <View style={{alignItems: 'center', marginTop: 10}}>
+                    <Text style={styles.inputLabelBigger}>Total de personnes non traitées</Text>
+                    <TextInput style={styles.inputField} value={props.totalUntreated.toString()} />
                 </View>
+            </View>
         </View>
     );
 }
@@ -51,6 +47,12 @@ const styles = StyleSheet.create({
         lineHeight: 13,
         color: 'white',
     },
+    inputLabelBigger: {
+        fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
+        fontSize: 15,
+        lineHeight: 22,
+        color: 'white',
+    },
     inputField: {
         marginVertical: 5,
         paddingVertical: 5,
@@ -61,8 +63,8 @@ const styles = StyleSheet.create({
         fontSize: 11,
         lineHeight: 13,
         color: 'black',
-        width: 95,
         textAlign: 'center',
+        minWidth: 100,
         
         /* Android Drop Shadow Styling */
         elevation: 10,
@@ -75,16 +77,5 @@ const styles = StyleSheet.create({
         },
         shadowRadius: 10,
         shadowOpacity: 0.3,
-    },
-    rowContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    leftContainer: {
-        flex: 1,
-    },
-    rightContainer: {
-        flex: 1,
-        alignItems: 'center',
     },
 })
