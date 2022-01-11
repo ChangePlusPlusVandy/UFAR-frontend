@@ -37,8 +37,8 @@ export default function HomePage () {
       screen: {
         flex: 1,
         backgroundColor: "#EC1C24",
-        height: 780,
-        width: 360,
+        height: "100%",
+        width: "100%",
         alignSelf:'center',
       },
       image: {
