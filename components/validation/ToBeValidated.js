@@ -6,83 +6,83 @@ import ArrowBadge from './ArrowBadge';
 
 const DATA = [
     {
-        id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+        id: "bd7acea-c1b1-46c2-aed5-3ad53b28ba",
         date: "04/12",
         dayNumber: "Jour 1",
     },
     {
-        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+        id: "3ac6afc-c605-48d3-a4f8-fbd91aa7f63",
         date: "05/12",
         dayNumber: "Jour 2",
     },
     {
-        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        id: "5694a0f-3da1-471f-bd6-145571e29d72",
         date: "06/12",
         dayNumber: "Jour 3",
     },
     {
-        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+        id: "3ac68afc-c05-48d3-a4f8-fbd1aa97f63",
         date: "07/12",
         dayNumber: "Jour 4",
     },
     {
-        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        id: "5869a0f-3da1-471f-bd96-145571e2d72",
         date: "08/12",
         dayNumber: "Jour 5",
     },
     {
-        id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+        id: "bd7abea-c1b1-46c2-aed5-3a53abb28ba",
         date: "09/12",
         dayNumber: "Jour 6",
     },
     {
-        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+        id: "3ac68fc-c605-48d3-a4f8-fbd91a97f63",
         date: "10/12",
         dayNumber: "Jour 7",
     },
     {
-        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        id: "5894a0f-3da1-471f-bd96-14551e29d72",
         date: "11/12",
         dayNumber: "Jour 8",
     },
     {
-        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+        id: "3ac68afc-c605-8d-a4f8-fbd91aa97f63",
         date: "12/12",
         dayNumber: "Jour 9",
     },
     {
-        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        id: "58694a0f-3d1-471f-bd6-145571e29d72",
         date: "13/12",
         dayNumber: "Jour 10",
     },
     {
-        id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+        id: "bd7acbea-c1b1-46c2-ae5-3ad3abb28ba",
         date: "14/12",
         dayNumber: "Jour 11",
     },
     {
-        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+        id: "3ac6afc-c605-48d-a4f8-fbd91aa97f63",
         date: "15/12",
         dayNumber: "Jour 12",
     },
     {
-        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        id: "58694a0f-3a1-471f-bd96-14571e29d72",
         date: "16/12",
         dayNumber: "Jour 13",
     },
     {
-        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+        id: "3ac68afc-c65-48d3-a4f8-fbd91aa97f63",
         date: "17/12",
         dayNumber: "Jour 14",
     },
     {
-        id: "58694a0f-3da1-471f-bd96-145571e29d72",
+        id: "58694af-3da1-471f-bd96-145571e29d72",
         date: "18/12",
         dayNumber: "Jour 15",
     },
 ];
 
-export default function TaskList() {
+export default function ToBeValidated(props) {
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
             <Text style={styles.timelist}>{item.date}</Text>
@@ -96,7 +96,7 @@ export default function TaskList() {
     return (
         <View style={styles.container}>
             <View style={styles.flexbox}>
-                <ArrowBadge />
+                <ArrowBadge setActivePage={props.setActivePage} />
                 <Text style={styles.header}>À Valider</Text>
             </View>
             <FlatList data={DATA} renderItem={renderItem} keyExtractor={item => item.id}/>

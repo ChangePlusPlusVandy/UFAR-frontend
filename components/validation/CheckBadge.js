@@ -3,15 +3,11 @@ import {StyleSheet , View,  TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 
 
-export default function CheckBadge () {
-    const onPress = () => {
-        // Do something
-        return;
-    }
+export default function CheckBadge (props) {
 
     return (
         <View style={styles.flexbox}>
-            <TouchableOpacity onPress={onPress} style={styles.checkbadge}>
+            <TouchableOpacity onPress={() => props.setActivePage(0)} style={styles.checkbadge}>
                 <Icon name="check" color = '#FFFFFF' size = {25} iconStyle = {styles.icon} />
             </TouchableOpacity>
         </View>

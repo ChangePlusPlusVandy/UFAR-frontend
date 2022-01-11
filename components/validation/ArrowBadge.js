@@ -3,15 +3,10 @@ import {StyleSheet , View,  TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 
 
-export default function ArrowBadge () {
-    const onPress = () => {
-        // Do something
-        return;
-    }
-
+export default function ArrowBadge (props) {
     return (
         <View style={styles.flexbox}>
-            <TouchableOpacity onPress={onPress} style={styles.arrowbadge}>
+            <TouchableOpacity onPress={() => props.setActivePage(1) } style={styles.arrowbadge}>
                 <Icon name="arrow-forward" color = '#FFFFFF' size = {25} iconStyle = {styles.icon} />
             </TouchableOpacity>
         </View>
