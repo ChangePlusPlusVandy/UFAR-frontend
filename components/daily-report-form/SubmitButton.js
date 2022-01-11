@@ -14,17 +14,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
      * to delete it after 24 hours, and navigates back to nurse landing page
      */
     const submitReport = () => {
-        // props.addReport(props.report, uuid.v4());
-        // // remove the report from the redux store after 24 hours
-        // setTimeout(() => {
-        //     props.removeReport(uuid.v4());
-        // }, 86400000);
+        props.addReport(props.report, uuid.v4());
+        // remove the report from the redux store after 24 hours
+        setTimeout(() => {
+            props.removeReport(uuid.v4());
+        }, 86400000);
 
-        // props.resetAllStates();
+        props.resetAllStates();
         
 
-        // if (props.activePage !== null) props.setActivePage(null);
-        console.log("submitReport");
+        if (props.activePage !== null) props.setActivePage(null);
+        // console.log("submitReport");
     }
 
     return (

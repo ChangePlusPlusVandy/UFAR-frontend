@@ -12,12 +12,10 @@ export default function NurseApp(props){
   return (
     <View style={styles.container}>
         <NetworkBar />
-        <ScrollView>
-            <StatusBar style="auto" />
-            <GreetingHeader />
-            {/* <DashboardSummary /> */}
-            <RecentsList/>
-        </ScrollView>
+        <StatusBar style="auto" />
+        <GreetingHeader />
+        {/* <DashboardSummary /> */}
+        <RecentsList/>
         <DailyReportForm/>
     </View>
   );

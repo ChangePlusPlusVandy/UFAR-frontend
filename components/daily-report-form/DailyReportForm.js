@@ -547,6 +547,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     // resets all states to default values
     const resetAllStates = () => {
         setDMMDay("");
+        setRegisteredNurse("");
         
         // Treatment Information state
         setOnchocerciasis(false);

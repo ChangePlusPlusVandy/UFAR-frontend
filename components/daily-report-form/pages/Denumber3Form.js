@@ -10,13 +10,13 @@ export default function Denumber3Form(props) {
                 <Text style={styles.inputLabel}>Total des ménages visités</Text>
                 <TextInput style={styles.inputField} 
                     onChange={(e) => props.setNumHouseholdsVisited(parseInt(e.nativeEvent.text) || 0)}
-                    defaultValue={(props.numHouseholdsVisited || '').toString()}
+                    defaultValue={(props.numHouseholdsVisited || '0').toString()}
                     />
 
                 <Text style={styles.inputLabel}>Total des ménages traités</Text>
                 <TextInput style={styles.inputField} 
                     onChange={(e) => props.setNumHouseholdsTreated(parseInt(e.nativeEvent.text) || 0)}
-                    defaultValue={(props.numHouseholdsTreated || '').toString()}
+                    defaultValue={(props.numHouseholdsTreated || '0').toString()}
                 />
 
 

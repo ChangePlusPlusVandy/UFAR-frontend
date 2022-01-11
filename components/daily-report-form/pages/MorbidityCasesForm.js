@@ -10,11 +10,11 @@ export default function MorbidityEstimationForm(props) {
                 <View style={styles.rowContainer}>
                     <View style={styles.inputFieldContainer}>
                         <Text style={styles.inputLabel}># des hommes</Text>
-                        <TextInput style={styles.inputField} onChange={(e) => props.setNumMenBlind(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenBlind || '').toString()} />
+                        <TextInput style={styles.inputField} onChange={(e) => props.setNumMenBlind(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenBlind || '0').toString()} />
                     </View>
                     <View style={styles.inputFieldContainer}>
                         <Text style={styles.inputLabel}># des femmes</Text>
-                        <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenBlind(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenBlind || '').toString()} />
+                        <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenBlind(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenBlind || '0').toString()} />
                     </View>
                     <View style={styles.inputFieldContainer}>
                         <Text style={styles.inputLabel}>Total des personnes</Text>
@@ -82,11 +82,11 @@ export default function MorbidityEstimationForm(props) {
                     <View style={styles.rowContainer}>
                         <View style={styles.inputFieldContainer}>
                             <Text style={styles.inputLabel}># des hommes</Text>
-                            <TextInput style={styles.inputField} onChange={(e) => props.setNumMenBlind(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenBlind || '').toString()} />
+                            <TextInput style={styles.inputField} onChange={(e) => props.setNumMenBlind(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenBlind || '0').toString()} />
                         </View>
                         <View style={styles.inputFieldContainer}>
                             <Text style={styles.inputLabel}># des femmes</Text>
-                            <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenBlind(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenBlind || '').toString()} />
+                            <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenBlind(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenBlind || '0').toString()} />
                         </View>
                         <View style={styles.inputFieldContainer}>
                             <Text style={styles.inputLabel}>Total des personnes</Text>
@@ -98,11 +98,11 @@ export default function MorbidityEstimationForm(props) {
                 <View style={styles.rowContainer}>
                     <View style={styles.inputFieldContainer}>
                         <Text style={styles.inputLabel}># des hommes</Text>
-                        <TextInput style={styles.inputField} onChange={(e) => props.setNumMenTrichiasis(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenTrichiasis || '').toString()} />
+                        <TextInput style={styles.inputField} onChange={(e) => props.setNumMenTrichiasis(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenTrichiasis || '0').toString()} />
                     </View>
                     <View style={styles.inputFieldContainer}>
                         <Text style={styles.inputLabel}># des femmes</Text>
-                        <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenTrichiasis(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenTrichiasis || '').toString()} />
+                        <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenTrichiasis(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenTrichiasis || '0').toString()} />
                     </View>
                     <View style={styles.inputFieldContainer}>
                         <Text style={styles.inputLabel}>Total des personnes</Text>
@@ -113,11 +113,11 @@ export default function MorbidityEstimationForm(props) {
                 <View style={styles.rowContainer}>
                     <View style={styles.inputFieldContainer}>
                         <Text style={styles.inputLabel}># des hommes</Text>
-                        <TextInput style={styles.inputField} onChange={(e) => props.setNumMenGuineaWorm(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenGuineaWorm || '').toString()} />
+                        <TextInput style={styles.inputField} onChange={(e) => props.setNumMenGuineaWorm(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenGuineaWorm || '0').toString()} />
                     </View>
                     <View style={styles.inputFieldContainer}>
                         <Text style={styles.inputLabel}># des femmes</Text>
-                        <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenGuineaWorm(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenGuineaWorm || '').toString()} />
+                        <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenGuineaWorm(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenGuineaWorm || '0').toString()} />
                     </View>
                     <View style={styles.inputFieldContainer}>
                         <Text style={styles.inputLabel}>Total des personnes</Text>
@@ -128,7 +128,7 @@ export default function MorbidityEstimationForm(props) {
                 <View style={styles.rowContainer}>
                     <View style={styles.inputFieldContainer}>
                         <Text style={styles.inputLabel}># des hommes</Text>
-                        <TextInput style={styles.inputField} onChange={(e) => props.setNumMenHydroceles(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenHydroceles || '').toString()} />
+                        <TextInput style={styles.inputField} onChange={(e) => props.setNumMenHydroceles(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenHydroceles || '0').toString()} />
                     </View>
                 </View>
             </ScrollView>

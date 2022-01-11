@@ -1,8 +1,7 @@
 import React from 'react';
-import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {Icon, CheckBox} from 'react-native-elements';
+import {ScrollView, FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Icon} from 'react-native-elements';
 import { connect } from 'react-redux';
-import DailyReportForm from '../daily-report-form/DailyReportForm';
 
 
 
@@ -13,6 +12,8 @@ export default connect(mapStateToProps)(function RecentsList(props){
         let dateString = new Date(date);
         return `${dateString.getMonth()}/${dateString.getDay()}/${dateString.getFullYear()}`;
     }
+
+    console.log("recentslist props", props);
 
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
@@ -28,10 +29,10 @@ export default connect(mapStateToProps)(function RecentsList(props){
     );
     
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container} persistentScrollbar={true}>
                 <Text style={styles.header}>Récent</Text>
                 <FlatList data={ props.reports? Object.keys(props.reports): []}renderItem={renderItem} keyExtractor={item => item.id}/>
-            </View>
+            </ScrollView>
         );
 });
 
@@ -48,6 +49,8 @@ function mapStateToProps(state) {
 const styles = StyleSheet.create({
     container: {
         marginTop: 27,
+        height: 100,
+        marginBottom: 70,
     },
     header: {
         // fontFamily: 'Helvetica Neue',

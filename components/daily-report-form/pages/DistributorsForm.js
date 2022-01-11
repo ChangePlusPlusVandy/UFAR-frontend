@@ -7,9 +7,9 @@ export default function DistributorsForm(props) {
             <Text style={styles.header}>DC distributeurs</Text>
             <View style={styles.inputContainer}>
                 <Text style={styles.inputLabel}># de DC homme</Text>
-                <TextInput style={styles.inputField} onChange={(e) => props.setNumMenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenDistributors || '').toString()} />
+                <TextInput style={styles.inputField} onChange={(e) => props.setNumMenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenDistributors || '0').toString()} />
                 <Text style={styles.inputLabel}># de DC femmes</Text>
-                <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenDistributors || '').toString()}/>
+                <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenDistributors(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenDistributors || '0').toString()}/>
                 <Text style={styles.inputLabelBigger}>Total</Text>
                 <TextInput style={styles.inputField} value={props.totalNumDistributors.toString()} placeholder="Total de DCs" />
             </View>

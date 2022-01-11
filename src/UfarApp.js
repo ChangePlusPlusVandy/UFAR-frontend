@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import HomePage from "../components/home-page/HomePage";
 
 import NurseApp from './NurseApp';
 
@@ -16,6 +17,12 @@ const AppNavigator = createStackNavigator({
   // home page will be the default page
 
   // home page
+  Home: {
+    screen: HomePage,
+    navigationOptions: {
+      headerShown: false,
+    }
+  },
 
   // nurse app
   NurseApp: {
@@ -30,7 +37,7 @@ const AppNavigator = createStackNavigator({
   // initial route  
 }, 
 {
-  initialRouteName: 'NurseApp',
+  initialRouteName: 'Home',
 });
 
 const AppContainer = createAppContainer(AppNavigator);
