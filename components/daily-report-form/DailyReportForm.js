@@ -18,7 +18,6 @@ import MorbidityCasesForm from './pages/MorbidityCasesForm';
 import ProcessingForm from './pages/ProcessingForm';
 import UntreatedForm from './pages/UntreatedForm';
 import DrugManagementForm from './pages/DrugManagementForm';
-import Summary from './pages/Summary';
 import data from './pages/locations';
 import { connect } from 'react-redux';
 
@@ -542,17 +541,128 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
             setPraziquantelLost={setPraziquantelLost}
             setPraziquantelRemaining={setPraziquantelRemaining}
             setPraziquantelReturned={setPraziquantelReturned}
-        />,
-        <Summary />
+        />
     ];
 
     // resets all states to default values
     const resetAllStates = () => {
-        setDMMDay(0);
-        setRegisteredNurse(""); setProvinceName(""); setProvinceId(""); setHealthZoneName("");
-        setHealthZoneId(""); setHealthAreaName(""); setHealthAreaId("");setVillageName("");
-        setVillageId("");
-        // todo: implement resetting the rest
+        setDMMDay("");
+        
+        // Treatment Information state
+        setOnchocerciasis(false);
+        setNumCyclesOnchocerciasis(0);
+        setOnchocerciasisFirst(false);
+        setOnchocerciasisSecond(false);
+        setLymphaticFilariasis(false);
+        setLFMectizanAlbendazole(false);
+        setNumCyclesLFMectizanAlbendazole(0);
+        setNumCyclesLFAlbendazole(0);
+        setLFAlbendazoleFirst(false);
+        setLFAlbendazoleSecond(false);
+        setSchistosomiasis(false);
+        setSoilTransmittedHelminthiasis(false);
+        setTrachoma(false);
+
+        // Dates state
+        setDCTrainingCompletionDate("");
+        setMedicineArrivalDate("");
+        setMDDStartDate("");
+        setDMMEndDate("");
+        setReportTransmissionDate("");
+    
+        // Distributors state
+        setNumMenDistributors(0);
+        setNumWomenDistributors(0);
+
+        // Denumber state
+        setMenLessThanSixMonths(0);
+        setMenSixMonthsToFiveYears(0);
+        setMenFiveToFourteenYears(0);
+        setMenFifteenAndOlder(0);
+        setWomenLessThanSixMonths(0);
+        setWomenSixMonthsToFiveYears(0);
+        setWomenFiveToFourteenYears(0);
+        setWomenFifteenAndOlder(0);
+        setTotalChildrenUnderSixMonths(0);
+        setTotalchilrenSixMonthsToveFiveYears(0);
+        setTotalFiveToFourteenYears(0);
+        setTotalFifteenAndOlder(0);
+        setTotalNumMen(0);
+        setTotalNumWomen(0);
+        setTotalNumPersons(0);
+
+        // Households
+        setNumHouseholdsVisited(0);
+        setNumHouseholdsTreated(0);
+        setGeographicalCoverageOfHouseholds(0);
+
+        // Morbidity Cases state
+        setNumMenBlind(0);
+        setNumWomenBlind(0);
+        setNumMenTrichiasis(0);
+        setNumWomenTrichiasis(0);
+        setNumMenHydroceles(0);
+        setNumMenGuineaWorm(0);
+        setNumWomenGuineaWorm(0);
+
+        // Processing: Mectizan state
+        setNumYoungMenMectizan(0);
+        setNumOldWomenMectizan(0);
+        setNumOldMenMectizan(0);
+        setNumYoungWomenMectizan(0);
+        setNumSideEffectsReportedMectizan(0);
+
+        // Processing: Mectizan and Albendazole state
+        setNumYoungMenMectAlb(0);
+        setNumOldWomenMectAlb(0);
+        setNumOldMenMectAlb(0);
+        setNumYoungWomenMectAlb(0);
+        setNumSideEffectsReportedMectAlb(0);
+
+        // Processing: Albendazole (alone) state
+        setNumYoungMenAlbendazoleTreat(0);
+        setNumOldWomenAlbendazoleTreat(0);
+        setNumOldMenAlbendazoleTreat(0);
+        setNumYoungWomenAlbendazoleTreat(0);
+        setNumSideEffectsReportedAlbendazoleTreat(0);
+ 
+        // Processing: Praziquantel state
+        setNumMenPrazi(0);
+        setNumWomenPrazi(0);
+        setNumSideEffectsReportedPrazi(0);
+
+        // Processing: Albendazole (Soil-transmitted helminthiasis)
+        setNumMenAlbendazoleHelminthiasis(0);
+        setNumWomenAlbendazoleHelminthiasis(0);
+
+        // todo: probably remove this
+        // const [numSideEffectsReportedAlbendazoleHelminthiasis, setNumSideEffectsReportedAlbendazoleHelminthiasis] = useState(0);
+
+         // Untreated state
+         setNumInfants(0);
+         setNumPregnant(0);
+         setNumBreastfeeding(0);
+         setNumBedridden(0);
+         setNumRefused(0);
+         setNumAbsent(0);
+
+         // Drug Management: Ivermectin
+        setIvermectinReceived(0);
+        setIvermectinUsed(0);
+        setIvermectinLost(0);
+        setIvermectinReturned(0);
+
+        // Drug Management: Albendazole
+        setAlbendazoleReceived(0);
+        setAlbendazoleUsed(0);
+        setAlbendazoleLost(0);
+        setAlbendazoleReturned(0);
+    
+        // Drug Management: Praziquantel
+        setPraziquantelReceived(0);
+        setPraziquantelUsed(0);
+        setPraziquantelLost(0);
+        setPraziquantelReturned(0);
     }
 
     // report object to be sent to the server
@@ -581,8 +691,16 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         "schistosomiasis": schistosomiasis,
         "soil_transmitted_helminthiasis": soilTransmittedHelminthiasis,
         "trachoma": trachoma,
+
         // 1.12 number of treatment cycles 
-        // treatment_circles: //todo: not implmented yet
+        "treatment_circles": {
+            "onchocerciasis": numCyclesOnchocerciasis,
+            // todo: implement and correct the rest
+            "lymphatic_filariasis": 0,
+            "schistosomiasis": 0,
+            "soil_transmitted_helminthiasis": 0,
+            "trachoma": 0,
+        },
 
         "dcs_training_completion_date": DCTrainingCompletionDate,
         "medicines_arrival_date": medicineArrivalDate,
@@ -654,56 +772,55 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         },
 
         // IV. PROCESSING
-        // TODO: implement state functionality
-        // mectizan: {
-        //     men: {
-        //         fiveToFourteen: 0,
-        //         fifteenAndOver:0
-        //     },
-        //     women: {
-        //         fiveToFourteen: 0,
-        //         fifteenAndOver: 0
-        //     }, 
-        // },
-        // mectizan_and_albendazole: {
-        //     men: {
-        //         fiveToFourteen: 0,
-        //         fifteenAndOver: 0
-        //     },
-        //     women: {
-        //         fiveToFourteen: 0,
-        //         fifteenAndOver: 0
-        //     },
+        "mectizan": {
+            "men": {
+                "fiveToFourteen": numYoungMenMectizan,
+                "fifteenAndOver": numOldMenMectizan
+            },
+            "women": {
+                "fiveToFourteen": numYoungWomenMectizan,
+                "fifteenAndOver": numOldWomenMectizan
+            }, 
+        },
+        "mectizan_and_albendazole": {
+            "men": {
+                "fiveToFourteen": numYoungMenMectAlb,
+                "fifteenAndOver": numOldMenMectAlb
+            },
+            "women": {
+                "fiveToFourteen": numYoungWomenMectAlb,
+                "fifteenAndOver": numOldWomenMectAlb
+            },
             
-        // },
-        // albendazole: {
-        //     men: {
-        //         fiveToFourteen: 0,
-        //         fifteenAndOver: 0
-        //     },
-        //     women: {
-        //         fiveToFourteen: 0,
-        //         fifteenAndOver: 0
-        //     },
+        },
+        "albendazole": {
+            "men": {
+                "fiveToFourteen": numYoungMenAlbendazoleTreat,
+                "fifteenAndOver": numOldMenAlbendazoleTreat
+            },
+            "women": {
+                "fiveToFourteen": numYoungWomenAlbendazoleTreat,
+                "fifteenAndOver": numOldWomenAlbendazoleTreat
+            },
             
-        // },
-        // praziquantel: {
-        //     men: {
-        //         fiveToFourteen: 0,
-        //     },
-        //     men: {
-        //         fiveToFourteen: 0,
-        //     }
-        // },
-        // albendazole_soil_transmitted: {
-        //     men: {
-        //         fiveToFourteen: 0
-        //     },
-        //     women: {
-        //         fiveToFourteen: 0
-        //     }
-        // },
-        // side_effects_num: 0,
+        },
+        "praziquantel": {
+            "men": {
+                "fiveToFourteen": numMenPrazi
+            },
+            "women": {
+                "fiveToFourteen": numWomenPrazi
+            }
+        },
+        "albendazole_soil_transmitted": {
+            "men": {
+                "fiveToFourteen": numMenAlbendazoleHelminthiasis
+            },
+            "women": {
+                "fiveToFourteen": numWomenAlbendazoleHelminthiasis
+            }
+        },
+        side_effects_num: 0, // todo: fix the side effects states (only one is needed)
 
         // V. UNTREATED PERSONS
         "untreated_persons": {
