@@ -19,7 +19,10 @@ export default function HomePage (props) {
             />
           { <>
             <TouchableOpacity
-              style={styles.roundButton1}>
+              style={styles.roundButton1}
+              onPress={() => props.navigation.navigate('AdminApp')}
+            >
+
             </TouchableOpacity> 
             
             <TouchableOpacity

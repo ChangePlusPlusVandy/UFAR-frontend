@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import HomePage from "../components/home-page/HomePage";
 
+import HomePage from "../components/home-page/HomePage";
 import NurseApp from './NurseApp';
+import AdminApp from './AdminApp';
 
 
 export default function UfarApp() {
@@ -14,27 +14,24 @@ export default function UfarApp() {
 }
 
 const AppNavigator = createStackNavigator({
-  // home page will be the default page
-
-  // home page
   Home: {
     screen: HomePage,
     navigationOptions: {
       headerShown: false,
     }
   },
-
-  // nurse app
   NurseApp: {
     screen: NurseApp,
     navigationOptions: {
       headerShown: false,
     }
   },
-
-  // admin app
-
-  // initial route  
+  AdminApp: {
+    screen: AdminApp,
+    navigationOptions: {
+      headerShown: false,
+    }
+  },
 }, 
 {
   initialRouteName: 'Home',
