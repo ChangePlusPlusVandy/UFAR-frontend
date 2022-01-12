@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
-import CheckBadge from './CheckBadge';
+import LeftArrow from './LeftArrow';
 //uses material icons
 
 const DATA = [
@@ -96,7 +96,7 @@ export default function RecentlyValidated(props) {
     return (
         <View style={styles.container}>
             <View style={styles.flexbox}>
-                <CheckBadge setActivePage={props.setActivePage}/>
+                <LeftArrow setActivePage={props.setActivePage}/>
                 <Text style={styles.header}>Récemment Validé</Text>
             </View>
             <FlatList data={DATA} renderItem={renderItem} keyExtractor={item => item.id}/>

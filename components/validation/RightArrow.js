@@ -3,19 +3,18 @@ import {StyleSheet , View,  TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 
 
-export default function CheckBadge (props) {
-
+export default function RightArrow (props) {
     return (
         <View style={styles.flexbox}>
-            <TouchableOpacity onPress={() => props.setActivePage(0)} style={styles.checkbadge}>
-                <Icon name="check" color = '#FFFFFF' size = {25} iconStyle = {styles.icon} />
+            <TouchableOpacity onPress={() => props.setActivePage(1) } style={styles.arrowbadge}>
+                <Icon name="chevron-thin-right" color = '#FFFFFF' size = {25} iconStyle = {styles.icon} type="entypo" />
             </TouchableOpacity>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    checkbadge: {
+    arrowbadge: {
         height: 35,
         width: 35,
         backgroundColor: '#79D462',

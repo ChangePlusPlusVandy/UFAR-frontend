@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
-import ArrowBadge from './ArrowBadge';
+import RightArrow from './RightArrow';
 //uses material icons
 
 const DATA = [
@@ -96,7 +96,7 @@ export default function ToBeValidated(props) {
     return (
         <View style={styles.container}>
             <View style={styles.flexbox}>
-                <ArrowBadge setActivePage={props.setActivePage} />
+                <RightArrow setActivePage={props.setActivePage} />
                 <Text style={styles.header}>À Valider</Text>
             </View>
             <FlatList data={DATA} renderItem={renderItem} keyExtractor={item => item.id}/>
