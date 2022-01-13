@@ -25,7 +25,7 @@ import { connect } from 'react-redux';
 
 export default connect(mapStateToProps)(function DailyReportForm(props) {
     console.log("DailyReportForm props: ", props);
-    const [activePage, setActivePage] = useState(null);
+    const [activePage, setActivePage] = useState(0);
 
 
     // Identification state
@@ -858,15 +858,6 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
 
     // Conditional rendering page navigation
     const renderPageContent = () => {
-        if (activePage === null) {
-            return (
-                <>
-                    <Pressable onPress={openForm} style={styles.newReportPressable} >
-                        <Text style={styles.newReportText}>New Report</Text>
-                    </Pressable>
-                </>
-            );
-        } else {
             return (
                 <>
                     {pages[activePage]}
@@ -884,15 +875,14 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
                     <ProgressBar progress={(activePage + 1) / pages.length} />
                 </>
             );
-        }
     }
 
     
     return (
-        <View style={activePage !== null ? styles.container : {...styles.container, ...styles.containerInactive}}>
-            <CrossIcon activePage={activePage} setActivePage={setActivePage}/>
+        <>
+            <CrossIcon setLandingPage={props.setLandingPage}/>
             {renderPageContent()}
-        </View>
+        </>
     );
 });
 
@@ -907,12 +897,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'space-between',
-        position: 'absolute',
-        left: 0,
-        right: 0,
         top: Platform.OS === 'android' ? StatusBar.currentHeight : 45,
         bottom: 0,
-        backgroundColor: '#EC1C24',
+        backgroundColor: 'grey',
         borderTopLeftRadius: 11,
         borderTopRightRadius: 11,
         
@@ -928,25 +915,7 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         shadowOpacity: 0.3,
     },
-    containerInactive: {
-        top: null,
-        height: 67,
-        justifyContent: 'center',
-    },
-    newReportPressable: {
-        position: 'absolute',
-        height: '100%',
-        width: '100%',
-        justifyContent: 'center',
-    },
-    newReportText: {
-        textAlign: 'center',
-        color: 'white',
-        fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Helvetica Neue',
-        fontWeight: 'bold',
-        fontSize: 23,
-        lineHeight: 28,
-    },
+   
     buttonsContainer: {
         position: 'absolute',
         width: '100%',
