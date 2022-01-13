@@ -1,13 +1,14 @@
 import React from 'react';
 import {Pressable, View, StyleSheet} from 'react-native';
 
-export default function CrossIcon ({activePage, setActivePage}) {
+export default function CrossIcon (props) {
     const handleClose = () => {
-        if (activePage !== null) setActivePage(null);
+        if (props.activePage !== null) props.setActivePage(null);
+        if (props.editMode) props.setEditMode(false);
     }
 
     return (
-        <Pressable onPress={handleClose} style={activePage !== null ? styles.container : {...styles.container, ...styles.containerInactive}} >
+        <Pressable onPress={handleClose} style={props.activePage !== null ? styles.container : {...styles.container, ...styles.containerInactive}} >
             <View style={{...styles.line, transform: [{rotate: '45deg'}], top: 2}}/>
             <View style={{...styles.line, transform: [{rotate: '-45deg'}], top: -2}}/>
         </Pressable>

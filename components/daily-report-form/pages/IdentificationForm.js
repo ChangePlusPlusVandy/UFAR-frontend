@@ -2,31 +2,62 @@ import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import {Chevron} from 'react-native-shapes';
+import data  from './locations'; // fixme: remove this
 
-// Dropdown items
-const provinceNames = [
-    { label: 'Kwango', value: 'kwango' },
-    { label: 'Kwilu', value: 'kwilu' },
-];
-const healthZoneNames = [
-    { label: 'Koshibanda', value: 'koshibanda' },
-    { label: 'Kimputu', value: 'kimputu' },
-    { label: 'Pay-Kongila', value: 'payKongila' },
-];
-const healthAreas = [
-    { label: 'Balaka', value: 'balaka' },
-    { label: 'Bamba', value: 'bamba' },
-    { label: 'Banda', value: 'banda' },
-];
-const villageNames = [
-    { label: 'Balaka Village', value: 'balakaVillage' },
-    { label: 'Balaka Mic P', value: 'balakaMicP' },
-    { label: 'Munga', value: 'munga' },
-];
 
 export default function IdentificationForm(props) {
+
+    // looks up all provinces and returns an array of objects
+    function getProvinces(){
+        let provinceNames = [];
+    
+        Object.keys(data.provinces).forEach(function(province) {
+            provinceNames.push({label: province, value: province});
+        });
+        return provinceNames;
+    }
+
+    // looks up all healthZones in a province and returns an array of objects
+    function getHealthZones(){
+        let healthZoneNames = [];
+        
+        if (props.provinceName){
+            Object.keys(data.provinces[props.provinceName].health_zones).forEach(function(healthZone) {
+                healthZoneNames.push({label: healthZone, value: healthZone});
+            });
+        }
+    
+        return healthZoneNames;
+    }
+
+    // looks up all healthAreas in a healthZone and returns an array of objects
+    function getHealthAreas(){
+        let healthAreas = [];
+        
+        if (props.provinceName && props.healthZoneName){
+            Object.keys(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas).forEach(function(healthArea) {
+                healthAreas.push({label: healthArea, value: healthArea});
+            });
+        }
+        
+        return healthAreas;
+    }
+
+    // looks up all villages in a healthArea and returns an array of objects
+    function getVillages(){
+        let villageNames = [];
+        
+        if (props.provinceName && props.healthZoneName && props.healthAreaName){
+            Object.keys(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas[props.healthAreaName].villages).forEach(function(village) {
+                villageNames.push({label: village, value: village});
+            });
+        }
+        return villageNames;
+    }
+    
     return (
         <View>
+            
             <Text style={styles.header}>Identification</Text>
             <View style={styles.inputContainer}>
                 <View style={{flexDirection: 'row'}}>
@@ -37,8 +68,17 @@ export default function IdentificationForm(props) {
                     <RNPickerSelect
                         useNativeAndroidPickerStyle={false}
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
-                        onValueChange={(value) => props.setProvinceName(value)}
-                        items={provinceNames}
+                        onValueChange={(value) => { 
+                            // set province name and initialize health zone and health area to prevent errors
+                            props.setProvinceName(value);
+                            value && props.setHealthZoneName(Object.keys(data.provinces[value].health_zones)[0]);
+                            props.setHealthAreaName(Object.keys(data.provinces[value].health_zones[Object.keys(data.provinces[value].health_zones)[0]].health_areas)[0]);
+
+                            // set province id
+                            value && props.setProvinceId(data.provinces[value].id);
+                        }}
+                        items={ getProvinces() }
+            
                         value={props.provinceName}
                         placeholder={{label: 'Nom de la Province/Région', value: null}}
                         Icon={() => <Chevron size={1.5} color='#9D9D9D' />}
@@ -48,8 +88,16 @@ export default function IdentificationForm(props) {
                     <RNPickerSelect
                         useNativeAndroidPickerStyle={false}
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
-                        onValueChange={(value) => props.setHealthZoneName(value)}
-                        items={healthZoneNames}
+                        onValueChange={(value) => {
+                            // set health zone name and initialize health area to prevent errors
+                            props.setHealthZoneName(value);
+                            value && props.setHealthAreaName(Object.keys(data.provinces[props.provinceName].health_zones[value].health_areas)[0]);
+
+                            // set health zone id
+                            value && props.setHealthZoneId(data.provinces[props.provinceName].health_zones[value].id);
+                        }}
+                        items={ getHealthZones() }
+            
                         value={props.healthZoneName}
                         placeholder={{label: 'Nom de la Zone de santé', value: null}}
                         Icon={() => <Chevron size={1.5} color='#9D9D9D' />}
@@ -59,9 +107,16 @@ export default function IdentificationForm(props) {
                     <RNPickerSelect
                         useNativeAndroidPickerStyle={false}
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
-                        onValueChange={(value) => props.setHealthArea(value)}
-                        items={healthAreas}
-                        value={props.healthArea}
+                        onValueChange={(value) => {
+                            // set health area name and initialize village to prevent errors
+                            props.setHealthAreaName(value);
+                            value && props.setVillageName(Object.keys(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas[value].villages)[0]);
+
+                            // set health area id
+                            value && props.setHealthAreaId(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas[value].id);
+                        }}
+                        items={ getHealthAreas() }
+                        value={props.healthAreaName}
                         placeholder={{label: 'Aire de santé', value: null}}
                         Icon={() => <Chevron size={1.5} color='#9D9D9D' />}
                     />
@@ -70,8 +125,13 @@ export default function IdentificationForm(props) {
                     <RNPickerSelect
                         useNativeAndroidPickerStyle={false}
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
-                        onValueChange={(value) => props.setVillageName(value)}
-                        items={villageNames}
+                        onValueChange={(value) => {
+                            props.setVillageName(value);
+
+                            // set village id
+                            value && props.setVillageId(data.provinces[props.provinceName].health_zones[props.healthZoneName].health_areas[props.healthAreaName].villages[value].id);
+                        }}
+                        items={ getVillages() }
                         value={props.villageName}
                         placeholder={{label: 'Nom du Village/Communauté', value: null}}
                         Icon={() => <Chevron size={1.5} color='#9D9D9D' />}

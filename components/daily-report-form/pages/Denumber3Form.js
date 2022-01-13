@@ -6,19 +6,17 @@ export default function Denumber3Form(props) {
         <View>
             <Text style={styles.header}>Ménages</Text>
             <View style={styles.inputContainer}>
-                <Text style={{...styles.inputLabel, fontSize: 19, lineHeight: 22}} >Ménages</Text>
+                <Text style={styles.inputLabelBigger} >Ménages</Text>
                 <Text style={styles.inputLabel}>Total des ménages visités</Text>
                 <TextInput style={styles.inputField} 
                     onChange={(e) => props.setNumHouseholdsVisited(parseInt(e.nativeEvent.text) || 0)}
-                    defaultValue={(props.numHouseholdsVisited || '').toString()}   
-                    placeholder='# visited'
+                    defaultValue={(props.numHouseholdsVisited || '0').toString()}
                     />
 
                 <Text style={styles.inputLabel}>Total des ménages traités</Text>
                 <TextInput style={styles.inputField} 
                     onChange={(e) => props.setNumHouseholdsTreated(parseInt(e.nativeEvent.text) || 0)}
-                    defaultValue={(props.numHouseholdsTreated || '').toString()} 
-                    placeholder='# treated' 
+                    defaultValue={(props.numHouseholdsTreated || '0').toString()}
                 />
 
 
@@ -50,6 +48,13 @@ const styles = StyleSheet.create({
         lineHeight: 13,
         color: 'white',
     },
+    inputLabelBigger: {
+        fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
+        fontSize: 19,
+        lineHeight: 22,
+        color: 'white',
+        marginBottom: 5,
+    },
     inputField: {
         marginVertical: 5,
         paddingVertical: 5,
@@ -60,7 +65,6 @@ const styles = StyleSheet.create({
         fontSize: 11,
         lineHeight: 13,
         color: 'black',
-        width: 95,
         textAlign: 'center',
 
         /* Android Drop Shadow Styling */

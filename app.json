@@ -23,7 +23,10 @@
             "adaptiveIcon": {
                 "foregroundImage": "./assets/adaptive-icon.png",
                 "backgroundColor": "#FFFFFF"
-            }
+            },
+            "permissions": [
+                "ACCESS_NETWORK_STATE"
+            ]
         },
         "web": {
             "favicon": "./assets/favicon.png"

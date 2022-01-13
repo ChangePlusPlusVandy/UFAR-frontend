@@ -7,13 +7,13 @@ import ufar from './ufar.png';
 
 const IMAGE_DEF = Image.resolveAssetSource(ufar).uri;
 
-export default function HomePage() {
+export default function HomePage(props) {
   return (
     <View style={styles.container}>
       <Image source={{uri: IMAGE_DEF}} style={styles.image} />
       <View style={styles.buttonsContainer}>
-        <AdminButton />
-        <NormalButton />
+        <AdminButton navigation={props.navigation} />
+        <NormalButton navigation={props.navigation} />
       </View>
     </View>
   )

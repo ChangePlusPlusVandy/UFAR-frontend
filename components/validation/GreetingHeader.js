@@ -1,31 +1,22 @@
 import React from 'react';
 import Hamburger from './Hamburger';
 import {StyleSheet, Text, View} from 'react-native';
-import { connect } from 'react-redux';
 
-export default connect(mapStateToProps)(function GreetingHeader(props) {
+export default function GreetingHeader({name}) {
     return (
         <View style = {styles.over}>
             <Hamburger/>
             <View style={styles.container}>
                 <Text style={styles.greeting}>Bienvenue</Text>
-                <Text style={styles.name}>{props.name}</Text>
+                <Text style={styles.name}>{name}</Text>
             </View>
         </View>
     );
-});
-
-function mapStateToProps(state) {
-    return {
-      name: state.reducer.name,
-      reports: state.reducer.reports,
-    };
 }
-
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 30,
+        paddingTop: 40,
         paddingHorizontal: 24,
         flex: 1, 
     },
@@ -40,12 +31,13 @@ const styles = StyleSheet.create({
         // fontFamily: 'Helvetica Neue',
         fontSize: 20,
         lineHeight: 24,
-        color: '#707070',
+        color: '#FFFFFF',
     },
     name: {
         textAlign: 'right',
         fontWeight: 'bold',
         fontSize: 30,
         lineHeight: 32,
+        color: '#fff',
     },
 });
