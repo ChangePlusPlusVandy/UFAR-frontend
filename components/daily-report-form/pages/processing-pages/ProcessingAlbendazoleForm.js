@@ -8,11 +8,11 @@ export default function ProcessingAlbendazoleForm(props) {
             <View style={styles.rowContainer}>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>5 - 14 ans</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumYoungMenAlbendazoleTreat(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numYoungMenAlbendazoleTreat || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumYoungMenAlbendazoleTreat(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numYoungMenAlbendazoleTreat || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>15 ans et plus</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumOldMenAlbendazoleTreat(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numOldMenAlbendazoleTreat || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumOldMenAlbendazoleTreat(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numOldMenAlbendazoleTreat || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>Total</Text>
@@ -24,11 +24,11 @@ export default function ProcessingAlbendazoleForm(props) {
             <View style={styles.rowContainer}>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>5 - 14 ans</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumYoungWomenAlbendazoleTreat(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numYoungWomenAlbendazoleTreat || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumYoungWomenAlbendazoleTreat(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numYoungWomenAlbendazoleTreat || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>15 ans et plus</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumOldWomenAlbendazoleTreat(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numOldWomenAlbendazoleTreat || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumOldWomenAlbendazoleTreat(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numOldWomenAlbendazoleTreat || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>Total</Text>
@@ -50,7 +50,7 @@ export default function ProcessingAlbendazoleForm(props) {
             <View style={{...styles.rowContainer, justifyContent: 'center'}}>
                 <View style={styles.inputFieldContainer}>
                     <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Effets secondaires signalés</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedAlbendazoleTreat(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedAlbendazoleTreat || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedAlbendazoleTreat(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedAlbendazoleTreat || '0').toString()} />
                 </View>
             </View>
         </View>

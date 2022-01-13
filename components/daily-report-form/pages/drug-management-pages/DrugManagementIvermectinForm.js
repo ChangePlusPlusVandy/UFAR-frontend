@@ -7,15 +7,15 @@ export default function DrugManagementIvermectinForm(props) {
             <View style={styles.rowContainer}>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>Received</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setIvermectinReceived(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.ivermectinReceived || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setIvermectinReceived(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.ivermectinReceived || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>Used</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setIvermectinUsed(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.ivermectinUsed || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setIvermectinUsed(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.ivermectinUsed || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>Lost</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setIvermectinLost(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.ivermectinLost || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setIvermectinLost(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.ivermectinLost || '0').toString()} />
                 </View>
             </View>
 
@@ -26,7 +26,7 @@ export default function DrugManagementIvermectinForm(props) {
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Returned to the C.S.</Text>
-                    <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setIvermectinReturned(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.ivermectinReturned || '').toString()} />
+                    <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setIvermectinReturned(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.ivermectinReturned || '0').toString()} />
                 </View>
             </View>
         </View>

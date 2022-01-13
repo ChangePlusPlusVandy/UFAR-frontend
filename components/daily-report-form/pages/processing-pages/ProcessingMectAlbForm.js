@@ -8,11 +8,11 @@ export default function ProcessingMectAlbForm(props) {
             <View style={styles.rowContainer}>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>5 - 14 ans</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumYoungMenMectAlb(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numYoungMenMectAlb || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumYoungMenMectAlb(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numYoungMenMectAlb || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>15 ans et plus</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumOldMenMectAlb(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numOldMenMectAlb || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumOldMenMectAlb(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numOldMenMectAlb || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>Total</Text>
@@ -24,11 +24,11 @@ export default function ProcessingMectAlbForm(props) {
             <View style={styles.rowContainer}>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>5 - 14 ans</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumYoungWomenMectAlb(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numYoungWomenMectAlb || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumYoungWomenMectAlb(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numYoungWomenMectAlb || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>15 ans et plus</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumOldWomenMectAlb(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numOldWomenMectAlb || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumOldWomenMectAlb(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numOldWomenMectAlb || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>Total</Text>
@@ -50,7 +50,7 @@ export default function ProcessingMectAlbForm(props) {
             <View style={{...styles.rowContainer, justifyContent: 'center'}}>
                 <View style={styles.inputFieldContainer}>
                     <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Effets secondaires signalés</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedMectAlb(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedMectAlb || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedMectAlb(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedMectAlb || '0').toString()} />
                 </View>
             </View>
         </View>

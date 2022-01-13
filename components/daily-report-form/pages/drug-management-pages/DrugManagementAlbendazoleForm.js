@@ -7,15 +7,15 @@ export default function DrugManagementAlbendazoleForm(props) {
             <View style={styles.rowContainer}>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>Received</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setAlbendazoleReceived(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.albendazoleReceived || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setAlbendazoleReceived(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.albendazoleReceived || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>Used</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setAlbendazoleUsed(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.albendazoleUsed || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setAlbendazoleUsed(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.albendazoleUsed || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>Lost</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setAlbendazoleLost(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.albendazoleLost || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setAlbendazoleLost(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.albendazoleLost || '0').toString()} />
                 </View>
             </View>
 
@@ -26,7 +26,7 @@ export default function DrugManagementAlbendazoleForm(props) {
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Returned to the C.S.</Text>
-                    <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setAlbendazoleReturned(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.albendazoleReturned || '').toString()} />
+                    <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setAlbendazoleReturned(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.albendazoleReturned || '0').toString()} />
                 </View>
             </View>
         </View>

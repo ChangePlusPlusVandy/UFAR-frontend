@@ -8,11 +8,11 @@ export default function ProcessingMectizanForm(props) {
             <View style={styles.rowContainer}>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>5 - 14 ans</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumYoungMenMectizan(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numYoungMenMectizan || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumYoungMenMectizan(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numYoungMenMectizan || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>15 ans et plus</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumOldMenMectizan(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numOldMenMectizan || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumOldMenMectizan(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numOldMenMectizan || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>Total</Text>
@@ -24,11 +24,11 @@ export default function ProcessingMectizanForm(props) {
             <View style={styles.rowContainer}>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>5 - 14 ans</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumYoungWomenMectizan(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numYoungWomenMectizan || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumYoungWomenMectizan(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numYoungWomenMectizan || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>15 ans et plus</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumOldWomenMectizan(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numOldWomenMectizan || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumOldWomenMectizan(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numOldWomenMectizan || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={styles.inputLabel}>Total</Text>
@@ -50,7 +50,7 @@ export default function ProcessingMectizanForm(props) {
             <View style={{...styles.rowContainer, justifyContent: 'center'}}>
                 <View style={styles.inputFieldContainer}>
                     <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Effets secondaires signalés</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedMectizan(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedMectizan || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedMectizan(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedMectizan || '0').toString()} />
                 </View>
             </View>
         </View>

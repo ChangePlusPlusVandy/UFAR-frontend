@@ -11,7 +11,7 @@ export default function ProcessingPraziForm(props) {
                         <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Hommes</Text>
                         <View style={styles.inputFieldContainer}>
                             <Text style={styles.inputLabel}>5 - 14 ans</Text>
-                            <TextInput style={styles.inputField} onChange={(e) => props.setNumMenPrazi(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenPrazi || '').toString()} />
+                            <TextInput style={styles.inputField} onChange={(e) => props.setNumMenPrazi(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenPrazi || '0').toString()} />
                         </View>
                     </View>
                 </View>
@@ -20,7 +20,7 @@ export default function ProcessingPraziForm(props) {
                         <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Femmes</Text>
                         <View style={styles.inputFieldContainer}>
                             <Text style={styles.inputLabel}>5 - 14 ans</Text>
-                            <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenPrazi(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenPrazi || '').toString()} />
+                            <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenPrazi(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenPrazi || '0').toString()} />
                         </View>
                     </View>
                 </View>
@@ -40,7 +40,7 @@ export default function ProcessingPraziForm(props) {
             <View style={{...styles.rowContainer, justifyContent: 'center'}}>
                 <View style={styles.inputFieldContainer}>
                     <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Effets secondaires signalés</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedPrazi(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedPrazi || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedPrazi(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedPrazi || '0').toString()} />
                 </View>
             </View>
         </View>

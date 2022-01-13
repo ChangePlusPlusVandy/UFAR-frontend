@@ -11,7 +11,7 @@ export default function ProcessingAlbendazoleHelminthiasisForm(props) {
                         <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Hommes</Text>
                         <View style={styles.inputFieldContainer}>
                             <Text style={styles.inputLabel}>5 - 14 ans</Text>
-                            <TextInput style={styles.inputField} onChange={(e) => props.setNumMenAlbendazoleHelminthiasis(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenAlbendazoleHelminthiasis || '').toString()} />
+                            <TextInput style={styles.inputField} onChange={(e) => props.setNumMenAlbendazoleHelminthiasis(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenAlbendazoleHelminthiasis || '0').toString()} />
                         </View>
                     </View>
                 </View>
@@ -20,7 +20,7 @@ export default function ProcessingAlbendazoleHelminthiasisForm(props) {
                         <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Femmes</Text>
                         <View style={styles.inputFieldContainer}>
                             <Text style={styles.inputLabel}>5 - 14 ans</Text>
-                            <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenAlbendazoleHelminthiasis(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenAlbendazoleHelminthiasis || '').toString()} />
+                            <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenAlbendazoleHelminthiasis(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenAlbendazoleHelminthiasis || '0').toString()} />
                         </View>
                     </View>
                 </View>
@@ -40,7 +40,7 @@ export default function ProcessingAlbendazoleHelminthiasisForm(props) {
             <View style={{...styles.rowContainer, justifyContent: 'center'}}>
                 <View style={styles.inputFieldContainer}>
                     <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Effets secondaires signalés</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedAlbendazoleHelminthiasis(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedAlbendazoleHelminthiasis || '').toString()} />
+                    <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedAlbendazoleHelminthiasis(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedAlbendazoleHelminthiasis || '0').toString()} />
                 </View>
             </View>
         </View>
