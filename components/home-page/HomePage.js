@@ -6,10 +6,6 @@ import ufar from './ufar.png';
 const IMAGE_DEF = Image.resolveAssetSource(ufar).uri;
 
 export default function HomePage (props) {
-    const onPress = () => {
-        // Do something
-        return;
-    }
 
     return (
         <View style={styles.screen}>

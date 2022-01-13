@@ -13,7 +13,7 @@ export default function NurseApp(props){
     <View style={styles.container}>
         <NetworkBar />
         <StatusBar style="auto" />
-        <GreetingHeader />
+        <GreetingHeader navigation={props.navigation}/>
         {/* <DashboardSummary /> */}
         <RecentsList/>
         <DailyReportForm/>

@@ -1,10 +1,7 @@
 import React from 'react';
 import {StyleSheet , TouchableOpacity, View} from 'react-native';
 import {Icon} from 'react-native-elements';
-import { Menu, MenuOptions, MenuOption, MenuTrigger, renderers } from 'react-native-popup-menu';
-import HomePage from '../home-page/HomePage';
-
-const { SlideInMenu } = renderers;
+import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 
 export default function Hamburger (props) {
 
@@ -15,7 +12,7 @@ export default function Hamburger (props) {
                     <Icon name="menu" color = '#FFFFFF' size = {44} iconStyle = {styles.icon} />
                 </MenuTrigger>
                 <MenuOptions customStyles = {styles.menuOptions}>
-                    <MenuOption>
+                    <MenuOption onSelect={() => props.navigation.navigate('Home')}>
                         <Icon name="home" color = '#FFF' size = {30} iconStyle = {styles.icon} />
                     </MenuOption>
                     <MenuOption>
