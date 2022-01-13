@@ -46,13 +46,6 @@ export default function ProcessingMectizanForm(props) {
                     <TextInput style={styles.inputField} value={`${isFinite(props.totalCoverageMectizan) ? props.totalCoverageMectizan.toString() : " --- "}%`} />
                 </View>
             </View>
-
-            <View style={{...styles.rowContainer, justifyContent: 'center'}}>
-                <View style={styles.inputFieldContainer}>
-                    <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Effets secondaires signalés</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedMectizan(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedMectizan || '').toString()} />
-                </View>
-            </View>
         </View>
     );
 }

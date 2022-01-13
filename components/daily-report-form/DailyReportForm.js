@@ -148,7 +148,6 @@ export default function DailyReportForm() {
     const [totalNumWomenMectizan, setTotalWomenMectizan] = useState(numYoungWomenMectizan + numOldWomenMectizan);
     const [totalNumMectizan, setTotalNumMectizan] = useState(totalNumMenMectizan + totalNumWomenMectizan);
     const [totalCoverageMectizan, setTotalCoverageMectizan] = useState((totalNumMectizan * 100) / totalNumPersons);
-    const [numSideEffectsReportedMectizan, setNumSideEffectsReportedMectizan] = useState(0);
 
     // Update totals
     useEffect(() => {
@@ -167,7 +166,6 @@ export default function DailyReportForm() {
     const [totalNumWomenMectAlb, setTotalWomenMectAlb] = useState(numYoungWomenMectAlb + numOldWomenMectAlb);
     const [totalNumMectAlb, setTotalNumMectAlb] = useState(totalNumMenMectAlb + totalNumWomenMectAlb);
     const [totalCoverageMectAlb, setTotalCoverageMectAlb] = useState((totalNumMectAlb * 100) / totalNumPersons);
-    const [numSideEffectsReportedMectAlb, setNumSideEffectsReportedMectAlb] = useState(0);
 
     // Update totals
     useEffect(() => {
@@ -186,7 +184,6 @@ export default function DailyReportForm() {
     const [totalNumWomenAlbendazoleTreat, setTotalWomenAlbendazoleTreat] = useState(numYoungWomenAlbendazoleTreat + numOldWomenAlbendazoleTreat);
     const [totalNumAlbendazoleTreat, setTotalNumAlbendazoleTreat] = useState(totalNumMenAlbendazoleTreat + totalNumWomenAlbendazoleTreat);
     const [totalCoverageAlbendazoleTreat, setTotalCoverageAlbendazoleTreat] = useState((totalNumAlbendazoleTreat * 100) / totalNumPersons);
-    const [numSideEffectsReportedAlbendazoleTreat, setNumSideEffectsReportedAlbendazoleTreat] = useState(0);
 
     // Update totals
     useEffect(() => {
@@ -201,7 +198,6 @@ export default function DailyReportForm() {
     const [numWomenPrazi, setNumWomenPrazi] = useState(0);
     const [totalNumPrazi, setTotalNumPrazi] = useState(numMenPrazi + numWomenPrazi);
     const [totalCoveragePrazi, setTotalCoveragePrazi] = useState((totalNumPrazi * 100) / totalNumPersons);
-    const [numSideEffectsReportedPrazi, setNumSideEffectsReportedPrazi] = useState(0);
 
     // Update total
     useEffect(() => {
@@ -214,13 +210,15 @@ export default function DailyReportForm() {
     const [numWomenAlbendazoleHelminthiasis, setNumWomenAlbendazoleHelminthiasis] = useState(0);
     const [totalNumAlbendazoleHelminthiasis, setTotalNumAlbendazoleHelminthiasis] = useState(numMenAlbendazoleHelminthiasis + numWomenAlbendazoleHelminthiasis);
     const [totalCoverageAlbendazoleHelminthiasis, setTotalCoverageAlbendazoleHelminthiasis] = useState((totalNumAlbendazoleHelminthiasis * 100) / totalNumPersons);
-    const [numSideEffectsReportedAlbendazoleHelminthiasis, setNumSideEffectsReportedAlbendazoleHelminthiasis] = useState(0);
 
     // Update total
     useEffect(() => {
         setTotalNumAlbendazoleHelminthiasis(numMenAlbendazoleHelminthiasis + numWomenAlbendazoleHelminthiasis);
         setTotalCoverageAlbendazoleHelminthiasis((totalNumAlbendazoleHelminthiasis * 100) / totalNumPersons);
     }, [numMenAlbendazoleHelminthiasis, numWomenAlbendazoleHelminthiasis, totalNumAlbendazoleHelminthiasis, totalNumPersons]);
+
+    // Side effects state
+    const [numSideEffectsReported, setNumSideEffectsReported] = useState(0);
     
      // Untreated state
      const [numInfants, setNumInfants] = useState(0);
@@ -400,7 +398,6 @@ export default function DailyReportForm() {
             setNumOldMenMectizan={setNumOldMenMectizan}
             setNumYoungWomenMectizan={setNumYoungWomenMectizan}
             setNumOldWomenMectizan={setNumOldWomenMectizan}
-            setNumSideEffectsReportedMectizan={setNumSideEffectsReportedMectizan}
             numYoungMenMectizan={numYoungMenMectizan}
             numYoungWomenMectizan={numYoungWomenMectizan}
             numOldMenMectizan={numOldMenMectizan}
@@ -409,14 +406,12 @@ export default function DailyReportForm() {
             totalNumMenMectizan={totalNumMenMectizan}
             totalNumMectizan={totalNumMectizan}
             totalCoverageMectizan={totalCoverageMectizan}
-            numSideEffectsReportedMectizan={numSideEffectsReportedMectizan}
 
             // Mectizan and Albendazole
             setNumYoungMenMectAlb={setNumYoungMenMectAlb}
             setNumOldMenMectAlb={setNumOldMenMectAlb}
             setNumYoungWomenMectAlb={setNumYoungWomenMectAlb}
             setNumOldWomenMectAlb={setNumOldWomenMectAlb}
-            setNumSideEffectsReportedMectAlb={setNumSideEffectsReportedMectAlb}
             numYoungMenMectAlb={numYoungMenMectAlb}
             numYoungWomenMectAlb={numYoungWomenMectAlb}
             numOldMenMectAlb={numOldMenMectAlb}
@@ -425,14 +420,12 @@ export default function DailyReportForm() {
             totalNumMenMectAlb={totalNumMenMectAlb}
             totalNumMectAlb={totalNumMectAlb}
             totalCoverageMectAlb={totalCoverageMectAlb}
-            numSideEffectsReportedMectAlb={numSideEffectsReportedMectAlb}
 
             // Albendazole (alone)
             setNumYoungMenAlbendazoleTreat={setNumYoungMenAlbendazoleTreat}
             setNumOldMenAlbendazoleTreat={setNumOldMenAlbendazoleTreat}
             setNumYoungWomenAlbendazoleTreat={setNumYoungWomenAlbendazoleTreat}
             setNumOldWomenAlbendazoleTreat={setNumOldWomenAlbendazoleTreat}
-            setNumSideEffectsReportedAlbendazoleTreat={setNumSideEffectsReportedAlbendazoleTreat}
             numYoungMenAlbendazoleTreat={numYoungMenAlbendazoleTreat}
             numYoungWomenAlbendazoleTreat={numYoungWomenAlbendazoleTreat}
             numOldMenAlbendazoleTreat={numOldMenAlbendazoleTreat}
@@ -441,7 +434,6 @@ export default function DailyReportForm() {
             totalNumMenAlbendazoleTreat={totalNumMenAlbendazoleTreat}
             totalNumAlbendazoleTreat={totalNumAlbendazoleTreat}
             totalCoverageAlbendazoleTreat={totalCoverageAlbendazoleTreat}
-            numSideEffectsReportedAlbendazoleTreat={numSideEffectsReportedAlbendazoleTreat}
             
             // Praziquantel
             setNumMenPrazi={setNumMenPrazi}
@@ -452,8 +444,6 @@ export default function DailyReportForm() {
             totalNumPrazi={totalNumPrazi}
             setTotalCoveragePrazi={setTotalCoveragePrazi}
             totalCoveragePrazi={totalCoveragePrazi}
-            setNumSideEffectsReportedPrazi={setNumSideEffectsReportedPrazi}
-            numSideEffectsReportedPrazi={numSideEffectsReportedPrazi}
 
             // Albendazole (Soil-transmitted helminthiasis)
             setNumMenAlbendazoleHelminthiasis={setNumMenAlbendazoleHelminthiasis}
@@ -464,8 +454,10 @@ export default function DailyReportForm() {
             totalNumAlbendazoleHelminthiasis={totalNumAlbendazoleHelminthiasis}
             setTotalCoverageAlbendazoleHelminthiasis={setTotalCoverageAlbendazoleHelminthiasis}
             totalCoverageAlbendazoleHelminthiasis={totalCoverageAlbendazoleHelminthiasis}
-            setNumSideEffectsReportedAlbendazoleHelminthiasis={setNumSideEffectsReportedAlbendazoleHelminthiasis}
-            numSideEffectsReportedAlbendazoleHelminthiasis={numSideEffectsReportedAlbendazoleHelminthiasis}
+
+            // Side effects
+            setNumSideEffectsReported={setNumSideEffectsReported}
+            numSideEffectsReported={numSideEffectsReported}
         />,
         <UntreatedForm
             setNumInfants={setNumInfants}

@@ -36,13 +36,6 @@ export default function ProcessingPraziForm(props) {
                     <TextInput style={styles.inputField} value={`${isFinite(props.totalCoveragePrazi) ? props.totalCoveragePrazi.toString() : " --- "}%`} />
                 </View>
             </View>
-
-            <View style={{...styles.rowContainer, justifyContent: 'center'}}>
-                <View style={styles.inputFieldContainer}>
-                    <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Effets secondaires signalés</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedPrazi(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedPrazi || '').toString()} />
-                </View>
-            </View>
         </View>
     );
 }

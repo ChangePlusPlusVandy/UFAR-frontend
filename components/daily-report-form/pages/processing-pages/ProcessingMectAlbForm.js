@@ -46,13 +46,6 @@ export default function ProcessingMectAlbForm(props) {
                     <TextInput style={styles.inputField} value={`${isFinite(props.totalCoverageMectAlb) ? props.totalCoverageMectAlb.toString() : " --- "}%`} />
                 </View>
             </View>
-
-            <View style={{...styles.rowContainer, justifyContent: 'center'}}>
-                <View style={styles.inputFieldContainer}>
-                    <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Effets secondaires signalés</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedMectAlb(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedMectAlb || '').toString()} />
-                </View>
-            </View>
         </View>
     );
 }

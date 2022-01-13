@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 
 import SlideshowPaginator from '../SlideshowPaginator';
 
@@ -39,7 +39,6 @@ export default function ProcessingForm(props) {
                 setNumOldMenMectAlb={props.setNumOldMenMectAlb}
                 setNumYoungWomenMectAlb={props.setNumYoungWomenMectAlb}
                 setNumOldWomenMectAlb={props.setNumOldWomenMectAlb}
-                setNumSideEffectsReportedMectAlb={props.setNumSideEffectsReportedMectAlb}
                 numYoungMenMectAlb={props.numYoungMenMectAlb}
                 numYoungWomenMectAlb={props.numYoungWomenMectAlb}
                 numOldMenMectAlb={props.numOldMenMectAlb}
@@ -48,7 +47,6 @@ export default function ProcessingForm(props) {
                 totalNumMenMectAlb={props.totalNumMenMectAlb}
                 totalNumMectAlb={props.totalNumMectAlb}
                 totalCoverageMectAlb={props.totalCoverageMectAlb}
-                numSideEffectsReportedMectAlb={props.numSideEffectsReportedMectAlb}
             />,
         },
         {
@@ -59,7 +57,6 @@ export default function ProcessingForm(props) {
                 setNumOldMenAlbendazoleTreat={props.setNumOldMenAlbendazoleTreat}
                 setNumYoungWomenAlbendazoleTreat={props.setNumYoungWomenAlbendazoleTreat}
                 setNumOldWomenAlbendazoleTreat={props.setNumOldWomenAlbendazoleTreat}
-                setNumSideEffectsReportedAlbendazoleTreat={props.setNumSideEffectsReportedAlbendazoleTreat}
                 numYoungMenAlbendazoleTreat={props.numYoungMenAlbendazoleTreat}
                 numYoungWomenAlbendazoleTreat={props.numYoungWomenAlbendazoleTreat}
                 numOldMenAlbendazoleTreat={props.numOldMenAlbendazoleTreat}
@@ -68,7 +65,6 @@ export default function ProcessingForm(props) {
                 totalNumMenAlbendazoleTreat={props.totalNumMenAlbendazoleTreat}
                 totalNumAlbendazoleTreat={props.totalNumAlbendazoleTreat}
                 totalCoverageAlbendazoleTreat={props.totalCoverageAlbendazoleTreat}
-                numSideEffectsReportedAlbendazoleTreat={props.numSideEffectsReportedAlbendazoleTreat}
             />,
         },
         {
@@ -83,8 +79,6 @@ export default function ProcessingForm(props) {
                 totalNumPrazi={props.totalNumPrazi}
                 setTotalCoveragePrazi={props.setTotalCoveragePrazi}
                 totalCoveragePrazi={props.totalCoveragePrazi}
-                setNumSideEffectsReportedPrazi={props.setNumSideEffectsReportedPrazi}
-                numSideEffectsReportedPrazi={props.numSideEffectsReportedPrazi}
             />,
         },
         {
@@ -99,8 +93,6 @@ export default function ProcessingForm(props) {
                 totalNumAlbendazoleHelminthiasis={props.totalNumAlbendazoleHelminthiasis}
                 setTotalCoverageAlbendazoleHelminthiasis={props.setTotalCoverageAlbendazoleHelminthiasis}
                 totalCoverageAlbendazoleHelminthiasis={props.totalCoverageAlbendazoleHelminthiasis}
-                setNumSideEffectsReportedAlbendazoleHelminthiasis={props.setNumSideEffectsReportedAlbendazoleHelminthiasis}
-                numSideEffectsReportedAlbendazoleHelminthiasis={props.numSideEffectsReportedAlbendazoleHelminthiasis}
             />,
         },
     ]
@@ -111,6 +103,12 @@ export default function ProcessingForm(props) {
             <View style={styles.inputContainer}>
                 <View style={styles.slideshowContainer}>
                     <SlideshowPaginator pages={pages} />
+                    <View style={styles.rowContainer}>
+                        <View style={styles.inputFieldContainer}>
+                            <Text style={styles.inputLabelBigger}>Effets secondaires signalés</Text>
+                            <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReported(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReported || '').toString()} />
+                        </View>
+                    </View>
                 </View>
             </View>
         </View>
@@ -134,5 +132,46 @@ const styles = StyleSheet.create({
     },
     slideshowContainer: {
         marginBottom: 20,
-    }
+    },
+    rowContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    inputFieldContainer: {
+        alignItems: 'center',
+    },
+    inputLabelBigger: {
+        fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
+        fontSize: 17,
+        lineHeight: 20,
+        color: 'white',
+        marginVertical: 10,
+        marginBottom: 0,
+    },
+    inputField: {
+        marginVertical: 5,
+        paddingVertical: 5,
+        paddingHorizontal: 15,
+        borderRadius: 17,
+        backgroundColor: 'white',
+        fontFamily: Platform.OS === 'android' ? 'sans-serif-medium' : 'Avenir-Roman',
+        fontSize: 11,
+        lineHeight: 13,
+        color: 'black',
+        width: 95,
+        textAlign: 'center',
+        
+        /* Android Drop Shadow Styling */
+        elevation: 10,
+        
+        /* iOS Drop Shadow Styling */
+        shadowColor: "black",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 10,
+        shadowOpacity: 0.3,
+    },
 })
