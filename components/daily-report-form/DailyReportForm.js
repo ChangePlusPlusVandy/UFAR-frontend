@@ -853,9 +853,6 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         },
     }
 
-
-    const openForm = () => setActivePage(0);  // Opens form by setting currently active page to 0 (first page)
-
     // Conditional rendering page navigation
     const renderPageContent = () => {
             return (
@@ -866,10 +863,8 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
                         {activePage < pages.length - 1 && <NextButton setActivePage={setActivePage}/>}
                         {activePage === pages.length - 1 && 
                         <SubmitButton 
-                            activePage={activePage} 
-                            setActivePage={setActivePage}
+                            setLandingPage={props.setLandingPage}
                             report={report}
-                            resetAllStates={resetAllStates}
                         />}
                     </View>
                     <ProgressBar progress={(activePage + 1) / pages.length} />
@@ -879,10 +874,10 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
 
     
     return (
-        <>
-            <CrossIcon setLandingPage={props.setLandingPage}/>
+        <View style={styles.container}>
+            <CrossIcon setLandingPage={props.setLandingPage} landingPage={props.landingPage}/>
             {renderPageContent()}
-        </>
+        </View>
     );
 });
 
@@ -897,9 +892,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'space-between',
+        position: 'absolute',
+        width: '100%',
         top: Platform.OS === 'android' ? StatusBar.currentHeight : 45,
         bottom: 0,
-        backgroundColor: 'grey',
+        backgroundColor: '#EC1C24',
         borderTopLeftRadius: 11,
         borderTopRightRadius: 11,
         
