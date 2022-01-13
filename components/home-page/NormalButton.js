@@ -1,13 +1,10 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 
-export default function NormalButton() {
-    // Change function here
-    const incremenetActivePage = () => setActivePage((prev) => prev + 1);
-
+export default function NormalButton(props) {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={incremenetActivePage} style={styles.button}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('NurseApp')} style={styles.button}>
                 {/* INSERT ICON */}
             </TouchableOpacity>
             <Text style={styles.text}>Normal</Text>

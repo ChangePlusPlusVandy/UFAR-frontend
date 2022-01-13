@@ -1,13 +1,10 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 
-export default function AdminButton() {
-    // Change function here
-    const decremenetActivePage = () => setActivePage((prev) => prev - 1);
-
+export default function AdminButton(props) {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={decremenetActivePage} style={styles.button}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('AdminApp')} style={styles.button}>
                 {/* INSERT ICON */}
             </TouchableOpacity>
             <Text style={styles.text}>Admin</Text>
