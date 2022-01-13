@@ -4,8 +4,6 @@ import { Icon } from 'react-native-elements';
 
 
 export default function NewReportButton(props){
-    
-    // when clicked, it resets the active page to render the daily report form 
 
     return(
         <View style={{...styles.container, ...styles.containerInactive}}>

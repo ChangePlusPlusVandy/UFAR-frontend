@@ -7,9 +7,6 @@ import {Platform, Pressable, StatusBar, StyleSheet, Text, View} from 'react-nati
 export default function Bridge(){
     const [landingPage, setLandingPage] = React.useState(true);
 
-    // Renders the new report button and the daily report form
-    // Depending on state
-
     return(
         <>
             {    landingPage ? 
