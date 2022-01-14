@@ -22,7 +22,7 @@ export default connect(mapStateToProps)(function RecentsList(props){
             <TouchableOpacity style={styles.edit}>
                 {props.reports[item].isSubmitted ? 
                 <Icon name="check" color = 'green' size = {25} /> :
-                <Icon name="dots-three-horizontal" color = 'green' size = {25} type="entypo" />}                
+                <Icon name="time-slot" color = 'green' size = {20} type="entypo" />}                
             </TouchableOpacity>
         </View>
     );
