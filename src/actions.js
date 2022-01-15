@@ -22,20 +22,18 @@ export const addReport = (report, id) => {
             body: JSON.stringify(report),
             })
             if (response.status == 200){
-                // console.log("report submitted successfully: ", response);
                 dispatch({type: 'ADD_REPORT', report: report, id: id})
             }  else {
-                // todo: if there's an error, remove the report from redux and notify the user
+                // if there's an error, call the add function which marks it is not submitted
                 console.log("error while submitting report1: ", err);
-                // todo: delete after testing
                 dispatch({type: 'ADD_REPORT', report: report, id: id})
-                // dispatch(offlineActionCreators.fetchOfflineMode(thunk))
             }
         } catch (err) {
-            
-            // todo: if there's an error, remove the report from redux and notify the user
+        
+            // if there's an error, call the add function which marks it is not submitted
             console.log("error while submitting report2: ", err);
-            // dispatch(offlineActionCreators.fetchOfflineMode(thunk))
+            dispatch({type: 'ADD_REPORT', report: report, id: id})
+
         }
 
     }

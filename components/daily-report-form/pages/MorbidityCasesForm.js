@@ -23,7 +23,7 @@ export default function MorbidityEstimationForm(props) {
                 </View>
                 <Text style={styles.inputLabelBigger}>Lymphœdème</Text>
                 <View>
-                    <Text style={styles.inputLabel}>Hommes</Text>
+                    <Text style={styles.inputLabelBigger}>Hommes</Text>
                     <View>
                         <View style={styles.rowContainer}>
                             <View style={styles.inputFieldContainer}>
@@ -46,7 +46,7 @@ export default function MorbidityEstimationForm(props) {
                             </View>
                         </View>
                     </View>
-                    <Text style={{...styles.inputLabel, marginBottom: 5}}>Femmes</Text>
+                    <Text style={{...styles.inputLabelBigger, marginBottom: 5}}>Femmes</Text>
                     <View>
                         <View style={styles.rowContainer}>
                             <View style={styles.inputFieldContainer}>
@@ -160,14 +160,14 @@ const styles = StyleSheet.create({
     },
     inputLabel: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
-        fontSize: 11,
+        fontSize: 12,
         lineHeight: 13,
         color: 'white',
         marginTop: 3,
     },
     inputLabelBigger: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
-        fontSize: 17,
+        fontSize: 15,
         lineHeight: 20,
         color: 'white',
         marginVertical: 10,

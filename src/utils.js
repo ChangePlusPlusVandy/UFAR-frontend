@@ -10,7 +10,6 @@ export function comparisonFn(action, actionQueue) {
       return actionQueue.find(queued => isEqual(queued, action));
     }
     if (typeof action === 'function') {
-      console.log("action to compare: ", action.meta);
       return actionQueue.find(
         queued =>
           (queued.meta && action.meta.name === queued.meta.name) &&

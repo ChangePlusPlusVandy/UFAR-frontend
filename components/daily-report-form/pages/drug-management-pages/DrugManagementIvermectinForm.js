@@ -21,11 +21,11 @@ export default function DrugManagementIvermectinForm(props) {
 
             <View style={styles.rowContainer}>
                 <View style={styles.inputFieldContainer}>
-                    <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Remaining</Text>
+                    <Text style={{...styles.inputLabel, marginBottom: 0}}>Remaining</Text>
                     <TextInput style={styles.inputFieldBigger} value={props.ivermectinRemaining.toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
-                    <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Returned to the C.S.</Text>
+                    <Text style={{...styles.inputLabel, marginBottom: 0}}>Returned to the C.S.</Text>
                     <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setIvermectinReturned(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.ivermectinReturned || '0').toString()} />
                 </View>
             </View>
@@ -55,13 +55,13 @@ const styles = StyleSheet.create({
     },
     inputLabel: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
-        fontSize: 11,
+        fontSize: 12,
         lineHeight: 13,
         color: 'white',
     },
     inputLabelBigger: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
-        fontSize: 17,
+        fontSize: 15,
         lineHeight: 20,
         color: 'white',
         marginVertical: 10,

@@ -34,14 +34,14 @@ const styles = StyleSheet.create({
     },
     inputLabel: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
-        fontSize: 11,
+        fontSize: 12,
         lineHeight: 13,
         color: 'white',
     },
     inputLabelBigger: {
         textAlign: 'center',
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
-        fontSize: 14,
+        fontSize: 15,
         lineHeight: 18,
         color: 'white',
     },

@@ -24,7 +24,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
         
 
         if (props.activePage !== null) props.setActivePage(null);
-        // console.log("submitReport");
     }
 
     return (
