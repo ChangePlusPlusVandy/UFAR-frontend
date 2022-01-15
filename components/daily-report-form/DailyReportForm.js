@@ -24,7 +24,6 @@ import { connect } from 'react-redux';
 
 
 export default connect(mapStateToProps)(function DailyReportForm(props) {
-    console.log("DailyReportForm props: ", props);
     const [activePage, setActivePage] = useState(null);
 
 

@@ -49,7 +49,7 @@ export default function ProcessingMectAlbForm(props) {
 
             <View style={{...styles.rowContainer, justifyContent: 'center'}}>
                 <View style={styles.inputFieldContainer}>
-                    <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Effets secondaires signalés</Text>
+                    <Text style={{...styles.inputLabel, marginBottom: 0}}>Effets secondaires signalés</Text>
                     <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedMectAlb(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedMectAlb || '0').toString()} />
                 </View>
             </View>
@@ -79,13 +79,13 @@ const styles = StyleSheet.create({
     },
     inputLabel: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
-        fontSize: 11,
+        fontSize: 12,
         lineHeight: 13,
         color: 'white',
     },
     inputLabelBigger: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
-        fontSize: 17,
+        fontSize: 15,
         lineHeight: 20,
         color: 'white',
         marginVertical: 10,
