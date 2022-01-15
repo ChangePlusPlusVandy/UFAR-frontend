@@ -5,9 +5,9 @@ import Validation from '../components/validation/Pages/Validation';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-export default function AdminApp() {
+export default function AdminApp(props) {
   return (
-      <Appcontainer />
+      <Appcontainer navigation={props.navigation}/>
   );
 }
 
