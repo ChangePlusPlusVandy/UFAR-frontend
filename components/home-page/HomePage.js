@@ -1,89 +1,40 @@
 import React from 'react';
 import {StyleSheet , TouchableOpacity, View, Text, Image} from 'react-native';
-import {Icon} from 'react-native-elements';
+
+import AdminButton from './AdminButton';
+import NormalButton from './NormalButton';
 import ufar from './ufar.png';
 
 const IMAGE_DEF = Image.resolveAssetSource(ufar).uri;
 
-export default function HomePage (props) {
+export default function HomePage(props) {
+  return (
+    <View style={styles.container}>
+      <Image source={{uri: IMAGE_DEF}} style={styles.image} />
+      <View style={styles.buttonsContainer}>
+        <AdminButton navigation={props.navigation} />
+        <NormalButton navigation={props.navigation} />
+      </View>
+    </View>
+  )
+}
 
-    return (
-        <View style={styles.screen}>
-            <Image
-              source={{uri: IMAGE_DEF}}
-              style={styles.image}
-            />
-          { <>
-            <TouchableOpacity
-              style={styles.roundButton1}
-              onPress={() => props.navigation.navigate('AdminApp')}
-            >
-
-            </TouchableOpacity> 
-            
-            <TouchableOpacity
-              style={styles.roundButton2}
-              onPress={() => props.navigation.navigate('NurseMain')}
-            >
-            </TouchableOpacity>
-          </>}
-          <Text style={styles.right}>Normal</Text>
-          <Text style={styles.left}>Admin</Text>
-        </View>
-      );
-    }
-    
-    /// Just some styles
-    const styles = StyleSheet.create({
-      screen: {
-        flex: 1,
-        backgroundColor: "#EC1C24",
-        height: "100%",
-        width: "100%",
-        alignSelf:'center',
-      },
-      image: {
-        justifyContent:'center',
-        position: 'absolute',
-        top: 81,
-        height: 79,
-        width: 360,
-        alignSelf:'center',
-      },
-      roundButton2: {
-        width: 54,
-        height: 54,
-        position: 'absolute',
-        left: 212,
-        top: 311,
-        borderRadius: 100,
-        backgroundColor: '#59AECF',
-        elevation: 10,
-      },
-      roundButton1: {
-        width: 54,
-        height: 54,
-        position: 'absolute',
-        left: 94,
-        top: 311,
-        borderRadius: 100,
-        backgroundColor: '#8AC566',
-      },
-      left: {
-        fontSize: 13,
-        position: 'absolute',
-        left: 102,
-        top: 375,
-        lineHeight: 16,
-        color: '#FFF',
-      },
-      right: {
-        fontSize: 13,
-        position: 'absolute',
-        left: 218,
-        top: 375,
-        lineHeight: 16,
-        color: '#FFF',
-      },
-
-    });
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#EC1C24",
+    height: "100%",
+    width: "100%",
+    justifyContent: 'center'
+  },
+  image: {
+    height: 79,
+    width: 360,
+    bottom: 200,
+    alignSelf:'center',
+  },
+  buttonsContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  }
+})
