@@ -2,13 +2,13 @@ import React from 'react';
 import Hamburger from './Hamburger';
 import {StyleSheet, Text, View} from 'react-native';
 
-export default function GreetingHeader(props, {name}) {
+export default function GreetingHeader(props) {
     return (
         <View style = {styles.over}>
             <Hamburger navigation={props.navigation}/>
             <View style={styles.container}>
                 <Text style={styles.greeting}>Bienvenue</Text>
-                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.name}>{props.name}</Text>
             </View>
         </View>
     );

@@ -4,7 +4,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import HomePage from "../components/home-page/HomePage";
 import NurseApp from './NurseApp';
-import AdminApp from './AdminApp';
+import Validation from '../components/validation/Pages/Validation';
+
 
 
 export default function UfarApp() {
@@ -13,28 +14,54 @@ export default function UfarApp() {
   );
 }
 
-const AppNavigator = createStackNavigator({
-  Home: {
-    screen: HomePage,
-    navigationOptions: {
-      headerShown: false,
-    }
-  },
-  NurseApp: {
+// navigation stack for the NurseApp
+const NurseAppNavigator = createStackNavigator({
+  NurseMain: {
     screen: NurseApp,
     navigationOptions: {
       headerShown: false,
     }
-  },
-  AdminApp: {
-    screen: AdminApp,
+  }
+}, {
+  initialRouteName: 'NurseMain',
+  navigationOptions:{
+    headerShown: false,
+  }
+})
+
+// navigation stack for the AdminApp
+const AdminAppNaviagtor = createStackNavigator({
+  Validation: {
+    screen: Validation,
     navigationOptions: {
       headerShown: false,
     }
+  }
+}, {
+  initialRouteName: 'Validation',
+  navigationOptions:{
+    headerShown: false,
+  }
+})
+
+// Naviation stack for the UfarApp (the main app)
+const UfarAppNavigator = createStackNavigator({
+  Home: {
+    screen: HomePage,
+    navigationOptions: {
+      headerShown: false,
+      
+    }
   },
+
+  // navigation stack for the Nurse App
+  NurseApp: NurseAppNavigator,
+
+  // navigation stack for the Admin app
+  AdminApp: AdminAppNaviagtor,
 }, 
 {
   initialRouteName: 'Home',
 });
 
-const AppContainer = createAppContainer(AppNavigator);
+const AppContainer = createAppContainer(UfarAppNavigator);

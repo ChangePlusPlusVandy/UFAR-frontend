@@ -23,7 +23,7 @@ export default function HomePage (props) {
             
             <TouchableOpacity
               style={styles.roundButton2}
-              onPress={() => props.navigation.navigate('NurseApp')}
+              onPress={() => props.navigation.navigate('NurseMain')}
             >
             </TouchableOpacity>
           </>}

@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet , TouchableOpacity, View} from 'react-native';
+import {StyleSheet , TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
-import { Menu, MenuOptions, MenuOption, MenuTrigger, renderers } from 'react-native-popup-menu';
+import { Menu, MenuOptions, MenuOption, MenuTrigger} from 'react-native-popup-menu';
 
-export default function Hamburger () {
+export default function Hamburger (props) {
 
     return (
         <TouchableOpacity style={styles.hamburger}>
@@ -12,8 +12,11 @@ export default function Hamburger () {
                     <Icon name="menu" color = '#FFFFFF' size = {44} iconStyle = {styles.icon} />
                 </MenuTrigger>
                 <MenuOptions customStyles = {styles.menuOptions}>
-                    <MenuOption>
+                    <MenuOption onSelect={() => props.navigation.navigate('Home')}>
                         <Icon name="home" color = '#FFF' size = {30} iconStyle = {styles.icon} />
+                    </MenuOption>
+                    <MenuOption>
+                        <Icon name="dashboard" color = '#FFF' size = {30} iconStyle = {styles.icon} />
                     </MenuOption>
                     <MenuOption>
                         <Icon name="settings" color = '#FFF' size = {30} iconStyle = {styles.icon} />
