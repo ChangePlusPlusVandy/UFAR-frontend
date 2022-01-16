@@ -11,6 +11,8 @@ import { persistStore, persistReducer, createTransform } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import  AsyncStorage from '@react-native-async-storage/async-storage';
 import { offlineActionTypes } from 'react-native-offline';
+import { MenuProvider } from 'react-native-popup-menu';
+
 
 import { addReport } from './src/actions.js';
 import { comparisonFn } from './src/utils.js';
@@ -119,12 +121,14 @@ const persistor = persistStore(store);
 export default function App() {
   // todo: change the ping interval to a more reasonable value
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}> 
-        <ReduxNetworkProvider pingInterval={3000} shouldPing={true} pingServerUrl='http://10.76.170.134:3000'>
-          <UfarApp />
-        </ReduxNetworkProvider>
-      </PersistGate> 
-    </Provider>
+    <MenuProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}> 
+          <ReduxNetworkProvider pingInterval={3000} shouldPing={true} pingServerUrl='http://10.76.170.134:3000'>
+            <UfarApp />
+          </ReduxNetworkProvider>
+        </PersistGate> 
+      </Provider>
+    </MenuProvider>
   );
 }

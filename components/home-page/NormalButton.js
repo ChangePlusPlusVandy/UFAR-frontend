@@ -4,7 +4,7 @@ import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 export default function NormalButton(props) {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('NurseApp')} style={styles.button}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('NurseMain')} style={styles.button}>
                 {/* INSERT ICON */}
             </TouchableOpacity>
             <Text style={styles.text}>Normal</Text>

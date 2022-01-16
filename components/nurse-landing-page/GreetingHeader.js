@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 export default connect(mapStateToProps)(function GreetingHeader(props) {
     return (
         <View style = {styles.over}>
-            <Hamburger/>
+            <Hamburger navigation={props.navigation}/>
             <View style={styles.container}>
                 <Text style={styles.greeting}>Bienvenue</Text>
                 <Text style={styles.name}>{props.name}</Text>
