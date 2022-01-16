@@ -8,17 +8,17 @@ export default function UntreatedForm(props) {
             <View style={styles.inputContainer}>
                 <Text style={styles.inputLabelBigger} ># de personnes non traitées</Text>
                 <Text style={styles.inputLabel}>Enfants de {'<'} 5 ans (E)</Text>
-                <TextInput style={styles.inputField} value={props.numInfants.toString()} />
+                <TextInput style={styles.inputField} value={props.numInfants.toString()}  onChange={(e) => props.setNumInfants(parseInt(e.nativeEvent.text) || 0)}/>
                 <Text style={styles.inputLabel}>Femmes enceintes (G)</Text>
-                <TextInput style={styles.inputField} value={props.numPregnant.toString()} />
+                <TextInput style={styles.inputField} value={props.numPregnant.toString()} onChange={(e) => props.setNumPregnant(parseInt(e.nativeEvent.text) || 0)}/>
                 <Text style={styles.inputLabel}>Femmes allaitantes de {'<'} 7jrs (FA)</Text>
-                <TextInput style={styles.inputField} value={props.numBreastfeeding.toString()}/>
+                <TextInput style={styles.inputField} value={props.numBreastfeeding.toString()} onChange={(e) => props.setNumBreastfeeding(parseInt(e.nativeEvent.text) || 0)}/>
                 <Text style={styles.inputLabel}>Malades grabataires (MG)</Text>
-                <TextInput style={styles.inputField} value={props.numBedridden.toString()} />
+                <TextInput style={styles.inputField} value={props.numBedridden.toString()} onChange={(e) => props.setNumBedridden(parseInt(e.nativeEvent.text) || 0)}/>
                 <Text style={styles.inputLabel}>Refus (R)</Text>
-                <TextInput style={styles.inputField} value={props.numRefused.toString()} />
+                <TextInput style={styles.inputField} value={props.numRefused.toString()} onChange={(e) => props.setNumRefused(parseInt(e.nativeEvent.text) || 0)}/>
                 <Text style={styles.inputLabel}>Absents (A)</Text>
-                <TextInput style={styles.inputField} value={props.numAbsent.toString()} />
+                <TextInput style={styles.inputField} value={props.numAbsent.toString()} onChange={(e) => props.setNumRefused(parseInt(e.nativeEvent.text) || 0)}/>
                 <View style={{alignItems: 'center', marginTop: 10}}>
                     <Text style={styles.inputLabelBigger}>Total de personnes non traitées</Text>
                     <TextInput style={styles.inputField} value={props.totalUntreated.toString()} />

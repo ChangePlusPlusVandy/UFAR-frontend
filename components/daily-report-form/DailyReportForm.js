@@ -430,15 +430,25 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
             totalNumBlind={totalNumBlind}
             
             setNumMenLUpperLimbs = {setNumMenLUpperLimbs}
+            numMenLUpperLimbs = {numMenLUpperLimbs}
             setNumMenRUpperLimbs = {setNumMenRUpperLimbs}
+            numMenRUpperLimbs = {numMenRUpperLimbs}
             setNumWomenLUpperLimbs = {setNumWomenLUpperLimbs}
+            numWomenLUpperLimbs = {numWomenLUpperLimbs}
             setNumWomenRUpperLimbs = {setNumWomenRUpperLimbs}
+            numWomenRUpperLimbs = {numWomenRUpperLimbs}
             setNumMenLLowerMembers = {setNumMenLLowerMembers}
+            numMenLLowerMembers = {numMenLLowerMembers}
             setNumMenRLowerMembers = {setNumMenRLowerMembers}
+            numMenRLowerMembers = {numMenRLowerMembers}
             setNumWomenLLowerMembers = {setNumWomenLLowerMembers}
+            numWomenLLowerMembers = {numWomenLLowerMembers}
             setNumWomenRLowerMembers = {setNumWomenRLowerMembers}
+            numWomenRLowerMembers = {numWomenRLowerMembers}
             setNumWomenLeftBreast = {setNumWomenLeftBreast}
+            numWomenLeftBreast = {numWomenLeftBreast}
             setNumWomenRightBreast = {setNumWomenRightBreast}
+            numWomenRightBreast = {numWomenRightBreast}
             setTotalNumMenLymphedema = {setTotalNumMenLymphedema}
             setTotalNumWomenLymphedema = {setTotalNumWomenLymphedema}
             setTotalNumLymphedema = {setTotalNumLymphedema}

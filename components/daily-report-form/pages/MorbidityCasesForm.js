@@ -28,21 +28,21 @@ export default function MorbidityEstimationForm(props) {
                         <View style={styles.rowContainer}>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Supérieur Gauche</Text>
-                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumMenLUpperLimbs(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenLUpperLimbs|| '').toString()}/>
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumMenLUpperLimbs(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenLUpperLimbs|| '0').toString()}/>
                             </View>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Supérieur Droit</Text>
-                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumMenRUpperLimbs(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenRUpperLimbs|| '').toString()}/>
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumMenRUpperLimbs(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenRUpperLimbs|| '0').toString()}/>
                             </View>
                         </View>
                         <View style={styles.rowContainer}>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Inférieur Gauche</Text>
-                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumMenLLowerMembers(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenLLowerMembers|| '').toString()}/>
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumMenLLowerMembers(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenLLowerMembers|| '0').toString()}/>
                             </View>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Inférieur Droit</Text>
-                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumMenRLowerMembers(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenRLowerMembers|| '').toString()}/>
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumMenRLowerMembers(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenRLowerMembers|| '0').toString()}/>
                             </View>
                         </View>
                     </View>
@@ -51,31 +51,31 @@ export default function MorbidityEstimationForm(props) {
                         <View style={styles.rowContainer}>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Supérieur Gauche</Text>
-                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenLUpperLimbs(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenLUpperLimbs|| '').toString()}/>
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenLUpperLimbs(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenLUpperLimbs|| '0').toString()}/>
                             </View>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Supérieur Droit</Text>
-                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenRUpperLimbs(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenRUpperLimbs|| '').toString()}/>
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenRUpperLimbs(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenRUpperLimbs|| '0').toString()}/>
                             </View>
                         </View>
                         <View style={styles.rowContainer}>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Inférieur Gauche</Text>
-                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenLLowerMembers(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenLLowerMembers|| '').toString()}/>
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenLLowerMembers(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenLLowerMembers|| '0').toString()}/>
                             </View>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Inférieur Droit</Text>
-                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenRLowerMembers(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenRLowerMembers|| '').toString()}/>
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenRLowerMembers(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenRLowerMembers|| '0').toString()}/>
                             </View>
                         </View>
                         <View style={styles.rowContainer}>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Seins Gauche</Text>
-                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenLeftBreast(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenLeftBreast|| '').toString()}/>
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenLeftBreast(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenLeftBreast|| '0').toString()}/>
                             </View>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Seins Droit</Text>
-                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenRightBreast(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenRightBreast|| '').toString()}/>
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenRightBreast(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenRightBreast|| '0').toString()}/>
                             </View>
                         </View>
                     </View>
