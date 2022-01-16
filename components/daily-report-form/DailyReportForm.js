@@ -664,7 +664,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         setNumOldWomenMectAlb(0);
         setNumOldMenMectAlb(0);
         setNumYoungWomenMectAlb(0);
-        // todo: side effects
+        setNumSideEffectsReported(0);
 
         // Processing: Albendazole (alone) state
         setNumYoungMenAlbendazoleTreat(0);
@@ -679,8 +679,6 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         // Processing: Albendazole (Soil-transmitted helminthiasis)
         setNumMenAlbendazoleHelminthiasis(0);
         setNumWomenAlbendazoleHelminthiasis(0);
-
-        // todo: probably remove this
 
          // Untreated state
          setNumInfants(0);
@@ -710,7 +708,6 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     }
 
     // report object to be sent to the server
-    // todo: needs to be finished
     var report = {
         // IDENTIFICATION
         "DMM_day": DMMDay,
@@ -737,14 +734,15 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         "trachoma": trachoma,
 
         // 1.12 number of treatment cycles 
-        "treatment_circles": {
-            "onchocerciasis": numCyclesOnchocerciasis,
-            // todo: implement and correct the rest
-            "lymphatic_filariasis": 0,
-            "schistosomiasis": 0,
-            "soil_transmitted_helminthiasis": 0,
-            "trachoma": 0,
-        },
+        // todo: Embeded within 1.11: delete if not needed later
+        // "treatment_circles": {
+        //     "onchocerciasis": numCyclesOnchocerciasis,
+        //     // todo: implement and correct the rest
+        //     "lymphatic_filariasis": 0,
+        //     "schistosomiasis": 0,
+        //     "soil_transmitted_helminthiasis": 0,
+        //     "trachoma": 0,
+        // },
 
         "dcs_training_completion_date": DCTrainingCompletionDate,
         "medicines_arrival_date": medicineArrivalDate,
@@ -779,30 +777,33 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
             "men": numMenBlind,
             "women": numWomenBlind
         },
-        // TODO: state functionality not done yet
-        // lymphedema: {
-        //     men: {
-        //         upper_limbs: {
-        //             left: ,
-        //             right:
-        //         },
-        //         lower_limbs: {
-        //             left: ,
-        //             right: 
-        //         }
-        //     },
-        //     women: {
-        //         upper_limbs: {
-        //             left:,
-        //             right:
-        //         },
-        //         lower_limbs: {
-        //             left:,
-        //             right:
-        //         },
-        //         breast:
-        //     }
-        // },
+        "lymphedema": {
+            "men": {
+                "upper_limbs": {
+                    "left": numMenLUpperLimbs,
+                    "right": numMenRUpperLimbs
+                },
+                "lower_limbs": {
+                    "left": numMenLLowerMembers,
+                    "right": numMenRLowerMembers
+                }
+            },
+            "women": {
+                "upper_limbs": {
+                    "left": numWomenLUpperLimbs,
+                    "right": numWomenRUpperLimbs
+                },
+                "lower_limbs": {
+                    "left": numWomenLLowerMembers,
+                    "right": numWomenRLowerMembers
+                },
+                "breast": {
+                    "left": numWomenLeftBreast,
+                    "right": numWomenRightBreast
+                }
+            }
+        },
+
         "hydroceles": {
             "men": numMenHydroceles
         },
@@ -864,7 +865,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
                 "fiveToFourteen": numWomenAlbendazoleHelminthiasis
             }
         },
-        side_effects_num: 0, // todo: fix the side effects states (only one is needed)
+        "side_effects_num": numSideEffectsReported,
 
         // V. UNTREATED PERSONS
         "untreated_persons": {
