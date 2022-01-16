@@ -124,6 +124,24 @@ export default function DailyReportForm() {
     const [numMenBlind, setNumMenBlind] = useState(0);
     const [numWomenBlind, setNumWomenBlind] = useState(0);
     const [totalNumBlind, setTotalNumBlind] = useState(numMenBlind + numWomenBlind);
+    
+    const [numMenLUpperLimbs, setNumMenLUpperLimbs] = useState(0);
+    const [numMenRUpperLimbs, setNumMenRUpperLimbs] = useState(0);
+    const [numMenLLowerMembers, setNumMenLLowerMembers] = useState(0);
+    const [numMenRLowerMembers, setNumMenRLowerMembers] = useState(0);
+    const [numWomenLUpperLimbs, setNumWomenLUpperLimbs] = useState(0);
+    const [numWomenRUpperLimbs, setNumWomenRUpperLimbs] = useState(0);
+    const [numWomenLLowerMembers, setNumWomenLLowerMembers] = useState(0);
+    const [numWomenRLowerMembers, setNumWomenRLowerMembers] = useState(0);
+    const [numWomenLeftBreast, setNumWomenLeftBreast] = useState(0);
+    const [numWomenRightBreast, setNumWomenRightBreast] = useState(0);
+    
+    const [totalNumMenLymphedema, setTotalNumMenLymphedema] = useState(numMenLUpperLimbs + numMenRUpperLimbs + numMenLLowerMembers
+        + numMenRLowerMembers);
+    const [totalNumWomenLymphedema, setTotalNumWomenLymphedema] = useState(numWomenLUpperLimbs + numWomenRUpperLimbs + numWomenLLowerMembers
+        + numWomenRLowerMembers + numWomenLeftBreast + numWomenRightBreast);
+    const [totalNumLymphedema, setTotalNumLymphedema] = useState(totalNumMenLymphedema + totalNumWomenLymphedema);
+
     const [numMenTrichiasis, setNumMenTrichiasis] = useState(0);
     const [numWomenTrichiasis, setNumWomenTrichiasis] = useState(0);
     const [totalNumTrichiasis, setTotalNumTrichiasis] = useState(numMenTrichiasis + numWomenTrichiasis);
@@ -137,7 +155,16 @@ export default function DailyReportForm() {
         setTotalNumBlind(numMenBlind + numWomenBlind);
         setTotalNumTrichiasis(numMenTrichiasis + numWomenTrichiasis);
         setTotalNumGuineaWorm(numMenGuineaWorm + numWomenGuineaWorm);
-    }, [numMenBlind, numWomenBlind, numMenTrichiasis, numWomenTrichiasis, numMenGuineaWorm, numWomenGuineaWorm]);
+        setTotalNumMenLymphedema(numMenLUpperLimbs + numMenRUpperLimbs + numMenLLowerMembers
+            + numMenRLowerMembers);
+        setTotalNumWomenLymphedema(numWomenLUpperLimbs + numWomenRUpperLimbs + numWomenLLowerMembers
+            + numWomenRLowerMembers + numWomenLeftBreast + numWomenRightBreast);
+        setTotalNumLymphedema(numMenLUpperLimbs + numMenRUpperLimbs + numMenLLowerMembers
+                + numMenRLowerMembers + numWomenLUpperLimbs + numWomenRUpperLimbs + numWomenLLowerMembers
+                + numWomenRLowerMembers + numWomenLeftBreast + numWomenRightBreast);
+    }, [numMenBlind, numWomenBlind, numMenTrichiasis, numWomenTrichiasis, numMenGuineaWorm, numWomenGuineaWorm,
+        numMenLLowerMembers, numMenRLowerMembers, numMenLUpperLimbs, numMenRUpperLimbs, numWomenLLowerMembers, numWomenRLowerMembers,
+        numWomenRUpperLimbs, numWomenLUpperLimbs, numWomenLeftBreast, numWomenRightBreast]);
 
     // Processing: Mectizan state
     const [numYoungMenMectizan, setNumYoungMenMectizan] = useState(0);
@@ -379,6 +406,25 @@ export default function DailyReportForm() {
             setNumWomenBlind={setNumWomenBlind}
             numWomenBlind={numWomenBlind}
             totalNumBlind={totalNumBlind}
+            
+            setNumMenLUpperLimbs = {setNumMenLUpperLimbs}
+            setNumMenRUpperLimbs = {setNumMenRUpperLimbs}
+            setNumWomenLUpperLimbs = {setNumWomenLUpperLimbs}
+            setNumWomenRUpperLimbs = {setNumWomenRUpperLimbs}
+            setNumMenLLowerMembers = {setNumMenLLowerMembers}
+            setNumMenRLowerMembers = {setNumMenRLowerMembers}
+            setNumWomenLLowerMembers = {setNumWomenLLowerMembers}
+            setNumWomenRLowerMembers = {setNumWomenRLowerMembers}
+            setNumWomenLeftBreast = {setNumWomenLeftBreast}
+            setNumWomenRightBreast = {setNumWomenRightBreast}
+            setTotalNumMenLymphedema = {setTotalNumMenLymphedema}
+            setTotalNumWomenLymphedema = {setTotalNumWomenLymphedema}
+            setTotalNumLymphedema = {setTotalNumLymphedema}
+            totalNumWomenLymphedema = {totalNumWomenLymphedema}
+            totalNumMenLymphedema = {totalNumMenLymphedema}
+            totalNumLymphedema = {totalNumLymphedema}
+            
+            
             setNumMenTrichiasis={setNumMenTrichiasis}
             numMenTrichiasis={numMenTrichiasis}
             setNumWomenTrichiasis={setNumWomenTrichiasis}

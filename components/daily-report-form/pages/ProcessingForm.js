@@ -32,7 +32,7 @@ export default function ProcessingForm(props) {
             />,
         },
         {
-            title: "Mectizan and Albendazole (Lymphatic filariasis)",
+            title: "Mectizan et Albendazole (Filariose lymphatique)",
             content: 
             <ProcessingMectAlbForm
                 setNumYoungMenMectAlb={props.setNumYoungMenMectAlb}
@@ -50,7 +50,7 @@ export default function ProcessingForm(props) {
             />,
         },
         {
-            title: "Albendazole alone (Lymphatic filariasis)",
+            title: "Albendazole seul (Filariose lymphatique)",
             content:  
             <ProcessingAlbendazoleForm
                 setNumYoungMenAlbendazoleTreat={props.setNumYoungMenAlbendazoleTreat}
@@ -68,7 +68,7 @@ export default function ProcessingForm(props) {
             />,
         },
         {
-            title: "Praziquantel (Schistosomiasis)",
+            title: "Praziquantel (Schistosomiase)",
             content: 
             <ProcessingPraziquantelForm
                 setNumMenPrazi={props.setNumMenPrazi}
@@ -82,7 +82,7 @@ export default function ProcessingForm(props) {
             />,
         },
         {
-            title: "Albendazole (Soil-transmitted helminthiasis)",
+            title: "Albendazole (Géohelminthiases)",
             content: 
             <ProcessingAlbendazoleHelminthiasisForm
                 setNumMenAlbendazoleHelminthiasis={props.setNumMenAlbendazoleHelminthiasis}

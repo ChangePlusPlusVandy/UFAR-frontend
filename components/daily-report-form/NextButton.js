@@ -10,7 +10,7 @@ export default function NextButton({setActivePage}) {
             <Pressable onPress={incremenetActivePage} style={styles.button}>
                 <Icon name='arrow-right' type='feather' color='white' size={45}/>
             </Pressable>
-            <Text style={styles.text}>Next</Text>
+            <Text style={styles.text}>Suivant</Text>
         </View>
     )
 }
