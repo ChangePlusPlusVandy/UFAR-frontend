@@ -46,13 +46,6 @@ export default function ProcessingAlbendazoleForm(props) {
                     <TextInput style={styles.inputField} value={`${isFinite(props.totalCoverageAlbendazoleTreat) ? props.totalCoverageAlbendazoleTreat.toString() : " --- "}%`} />
                 </View>
             </View>
-
-            <View style={{...styles.rowContainer, justifyContent: 'center'}}>
-                <View style={styles.inputFieldContainer}>
-                    <Text style={{...styles.inputLabel, marginBottom: 0}}>Effets secondaires signalés</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedAlbendazoleTreat(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedAlbendazoleTreat || '0').toString()} />
-                </View>
-            </View>
         </View>
     );
 }

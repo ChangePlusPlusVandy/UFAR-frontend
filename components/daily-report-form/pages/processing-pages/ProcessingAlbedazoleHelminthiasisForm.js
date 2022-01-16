@@ -36,13 +36,6 @@ export default function ProcessingAlbendazoleHelminthiasisForm(props) {
                     <TextInput style={styles.inputField} value={`${isFinite(props.totalCoverageAlbendazoleHelminthiasis) ? props.totalCoverageAlbendazoleHelminthiasis.toString() : "0"}%`} />
                 </View>
             </View>
-
-            <View style={{...styles.rowContainer, justifyContent: 'center'}}>
-                <View style={styles.inputFieldContainer}>
-                    <Text style={{...styles.inputLabel, marginBottom: 0}}>Effets secondaires signalés</Text>
-                    <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReportedAlbendazoleHelminthiasis(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReportedAlbendazoleHelminthiasis || '0').toString()} />
-                </View>
-            </View>
         </View>
     );
 }

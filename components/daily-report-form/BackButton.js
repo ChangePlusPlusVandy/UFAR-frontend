@@ -10,7 +10,7 @@ export default function BackButton({setActivePage}) {
             <Pressable onPress={decremenetActivePage} style={styles.button}>
                 <Icon name='arrow-left' type='feather' color='white' size={45}/>
             </Pressable>
-            <Text style={styles.text}>Back</Text>
+            <Text style={styles.text}>Retour</Text>
         </View>
     )
 }
