@@ -20,10 +20,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
             props.removeReport(uuid.v4());
         }, 86400000);
 
-        props.resetAllStates();
-        
-
-        if (props.activePage !== null) props.setActivePage(null);
+        // navigate back to nurse landing page
+        props.setLandingPage(true);
+        // console.log("submitReport");
     }
 
     return (

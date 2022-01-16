@@ -24,7 +24,8 @@ import { connect } from 'react-redux';
 
 
 export default connect(mapStateToProps)(function DailyReportForm(props) {
-    const [activePage, setActivePage] = useState(null);
+    console.log("DailyReportForm props: ", props);
+    const [activePage, setActivePage] = useState(0);
 
 
     // Identification state
@@ -897,20 +898,8 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         },
     }
 
-
-    const openForm = () => setActivePage(0);  // Opens form by setting currently active page to 0 (first page)
-
     // Conditional rendering page navigation
     const renderPageContent = () => {
-        if (activePage === null) {
-            return (
-                <>
-                    <Pressable onPress={openForm} style={styles.newReportPressable} >
-                        <Text style={styles.newReportText}>New Report</Text>
-                    </Pressable>
-                </>
-            );
-        } else {
             return (
                 <>
                     {pages[activePage]}
@@ -919,22 +908,19 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
                         {activePage < pages.length - 1 && <NextButton setActivePage={setActivePage}/>}
                         {activePage === pages.length - 1 && 
                         <SubmitButton 
-                            activePage={activePage} 
-                            setActivePage={setActivePage}
+                            setLandingPage={props.setLandingPage}
                             report={report}
-                            resetAllStates={resetAllStates}
                         />}
                     </View>
                     <ProgressBar progress={(activePage + 1) / pages.length} />
                 </>
             );
-        }
     }
 
     
     return (
-        <View style={activePage !== null ? styles.container : {...styles.container, ...styles.containerInactive}}>
-            <CrossIcon activePage={activePage} setActivePage={setActivePage}/>
+        <View style={styles.container}>
+            <CrossIcon setLandingPage={props.setLandingPage} landingPage={props.landingPage}/>
             {renderPageContent()}
         </View>
     );
@@ -952,8 +938,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         position: 'absolute',
-        left: 0,
-        right: 0,
+        width: '100%',
         top: Platform.OS === 'android' ? StatusBar.currentHeight : 45,
         bottom: 0,
         backgroundColor: '#EC1C24',
@@ -972,25 +957,7 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         shadowOpacity: 0.3,
     },
-    containerInactive: {
-        top: null,
-        height: 67,
-        justifyContent: 'center',
-    },
-    newReportPressable: {
-        position: 'absolute',
-        height: '100%',
-        width: '100%',
-        justifyContent: 'center',
-    },
-    newReportText: {
-        textAlign: 'center',
-        color: 'white',
-        fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Helvetica Neue',
-        fontWeight: 'bold',
-        fontSize: 23,
-        lineHeight: 28,
-    },
+   
     buttonsContainer: {
         position: 'absolute',
         width: '100%',

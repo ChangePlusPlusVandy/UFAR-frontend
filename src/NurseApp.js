@@ -5,6 +5,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import GreetingHeader from '../components/nurse-landing-page/GreetingHeader';
 import DashboardSummary from '../components/nurse-landing-page/DashboardSummary';
 import DailyReportForm from '../components/daily-report-form/DailyReportForm';
+import Bridge from '../components/daily-report-form/Bridge';
 import RecentsList from '../components/nurse-landing-page/RecentsList';
 import NetworkBar from '../components/nurse-landing-page/NetworkBar';
 
@@ -16,7 +17,7 @@ export default function NurseApp(props){
         <GreetingHeader navigation={props.navigation}/>
         {/* <DashboardSummary /> */}
         <RecentsList/>
-        <DailyReportForm/>
+        <Bridge/>
     </View>
   );
 };
