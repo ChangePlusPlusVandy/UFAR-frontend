@@ -6,26 +6,26 @@ export default function DrugManagementPraziquantelForm(props) {
         <View>
             <View style={styles.rowContainer}>
                 <View style={styles.inputFieldContainer}>
-                    <Text style={styles.inputLabel}>Received</Text>
+                    <Text style={styles.inputLabel}>Reçue</Text>
                     <TextInput style={styles.inputField} onChange={(e) => props.setPraziquantelReceived(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.praziquantelReceived || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
-                    <Text style={styles.inputLabel}>Used</Text>
+                    <Text style={styles.inputLabel}>Utilisée</Text>
                     <TextInput style={styles.inputField} onChange={(e) => props.setPraziquantelUsed(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.praziquantelUsed || '0').toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
-                    <Text style={styles.inputLabel}>Lost</Text>
+                    <Text style={styles.inputLabel}>Perdue</Text>
                     <TextInput style={styles.inputField} onChange={(e) => props.setPraziquantelLost(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.praziquantelLost || '0').toString()} />
                 </View>
             </View>
 
             <View style={styles.rowContainer}>
                 <View style={styles.inputFieldContainer}>
-                    <Text style={{...styles.inputLabel, marginBottom: 0}}>Remaining</Text>
+                    <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Restante</Text>
                     <TextInput style={styles.inputFieldBigger} value={props.praziquantelRemaining.toString()} />
                 </View>
                 <View style={styles.inputFieldContainer}>
-                    <Text style={{...styles.inputLabel, marginBottom: 0}}>Returned to the C.S.</Text>
+                    <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Rendue au C.S.</Text>
                     <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setPraziquantelReturned(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.praziquantelReturned || '0').toString()} />
                 </View>
             </View>

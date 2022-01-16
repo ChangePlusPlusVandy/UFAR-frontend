@@ -10,7 +10,7 @@ import DrugManagementPraziquantelForm from './drug-management-pages/DrugManageme
 export default function DrugManagementForm(props) {
     const pages = [
         {
-            title: "Ivermectin (Oncho/FL)",
+            title: "Ivermectine (Oncho/FL)",
             content: 
             <DrugManagementIvermectinForm 
                 ivermectinReceived={props.ivermectinReceived}
