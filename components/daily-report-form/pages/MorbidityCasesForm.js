@@ -23,74 +23,74 @@ export default function MorbidityEstimationForm(props) {
                 </View>
                 <Text style={styles.inputLabelBigger}>Lymphœdème</Text>
                 <View>
-                    <Text style={styles.inputLabel}>Hommes</Text>
+                    <Text style={styles.inputLabelBigger}>Hommes</Text>
                     <View>
                         <View style={styles.rowContainer}>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Supérieur Gauche</Text>
-                                <TextInput style={styles.inputFieldBigger} />
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumMenLUpperLimbs(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenLUpperLimbs|| '0').toString()}/>
                             </View>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Supérieur Droit</Text>
-                                <TextInput style={styles.inputFieldBigger} />
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumMenRUpperLimbs(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenRUpperLimbs|| '0').toString()}/>
                             </View>
                         </View>
                         <View style={styles.rowContainer}>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Inférieur Gauche</Text>
-                                <TextInput style={styles.inputFieldBigger} />
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumMenLLowerMembers(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenLLowerMembers|| '0').toString()}/>
                             </View>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Inférieur Droit</Text>
-                                <TextInput style={styles.inputFieldBigger} />
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumMenRLowerMembers(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenRLowerMembers|| '0').toString()}/>
                             </View>
                         </View>
                     </View>
-                    <Text style={{...styles.inputLabel, marginBottom: 5}}>Femmes</Text>
+                    <Text style={{...styles.inputLabelBigger, marginBottom: 5}}>Femmes</Text>
                     <View>
                         <View style={styles.rowContainer}>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Supérieur Gauche</Text>
-                                <TextInput style={styles.inputFieldBigger} />
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenLUpperLimbs(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenLUpperLimbs|| '0').toString()}/>
                             </View>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Supérieur Droit</Text>
-                                <TextInput style={styles.inputFieldBigger} />
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenRUpperLimbs(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenRUpperLimbs|| '0').toString()}/>
                             </View>
                         </View>
                         <View style={styles.rowContainer}>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Inférieur Gauche</Text>
-                                <TextInput style={styles.inputFieldBigger} />
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenLLowerMembers(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenLLowerMembers|| '0').toString()}/>
                             </View>
                             <View style={styles.inputFieldContainer}>
                                 <Text style={styles.inputLabel}>Membre Inférieur Droit</Text>
-                                <TextInput style={styles.inputFieldBigger} />
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenRLowerMembers(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenRLowerMembers|| '0').toString()}/>
                             </View>
                         </View>
                         <View style={styles.rowContainer}>
                             <View style={styles.inputFieldContainer}>
-                                <Text style={styles.inputLabel}>Left Breast</Text>
-                                <TextInput style={styles.inputFieldBigger} />
+                                <Text style={styles.inputLabel}>Seins Gauche</Text>
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenLeftBreast(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenLeftBreast|| '0').toString()}/>
                             </View>
                             <View style={styles.inputFieldContainer}>
-                                <Text style={styles.inputLabel}>Right Breast</Text>
-                                <TextInput style={styles.inputFieldBigger} />
+                                <Text style={styles.inputLabel}>Seins Droit</Text>
+                                <TextInput style={styles.inputFieldBigger} onChange={(e) => props.setNumWomenRightBreast(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenRightBreast|| '0').toString()}/>
                             </View>
                         </View>
                     </View>
                     <View style={styles.rowContainer}>
                         <View style={styles.inputFieldContainer}>
                             <Text style={styles.inputLabel}># des hommes</Text>
-                            <TextInput style={styles.inputField} onChange={(e) => props.setNumMenBlind(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numMenBlind || '0').toString()} />
+                            <TextInput style={styles.inputField} value={props.totalNumMenLymphedema.toString()} />
                         </View>
                         <View style={styles.inputFieldContainer}>
                             <Text style={styles.inputLabel}># des femmes</Text>
-                            <TextInput style={styles.inputField} onChange={(e) => props.setNumWomenBlind(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numWomenBlind || '0').toString()} />
+                            <TextInput style={styles.inputField} value={props.totalNumWomenLymphedema.toString()} />
                         </View>
                         <View style={styles.inputFieldContainer}>
                             <Text style={styles.inputLabel}>Total des personnes</Text>
-                            <TextInput style={styles.inputField} value={props.totalNumBlind.toString()} />
+                            <TextInput style={styles.inputField} value={props.totalNumLymphedema.toString()} />
                         </View>
                     </View>
                 </View>
@@ -160,14 +160,14 @@ const styles = StyleSheet.create({
     },
     inputLabel: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
-        fontSize: 11,
+        fontSize: 12,
         lineHeight: 13,
         color: 'white',
         marginTop: 3,
     },
     inputLabelBigger: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
-        fontSize: 17,
+        fontSize: 15,
         lineHeight: 20,
         color: 'white',
         marginVertical: 10,

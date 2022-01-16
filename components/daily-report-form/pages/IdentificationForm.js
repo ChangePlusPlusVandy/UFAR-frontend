@@ -121,7 +121,7 @@ export default function IdentificationForm(props) {
                         Icon={() => <Chevron size={1.5} color='#9D9D9D' />}
                     />
                 </View>
-                <View>
+                <View style={styles.RNPickerSelectContainer}>
                     <RNPickerSelect
                         useNativeAndroidPickerStyle={false}
                         style={{inputAndroid: styles.RNPickerSelectInput, iconContainer: styles.RNPickerSelectIconContainer, placeholder: styles.placeholder}}
@@ -155,6 +155,7 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         marginHorizontal: 34,
+        // justifyContent: "space-around",
     },
     inputField: {
         marginVertical: 5,

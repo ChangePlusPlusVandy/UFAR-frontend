@@ -139,6 +139,24 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     const [numMenBlind, setNumMenBlind] = useState(0);
     const [numWomenBlind, setNumWomenBlind] = useState(0);
     const [totalNumBlind, setTotalNumBlind] = useState(numMenBlind + numWomenBlind);
+    
+    const [numMenLUpperLimbs, setNumMenLUpperLimbs] = useState(0);
+    const [numMenRUpperLimbs, setNumMenRUpperLimbs] = useState(0);
+    const [numMenLLowerMembers, setNumMenLLowerMembers] = useState(0);
+    const [numMenRLowerMembers, setNumMenRLowerMembers] = useState(0);
+    const [numWomenLUpperLimbs, setNumWomenLUpperLimbs] = useState(0);
+    const [numWomenRUpperLimbs, setNumWomenRUpperLimbs] = useState(0);
+    const [numWomenLLowerMembers, setNumWomenLLowerMembers] = useState(0);
+    const [numWomenRLowerMembers, setNumWomenRLowerMembers] = useState(0);
+    const [numWomenLeftBreast, setNumWomenLeftBreast] = useState(0);
+    const [numWomenRightBreast, setNumWomenRightBreast] = useState(0);
+    
+    const [totalNumMenLymphedema, setTotalNumMenLymphedema] = useState(numMenLUpperLimbs + numMenRUpperLimbs + numMenLLowerMembers
+        + numMenRLowerMembers);
+    const [totalNumWomenLymphedema, setTotalNumWomenLymphedema] = useState(numWomenLUpperLimbs + numWomenRUpperLimbs + numWomenLLowerMembers
+        + numWomenRLowerMembers + numWomenLeftBreast + numWomenRightBreast);
+    const [totalNumLymphedema, setTotalNumLymphedema] = useState(totalNumMenLymphedema + totalNumWomenLymphedema);
+
     const [numMenTrichiasis, setNumMenTrichiasis] = useState(0);
     const [numWomenTrichiasis, setNumWomenTrichiasis] = useState(0);
     const [totalNumTrichiasis, setTotalNumTrichiasis] = useState(numMenTrichiasis + numWomenTrichiasis);
@@ -152,7 +170,16 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         setTotalNumBlind(numMenBlind + numWomenBlind);
         setTotalNumTrichiasis(numMenTrichiasis + numWomenTrichiasis);
         setTotalNumGuineaWorm(numMenGuineaWorm + numWomenGuineaWorm);
-    }, [numMenBlind, numWomenBlind, numMenTrichiasis, numWomenTrichiasis, numMenGuineaWorm, numWomenGuineaWorm]);
+        setTotalNumMenLymphedema(numMenLUpperLimbs + numMenRUpperLimbs + numMenLLowerMembers
+            + numMenRLowerMembers);
+        setTotalNumWomenLymphedema(numWomenLUpperLimbs + numWomenRUpperLimbs + numWomenLLowerMembers
+            + numWomenRLowerMembers + numWomenLeftBreast + numWomenRightBreast);
+        setTotalNumLymphedema(numMenLUpperLimbs + numMenRUpperLimbs + numMenLLowerMembers
+                + numMenRLowerMembers + numWomenLUpperLimbs + numWomenRUpperLimbs + numWomenLLowerMembers
+                + numWomenRLowerMembers + numWomenLeftBreast + numWomenRightBreast);
+    }, [numMenBlind, numWomenBlind, numMenTrichiasis, numWomenTrichiasis, numMenGuineaWorm, numWomenGuineaWorm,
+        numMenLLowerMembers, numMenRLowerMembers, numMenLUpperLimbs, numMenRUpperLimbs, numWomenLLowerMembers, numWomenRLowerMembers,
+        numWomenRUpperLimbs, numWomenLUpperLimbs, numWomenLeftBreast, numWomenRightBreast]);
 
     // Processing: Mectizan state
     const [numYoungMenMectizan, setNumYoungMenMectizan] = useState(0);
@@ -163,7 +190,6 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     const [totalNumWomenMectizan, setTotalWomenMectizan] = useState(numYoungWomenMectizan + numOldWomenMectizan);
     const [totalNumMectizan, setTotalNumMectizan] = useState(totalNumMenMectizan + totalNumWomenMectizan);
     const [totalCoverageMectizan, setTotalCoverageMectizan] = useState((totalNumMectizan * 100) / totalNumPersons);
-    const [numSideEffectsReportedMectizan, setNumSideEffectsReportedMectizan] = useState(0);
 
     // Update totals
     useEffect(() => {
@@ -182,7 +208,6 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     const [totalNumWomenMectAlb, setTotalWomenMectAlb] = useState(numYoungWomenMectAlb + numOldWomenMectAlb);
     const [totalNumMectAlb, setTotalNumMectAlb] = useState(totalNumMenMectAlb + totalNumWomenMectAlb);
     const [totalCoverageMectAlb, setTotalCoverageMectAlb] = useState((totalNumMectAlb * 100) / totalNumPersons);
-    const [numSideEffectsReportedMectAlb, setNumSideEffectsReportedMectAlb] = useState(0);
 
     // Update totals
     useEffect(() => {
@@ -201,7 +226,6 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     const [totalNumWomenAlbendazoleTreat, setTotalWomenAlbendazoleTreat] = useState(numYoungWomenAlbendazoleTreat + numOldWomenAlbendazoleTreat);
     const [totalNumAlbendazoleTreat, setTotalNumAlbendazoleTreat] = useState(totalNumMenAlbendazoleTreat + totalNumWomenAlbendazoleTreat);
     const [totalCoverageAlbendazoleTreat, setTotalCoverageAlbendazoleTreat] = useState((totalNumAlbendazoleTreat * 100) / totalNumPersons);
-    const [numSideEffectsReportedAlbendazoleTreat, setNumSideEffectsReportedAlbendazoleTreat] = useState(0);
 
     // Update totals
     useEffect(() => {
@@ -216,7 +240,6 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     const [numWomenPrazi, setNumWomenPrazi] = useState(0);
     const [totalNumPrazi, setTotalNumPrazi] = useState(numMenPrazi + numWomenPrazi);
     const [totalCoveragePrazi, setTotalCoveragePrazi] = useState((totalNumPrazi * 100) / totalNumPersons);
-    const [numSideEffectsReportedPrazi, setNumSideEffectsReportedPrazi] = useState(0);
 
     // Update total
     useEffect(() => {
@@ -229,13 +252,15 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     const [numWomenAlbendazoleHelminthiasis, setNumWomenAlbendazoleHelminthiasis] = useState(0);
     const [totalNumAlbendazoleHelminthiasis, setTotalNumAlbendazoleHelminthiasis] = useState(numMenAlbendazoleHelminthiasis + numWomenAlbendazoleHelminthiasis);
     const [totalCoverageAlbendazoleHelminthiasis, setTotalCoverageAlbendazoleHelminthiasis] = useState((totalNumAlbendazoleHelminthiasis * 100) / totalNumPersons);
-    const [numSideEffectsReportedAlbendazoleHelminthiasis, setNumSideEffectsReportedAlbendazoleHelminthiasis] = useState(0);
 
     // Update total
     useEffect(() => {
         setTotalNumAlbendazoleHelminthiasis(numMenAlbendazoleHelminthiasis + numWomenAlbendazoleHelminthiasis);
         setTotalCoverageAlbendazoleHelminthiasis((totalNumAlbendazoleHelminthiasis * 100) / totalNumPersons);
     }, [numMenAlbendazoleHelminthiasis, numWomenAlbendazoleHelminthiasis, totalNumAlbendazoleHelminthiasis, totalNumPersons]);
+
+    // Side effects state
+    const [numSideEffectsReported, setNumSideEffectsReported] = useState(0);
     
      // Untreated state
      const [numInfants, setNumInfants] = useState(0);
@@ -404,6 +429,35 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
             setNumWomenBlind={setNumWomenBlind}
             numWomenBlind={numWomenBlind}
             totalNumBlind={totalNumBlind}
+            
+            setNumMenLUpperLimbs = {setNumMenLUpperLimbs}
+            numMenLUpperLimbs = {numMenLUpperLimbs}
+            setNumMenRUpperLimbs = {setNumMenRUpperLimbs}
+            numMenRUpperLimbs = {numMenRUpperLimbs}
+            setNumWomenLUpperLimbs = {setNumWomenLUpperLimbs}
+            numWomenLUpperLimbs = {numWomenLUpperLimbs}
+            setNumWomenRUpperLimbs = {setNumWomenRUpperLimbs}
+            numWomenRUpperLimbs = {numWomenRUpperLimbs}
+            setNumMenLLowerMembers = {setNumMenLLowerMembers}
+            numMenLLowerMembers = {numMenLLowerMembers}
+            setNumMenRLowerMembers = {setNumMenRLowerMembers}
+            numMenRLowerMembers = {numMenRLowerMembers}
+            setNumWomenLLowerMembers = {setNumWomenLLowerMembers}
+            numWomenLLowerMembers = {numWomenLLowerMembers}
+            setNumWomenRLowerMembers = {setNumWomenRLowerMembers}
+            numWomenRLowerMembers = {numWomenRLowerMembers}
+            setNumWomenLeftBreast = {setNumWomenLeftBreast}
+            numWomenLeftBreast = {numWomenLeftBreast}
+            setNumWomenRightBreast = {setNumWomenRightBreast}
+            numWomenRightBreast = {numWomenRightBreast}
+            setTotalNumMenLymphedema = {setTotalNumMenLymphedema}
+            setTotalNumWomenLymphedema = {setTotalNumWomenLymphedema}
+            setTotalNumLymphedema = {setTotalNumLymphedema}
+            totalNumWomenLymphedema = {totalNumWomenLymphedema}
+            totalNumMenLymphedema = {totalNumMenLymphedema}
+            totalNumLymphedema = {totalNumLymphedema}
+            
+            
             setNumMenTrichiasis={setNumMenTrichiasis}
             numMenTrichiasis={numMenTrichiasis}
             setNumWomenTrichiasis={setNumWomenTrichiasis}
@@ -423,7 +477,6 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
             setNumOldMenMectizan={setNumOldMenMectizan}
             setNumYoungWomenMectizan={setNumYoungWomenMectizan}
             setNumOldWomenMectizan={setNumOldWomenMectizan}
-            setNumSideEffectsReportedMectizan={setNumSideEffectsReportedMectizan}
             numYoungMenMectizan={numYoungMenMectizan}
             numYoungWomenMectizan={numYoungWomenMectizan}
             numOldMenMectizan={numOldMenMectizan}
@@ -432,14 +485,12 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
             totalNumMenMectizan={totalNumMenMectizan}
             totalNumMectizan={totalNumMectizan}
             totalCoverageMectizan={totalCoverageMectizan}
-            numSideEffectsReportedMectizan={numSideEffectsReportedMectizan}
 
             // Mectizan and Albendazole
             setNumYoungMenMectAlb={setNumYoungMenMectAlb}
             setNumOldMenMectAlb={setNumOldMenMectAlb}
             setNumYoungWomenMectAlb={setNumYoungWomenMectAlb}
             setNumOldWomenMectAlb={setNumOldWomenMectAlb}
-            setNumSideEffectsReportedMectAlb={setNumSideEffectsReportedMectAlb}
             numYoungMenMectAlb={numYoungMenMectAlb}
             numYoungWomenMectAlb={numYoungWomenMectAlb}
             numOldMenMectAlb={numOldMenMectAlb}
@@ -448,14 +499,12 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
             totalNumMenMectAlb={totalNumMenMectAlb}
             totalNumMectAlb={totalNumMectAlb}
             totalCoverageMectAlb={totalCoverageMectAlb}
-            numSideEffectsReportedMectAlb={numSideEffectsReportedMectAlb}
 
             // Albendazole (alone)
             setNumYoungMenAlbendazoleTreat={setNumYoungMenAlbendazoleTreat}
             setNumOldMenAlbendazoleTreat={setNumOldMenAlbendazoleTreat}
             setNumYoungWomenAlbendazoleTreat={setNumYoungWomenAlbendazoleTreat}
             setNumOldWomenAlbendazoleTreat={setNumOldWomenAlbendazoleTreat}
-            setNumSideEffectsReportedAlbendazoleTreat={setNumSideEffectsReportedAlbendazoleTreat}
             numYoungMenAlbendazoleTreat={numYoungMenAlbendazoleTreat}
             numYoungWomenAlbendazoleTreat={numYoungWomenAlbendazoleTreat}
             numOldMenAlbendazoleTreat={numOldMenAlbendazoleTreat}
@@ -464,7 +513,6 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
             totalNumMenAlbendazoleTreat={totalNumMenAlbendazoleTreat}
             totalNumAlbendazoleTreat={totalNumAlbendazoleTreat}
             totalCoverageAlbendazoleTreat={totalCoverageAlbendazoleTreat}
-            numSideEffectsReportedAlbendazoleTreat={numSideEffectsReportedAlbendazoleTreat}
             
             // Praziquantel
             setNumMenPrazi={setNumMenPrazi}
@@ -475,8 +523,6 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
             totalNumPrazi={totalNumPrazi}
             setTotalCoveragePrazi={setTotalCoveragePrazi}
             totalCoveragePrazi={totalCoveragePrazi}
-            setNumSideEffectsReportedPrazi={setNumSideEffectsReportedPrazi}
-            numSideEffectsReportedPrazi={numSideEffectsReportedPrazi}
 
             // Albendazole (Soil-transmitted helminthiasis)
             setNumMenAlbendazoleHelminthiasis={setNumMenAlbendazoleHelminthiasis}
@@ -487,8 +533,10 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
             totalNumAlbendazoleHelminthiasis={totalNumAlbendazoleHelminthiasis}
             setTotalCoverageAlbendazoleHelminthiasis={setTotalCoverageAlbendazoleHelminthiasis}
             totalCoverageAlbendazoleHelminthiasis={totalCoverageAlbendazoleHelminthiasis}
-            setNumSideEffectsReportedAlbendazoleHelminthiasis={setNumSideEffectsReportedAlbendazoleHelminthiasis}
-            numSideEffectsReportedAlbendazoleHelminthiasis={numSideEffectsReportedAlbendazoleHelminthiasis}
+
+            // Side effects
+            setNumSideEffectsReported={setNumSideEffectsReported}
+            numSideEffectsReported={numSideEffectsReported}
         />,
         <UntreatedForm
             setNumInfants={setNumInfants}
@@ -611,33 +659,29 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         setNumOldWomenMectizan(0);
         setNumOldMenMectizan(0);
         setNumYoungWomenMectizan(0);
-        setNumSideEffectsReportedMectizan(0);
 
         // Processing: Mectizan and Albendazole state
         setNumYoungMenMectAlb(0);
         setNumOldWomenMectAlb(0);
         setNumOldMenMectAlb(0);
         setNumYoungWomenMectAlb(0);
-        setNumSideEffectsReportedMectAlb(0);
+        // todo: side effects
 
         // Processing: Albendazole (alone) state
         setNumYoungMenAlbendazoleTreat(0);
         setNumOldWomenAlbendazoleTreat(0);
         setNumOldMenAlbendazoleTreat(0);
         setNumYoungWomenAlbendazoleTreat(0);
-        setNumSideEffectsReportedAlbendazoleTreat(0);
  
         // Processing: Praziquantel state
         setNumMenPrazi(0);
         setNumWomenPrazi(0);
-        setNumSideEffectsReportedPrazi(0);
 
         // Processing: Albendazole (Soil-transmitted helminthiasis)
         setNumMenAlbendazoleHelminthiasis(0);
         setNumWomenAlbendazoleHelminthiasis(0);
 
         // todo: probably remove this
-        // const [numSideEffectsReportedAlbendazoleHelminthiasis, setNumSideEffectsReportedAlbendazoleHelminthiasis] = useState(0);
 
          // Untreated state
          setNumInfants(0);

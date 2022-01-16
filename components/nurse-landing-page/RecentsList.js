@@ -13,8 +13,6 @@ export default connect(mapStateToProps)(function RecentsList(props){
         return `${dateString.getMonth()}/${dateString.getDay()}/${dateString.getFullYear()}`;
     }
 
-    console.log("recentslist props", props);
-
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
             <Text style={styles.timelist}>{ convertDateToString(props.reports[item].report.date)}</Text>
@@ -22,8 +20,7 @@ export default connect(mapStateToProps)(function RecentsList(props){
             <TouchableOpacity style={styles.edit}>
                 {props.reports[item].isSubmitted ? 
                 <Icon name="check" color = 'green' size = {25} /> :
-                <Icon name="close" color = 'green' size = {25} />}
-                
+                <Icon name="time-slot" color = 'green' size = {20} type="entypo" />}                
             </TouchableOpacity>
         </View>
     );
@@ -37,7 +34,6 @@ export default connect(mapStateToProps)(function RecentsList(props){
 });
 
 function mapStateToProps(state) {
-    console.log("recentslist mapstatetoprops", state);
     return {
       name: state.reducer.name,
       reports: state.reducer.reports,

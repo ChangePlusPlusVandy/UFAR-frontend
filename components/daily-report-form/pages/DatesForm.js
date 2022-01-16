@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     },
     inputLabel: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
-        fontSize: 11,
+        fontSize: 12,
         lineHeight: 13,
         color: 'white',
     },

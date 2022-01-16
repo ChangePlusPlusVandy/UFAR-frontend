@@ -1,16 +1,13 @@
 import React from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {Icon} from 'react-native-elements';
+import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 
-export default function BackButton({setActivePage}) {
-    const decremenetActivePage = () => setActivePage((prev) => prev - 1);
-
+export default function AdminButton(props) {
     return (
         <View style={styles.container}>
-            <Pressable onPress={decremenetActivePage} style={styles.button}>
-                <Icon name='arrow-left' type='feather' color='white' size={45}/>
-            </Pressable>
-            <Text style={styles.text}>Retour</Text>
+            <TouchableOpacity onPress={() => props.navigation.navigate('AdminApp')} style={styles.button}>
+                {/* INSERT ICON */}
+            </TouchableOpacity>
+            <Text style={styles.text}>Admin</Text>
         </View>
     )
 }
@@ -18,10 +15,9 @@ export default function BackButton({setActivePage}) {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        // bottom: 0,
     },
     button: {
-        backgroundColor: '#CCCDCF',
+        backgroundColor: '#8AC566',
         height: 54,
         width: 54,
         borderRadius: 27,
