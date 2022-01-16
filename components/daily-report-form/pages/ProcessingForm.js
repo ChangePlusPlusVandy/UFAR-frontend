@@ -19,7 +19,6 @@ export default function ProcessingForm(props) {
                 setNumOldMenMectizan={props.setNumOldMenMectizan}
                 setNumYoungWomenMectizan={props.setNumYoungWomenMectizan}
                 setNumOldWomenMectizan={props.setNumOldWomenMectizan}
-                setNumSideEffectsReportedMectizan={props.setNumSideEffectsReportedMectizan}
                 numYoungMenMectizan={props.numYoungMenMectizan}
                 numYoungWomenMectizan={props.numYoungWomenMectizan}
                 numOldMenMectizan={props.numOldMenMectizan}

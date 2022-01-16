@@ -658,33 +658,29 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         setNumOldWomenMectizan(0);
         setNumOldMenMectizan(0);
         setNumYoungWomenMectizan(0);
-        setNumSideEffectsReportedMectizan(0);
 
         // Processing: Mectizan and Albendazole state
         setNumYoungMenMectAlb(0);
         setNumOldWomenMectAlb(0);
         setNumOldMenMectAlb(0);
         setNumYoungWomenMectAlb(0);
-        setNumSideEffectsReportedMectAlb(0);
+        // todo: side effects
 
         // Processing: Albendazole (alone) state
         setNumYoungMenAlbendazoleTreat(0);
         setNumOldWomenAlbendazoleTreat(0);
         setNumOldMenAlbendazoleTreat(0);
         setNumYoungWomenAlbendazoleTreat(0);
-        setNumSideEffectsReportedAlbendazoleTreat(0);
  
         // Processing: Praziquantel state
         setNumMenPrazi(0);
         setNumWomenPrazi(0);
-        setNumSideEffectsReportedPrazi(0);
 
         // Processing: Albendazole (Soil-transmitted helminthiasis)
         setNumMenAlbendazoleHelminthiasis(0);
         setNumWomenAlbendazoleHelminthiasis(0);
 
         // todo: probably remove this
-        // const [numSideEffectsReportedAlbendazoleHelminthiasis, setNumSideEffectsReportedAlbendazoleHelminthiasis] = useState(0);
 
          // Untreated state
          setNumInfants(0);
