@@ -24,9 +24,10 @@ import { connect } from 'react-redux';
 
 
 export default connect(mapStateToProps)(function DailyReportForm(props) {
-    console.log("DailyReportForm props: ", props);
-    const [activePage, setActivePage] = useState(0);
 
+    const [edit, setEdit] = useState(props.edit);
+
+    const [activePage, setActivePage] = useState(0);
 
     // Identification state
     const [DMMDay, setDMMDay] = useState("");
@@ -593,9 +594,9 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     ];
 
     // resets all states to default values
-    const resetAllStates = () => {
-        setDMMDay("");
-        setRegisteredNurse("");
+    const resetAllStates = (report) => {
+        setDMMDay(report.DMMDay);
+        setRegisteredNurse(report.nurse);
         
         // Treatment Information state
         setOnchocerciasis(false);
@@ -900,6 +901,13 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
 
     // Conditional rendering page navigation
     const renderPageContent = () => {
+
+            // if there's a report to edit, reset all states
+            if (edit){
+                setEdit(false);
+                resetAllStates(props.currentReport);
+            }
+
             return (
                 <>
                     {pages[activePage]}
@@ -910,13 +918,13 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
                         <SubmitButton 
                             setLandingPage={props.setLandingPage}
                             report={report}
+                            edit={props.edit}
                         />}
                     </View>
                     <ProgressBar progress={(activePage + 1) / pages.length} />
                 </>
             );
     }
-
     
     return (
         <View style={styles.container}>

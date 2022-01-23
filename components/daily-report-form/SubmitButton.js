@@ -25,6 +25,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
         // console.log("submitReport");
     }
 
+    const submitEditReport = () => {
+        // todo: edit report submit functionality
+        console.log("edit report submitted");
+
+        // navigate back to validation pages
+        props.setLandingPage(true);
+    }
+
     return (
         <View>
             <View style={styles.centeredView}>
@@ -43,7 +51,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                             <Pressable
                             style={styles.button}
                             onPress={() => {
-                                submitReport();
+                                props.edit? submitEditReport():submitReport();
                                 setModalVisible(!modalVisible)
                             }}
                             >
@@ -56,7 +64,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
             <View style={styles.container}>
                 <Pressable onPress={ () => {
                     if (props.isConnected) {
-                        submitReport();
+                        props.edit? submitEditReport():submitReport();
                     } else {
                         setModalVisible(true);
                     }

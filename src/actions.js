@@ -46,3 +46,43 @@ export const addReport = (report, id) => {
     };    
     return thunk;
 };
+
+
+export const editReport = (report, id) => {
+    async function thunk(dispatch){
+        // submit the report to the server
+        try {
+            const response = await fetch('http://10.76.170.134:3000/validation/reports/validate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(report),
+            })
+            if (response.status == 200){
+                //todo:
+                // dispatch({type: 'EDIT_REPORT', report: report, id: id})
+            }  else {
+                // todo: 
+                // if there's an error, call the add function which marks it is not submitted
+                // console.log("error while submitting report1: ", err);
+                // dispatch({type: 'EDIT_REPORT', report: report, id: id})
+            }
+        } catch (err) {
+            // todo: 
+            // if there's an error, call the add function which marks it is not submitted
+            // console.log("error while submitting report2: ", err);
+            // dispatch({type: 'ADD_REPORT', report: report, id: id})
+        }
+    }
+
+    thunk.interceptInOffline = true;
+
+    thunk.meta = {
+        retry: true,
+        name: `editReport`,
+        args: [report, id],
+    };    
+    return thunk;
+}

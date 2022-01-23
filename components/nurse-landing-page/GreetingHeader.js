@@ -4,6 +4,8 @@ import {StyleSheet, Text, View} from 'react-native';
 import { connect } from 'react-redux';
 
 export default connect(mapStateToProps)(function GreetingHeader(props) {
+    console.log("GreetingHeader props: ", props.name);
+
     return (
         <View style = {styles.over}>
             <Hamburger navigation={props.navigation}/>
@@ -16,6 +18,8 @@ export default connect(mapStateToProps)(function GreetingHeader(props) {
 });
 
 function mapStateToProps(state) {
+    console.log("mapStateToProps: ", state);
+
     return {
       name: state.reducer.name,
       reports: state.reducer.reports,
