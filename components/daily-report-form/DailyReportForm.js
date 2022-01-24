@@ -595,7 +595,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
 
     // resets all states to default values
     const resetAllStates = (report) => {
-        setDMMDay(report.DMMDay);
+        setDMMDay(report.DMM_day);
         setRegisteredNurse(report.nurse);
         
         // Treatment Information state
@@ -919,6 +919,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
                             setLandingPage={props.setLandingPage}
                             report={report}
                             edit={props.edit}
+                            currentReportId={props.currentReport.id}
                         />}
                     </View>
                     <ProgressBar progress={(activePage + 1) / pages.length} />

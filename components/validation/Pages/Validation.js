@@ -5,41 +5,27 @@ import GreetingHeader from '../GreetingHeader';
 import ToBeValidated from '../ToBeValidated';
 import RecentlyValidated from '../RecentlyValidated';
 
+import { connect } from 'react-redux';
+import { getReports } from '../../../src/actions';
 
 
-export default function Validation (props) {
+
+export default connect(mapStateToProps, mapDispatchToProps)(function Validation (props) {
     const [activePage, setActivePage] = React.useState(0);
 
-    // fixme: for testing
-    const REPORT = [
-        {
-            id: "3ac68afc-c605-8d-a4f8-fbd91aa97f63",
-            date: "12/12",
-            dayNumber: "Jour 1",
-            validated: false,
-            DMMDay: "1",
-            nurse: "Nurse 1",
-        },
-        {
-            id: "3ac68afc-c605-8d-a4f8-fbd91aa963",
-            date: "12/12",
-            dayNumber: "Jour 2",
-            validated: true,
-        },
-        {
-            id: "3ac68afc-c605-8d-f8-fbd91aa97f63",
-            date: "12/12",
-            dayNumber: "Jour 3",
-            validated: true,
-        },
-    ];
+    // if there's no non validated reports remaining, we make a call to the backend to get new data
+    if( props.validationReports.filter(report => report.validated === false).length === 0 ){
+
+        // todo: replace with a real id and figure out a way to get it here. 
+        props.getReports(1);
+    }
 
     const page = [
         <ToBeValidated setActivePage={setActivePage} 
-            reports={REPORT.filter(report => report.validated === false)} 
+            reports={props.validationReports.filter(report => report.is_validated === false)} 
         />,
         <RecentlyValidated setActivePage={setActivePage}
-            reports={REPORT.filter(report => report.validated === true)}
+            reports={props.validationReports.filter(report => report.is_validated === true)}
         />
     ]
 
@@ -50,6 +36,17 @@ export default function Validation (props) {
             {page[activePage]}
         </View>
     );
+});
+
+function mapStateToProps(state) {
+    return {
+        name: state.reducer.name,
+        validationReports: state.reducer.validationReports,
+    };
+}
+
+function mapDispatchToProps(dispatch){
+    getReports = (healthZoneId) => dispatch(getReports(healthZoneId));
 }
 
 const styles = StyleSheet.create({

@@ -14,11 +14,14 @@ import { offlineActionTypes } from 'react-native-offline';
 import { MenuProvider } from 'react-native-popup-menu';
 
 
-import { addReport } from './src/actions.js';
+import { addReport, getReports, validateReport } from './src/actions.js';
 import { comparisonFn } from './src/utils.js';
+
 
 const actions = {
     addReport,
+    getReports,
+    validateReport
 };
 
 // @credit: https://www.npmjs.com/package/react-native-offline#offline-queue
@@ -64,7 +67,7 @@ const networkTransform = createTransform(
 const initialState = {
   name: 'Jean Deport', // todo: get this from the server
   reports: {}, // holds report objects for the day
-  // todo: add more state for unchanging data - to be done later
+  validationReports: [], // holds report objects for the day
 };
   
 const persistConfig = {
@@ -78,7 +81,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_REPORT':
       // adds or updates the report in the state
-      return { reports: { ...state.reports, [action.id]: {report: action.report, isSubmitted: true} } };
+      return { ...state, reports: { ...state.reports, [action.id]: {report: action.report, isSubmitted: true} } };
       
     case 'SET_NAME':
       return { name: action.name }
@@ -86,15 +89,28 @@ const reducer = (state = initialState, action) => {
     case 'REMOVE_REPORT':
         const newReports = { ...state.reports };
         delete newReports[action.id];
-      return {reports: newReports};
+      return {...state, reports: newReports};
 
     case offlineActionTypes.FETCH_OFFLINE_MODE:
       // todo: better way not to include literals
       if (action.meta.name === 'addReport'){
         var report = action.meta.args[0];
         var id = action.meta.args[1];
-        return { reports: { ...state.reports, [id]: {report: report, isSbumitted: false} } };
+        return { ...state, reports: { ...state.reports, [id]: {report: report, isSbumitted: false} } };
       }
+
+    // validation cases
+    case 'ADD_VALIDATION_REPORTS':
+      return { ...state, validationReports: action.reports };
+
+    case 'MARK_VALIDATED_REPORT':
+      // updated reports
+      var validatedReport = {...state.validationReports.find(report => report.id === action.id), ...action.report};
+
+      // remove the report from the validation reports
+      var newValidationReports = state.validationReports.filter(report => report.id !== action.id);
+
+      return { ...state, validationReports: [validatedReport, ...newValidationReports] };
   } 
   return state;
 };

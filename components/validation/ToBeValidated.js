@@ -3,10 +3,10 @@ import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import RightArrow from './RightArrow';
 import DailyReportForm from '../daily-report-form/DailyReportForm';
-//uses material icons
 
+import { connect } from 'react-redux';
 
-export default function ToBeValidated(props) {
+export default connect(mapStateToProps)(function ToBeValidated(props) {
     const [landingPage, setLandingPage] = React.useState(true);
     const [ currentReport, setCurrentReport ] = React.useState(null);
 
@@ -31,17 +31,23 @@ export default function ToBeValidated(props) {
                 <RightArrow setActivePage={props.setActivePage} />
                 <Text style={styles.header}>À Valider</Text>
             </View>
-            <FlatList data={props.reports} renderItem={renderItem} keyExtractor={item => item.id}/>
+            <FlatList data={props.validationReports} renderItem={renderItem} keyExtractor={item => item.id}/>
         </View> 
     ) : (
         <DailyReportForm
             setLandingPage={setLandingPage}
             currentReport={currentReport}
-            setCurrentReport={setCurrentReport}
             edit={true}
         />
     );
+});
+
+function mapStateToProps(state) {
+    return {
+        validationReports: state.reducer.validationReports,
+    };
 }
+
 
 const styles = StyleSheet.create({
     container: {

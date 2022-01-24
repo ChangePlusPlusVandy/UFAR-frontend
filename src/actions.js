@@ -1,3 +1,6 @@
+// Note: Every action function should have an identifier that is unique to the action as
+// the last parameter. This is used to detect if an action has already been dispatched.
+
 
 /**
  * When a user adds a report online, it is added to our redux store and marked as submitted 
@@ -48,7 +51,14 @@ export const addReport = (report, id) => {
 };
 
 
-export const editReport = (report, id) => {
+/**
+ * When online an endpont is called at the backend to add modifications, otherwise, the request is added to the offline queue
+ * for later execution when online. The report will be marked as validated unless an error occurs, and it is marked as not submitted
+ * @param {*} report 
+ * @param {*} id 
+ * @returns thunk action
+ */
+export const validateReport = (report, id) => {
     async function thunk(dispatch){
         // submit the report to the server
         try {
@@ -61,19 +71,12 @@ export const editReport = (report, id) => {
             body: JSON.stringify(report),
             })
             if (response.status == 200){
-                //todo:
-                // dispatch({type: 'EDIT_REPORT', report: report, id: id})
+                console.log("report successfully validated");
             }  else {
-                // todo: 
-                // if there's an error, call the add function which marks it is not submitted
-                // console.log("error while submitting report1: ", err);
-                // dispatch({type: 'EDIT_REPORT', report: report, id: id})
+                console.log("report not succesfully validated: ", response);
             }
         } catch (err) {
-            // todo: 
-            // if there's an error, call the add function which marks it is not submitted
-            // console.log("error while submitting report2: ", err);
-            // dispatch({type: 'ADD_REPORT', report: report, id: id})
+            console.log("error while validating report: ", err);
         }
     }
 
@@ -81,8 +84,44 @@ export const editReport = (report, id) => {
 
     thunk.meta = {
         retry: true,
-        name: `editReport`,
+        name: `validateReport`,
         args: [report, id],
     };    
+    return thunk;
+}
+
+
+export function getReports(healthZoneId){
+    async function thunk(dispatch){
+        // submit the report to the server
+        try {
+            const response = await fetch(`http://10.76.170.134:3000/validation/${healthZoneId}/reports/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            })
+            if (response.status == 200){
+                const reports = await response.json();
+                console.log("reports: ", reports); // todo: delete after debuging
+                // todo: action to reinitialize the reports in our store
+                // dispatch({type: 'ADD_VALIDATION_REPORTS', reports: reports})
+            } else {
+                console.log("reports not submitted");
+            }
+        } catch (err) {
+            console.log("error while submitting report: ", err);
+        }
+    }
+
+
+    thunk.interceptInOffline = true;
+
+    thunk.meta = {
+        retry: true,
+        name: `getReports`,
+        args: [healthZoneId],
+    };
     return thunk;
 }
