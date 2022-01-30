@@ -84,7 +84,7 @@ const reducer = (state = initialState, action) => {
       return { ...state, reports: { ...state.reports, [action.id]: {report: action.report, isSubmitted: true} } };
       
     case 'SET_NAME':
-      return { name: action.name }
+      return { ...state, name: action.name }
 
     case 'REMOVE_REPORT':
         const newReports = { ...state.reports };
@@ -101,7 +101,7 @@ const reducer = (state = initialState, action) => {
 
     // validation cases
     case 'ADD_VALIDATION_REPORTS':
-      return { ...state, validationReports: action.reports };
+      return { ...state, validationReports: [...action.reports] };
 
     case 'MARK_VALIDATED_REPORT':
       // updated reports

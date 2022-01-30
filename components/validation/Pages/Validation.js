@@ -11,13 +11,15 @@ import { getReports } from '../../../src/actions';
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(function Validation (props) {
+    console.log("Validationm props: ", props);
+
     const [activePage, setActivePage] = React.useState(0);
 
     // if there's no non validated reports remaining, we make a call to the backend to get new data
-    if( props.validationReports.filter(report => report.validated === false).length === 0 ){
+    if( props.validationReports.filter(report => report.is_validated === false).length === 0 ){
 
         // todo: replace with a real id and figure out a way to get it here. 
-        props.getReports(1);
+        props.getReports("618b21eb8453970bd916764c");
     }
 
     const page = [
@@ -39,6 +41,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function Validation 
 });
 
 function mapStateToProps(state) {
+    console.log("mapStateToProps", state);
     return {
         name: state.reducer.name,
         validationReports: state.reducer.validationReports,
@@ -46,7 +49,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-    getReports = (healthZoneId) => dispatch(getReports(healthZoneId));
+    return {
+        getReports: (healthZoneId) => dispatch(getReports(healthZoneId))
+    };
 }
 
 const styles = StyleSheet.create({

@@ -34,13 +34,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
 
         // update and mark report as validated
         props.report['is_validated'] = true;
-        props.markValidatedReport(props.report, props.currentReportId);
+
+        console.log("report to be validated: ", props.report);
+        // props.markValidatedReport(props.report, props.currentReportId);
+
+        // console.log("validated report: ", props.validationReports);
 
         // dispatch an action to validate the report at the backend
-        props.validateReport(props.validationReports.find(report => report.id === currentReportId), props.currentReportId);
+        // props.validateReport(props.validationReports.find(report => report.id === currentReportId), props.currentReportId);
 
         // navigate back to validation pages
-        props.setLandingPage(true);
+        // props.setLandingPage(true);
     }
 
     return (
@@ -82,7 +86,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                 style={styles.button}>
                     <Icon name='sc-telegram' type='evilicon' color='white' size={45}/>
                 </Pressable>
-                <Text style={styles.text}>Submit/Save</Text>
+                <Text style={styles.text}> {props.edit? "Validate": "Submit/Save" }</Text>
             </View>
         </View>
     )

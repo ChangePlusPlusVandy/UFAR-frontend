@@ -12,8 +12,8 @@ export default connect(mapStateToProps)(function ToBeValidated(props) {
 
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
-            <Text style={styles.timelist}>{item.date}</Text>
-            <Text style={styles.namelist}>{item.dayNumber}</Text>
+            <Text style={styles.timelist}>{item.date.substring(0, item.date.indexOf("T"))}</Text>
+            <Text style={styles.namelist}>{`Jour #${item.DMM_day}`}</Text>
             <TouchableOpacity style={styles.edit}>
                 <Icon name="edit" color = '#000000' size = {25} 
                     onPress={() => {

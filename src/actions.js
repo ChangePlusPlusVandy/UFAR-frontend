@@ -95,7 +95,7 @@ export function getReports(healthZoneId){
     async function thunk(dispatch){
         // submit the report to the server
         try {
-            const response = await fetch(`http://10.76.170.134:3000/validation/${healthZoneId}/reports/`, {
+            const response = await fetch(`http://10.76.170.134:3000/validation/${healthZoneId}/reports`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -106,12 +106,12 @@ export function getReports(healthZoneId){
                 const reports = await response.json();
                 console.log("reports: ", reports); // todo: delete after debuging
                 // todo: action to reinitialize the reports in our store
-                // dispatch({type: 'ADD_VALIDATION_REPORTS', reports: reports})
+                dispatch({type: 'ADD_VALIDATION_REPORTS', reports: reports})
             } else {
-                console.log("reports not submitted");
+                console.log("Failed to get reports", response.status);
             }
         } catch (err) {
-            console.log("error while submitting report: ", err);
+            console.log("error while retrieving reports: ", err);
         }
     }
 
