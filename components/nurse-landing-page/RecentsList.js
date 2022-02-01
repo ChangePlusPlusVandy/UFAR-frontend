@@ -16,7 +16,7 @@ export default connect(mapStateToProps)(function RecentsList(props){
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
             <Text style={styles.timelist}>{ convertDateToString(props.reports[item].report.date)}</Text>
-            <Text style={styles.namelist}>{`Joul #${props.reports[item].report.DMM_day}`}</Text>
+            <Text style={styles.namelist}>{`Jour #${props.reports[item].report.DMM_day}`}</Text>
             <TouchableOpacity style={styles.edit}>
                 {props.reports[item].isSubmitted ? 
                 <Icon name="check" color = 'green' size = {25} /> :
