@@ -32,11 +32,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
     const submitEditReport = () => {
         console.log("edit report submitted");
 
-        // update and mark report as validated
-        props.report['is_validated'] = true;
-
-        console.log("report to be validated: ", props.report);
-        // props.markValidatedReport(props.report, props.currentReportId);
+        // console.log("props report", props.report);
+        props.markValidatedReport(props.report, props.currentReportId);
 
         // console.log("validated report: ", props.validationReports);
 
@@ -44,7 +41,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
         // props.validateReport(props.validationReports.find(report => report.id === currentReportId), props.currentReportId);
 
         // navigate back to validation pages
-        // props.setLandingPage(true);
+        props.setLandingPage(true);
     }
 
     return (

@@ -2,18 +2,25 @@ import React from 'react';
 import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import LeftArrow from './LeftArrow';
+import { convertFromYYYYMMDDToDDMMYYYY } from '../../src/utils';
+
 //uses material icons
 
 export default function RecentlyValidated(props) {
+
+    console.log("reports", props.reports);
+
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
-            <Text style={styles.timelist}>{item.date}</Text>
-            <Text style={styles.namelist}>{item.dayNumber}</Text>
+            <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(item.date)).toISOString().split('T')[0])}</Text>
+            <Text style={styles.namelist}>{`Jour #${item.DMM_day}`}</Text>
             <TouchableOpacity style={styles.edit}>
-                <Icon name="check" color = '#fff' style = {styles.icon} />
+            <Icon name="check" color = '#fff' style = {styles.icon} />
             </TouchableOpacity>
         </View>
     );
+
+
 
     return (
         <View style={styles.container}>

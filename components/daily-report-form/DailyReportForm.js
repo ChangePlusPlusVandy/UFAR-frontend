@@ -21,6 +21,8 @@ import DrugManagementForm from './pages/DrugManagementForm';
 import data from './pages/locations';
 import { connect } from 'react-redux';
 
+import { convertFromYYYYMMDDToDDMMYYYY } from "../../src/utils.js";
+
 
 const replaceIdsWithNames = (provinceId, healthZoneId, healthAreaId, villageId) => {
 
@@ -57,6 +59,7 @@ const replaceIdsWithNames = (provinceId, healthZoneId, healthAreaId, villageId) 
 
     return result;
 };
+
 
 
 export default connect(mapStateToProps)(function DailyReportForm(props) {
@@ -669,11 +672,11 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         setTrachoma(report.trachoma);
 
         // Dates state
-        setDCTrainingCompletionDate(report.dcs_training_completion_date.substring(0, report.dcs_training_completion_date.indexOf("T")));
-        setMedicineArrivalDate(report.medicines_arrival_date.substring(0, report.medicines_arrival_date.indexOf("T")));
-        setMDDStartDate(report.MDD_start_date.substring(0, report.MDD_start_date.indexOf("T")));
-        setDMMEndDate(report.MDD_end_date.substring(0, report.MDD_end_date.indexOf("T")));
-        setReportTransmissionDate(report.date_of_transmission.substring(0, report.date_of_transmission.indexOf("T")));
+        setDCTrainingCompletionDate(convertFromYYYYMMDDToDDMMYYYY(report.dcs_training_completion_date.split('T')[0]));
+        setMedicineArrivalDate(convertFromYYYYMMDDToDDMMYYYY(report.medicines_arrival_date.split('T')[0]));
+        setMDDStartDate(convertFromYYYYMMDDToDDMMYYYY(report.MDD_start_date.split('T')[0]));
+        setDMMEndDate(convertFromYYYYMMDDToDDMMYYYY(report.MDD_end_date.split('T')[0]));
+        setReportTransmissionDate(convertFromYYYYMMDDToDDMMYYYY(report.date_of_transmission.split('T')[0]));
     
         // Distributors state
         setNumMenDistributors(report.distributors.men);
@@ -782,7 +785,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         "health_zone": healthZoneId,
         "village": villageId,
         // DATE
-        "date": "5-5-20", //todo: Date.now(),
+        "date": Date.now(),
         // 1.11 diseases treated
         "onchocerciasis": {
             "first_round": onchocerciasisFirst,

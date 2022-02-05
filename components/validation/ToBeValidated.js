@@ -3,16 +3,24 @@ import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import RightArrow from './RightArrow';
 import DailyReportForm from '../daily-report-form/DailyReportForm';
+import FetchButton from './FetchButton';
 
 import { connect } from 'react-redux';
+import { convertFromYYYYMMDDToDDMMYYYY } from '../../src/utils';
 
-export default connect(mapStateToProps)(function ToBeValidated(props) {
+export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidated(props) {
+
+    // console.log("to be validated props", props);
+
     const [landingPage, setLandingPage] = React.useState(true);
     const [ currentReport, setCurrentReport ] = React.useState(null);
 
+    // Note: the conversion of the date is different from the  validated component bcs this
+    // component deals with a report object immidiatly from the backend, which has a different format 
+    // for date.
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
-            <Text style={styles.timelist}>{item.date.substring(0, item.date.indexOf("T"))}</Text>
+            <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY(item.date.split('T')[0])}</Text>
             <Text style={styles.namelist}>{`Jour #${item.DMM_day}`}</Text>
             <TouchableOpacity style={styles.edit}>
                 <Icon name="edit" color = '#000000' size = {25} 
@@ -29,9 +37,11 @@ export default connect(mapStateToProps)(function ToBeValidated(props) {
         <View style={styles.container}>
             <View style={styles.flexbox}>
                 <RightArrow setActivePage={props.setActivePage} />
+                
                 <Text style={styles.header}>À Valider</Text>
+                <FetchButton/>
             </View>
-            <FlatList data={props.validationReports} renderItem={renderItem} keyExtractor={item => item.id}/>
+            <FlatList data={props.reports} renderItem={renderItem} keyExtractor={item => item.id}/>
         </View> 
     ) : (
         <DailyReportForm
@@ -45,6 +55,12 @@ export default connect(mapStateToProps)(function ToBeValidated(props) {
 function mapStateToProps(state) {
     return {
         validationReports: state.reducer.validationReports,
+    };
+}
+
+function mapDispatchToProps(dispatch){
+    return {
+        getReports: (healthZoneId) => dispatch(getReports(healthZoneId))
     };
 }
 
@@ -62,13 +78,13 @@ const styles = StyleSheet.create({
     header: {
         // fontFamily: 'Helvetica Neue',
         marginTop: 5,
-        marginLeft: 110,
+        marginLeft: 100,
         fontWeight: 'bold',
         fontSize: 25,
         lineHeight: 25,
         marginBottom: 5,
         alignSelf: "center",
-        flex: 11,
+        flex: 4,
     },
     listitem: {
         marginHorizontal: 7,

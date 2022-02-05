@@ -13,8 +13,13 @@ export function comparisonFn(action, actionQueue) {
       return actionQueue.find(
         queued =>
           (queued.meta && action.meta.name === queued.meta.name) &&
-          (queued.meta && action.meta.args.at(-1) === queued.meta.args.at(-1)),
-      );
+          (queued.meta && action.meta.args[1] === queued.meta.args[1]),      
+        );
     }
     return undefined;
 }
+
+export function convertFromYYYYMMDDToDDMMYYYY(date){
+  var d = date.split("-");
+  return `${d[2]}/${d[1]}/${d[0]}`;
+};

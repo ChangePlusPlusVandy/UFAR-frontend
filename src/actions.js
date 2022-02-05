@@ -1,3 +1,6 @@
+import uuid from 'react-native-uuid';
+
+
 // Note: Every action function should have an identifier that is unique to the action as
 // the last parameter. This is used to detect if an action has already been dispatched.
 
@@ -55,10 +58,10 @@ export const addReport = (report, id) => {
  * When online an endpont is called at the backend to add modifications, otherwise, the request is added to the offline queue
  * for later execution when online. The report will be marked as validated unless an error occurs, and it is marked as not submitted
  * @param {*} report 
- * @param {*} id 
+ * @param {*} id -- unique id of the current function
  * @returns thunk action
  */
-export const validateReport = (report, id) => {
+export const validateReport = (report, id=uuid.v4()) => {
     async function thunk(dispatch){
         // submit the report to the server
         try {
@@ -91,7 +94,7 @@ export const validateReport = (report, id) => {
 }
 
 
-export function getReports(healthZoneId){
+export function getReports(healthZoneId, id=uuid.v4()){
     async function thunk(dispatch){
         // submit the report to the server
         try {
@@ -121,7 +124,7 @@ export function getReports(healthZoneId){
     thunk.meta = {
         retry: true,
         name: `getReports`,
-        args: [healthZoneId],
+        args: [healthZoneId, id],
     };
     return thunk;
 }
