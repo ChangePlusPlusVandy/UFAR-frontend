@@ -5,6 +5,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import HomePage from "../components/home-page/HomePage";
 import NurseApp from './NurseApp';
 import Validation from '../components/validation/Pages/Validation';
+import Login from '../components/authorization/Login';
 
 
 
@@ -36,9 +37,15 @@ const AdminAppNaviagtor = createStackNavigator({
     navigationOptions: {
       headerShown: false,
     }
+  },
+  Authroization: {
+    screen: Login,
+    navigationOptions: {
+      headerShown: false,
+    }
   }
 }, {
-  initialRouteName: 'Validation',
+  initialRouteName: 'Authroization',
   navigationOptions:{
     headerShown: false,
   }
