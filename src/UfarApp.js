@@ -5,7 +5,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import HomePage from "../components/home-page/HomePage";
 import NurseApp from './NurseApp';
 import Validation from '../components/validation/Pages/Validation';
-
+import Dashboard from '../components/validation/Dashboard'
 
 
 export default function UfarApp() {
@@ -48,6 +48,14 @@ const AdminAppNaviagtor = createStackNavigator({
 const UfarAppNavigator = createStackNavigator({
   Home: {
     screen: HomePage,
+    navigationOptions: {
+      headerShown: false,
+      
+    }
+  },
+
+  Dashboard: {
+    screen: Dashboard,
     navigationOptions: {
       headerShown: false,
       
