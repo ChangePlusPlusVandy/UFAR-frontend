@@ -1,14 +1,15 @@
 import React from 'react';
-import {StyleSheet , TouchableOpacity, View, Text, Image} from 'react-native';
-import {VictoryChart, VictoryBar, VictoryTheme, VictoryAxis, VictoryLabel } from 'victory-native'
+import {StyleSheet , View, Text } from 'react-native';
+import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme } from 'victory-native'
 
 
 export default function Dashboard(props) {
   return (
     <View style={styles.container}>
         <VictoryChart
-            theme={VictoryTheme.grayscale}
-            domainPadding={{x: 20}}
+          theme={VictoryTheme.grayscale}
+          domainPadding={{x: 20}}
+          padding={{top: 100, left: 100, right: 80}}
           >
             <Text style={styles.chartTitle}>Proportion des ménages de I'AS ayant bénéficié du traitement pendant la DMM</Text>
             <VictoryBar
@@ -26,11 +27,11 @@ export default function Dashboard(props) {
               y="percentage"
               labels={({ datum }) => datum.percentage}
               animate={{
-                duration: 1000,
-                onLoad: { duration: 1000 }
+                duration: 120,
+                onLoad: { duration: 120 }
               }}
               barRatio={0.8}
-              // cornerRadius={{top: 16, bottom: 16}}
+              cornerRadius={10}
             />
             <VictoryAxis/>
         </VictoryChart>
