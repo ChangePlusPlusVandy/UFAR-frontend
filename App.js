@@ -13,6 +13,10 @@ import  AsyncStorage from '@react-native-async-storage/async-storage';
 import { offlineActionTypes } from 'react-native-offline';
 import { MenuProvider } from 'react-native-popup-menu';
 
+// authorization 
+import {AuthProvider} from './src/context/AuthContext';
+import {AxiosProvider} from './src/context/AxiosContext';
+
 
 import { addReport } from './src/actions.js';
 import { comparisonFn } from './src/utils.js';
@@ -118,17 +122,26 @@ const store = createStore(pReducer, applyMiddleware(networkMiddleware, thunk, lo
 const persistor = persistStore(store);
 
 
+
+
+
+
+
 export default function App() {
   // todo: change the ping interval to a more reasonable value
   return (
-    <MenuProvider>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}> 
-          <ReduxNetworkProvider pingInterval={3000} shouldPing={true} pingServerUrl='http://10.76.170.134:3000'>
-            <UfarApp />
-          </ReduxNetworkProvider>
-        </PersistGate> 
-      </Provider>
-    </MenuProvider>
+    <AuthProvider>
+      <AxiosProvider>
+        <MenuProvider>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}> 
+              <ReduxNetworkProvider pingInterval={3000} shouldPing={true} pingServerUrl='http://10.76.170.134:3000'>
+                <UfarApp />
+              </ReduxNetworkProvider>
+            </PersistGate> 
+          </Provider>
+        </MenuProvider>
+      </AxiosProvider>
+    </AuthProvider>
   );
 }

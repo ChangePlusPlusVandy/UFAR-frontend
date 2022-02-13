@@ -4,10 +4,9 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import HomePage from "../components/home-page/HomePage";
 import NurseApp from './NurseApp';
+import AdminApp from './AdminApp';
 import Validation from '../components/validation/Pages/Validation';
 import Login from '../components/authorization/Login';
-
-
 
 export default function UfarApp() {
   return (
@@ -32,20 +31,15 @@ const NurseAppNavigator = createStackNavigator({
 
 // navigation stack for the AdminApp
 const AdminAppNaviagtor = createStackNavigator({
-  Validation: {
-    screen: Validation,
+  AdminMain: {
+    screen: AdminApp,
     navigationOptions: {
       headerShown: false,
     }
   },
-  Authroization: {
-    screen: Login,
-    navigationOptions: {
-      headerShown: false,
-    }
-  }
+  
 }, {
-  initialRouteName: 'Authroization',
+  initialRouteName: 'AdminMain',
   navigationOptions:{
     headerShown: false,
   }
@@ -58,6 +52,13 @@ const UfarAppNavigator = createStackNavigator({
     navigationOptions: {
       headerShown: false,
       
+    }
+  },
+
+  Authorization: {
+    screen: Login,
+    navigationOptions: {
+      headerShown: false,
     }
   },
 
