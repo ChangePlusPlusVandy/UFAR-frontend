@@ -18,16 +18,18 @@ export default function Dashboard3(props) {
     return (
         <View style={styles.container}>
           <ScrollView>
+          <Text style={styles.chartTitle}>Graph Title</Text>
             <VictoryChart
-              domainPadding={18} // makes the data pad from end of axes
+              domainPadding={30} // makes the data pad from end of axes
               domain={{ y: [0, 100]}} 
-              padding={{top: 10, left: 60, right: 60, bottom: 80}}
-              height={450} // should make this a function of how much data there is
+              padding={{top: 30, left: 60, right: 60, bottom: 80}}
+              height={450} // should make this a function of how much data there is!!
               >
-                <VictoryGroup horizontal
+                <VictoryGroup // DO NOT use VictoryAxis with this component
+                horizontal
                 offset={12}
                 colorScale={["#84BD62", "#EC1C24", "#55A5C4"]}
-                categories={{ x: ["RegionE", "RegionD", "RegionC", "RegionB", "RegionA"] }}
+                categories={{ x: ["RegionE", "RegionD", "RegionC", "RegionB", "RegionA"] }} // will need to update this with region names
                 >
                     <VictoryBar
                         style={styles.barChart}

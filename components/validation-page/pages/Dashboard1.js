@@ -8,12 +8,12 @@ export default function Dashboard1(props) {
   return (
     <View style={styles.container}>
       <ScrollView>
+        <Text style={styles.chartTitle}>Proportion des ménages de I'AS ayant bénéficié du traitement pendant la DMM</Text>
         <VictoryChart
             theme={VictoryTheme.grayscale}
             domainPadding={{x: 20}}
-            padding={{top: 50, left: 100, right: 80}}
+            padding={{top: 50, left: 80, right: 80}}
             >
-              <Text style={styles.chartTitle}>Proportion des ménages de I'AS ayant bénéficié du traitement pendant la DMM</Text>
               <VictoryBar
                 horizontal
                 style={styles.barChart}
@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
   },
   chartTitle: {
     textAlign: 'center',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    // right: 25
   },
   barChart: {
     data: { fill: "#c43a31", fillOpacity: ({ datum }) => datum.percentage / 100},
