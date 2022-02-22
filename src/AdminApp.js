@@ -60,7 +60,6 @@ export default function AdminApp(props){
 
     return (
       <>
-        <NetworkBar/>
         <Validation navigation={props.navigation} />
       </>
     );
