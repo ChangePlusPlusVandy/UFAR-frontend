@@ -11,7 +11,7 @@ const AuthProvider = ({children}) => {
   const [authState, setAuthState] = useState({
     accessToken: null,
     authenticated: null,
-    role: null,
+    user: {}
   });
 
   const logout = async () => {
@@ -19,6 +19,7 @@ const AuthProvider = ({children}) => {
     setAuthState({
       accessToken: null,
       authenticated: false,
+      user: {}
     });
   };
 

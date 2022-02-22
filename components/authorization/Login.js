@@ -68,6 +68,7 @@ export default function Login(props){
                     authContext.setAuthState({
                         accessToken,
                         authenticated: true,
+                        user: user.user,
                     });
 
                     await SecureStore.setItemAsync('jwt', accessToken);

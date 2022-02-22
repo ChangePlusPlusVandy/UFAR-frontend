@@ -28,6 +28,7 @@ export default function NurseApp(props){
         authContext.setAuthState({
           accessToken: value || null,
           authenticated: value !== null,
+          user: jwt_decode(value).user
         });
         setStatus('success');
       } catch (error) {
@@ -37,6 +38,7 @@ export default function NurseApp(props){
         authContext.setAuthState({
           accessToken: null,
           authenticated: false,
+          user: {}
         });
       }
     }, []);

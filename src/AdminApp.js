@@ -29,6 +29,7 @@ export default function AdminApp(props){
           authContext.setAuthState({
             accessToken: value || null,
             authenticated: value !== null,
+            user: user.user
           });
           setStatus('success');
         } else {
@@ -42,6 +43,7 @@ export default function AdminApp(props){
         authContext.setAuthState({
           accessToken: null,
           authenticated: false,
+          user: {}
         });
       }
     }, []);
