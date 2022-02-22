@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import SwitchSelector from 'react-native-switch-selector';
-import Dashboard from './Dashboard';
+import Dashboard1 from './Dashboard1';
+import Dashboard2 from './Dashboard2';
+import Dashboard3 from './Dashboard3';
 
 export default function Dashboards() {
     const options = [
@@ -13,15 +15,15 @@ export default function Dashboards() {
     const dashboards = [
         {
             title: "Geographical Coverage",
-            graph: <Dashboard/>,
+            graph: <Dashboard1/>,
         },
         {
             title: "Therapeutical Coverage",
-            graph: <Dashboard/>,
+            graph: <Dashboard2/>,
         },
         {
             title: "Drugs Used",
-            graph: <Dashboard/>,
+            graph: <Dashboard3/>,
         },
     ];
 
