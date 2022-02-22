@@ -11,27 +11,22 @@ import { AuthContext } from '../src/context/AuthContext';
 import * as SecureStore from 'expo-secure-store'
 import Spinner from '../components/authorization/Spinner';
 import Login from '../components/authorization/Login';
-import jwt_decode from "jwt-decode";
+import jwt_decode from "jwt-decode"; // todo: to decode tokens
 
 
 
 export default function NurseApp(props){
+    // todo: decode the type of user if asked to
+
     const authContext = useContext(AuthContext);
     const [status, setStatus] = useState('loading');
-
-    
-
 
     const loadJWT = useCallback(async () => {
       try {
         const value = await SecureStore.getItemAsync('jwt');
 
-        // todo: to be used for decoding the token
-        //console.log("decoded token", jwt_decode("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL25zZi1zY2MxLmlzaXMudmFuZGVyYmlsdC5lZHUvZ3JhcGhxbCI6eyJlbWFpbCI6InNhbG9tb25kdXNoaW1pcmltYW5hQGdtYWlsLmNvbSIsInJvbGUiOiJQUklWSUxFR0VEIiwibmVpZ2hib3Job29kIjoiU3lsdmFuIFBhcmsifSwiaWF0IjoxNjM3OTE1MzgwLCJleHAiOjE2Mzg1MjAxODAsInN1YiI6IjYwZjA4NDkxMDUxODUxNjU2OTliMjA5MyJ9.UJBNu1S6PT-ugEKozK8ukiagZeCp3ucOgsr3NqdW1og"));
-
         authContext.setAuthState({
           accessToken: value || null,
-          // refreshToken: jwt.refreshToken || null,
           authenticated: value !== null,
         });
         setStatus('success');
@@ -41,7 +36,6 @@ export default function NurseApp(props){
         // console.log("keychain", Keychain);
         authContext.setAuthState({
           accessToken: null,
-          // refreshToken: null,
           authenticated: false,
         });
       }
@@ -51,20 +45,19 @@ export default function NurseApp(props){
       loadJWT();
     }, [loadJWT]);
 
-  if (status === 'loading') {
-    return <Spinner />;
-  }
+  // if (status === 'loading') {
+  //   return <Spinner />;
+  // }
 
 
   if (authContext?.authState?.authenticated === false) {
-    return <Login user={"Normal"} initial={1} />;
+    return <Login setStatus={setStatus} user={"Normal"} initial={1} navigation={props.navigation} />;
   } else {
     return (
       <View style={styles.container}>
           <NetworkBar />
           <StatusBar style="auto" />
           <GreetingHeader navigation={props.navigation}/>
-          {/* <DashboardSummary /> */}
           <RecentsList/>
           <Bridge/>
       </View>

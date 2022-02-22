@@ -24,9 +24,13 @@ export default function Hamburger (props) {
                     <MenuOption>
                         <Icon name="close" color = '#FFF' size = {30} iconStyle = {styles.icon} />
                     </MenuOption>
-                    <MenuOption onSelect={() => authContext.logout()}>
+                    {/** if is authenticated */
+                        authContext.authState.authenticated &&
+                        <MenuOption onSelect={() => authContext.logout()}>
                         <Icon name="logout" color = '#FFF' size = {30} iconStyle = {styles.icon} />
-                    </MenuOption>
+                        </MenuOption>
+                    }
+                    
                 </MenuOptions>
             </Menu>
         </TouchableOpacity>

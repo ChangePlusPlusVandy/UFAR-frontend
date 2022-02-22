@@ -3,27 +3,23 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function LoginButton(props) {
-    // todo: add a link to the forgot password page
+export default function RegistrationButton(props) {
+    // todo: add a link to the login page
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} 
-                onPress={() =>
-                    props.onLogin()
-                }
+                // onPress={() =>
+                //     // props.onLogin()
+                // }
             >
                 <Icon name='arrow-right' type='feather' color='white' size={50}/>
             </TouchableOpacity>
-            <Text style={{...styles.text, ...styles.link}}
+            <Text 
+                style={{...styles.text, ...styles.link}}
                 onPress={() =>
-                    props.navigation.navigate('ForgotPassword')
+                    props.navigation.navigate('Login')
                 }
-            >Forgot password</Text>
-            <Text style={{...styles.text, ...styles.link}}
-                onPress={() =>
-                    props.navigation.navigate('Registration')
-                }
-            >Register, Instead</Text>
+            >Login, Instead</Text>
         </View>
     )
 }

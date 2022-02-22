@@ -7,32 +7,40 @@ import Validation from '../components/validation/Pages/Validation';
 
 // authorization
 import { AuthContext } from '../src/context/AuthContext';
+import * as SecureStore from 'expo-secure-store'
 import Spinner from '../components/authorization/Spinner';
 import Login from '../components/authorization/Login';
+import jwt_decode from "jwt-decode"; // todo: to decode tokens
 
 
 
 export default function AdminApp(props){
+
     const authContext = useContext(AuthContext);
     const [status, setStatus] = useState('loading');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const loadJWT = useCallback(async () => {
       try {
-        const value = await Keychain.getGenericPassword();
-        const jwt = JSON.parse(value.password);
+        const value = await SecureStore.getItemAsync('jwt');
+        const user = jwt_decode(value);
 
-        authContext.setAuthState({
-          accessToken: jwt.accessToken || null,
-          // refreshToken: jwt.refreshToken || null,
-          authenticated: jwt.accessToken !== null,
-        });
-        setStatus('success');
+        if (user.user.role.toLowerCase() === "ADMIN".toLowerCase()) {
+          authContext.setAuthState({
+            accessToken: value || null,
+            authenticated: value !== null,
+          });
+          setStatus('success');
+        } else {
+          setStatus('failed');
+          setErrorMessage('You are not authorized to access the Admin page');
+        }
+
       } catch (error) {
         setStatus('error');
-        console.log(`Keychain Error: ${error.message}`);
+        console.log(`SecureStore Error: ${error.message}`);
         authContext.setAuthState({
           accessToken: null,
-          // refreshToken: null,
           authenticated: false,
         });
       }
@@ -42,19 +50,20 @@ export default function AdminApp(props){
       loadJWT();
     }, [loadJWT]);
 
-    if (status === 'loading') {
-        return <Spinner />;
-    }
+    // if (status === 'loading') {
+    //     return <Spinner/>;
+    // }
 
-
-    if (authContext?.authState?.authenticated === false) {
-        return <Login user={"Admin"} initial={0}/>;
+    if ((authContext?.authState?.authenticated === false) || (status === 'failed')) {
+        return <Login setStatus={setStatus} user={"Admin"} initial={0} errorMessage={errorMessage} navigation={props.navigation}/>;
     } 
 
     return (
-        <Validation />
+      <>
+        <NetworkBar/>
+        <Validation navigation={props.navigation} />
+      </>
     );
-  
 };
 
 

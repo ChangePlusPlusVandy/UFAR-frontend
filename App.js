@@ -12,6 +12,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import  AsyncStorage from '@react-native-async-storage/async-storage';
 import { offlineActionTypes } from 'react-native-offline';
 import { MenuProvider } from 'react-native-popup-menu';
+import { DEV_DOMAIN } from "@env" 
 
 // authorization 
 import {AuthProvider} from './src/context/AuthContext';
@@ -135,7 +136,7 @@ export default function App() {
         <MenuProvider>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}> 
-              <ReduxNetworkProvider pingInterval={3000} shouldPing={true} pingServerUrl='http://10.76.170.134:3000'>
+              <ReduxNetworkProvider pingInterval={3000} shouldPing={true} pingServerUrl={DEV_DOMAIN}>
                 <UfarApp />
               </ReduxNetworkProvider>
             </PersistGate> 

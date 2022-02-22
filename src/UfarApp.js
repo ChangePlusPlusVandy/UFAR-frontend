@@ -7,6 +7,8 @@ import NurseApp from './NurseApp';
 import AdminApp from './AdminApp';
 import Validation from '../components/validation/Pages/Validation';
 import Login from '../components/authorization/Login';
+import Registration from '../components/authorization/Registration';
+import ForgotPassword from '../components/authorization/ForgotPassword';
 
 export default function UfarApp() {
   return (
@@ -55,8 +57,22 @@ const UfarAppNavigator = createStackNavigator({
     }
   },
 
-  Authorization: {
+  Login: {
     screen: Login,
+    navigationOptions: {
+      headerShown: false,
+    }
+  },
+
+  Registration: {
+    screen: Registration,
+    navigationOptions: {
+      headerShown: false,
+    }
+  },
+
+  ForgotPassword: {
+    screen: ForgotPassword,
     navigationOptions: {
       headerShown: false,
     }

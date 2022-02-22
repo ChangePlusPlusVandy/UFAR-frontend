@@ -8,7 +8,6 @@ import RecentlyValidated from '../RecentlyValidated';
 
 
 export default function Validation (props) {
-    console.log("Validation navigation: ", props.navigation);
 
     const [activePage, setActivePage] = React.useState(0);
 

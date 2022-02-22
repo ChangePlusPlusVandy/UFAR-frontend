@@ -3,20 +3,22 @@
 import React, {createContext, useContext} from 'react';
 import axios from 'axios';
 import {AuthContext} from './AuthContext';
-import createAuthRefreshInterceptor from 'axios-auth-refresh';
+import { DEV_DOMAIN } from "@env" 
 
 const AxiosContext = createContext();
 const {Provider} = AxiosContext;
 
+
 const AxiosProvider = ({children}) => {
+
   const authContext = useContext(AuthContext);
 
   const authAxios = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: DEV_DOMAIN,
   });
 
   const publicAxios = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: DEV_DOMAIN,
   });
 
   authAxios.interceptors.request.use(
@@ -32,43 +34,18 @@ const AxiosProvider = ({children}) => {
     },
   );
 
-//   const refreshAuthLogic = async failedRequest => { // fixme: converted this to async, might cause errors
-//     const data = {
-//       refreshToken: authContext.authState.refreshToken,
-//     };
-
-//     const options = {
-//       method: 'POST',
-//       data,
-//       url: 'http://localhost:3000/api/refreshToken',
-//     };
-
-//     try {
-//           const tokenRefreshResponse = await axios(options);
-//           failedRequest.response.config.headers.Authorization =
-//               'Bearer ' + tokenRefreshResponse.data.accessToken;
-
-//           authContext.setAuthState({
-//               ...authContext.authState,
-//               accessToken: tokenRefreshResponse.data.accessToken,
-//           });
-
-//           await Keychain.setGenericPassword(
-//               'token',
-//               JSON.stringify({
-//                   accessToken: tokenRefreshResponse.data.accessToken,
-//                   refreshToken: authContext.authState.refreshToken,
-//               }));
-//           return await Promise.resolve();
-//       } catch (e) {
-//           authContext.setAuthState({
-//               accessToken: null,
-//               refreshToken: null,
-//           });
-//       }
-//   };
-
-//   createAuthRefreshInterceptor(authAxios, refreshAuthLogic, {});
+  // if token is expired, logout and redirect to login page
+  authAxios.interceptors.response.use(
+    response => {
+      return response;
+    },
+    error => {
+      if (error.response.status === 401) {
+        authContext.logout();
+      }
+      return Promise.reject(error);
+    },
+  );
 
   return (
     <Provider

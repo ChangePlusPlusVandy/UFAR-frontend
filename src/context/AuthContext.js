@@ -10,15 +10,14 @@ const {Provider} = AuthContext;
 const AuthProvider = ({children}) => {
   const [authState, setAuthState] = useState({
     accessToken: null,
-    // refreshToken: null,
     authenticated: null,
+    role: null,
   });
 
   const logout = async () => {
     await SecureStore.deleteItemAsync('jwt');
     setAuthState({
       accessToken: null,
-      // refreshToken: null,
       authenticated: false,
     });
   };

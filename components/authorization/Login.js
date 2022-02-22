@@ -8,6 +8,8 @@ import SwitchSelector from 'react-native-switch-selector';
 import { AuthContext } from '../../src/context/AuthContext';
 import * as SecureStore from 'expo-secure-store'
 import { AxiosContext } from '../../src/context/AxiosContext';
+import jwt_decode from "jwt-decode"; // todo: to decode tokens
+
 
 import ufar from './ufar.png';
 
@@ -15,65 +17,85 @@ import ufar from './ufar.png';
 const IMAGE_DEF = Image.resolveAssetSource(ufar).uri;
 
 export default function Login(props){
+
+    // todo: add endpoint for login
+
+    // Login logic
+    
+    // user selects type -- admin or normal
+    // logs in with username and password
+    // if type doesn't match with the token, only for admin logins for now
+        // don't authorize user
+        // return to login page with a message "Not authorized user: select the right type"
+    // else authorize user
+
+
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [errorMessage, setErrorMessage] = React.useState(props.errorMessage||'');
+    // note: initial can be 0 or 1, so logic is reversed because 0 is always false
+    const [userOption, setUserOption] = React.useState(props.initial? 1:props.initial);
+
+
     const authContext = useContext(AuthContext);
     const {publicAxios} = useContext(AxiosContext);
 
     const options = [
         { label: 'Admin', value: 0 },
         { label: 'Nurse', value: 1 },
+
     ];
+
 
     const onLogin = async () => {
         try {
-            authContext.setAuthState({
-                accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL25zZi1zY2MxLmlzaXMudmFuZGVyYmlsdC5lZHUvZ3JhcGhxbCI6eyJlbWFpbCI6InNhbG9tb25kdXNoaW1pcmltYW5hQGdtYWlsLmNvbSIsInJvbGUiOiJQUklWSUxFR0VEIiwibmVpZ2hib3Job29kIjoiU3lsdmFuIFBhcmsifSwiaWF0IjoxNjM3OTE1MzgwLCJleHAiOjE2Mzg1MjAxODAsInN1YiI6IjYwZjA4NDkxMDUxODUxNjU2OTliMjA5MyJ9.UJBNu1S6PT-ugEKozK8ukiagZeCp3ucOgsr3NqdW1og',
-                // refreshToken,
-                authenticated: true,
-            });
+            const response = await publicAxios.post('/auth/login',
+                JSON.stringify({name: username, password: password}),
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }
+            );
+                
+            if (response.status == 200) {
+                
+                const accessToken = response.data; 
 
-            await SecureStore.setItemAsync('jwt', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL25zZi1zY2MxLmlzaXMudmFuZGVyYmlsdC5lZHUvZ3JhcGhxbCI6eyJlbWFpbCI6InNhbG9tb25kdXNoaW1pcmltYW5hQGdtYWlsLmNvbSIsInJvbGUiOiJQUklWSUxFR0VEIiwibmVpZ2hib3Job29kIjoiU3lsdmFuIFBhcmsifSwiaWF0IjoxNjM3OTE1MzgwLCJleHAiOjE2Mzg1MjAxODAsInN1YiI6IjYwZjA4NDkxMDUxODUxNjU2OTliMjA5MyJ9.UJBNu1S6PT-ugEKozK8ukiagZeCp3ucOgsr3NqdW1og");
-        //   const response = await publicAxios.post('/<endpoint>', {
-        //     username,
-        //     password,
-        //   });
-          
-        //     if (response.status == 200) {
+                const user = jwt_decode(accessToken);
 
-        //         const {accessToken} = response.data;
-        //         authContext.setAuthState({
-        //         accessToken,
-        //         // refreshToken,
-        //         authenticated: true,
-        //         });
+                if (user.user.role.toLowerCase() === options.filter(o => o.value === userOption)[0].label.toLowerCase()) {
+                    authContext.setAuthState({
+                        accessToken,
+                        authenticated: true,
+                    });
 
-        //         await Keychain.setGenericPassword(
-        //             'token',
-        //             JSON.stringify({
-        //                 accessToken,
-        //                 // refreshToken,
-        //         }),);
+                    await SecureStore.setItemAsync('jwt', accessToken);
+                    props.setStatus&&props.setStatus('success');
+                    await props.navigation.navigate(userOption? 'NurseApp':'AdminApp');
+                } else {
+                    setErrorMessage('Not authorized user: select the right type');
+                }
             
-        //     } else {
-        //         Alert.alert('Login Failed:', response.data.message);
-        //         return;
-        //     }
+            } else {
+                setErrorMessage("Login Failed: " + response.json().message);
+                return;
+            }
 
         } catch (error) {
-          Alert.alert('Login Failed', error.response?.data?.message);
-          console.log("Error: ", error);
+            setErrorMessage("Login Failed: " + error);
+            // Alert.alert('Login Failed', error.response?.data?.message);
         }
     };
-    
 
+    
     return (
         <View style={styles.container}>
             <Image source={{uri: IMAGE_DEF}} style={styles.image} />
             <SwitchSelector 
-                options={options} initial={props.initial} 
+                options={options} initial={props.initial? 1:props.initial} 
                 onPress={ value => 
-                    console.log(`Call onPress with value: ${value}`)
+                    setUserOption(value)
                 } 
                 buttonColor='#EC1C24'
                 style={styles.switch}
@@ -84,15 +106,16 @@ export default function Login(props){
             <Text>{props.user}</Text>
 
             <TextInput style={styles.input} placeholder="Username" 
-                onChangeText={(text) => setUsername(text)}
-                value={username}
+                onChangeText={text => setUsername(text)}
+                // value={username}
             />
             <TextInput style={styles.input} placeholder="Password"
-                onChange = {(text) => setPassword(text)}
+                onChange = {(e) => setPassword(e.nativeEvent.text)}
                 // value = {password}
                 secureTextEntry={true} 
             />
-            <LoginButton onLogin={onLogin} />
+            <TextInput style={styles.error}>{errorMessage}</TextInput>
+            <LoginButton onLogin={onLogin} navigation={props.navigation} />
         </View>
     )
 }
@@ -126,4 +149,10 @@ const styles = StyleSheet.create({
         width: 300,
         marginBottom: 20,  
     },
+
+    error:{
+        color: 'red',
+        fontSize: 12,
+        fontStyle: 'italic',
+    }
 })
