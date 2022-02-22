@@ -4,6 +4,7 @@ import {StyleSheet , View} from 'react-native';
 import GreetingHeader from '../GreetingHeader';
 import ToBeValidated from '../ToBeValidated';
 import RecentlyValidated from '../RecentlyValidated';
+import NetworkBar from '../../nurse-landing-page/NetworkBar';
 
 import { connect } from 'react-redux';
 
@@ -26,6 +27,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function Validation 
 
     return (
         <View  style = {styles.admin}>
+            <NetworkBar />
             <StatusBar style="auto" />
             <GreetingHeader navigation={props.navigation} name = "Jean DuPont"/>
             {page[activePage]}
