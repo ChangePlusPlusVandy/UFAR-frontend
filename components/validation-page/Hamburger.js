@@ -21,6 +21,9 @@ export default function Hamburger (props) {
                     <MenuOption onSelect={() => props.setActivePage(2)}>
                         <Icon name="dashboard" color = '#FFF' size = {30} iconStyle = {styles.icon} />
                     </MenuOption>
+                    <MenuOption onSelect={() => props.setActivePage(0)}>
+                        <Icon name="check" color = '#FFF' size = {30} iconStyle = {styles.icon} />
+                    </MenuOption>
                     <MenuOption>
                         <Icon name="settings" color = '#FFF' size = {30} iconStyle = {styles.icon} />
                     </MenuOption>
