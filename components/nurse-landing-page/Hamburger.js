@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet , TouchableOpacity, View} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
+import { AuthContext } from '../../src/context/AuthContext';
 
 export default function Hamburger (props) {
+
+    const authContext = useContext(AuthContext);
 
     return (
         <TouchableOpacity style={styles.hamburger}>
@@ -21,6 +24,13 @@ export default function Hamburger (props) {
                     <MenuOption>
                         <Icon name="close" color = '#FFF' size = {30} iconStyle = {styles.icon} />
                     </MenuOption>
+                    {/** if is authenticated */
+                        authContext.authState.authenticated &&
+                        <MenuOption onSelect={() => authContext.logout()}>
+                        <Icon name="logout" color = '#FFF' size = {30} iconStyle = {styles.icon} />
+                        </MenuOption>
+                    }
+                    
                 </MenuOptions>
             </Menu>
         </TouchableOpacity>

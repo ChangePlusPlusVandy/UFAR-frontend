@@ -21,12 +21,52 @@ import DrugManagementForm from './pages/DrugManagementForm';
 import data from './pages/locations';
 import { connect } from 'react-redux';
 
+import { convertFromYYYYMMDDToDDMMYYYY } from "../../src/utils.js";
+
+
+const replaceIdsWithNames = (provinceId, healthZoneId, healthAreaId, villageId) => {
+
+    var result = {
+        provinceName: "",
+        healthZoneName: "",
+        healthAreaName: "",
+        villageName: ""
+    }
+
+    Object.keys(data.provinces).forEach(province => {
+        if (data.provinces[province].id === provinceId) {
+            result.provinceName = province;
+
+            Object.keys(data.provinces[province].health_zones).forEach(healthZone => {
+                if (data.provinces[province].health_zones[healthZone].id === healthZoneId) {
+                    result.healthZoneName = healthZone;
+
+                    Object.keys(data.provinces[province].health_zones[healthZone].health_areas).forEach(healthArea => {
+                        if (data.provinces[province].health_zones[healthZone].health_areas[healthArea].id === healthAreaId) {
+                            result.healthAreaName = healthArea;
+
+                            Object.keys(data.provinces[province].health_zones[healthZone].health_areas[healthArea].villages).forEach(village => {
+                                if (data.provinces[province].health_zones[healthZone].health_areas[healthArea].villages[village].id === villageId) {
+                                    result.villageName = village;
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+    return result;
+};
+
 
 
 export default connect(mapStateToProps)(function DailyReportForm(props) {
-    console.log("DailyReportForm props: ", props);
-    const [activePage, setActivePage] = useState(0);
 
+    const [edit, setEdit] = useState(props.edit);
+
+    const [activePage, setActivePage] = useState(0);
 
     // Identification state
     const [DMMDay, setDMMDay] = useState("");
@@ -123,7 +163,10 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         setTotalchilrenSixMonthsToveFiveYears(menSixMonthsToFiveYears + womenSixMonthsToFiveYears);
         setTotalFiveToFourteenYears(menFiveToFourteenYears + womenFiveToFourteenYears);
         setTotalFifteenAndOlder(menFifteenAndOlder + womenFifteenAndOlder);
-    }, [menUnderSixMonths, menSixMonthsToFiveYears, menFiveToFourteenYears, menFifteenAndOlder, womenLessThanSixMonths, womenSixMonthsToFiveYears, womenFiveToFourteenYears, womenFifteenAndOlder]);
+    }, [menUnderSixMonths, menSixMonthsToFiveYears,
+         menFiveToFourteenYears, menFifteenAndOlder,
+          womenLessThanSixMonths, womenSixMonthsToFiveYears,
+           womenFiveToFourteenYears, womenFifteenAndOlder, totalNumMen, totalNumWomen]);
         
     // Households
     const [numHouseholdsVisited, setNumHouseholdsVisited] = useState(0);
@@ -593,119 +636,142 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     ];
 
     // resets all states to default values
-    const resetAllStates = () => {
-        setDMMDay("");
-        setRegisteredNurse("");
+    const resetAllStates = (report) => {
+
+        var { provinceName, healthZoneName, healthAreaName, villageName } = replaceIdsWithNames(
+            report.province, report.health_zone, report.health_area, report.village
+        );
+
+        setDMMDay(report.DMM_day);
+        setRegisteredNurse(report.nurse);
+
+        setProvinceName(provinceName);
+        setProvinceId(report.province);
+        setHealthZoneName(healthZoneName);
+        setHealthZoneId(report.health_zone);
+        setHealthAreaName(healthAreaName);
+        setHealthAreaId(report.health_area);
+        setVillageName(villageName);
+        setVillageId(report.village);
+    
         
         // Treatment Information state
-        setOnchocerciasis(false);
+        setOnchocerciasis(report.schistosomiasis);
         setNumCyclesOnchocerciasis(0);
-        setOnchocerciasisFirst(false);
-        setOnchocerciasisSecond(false);
-        setLymphaticFilariasis(false);
-        setLFMectizanAlbendazole(false);
+        setOnchocerciasisFirst(report.onchocerciasis.first_round);
+        setOnchocerciasisSecond(report.onchocerciasis.second_round);
+        setLymphaticFilariasis(report.lymphatic_filariasis.mectizan_and_albendazole || 
+            report.lymphatic_filariasis.albendazole_alone.first_round || report.lymphatic_filariasis.albendazole_alone.second_round);
+        setLFMectizanAlbendazole(report.lymphatic_filariasis.mectizan_and_albendazole);
         setNumCyclesLFMectizanAlbendazole(0);
         setNumCyclesLFAlbendazole(0);
-        setLFAlbendazoleFirst(false);
-        setLFAlbendazoleSecond(false);
-        setSchistosomiasis(false);
-        setSoilTransmittedHelminthiasis(false);
-        setTrachoma(false);
+        setLFAlbendazoleFirst(report.lymphatic_filariasis.albendazole_alone.first_round);
+        setLFAlbendazoleSecond(report.lymphatic_filariasis.albendazole_alone.second_round);
+        setSchistosomiasis(report.schistosomiasis);
+        setSoilTransmittedHelminthiasis(report.soil_transmitted_helminthiasis);
+        setTrachoma(report.trachoma);
 
         // Dates state
-        setDCTrainingCompletionDate("");
-        setMedicineArrivalDate("");
-        setMDDStartDate("");
-        setDMMEndDate("");
-        setReportTransmissionDate("");
+        setDCTrainingCompletionDate(convertFromYYYYMMDDToDDMMYYYY(report.dcs_training_completion_date.split('T')[0]));
+        setMedicineArrivalDate(convertFromYYYYMMDDToDDMMYYYY(report.medicines_arrival_date.split('T')[0]));
+        setMDDStartDate(convertFromYYYYMMDDToDDMMYYYY(report.MDD_start_date.split('T')[0]));
+        setDMMEndDate(convertFromYYYYMMDDToDDMMYYYY(report.MDD_end_date.split('T')[0]));
+        setReportTransmissionDate(convertFromYYYYMMDDToDDMMYYYY(report.date_of_transmission.split('T')[0]));
     
         // Distributors state
-        setNumMenDistributors(0);
-        setNumWomenDistributors(0);
+        setNumMenDistributors(report.distributors.men);
+        setNumWomenDistributors(report.distributors.women);
 
         // Denumber state
-        setMenLessThanSixMonths(0);
-        setMenSixMonthsToFiveYears(0);
-        setMenFiveToFourteenYears(0);
-        setMenFifteenAndOlder(0);
-        setWomenLessThanSixMonths(0);
-        setWomenSixMonthsToFiveYears(0);
-        setWomenFiveToFourteenYears(0);
-        setWomenFifteenAndOlder(0);
-        setTotalChildrenUnderSixMonths(0);
-        setTotalchilrenSixMonthsToveFiveYears(0);
-        setTotalFiveToFourteenYears(0);
-        setTotalFifteenAndOlder(0);
-        setTotalNumMen(0);
-        setTotalNumWomen(0);
-        setTotalNumPersons(0);
+        setMenLessThanSixMonths(report.patients.men.lessThanSixMonths);
+        setMenSixMonthsToFiveYears(report.patients.men.sixMonthsToFiveYears);
+        setMenFiveToFourteenYears(report.patients.men.fiveToFourteen);
+        setMenFifteenAndOlder(report.patients.men.fifteenAndAbove);
+        setWomenLessThanSixMonths(report.patients.women.lessThanSixMonths);
+        setWomenSixMonthsToFiveYears(report.patients.women.sixMonthsToFiveYears);
+        setWomenFiveToFourteenYears(report.patients.women.fiveToFourteen);
+        setWomenFifteenAndOlder(report.patients.women.fifteenAndAbove);
+        
 
         // Households
-        setNumHouseholdsVisited(0);
-        setNumHouseholdsTreated(0);
-        setGeographicalCoverageOfHouseholds(0);
+        setNumHouseholdsVisited(report.households.visited);
+        setNumHouseholdsTreated(report.households.treated);
 
         // Morbidity Cases state
-        setNumMenBlind(0);
-        setNumWomenBlind(0);
-        setNumMenTrichiasis(0);
-        setNumWomenTrichiasis(0);
-        setNumMenHydroceles(0);
-        setNumMenGuineaWorm(0);
-        setNumWomenGuineaWorm(0);
+        setNumMenBlind(report.blind.men);
+        setNumWomenBlind(report.blind.women);
+        setNumMenTrichiasis(report.trichiasis.men);
+        setNumWomenTrichiasis(report.trichiasis.women);
+        setNumMenHydroceles(report.hydroceles.men);
+        setNumMenGuineaWorm(report.guinea_worm.men);
+        setNumWomenGuineaWorm(report.guinea_worm.women);
+
+        setNumMenLUpperLimbs(report.lymphedema.men.upper_limbs.left)
+        setNumMenRUpperLimbs(report.lymphedema.men.upper_limbs.right)
+        setNumMenLLowerMembers(report.lymphedema.men.lower_limbs.left)
+        setNumMenRLowerMembers(report.lymphedema.men.lower_limbs.right)
+    
+
+        setNumWomenLUpperLimbs(report.lymphedema.women.upper_limbs.left)
+        setNumWomenRUpperLimbs(report.lymphedema.women.upper_limbs.right)
+        setNumWomenLLowerMembers(report.lymphedema.women.lower_limbs.left)
+        setNumWomenRLowerMembers(report.lymphedema.women.lower_limbs.right)
+        setNumWomenLeftBreast(report.lymphedema.women.breast.left)
+        setNumWomenRightBreast(report.lymphedema.women.breast.right)
 
         // Processing: Mectizan state
-        setNumYoungMenMectizan(0);
-        setNumOldWomenMectizan(0);
-        setNumOldMenMectizan(0);
-        setNumYoungWomenMectizan(0);
+        setNumYoungMenMectizan(report.mectizan.men.fiveToFourteen);
+        setNumOldWomenMectizan(report.mectizan.men.fifteenAndOver);
+        setNumOldMenMectizan(report.mectizan.men.fifteenAndOver);
+        setNumYoungWomenMectizan(report.mectizan.women.fiveToFourteen);
 
         // Processing: Mectizan and Albendazole state
-        setNumYoungMenMectAlb(0);
-        setNumOldWomenMectAlb(0);
-        setNumOldMenMectAlb(0);
-        setNumYoungWomenMectAlb(0);
-        setNumSideEffectsReported(0);
+        setNumYoungMenMectAlb(report.mectizan_and_albendazole.men.fiveToFourteen);
+        setNumOldMenMectAlb(report.mectizan_and_albendazole.men.fifteenAndOver);
+        setNumYoungWomenMectAlb(report.mectizan_and_albendazole.women.fiveToFourteen);
+        setNumOldWomenMectAlb(report.mectizan_and_albendazole.women.fifteenAndOver);
+
+        setNumSideEffectsReported(report.side_effects_num);
 
         // Processing: Albendazole (alone) state
-        setNumYoungMenAlbendazoleTreat(0);
-        setNumOldWomenAlbendazoleTreat(0);
-        setNumOldMenAlbendazoleTreat(0);
-        setNumYoungWomenAlbendazoleTreat(0);
+        setNumYoungMenAlbendazoleTreat(report.albendazole.men.fiveToFourteen);
+        setNumOldWomenAlbendazoleTreat(report.albendazole.women.fifteenAndOver);
+        setNumOldMenAlbendazoleTreat(report.albendazole.men.fifteenAndOver);
+        setNumYoungWomenAlbendazoleTreat(report.albendazole.women.fiveToFourteen);
  
         // Processing: Praziquantel state
-        setNumMenPrazi(0);
-        setNumWomenPrazi(0);
+        setNumMenPrazi(report.praziquantel.men.fiveToFourteen);
+        setNumWomenPrazi(report.praziquantel.women.fiveToFourteen);
 
         // Processing: Albendazole (Soil-transmitted helminthiasis)
-        setNumMenAlbendazoleHelminthiasis(0);
-        setNumWomenAlbendazoleHelminthiasis(0);
+        setNumMenAlbendazoleHelminthiasis(report.albendazole_soil_transmitted.men.fiveToFourteen);
+        setNumWomenAlbendazoleHelminthiasis(report.albendazole_soil_transmitted.women.fiveToFourteen);
 
-         // Untreated state
-         setNumInfants(0);
-         setNumPregnant(0);
-         setNumBreastfeeding(0);
-         setNumBedridden(0);
-         setNumRefused(0);
-         setNumAbsent(0);
+        // Untreated state
+        setNumInfants(report.untreated_persons.childrenYoungerThanFive);
+        setNumPregnant(report.untreated_persons.pregnantWomen);
+        setNumBreastfeeding(report.untreated_persons.breastfeedingWomen);
+        setNumBedridden(report.untreated_persons.bedriddenPatients);
+        setNumRefused(report.untreated_persons.refusals);
+        setNumAbsent(report.untreated_persons.absent);
 
          // Drug Management: Ivermectin
-        setIvermectinReceived(0);
-        setIvermectinUsed(0);
-        setIvermectinLost(0);
-        setIvermectinReturned(0);
+        setIvermectinReceived(report.ivermectin_management.quantityReceived);
+        setIvermectinUsed(report.ivermectin_management.quantityUsed);
+        setIvermectinLost(report.ivermectin_management.amountLost);
+        setIvermectinReturned(report.ivermectin_management.quantityReturnedToCS);
 
         // Drug Management: Albendazole
-        setAlbendazoleReceived(0);
-        setAlbendazoleUsed(0);
-        setAlbendazoleLost(0);
-        setAlbendazoleReturned(0);
+        setAlbendazoleReceived(report.albendazole_management.quantityReceived);
+        setAlbendazoleUsed(report.albendazole_management.quantityUsed);
+        setAlbendazoleLost(report.albendazole_management.amountLost);
+        setAlbendazoleReturned(report.albendazole_management.quantityReturnedToCS);
     
         // Drug Management: Praziquantel
-        setPraziquantelReceived(0);
-        setPraziquantelUsed(0);
-        setPraziquantelLost(0);
-        setPraziquantelReturned(0);
+        setPraziquantelReceived(report.praziquantel_management.quantityReceived);
+        setPraziquantelUsed(report.praziquantel_management.quantityUsed);
+        setPraziquantelLost(report.praziquantel_management.amountLost);
+        setPraziquantelReturned(report.praziquantel_management.quantityReturnedToCS);
     }
 
     // report object to be sent to the server
@@ -714,8 +780,10 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         "DMM_day": DMMDay,
         "nurse": registeredNurse,
         "village": villageId,
+        "province": provinceId,
         "health_area": healthAreaId,
         "health_zone": healthZoneId,
+        "village": villageId,
         // DATE
         "date": Date.now(),
         // 1.11 diseases treated
@@ -745,11 +813,11 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         //     "trachoma": 0,
         // },
 
-        "dcs_training_completion_date": DCTrainingCompletionDate,
-        "medicines_arrival_date": medicineArrivalDate,
-        "MDD_start_date": MDDStartDate,
-        "MDD_end_date": DMMEndDate,
-        "date_of_transmission": reportTransmissionDate,
+        "dcs_training_completion_date": (new Date(DCTrainingCompletionDate.replace(/:\/:/, "-"))).getTime(),
+        "medicines_arrival_date": (new Date(medicineArrivalDate.replace(/:\/:/, "-"))).getTime(),
+        "MDD_start_date": (new Date(MDDStartDate.replace(/:\/:/, "-"))).getTime(),
+        "MDD_end_date": (new Date(DMMEndDate.replace(/:\/:/, "-"))).getTime(),
+        "date_of_transmission": (new Date(reportTransmissionDate.replace(/:\/:/, "-"))).getTime(),
         "distributors": {
             "men": numMenDistributors,
             "women": numWomenDistributors
@@ -900,6 +968,13 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
 
     // Conditional rendering page navigation
     const renderPageContent = () => {
+
+            // if there's a report to edit, reset all states
+            if (edit){
+                setEdit(false);
+                resetAllStates(props.currentReport);
+            }
+
             return (
                 <>
                     {pages[activePage]}
@@ -910,13 +985,14 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
                         <SubmitButton 
                             setLandingPage={props.setLandingPage}
                             report={report}
+                            edit={props.edit}
+                            currentReportId={props.currentReport && props.currentReport.id}
                         />}
                     </View>
                     <ProgressBar progress={(activePage + 1) / pages.length} />
                 </>
             );
     }
-
     
     return (
         <View style={styles.container}>

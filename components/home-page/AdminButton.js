@@ -4,7 +4,10 @@ import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 export default function AdminButton(props) {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('AdminApp')} style={styles.button}>
+            <TouchableOpacity onPress={() => 
+                // todo: if not authorized, redirect to login page
+                props.navigation.navigate('AdminApp')} style={styles.button
+            }>
                 {/* INSERT ICON */}
             </TouchableOpacity>
             <Text style={styles.text}>Admin</Text>

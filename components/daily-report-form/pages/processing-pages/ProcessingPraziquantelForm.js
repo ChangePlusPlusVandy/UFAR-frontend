@@ -33,7 +33,7 @@ export default function ProcessingPraziForm(props) {
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Total couvert</Text>
-                    <TextInput style={styles.inputField} value={`${isFinite(props.totalCoveragePrazi) ? props.totalCoveragePrazi.toString() : " --- "}%`} />
+                    <TextInput style={styles.inputField} value={`${isFinite(props.totalCoveragePrazi) ? props.totalCoveragePrazi.toString() : "0"}%`} />
                 </View>
             </View>
         </View>

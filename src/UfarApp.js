@@ -5,7 +5,10 @@ import { createStackNavigator } from 'react-navigation-stack';
 import HomePage from "../components/home-page/HomePage";
 import NurseApp from './NurseApp';
 import Validation from '../components/validation-page/Validation';
-
+import AdminApp from './AdminApp';
+import Login from '../components/authorization/Login';
+import Registration from '../components/authorization/Registration';
+import ForgotPassword from '../components/authorization/ForgotPassword';
 
 export default function UfarApp() {
   return (
@@ -30,14 +33,15 @@ const NurseAppNavigator = createStackNavigator({
 
 // navigation stack for the AdminApp
 const AdminAppNaviagtor = createStackNavigator({
-  Validation: {
-    screen: Validation,
+  AdminMain: {
+    screen: AdminApp,
     navigationOptions: {
       headerShown: false,
     }
-  }
+  },
+  
 }, {
-  initialRouteName: 'Validation',
+  initialRouteName: 'AdminMain',
   navigationOptions:{
     headerShown: false,
   }
@@ -50,6 +54,27 @@ const UfarAppNavigator = createStackNavigator({
     navigationOptions: {
       headerShown: false,
       
+    }
+  },
+
+  Login: {
+    screen: Login,
+    navigationOptions: {
+      headerShown: false,
+    }
+  },
+
+  Registration: {
+    screen: Registration,
+    navigationOptions: {
+      headerShown: false,
+    }
+  },
+
+  ForgotPassword: {
+    screen: ForgotPassword,
+    navigationOptions: {
+      headerShown: false,
     }
   },
 

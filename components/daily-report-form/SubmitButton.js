@@ -4,7 +4,7 @@ import {Pressable, StyleSheet, Text, View, Modal} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { connect } from 'react-redux';
 import uuid from 'react-native-uuid';
-import { addReport } from '../../src/actions.js'
+import { addReport, validateReport } from '../../src/actions.js'
 
 export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButton(props){
     const [modalVisible, setModalVisible] = React.useState(false);
@@ -25,6 +25,25 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
         // console.log("submitReport");
     }
 
+    /**
+     * Validates report through redux and finally at the backend, navigates
+     * back to validation pages
+     */
+    const submitEditReport = () => {
+        console.log("edit report submitted");
+
+        // console.log("props report", props.report);
+        props.markValidatedReport(props.report, props.currentReportId);
+
+        // console.log("validated report: ", props.validationReports);
+
+        // dispatch an action to validate the report at the backend
+        // props.validateReport(props.validationReports.find(report => report.id === currentReportId), props.currentReportId);
+
+        // navigate back to validation pages
+        props.setLandingPage(true);
+    }
+
     return (
         <View>
             <View style={styles.centeredView}>
@@ -43,7 +62,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                             <Pressable
                             style={styles.button}
                             onPress={() => {
-                                submitReport();
+                                props.edit? submitEditReport():submitReport();
                                 setModalVisible(!modalVisible)
                             }}
                             >
@@ -56,7 +75,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
             <View style={styles.container}>
                 <Pressable onPress={ () => {
                     if (props.isConnected) {
-                        submitReport();
+                        props.edit? submitEditReport():submitReport();
                     } else {
                         setModalVisible(true);
                     }
@@ -64,7 +83,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                 style={styles.button}>
                     <Icon name='sc-telegram' type='evilicon' color='white' size={45}/>
                 </Pressable>
-                <Text style={styles.text}>Submit/Save</Text>
+                <Text style={styles.text}> {props.edit? "Validate": "Submit/Save" }</Text>
             </View>
         </View>
     )
@@ -75,6 +94,7 @@ function mapStateToProps(state) {
       name: state.reducer.name,
       reports: state.reducer.reports,
       isConnected: state.network.isConnected,
+      validationReports: state.reducer.validationReports,
     };
 }
 
@@ -85,7 +105,9 @@ function mapDispatchToProps(dispatch){
         //     retry: true,
         //   },}),
         addReport: (report, id) => dispatch(addReport(report, id)),  
-        removeReport: (id) => dispatch({type: 'REMOVE_REPORT', id: id}),  
+        removeReport: (id) => dispatch({type: 'REMOVE_REPORT', id: id}), 
+        markValidatedReport: (report, id) => dispatch({type: 'MARK_VALIDATED_REPORT', report: report, id: id}),
+        validateReport: (report, id) => dispatch(validateReport(report, id)),
     };
 }
 

@@ -43,7 +43,7 @@ export default function ProcessingMectizanForm(props) {
                 </View>
                 <View style={styles.inputFieldContainer}>
                     <Text style={{...styles.inputLabelBigger, marginBottom: 0}}>Total couvert</Text>
-                    <TextInput style={styles.inputField} value={`${isFinite(props.totalCoverageMectizan) ? props.totalCoverageMectizan.toString() : " --- "}%`} />
+                    <TextInput style={styles.inputField} value={`${isFinite(props.totalCoverageMectizan) ? props.totalCoverageMectizan.toString() : "0"}%`} />
                 </View>
             </View>
         </View>
