@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory-native'
 
 
-export default function Dashboard1(props) {
+export default function GeographicalDashboard(props) {
   return (
     <View style={styles.container}>
       <ScrollView>

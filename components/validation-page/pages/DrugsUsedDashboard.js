@@ -14,7 +14,7 @@ const regionData = {
 // I.E. Instead of adding more victorybar components if you get more regions, you just add more data points inside each one.
 // Each bar should have the same number of data points and should correspond to the number of regions
 // The below data is obv all dummy
-export default function Dashboard3(props) {
+export default function DrugsUsedDashboard(props) {
     return (
         <View style={styles.container}>
           <ScrollView>
