@@ -6,15 +6,23 @@ import ToBeValidated from '../ToBeValidated';
 import RecentlyValidated from '../RecentlyValidated';
 import NetworkBar from '../../nurse-landing-page/NetworkBar';
 
+import { connect } from 'react-redux';
 
 
-export default function Validation (props) {
 
+
+export default connect(mapStateToProps, mapDispatchToProps)(function Validation (props) {
+    // console.log("Validation props", props);
     const [activePage, setActivePage] = React.useState(0);
 
+    
     const page = [
-        <ToBeValidated setActivePage={setActivePage} />,
-        <RecentlyValidated setActivePage={setActivePage} />
+        <ToBeValidated setActivePage={setActivePage} 
+            reports={props.validationReports.filter(report => report.is_validated === false)} 
+        />,
+        <RecentlyValidated setActivePage={setActivePage}
+            reports={props.validationReports.filter(report => report.is_validated === true)}
+        />
     ]
 
     return (
@@ -25,6 +33,19 @@ export default function Validation (props) {
             {page[activePage]}
         </View>
     );
+});
+
+function mapStateToProps(state) {
+    return {
+        name: state.reducer.name,
+        validationReports: state.reducer.validationReports,
+    };
+}
+
+function mapDispatchToProps(dispatch){
+    return {
+        getReports: (healthZoneId) => dispatch(getReports(healthZoneId))
+    };
 }
 
 const styles = StyleSheet.create({

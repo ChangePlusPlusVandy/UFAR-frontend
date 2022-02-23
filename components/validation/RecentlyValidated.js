@@ -2,96 +2,25 @@ import React from 'react';
 import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import LeftArrow from './LeftArrow';
+import { convertFromYYYYMMDDToDDMMYYYY } from '../../src/utils';
+
 //uses material icons
 
-const DATA = [
-    {
-        id: "bd7acbea-c1b1-46c2-a5-3ad53abb28ba",
-        date: "04/12",
-        dayNumber: "Jour 1",
-    },
-    {
-        id: "3ac68afc-c6-48d3-a4f8-fbd91aa97f63",
-        date: "05/12",
-        dayNumber: "Jour 2",
-    },
-    {
-        id: "58694a0f-3da1-471f-bd96-1455729d72",
-        date: "06/12",
-        dayNumber: "Jour 3",
-    },
-    {
-        id: "3ac68afc-c5-48d3-a4f8-fbd91aa97f63",
-        date: "07/12",
-        dayNumber: "Jour 4",
-    },
-    {
-        id: "58690f-3da1-471f-bd96-145571e29d72",
-        date: "08/12",
-        dayNumber: "Jour 5",
-    },
-    {
-        id: "bd7acbea-c1b1-46c2-aed5-3ad53ab8ba",
-        date: "09/12",
-        dayNumber: "Jour 6",
-    },
-    {
-        id: "3ac8afc-c605-48d3-a4f8-fbd91aa97f63",
-        date: "10/12",
-        dayNumber: "Jour 7",
-    },
-    {
-        id: "58694a0f-3da1-471f-bd96-14551e29d72",
-        date: "11/12",
-        dayNumber: "Jour 8",
-    },
-    {
-        id: "3ac68afc-c605-4d3-a4f8-fbd91aa97f63",
-        date: "12/12",
-        dayNumber: "Jour 9",
-    },
-    {
-        id: "58694a0f-da1-471f-bd96-145571e29d72",
-        date: "13/12",
-        dayNumber: "Jour 10",
-    },
-    {
-        id: "bd7acbea-c1b1-46c2-ad5-3ad53abb28ba",
-        date: "14/12",
-        dayNumber: "Jour 11",
-    },
-    {
-        id: "3ac8afc-c605-48d3-a4f8-fbd91aa97f63",
-        date: "15/12",
-        dayNumber: "Jour 12",
-    },
-    {
-        id: "58694a0f-3da1-471f-bd96-14571e29d72",
-        date: "16/12",
-        dayNumber: "Jour 13",
-    },
-    {
-        id: "3a68afc-c605-48d3-a4f8-fbd91aa97f63",
-        date: "17/12",
-        dayNumber: "Jour 14",
-    },
-    {
-        id: "58694a0f-3a1-471f-bd96-145571e29d72",
-        date: "18/12",
-        dayNumber: "Jour 15",
-    },
-];
-
 export default function RecentlyValidated(props) {
+
+    console.log("reports", props.reports);
+
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
-            <Text style={styles.timelist}>{item.date}</Text>
-            <Text style={styles.namelist}>{item.dayNumber}</Text>
+            <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(item.date)).toISOString().split('T')[0])}</Text>
+            <Text style={styles.namelist}>{`Jour #${item.DMM_day}`}</Text>
             <TouchableOpacity style={styles.edit}>
-                <Icon name="check" color = '#fff' style = {styles.icon} />
+            <Icon name="check" color = '#fff' style = {styles.icon} />
             </TouchableOpacity>
         </View>
     );
+
+
 
     return (
         <View style={styles.container}>
@@ -99,7 +28,7 @@ export default function RecentlyValidated(props) {
                 <LeftArrow setActivePage={props.setActivePage}/>
                 <Text style={styles.header}>Récemment Validé</Text>
             </View>
-            <FlatList data={DATA} renderItem={renderItem} keyExtractor={item => item.id}/>
+            <FlatList data={props.reports} renderItem={renderItem} keyExtractor={item => item.id}/>
         </View>
     );
 }

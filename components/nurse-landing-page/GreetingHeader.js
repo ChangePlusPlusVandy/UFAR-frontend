@@ -22,6 +22,8 @@ export default connect(mapStateToProps)(function GreetingHeader(props) {
 });
 
 function mapStateToProps(state) {
+    console.log("mapStateToProps: ", state);
+
     return {
       name: state.reducer.name,
       reports: state.reducer.reports,

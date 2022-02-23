@@ -74,4 +74,4 @@ const styles = StyleSheet.create({
             backgroundColor: '#EC1C24',
         },
     },
-})
+});

@@ -2,107 +2,67 @@ import React from 'react';
 import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import RightArrow from './RightArrow';
-//uses material icons
+import DailyReportForm from '../daily-report-form/DailyReportForm';
+import FetchButton from './FetchButton';
 
-const DATA = [
-    {
-        id: "bd7acea-c1b1-46c2-aed5-3ad53b28ba",
-        date: "04/12",
-        dayNumber: "Jour 1",
-    },
-    {
-        id: "3ac6afc-c605-48d3-a4f8-fbd91aa7f63",
-        date: "05/12",
-        dayNumber: "Jour 2",
-    },
-    {
-        id: "5694a0f-3da1-471f-bd6-145571e29d72",
-        date: "06/12",
-        dayNumber: "Jour 3",
-    },
-    {
-        id: "3ac68afc-c05-48d3-a4f8-fbd1aa97f63",
-        date: "07/12",
-        dayNumber: "Jour 4",
-    },
-    {
-        id: "5869a0f-3da1-471f-bd96-145571e2d72",
-        date: "08/12",
-        dayNumber: "Jour 5",
-    },
-    {
-        id: "bd7abea-c1b1-46c2-aed5-3a53abb28ba",
-        date: "09/12",
-        dayNumber: "Jour 6",
-    },
-    {
-        id: "3ac68fc-c605-48d3-a4f8-fbd91a97f63",
-        date: "10/12",
-        dayNumber: "Jour 7",
-    },
-    {
-        id: "5894a0f-3da1-471f-bd96-14551e29d72",
-        date: "11/12",
-        dayNumber: "Jour 8",
-    },
-    {
-        id: "3ac68afc-c605-8d-a4f8-fbd91aa97f63",
-        date: "12/12",
-        dayNumber: "Jour 9",
-    },
-    {
-        id: "58694a0f-3d1-471f-bd6-145571e29d72",
-        date: "13/12",
-        dayNumber: "Jour 10",
-    },
-    {
-        id: "bd7acbea-c1b1-46c2-ae5-3ad3abb28ba",
-        date: "14/12",
-        dayNumber: "Jour 11",
-    },
-    {
-        id: "3ac6afc-c605-48d-a4f8-fbd91aa97f63",
-        date: "15/12",
-        dayNumber: "Jour 12",
-    },
-    {
-        id: "58694a0f-3a1-471f-bd96-14571e29d72",
-        date: "16/12",
-        dayNumber: "Jour 13",
-    },
-    {
-        id: "3ac68afc-c65-48d3-a4f8-fbd91aa97f63",
-        date: "17/12",
-        dayNumber: "Jour 14",
-    },
-    {
-        id: "58694af-3da1-471f-bd96-145571e29d72",
-        date: "18/12",
-        dayNumber: "Jour 15",
-    },
-];
+import { connect } from 'react-redux';
+import { convertFromYYYYMMDDToDDMMYYYY } from '../../src/utils';
 
-export default function ToBeValidated(props) {
+export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidated(props) {
+
+    // console.log("to be validated props", props);
+
+    const [landingPage, setLandingPage] = React.useState(true);
+    const [ currentReport, setCurrentReport ] = React.useState(null);
+
+    // Note: the conversion of the date is different from the  validated component bcs this
+    // component deals with a report object immidiatly from the backend, which has a different format 
+    // for date.
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
-            <Text style={styles.timelist}>{item.date}</Text>
-            <Text style={styles.namelist}>{item.dayNumber}</Text>
+            <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY(item.date.split('T')[0])}</Text>
+            <Text style={styles.namelist}>{`Jour #${item.DMM_day}`}</Text>
             <TouchableOpacity style={styles.edit}>
-                <Icon name="edit" color = '#000000' size = {25} />
+                <Icon name="edit" color = '#000000' size = {25} 
+                    onPress={() => {
+                        setCurrentReport(item);
+                        setLandingPage(false);
+                    }}
+                />
             </TouchableOpacity>
         </View>
     );
 
-    return (
+    return landingPage? (
         <View style={styles.container}>
             <View style={styles.flexbox}>
                 <RightArrow setActivePage={props.setActivePage} />
                 <Text style={styles.header}>À Valider</Text>
+                <FetchButton/>
             </View>
-            <FlatList data={DATA} renderItem={renderItem} keyExtractor={item => item.id}/>
-        </View>
+            <FlatList data={props.reports} renderItem={renderItem} keyExtractor={item => item.id}/>
+        </View> 
+    ) : (
+        <DailyReportForm
+            setLandingPage={setLandingPage}
+            currentReport={currentReport}
+            edit={true}
+        />
     );
+});
+
+function mapStateToProps(state) {
+    return {
+        validationReports: state.reducer.validationReports,
+    };
 }
+
+function mapDispatchToProps(dispatch){
+    return {
+        getReports: (healthZoneId) => dispatch(getReports(healthZoneId))
+    };
+}
+
 
 const styles = StyleSheet.create({
     container: {
@@ -117,13 +77,13 @@ const styles = StyleSheet.create({
     header: {
         // fontFamily: 'Helvetica Neue',
         marginTop: 5,
-        marginLeft: 110,
+        marginLeft: 100,
         fontWeight: 'bold',
         fontSize: 25,
         lineHeight: 25,
         marginBottom: 5,
         alignSelf: "center",
-        flex: 11,
+        flex: 4,
     },
     listitem: {
         marginHorizontal: 7,
