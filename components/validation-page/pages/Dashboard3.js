@@ -22,7 +22,7 @@ export default function Dashboard3(props) {
             <VictoryChart
               domainPadding={30} // makes the data pad from end of axes
               domain={{ y: [0, 100]}} 
-              padding={{top: 30, left: 60, right: 60, bottom: 80}}
+              padding={{top: 30, left: 80, right: 60, bottom: 80}}
               height={450} // should make this a function of how much data there is!!
               >
                 <VictoryGroup // DO NOT use VictoryAxis with this component
