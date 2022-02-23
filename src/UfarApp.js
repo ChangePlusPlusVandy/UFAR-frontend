@@ -4,8 +4,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import HomePage from "../components/home-page/HomePage";
 import NurseApp from './NurseApp';
+import Validation from '../components/validation-page/Validation';
 import AdminApp from './AdminApp';
-import Validation from '../components/validation/Pages/Validation';
 import Login from '../components/authorization/Login';
 import Registration from '../components/authorization/Registration';
 import ForgotPassword from '../components/authorization/ForgotPassword';

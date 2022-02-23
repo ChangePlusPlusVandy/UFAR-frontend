@@ -1,12 +1,13 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
-import RightArrow from './RightArrow';
-import DailyReportForm from '../daily-report-form/DailyReportForm';
-import FetchButton from './FetchButton';
+import RightArrow from '../RightArrow';
+//uses material icons
+import DailyReportForm from '../../daily-report-form/DailyReportForm';
+import FetchButton from '../FetchButton';
 
 import { connect } from 'react-redux';
-import { convertFromYYYYMMDDToDDMMYYYY } from '../../src/utils';
+import { convertFromYYYYMMDDToDDMMYYYY } from '../../../src/utils';
 
 export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidated(props) {
 
@@ -66,13 +67,25 @@ function mapDispatchToProps(dispatch){
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 50,
-        paddingTop: 20,
-        paddingBottom: 20,
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        height: 540,
+        backgroundColor: 'white',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
         overflow: 'scroll',
+        flex: 1,
+        marginTop: 20,
+        paddingVertical: 20,
+
+        /* Android Drop Shadow Styling */
+        elevation: 10,
+        
+        /* iOS Drop Shadow Styling */
+        shadowColor: "black",
+        shadowOffset: {
+            width: 5,
+            height: 5,
+        },
+        shadowRadius: 5,
+        shadowOpacity: 0.3,
     },
     header: {
         // fontFamily: 'Helvetica Neue',

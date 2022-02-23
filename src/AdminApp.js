@@ -2,15 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import NetworkBar from '../components/nurse-landing-page/NetworkBar';
-import Validation from '../components/validation/Pages/Validation';
+import Validation from '../components/validation-page/Validation';
 
 // authorization
 import { AuthContext } from '../src/context/AuthContext';
 import * as SecureStore from 'expo-secure-store'
-import Spinner from '../components/authorization/Spinner';
 import Login from '../components/authorization/Login';
-import jwt_decode from "jwt-decode"; // todo: to decode tokens
+import jwt_decode from "jwt-decode";
 
 
 

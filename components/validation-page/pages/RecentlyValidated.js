@@ -1,14 +1,13 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
-import LeftArrow from './LeftArrow';
-import { convertFromYYYYMMDDToDDMMYYYY } from '../../src/utils';
+import LeftArrow from '../LeftArrow';
+//uses material icons
+import { convertFromYYYYMMDDToDDMMYYYY } from '../../../src/utils';
 
 //uses material icons
 
 export default function RecentlyValidated(props) {
-
-    console.log("reports", props.reports);
 
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
@@ -35,13 +34,25 @@ export default function RecentlyValidated(props) {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 50,
-        paddingTop: 20,
-        paddingBottom: 20,
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        height: 540,
+        backgroundColor: 'white',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
         overflow: 'scroll',
+        flex: 1,
+        marginTop: 20,
+        paddingVertical: 20,
+
+        /* Android Drop Shadow Styling */
+        elevation: 10,
+        
+        /* iOS Drop Shadow Styling */
+        shadowColor: "black",
+        shadowOffset: {
+            width: 5,
+            height: 5,
+        },
+        shadowRadius: 5,
+        shadowOpacity: 0.3,
     },
     header: {
         // fontFamily: 'Helvetica Neue',

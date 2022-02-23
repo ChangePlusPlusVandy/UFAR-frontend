@@ -10,7 +10,7 @@ export default function GreetingHeader(props) {
 
     return (
         <View style = {styles.over}>
-            <Hamburger navigation={props.navigation}/>
+            <Hamburger navigation={props.navigation} setActivePage={props.setActivePage}/>
             <View style={styles.container}>
                 <Text style={styles.greeting}>Bienvenue</Text>
                 <Text style={styles.name}>{authContext.authState.user?.name || ""}</Text>
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     },
     over: {
         flexDirection: "row",
+        alignItems: 'center',
     },
     hamburgerBun: {
         flex: 1, 

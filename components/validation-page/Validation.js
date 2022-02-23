@@ -1,10 +1,11 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {StyleSheet , View} from 'react-native';
-import GreetingHeader from '../GreetingHeader';
-import ToBeValidated from '../ToBeValidated';
-import RecentlyValidated from '../RecentlyValidated';
-import NetworkBar from '../../nurse-landing-page/NetworkBar';
+import GreetingHeader from './GreetingHeader';
+import ToBeValidated from './pages/ToBeValidated';
+import RecentlyValidated from './pages/RecentlyValidated';
+import Dashboards from './pages/Dashboards';
+import NetworkBar from '../nurse-landing-page/NetworkBar';
 
 import { connect } from 'react-redux';
 
@@ -22,14 +23,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(function Validation 
         />,
         <RecentlyValidated setActivePage={setActivePage}
             reports={props.validationReports.filter(report => report.is_validated === true)}
-        />
+        />,
+        <Dashboards/>
     ]
 
     return (
         <View  style = {styles.admin}>
             <NetworkBar />
             <StatusBar style="auto" />
-            <GreetingHeader navigation={props.navigation} name = "Jean DuPont"/>
+            <GreetingHeader navigation={props.navigation} name = "Jean DuPont" setActivePage={setActivePage}/>
             {page[activePage]}
         </View>
     );
