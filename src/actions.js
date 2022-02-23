@@ -1,5 +1,5 @@
 import uuid from 'react-native-uuid';
-
+import { DEV_DOMAIN } from "@env" 
 
 // Note: Every action function should have an identifier that is unique to the action as
 // the last parameter. This is used to detect if an action has already been dispatched.
@@ -19,7 +19,7 @@ export const addReport = (report, id) => {
         // submit the report to the server
         // todo: better way to pass in url
         try {
-            const response = await fetch('http://10.76.149.63:3000/form/insert', {
+            const response = await fetch(`${DEV_DOMAIN}/form/insert`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ export const validateReport = (report, id=uuid.v4()) => {
     async function thunk(dispatch){
         // submit the report to the server
         try {
-            const response = await fetch('http://10.76.149.63:3000/validation/reports/validate', {
+            const response = await fetch(`${DEV_DOMAIN}/validation/reports/validate`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ export function getReports(healthZoneId, id=uuid.v4()){
     async function thunk(dispatch){
         // submit the report to the server
         try {
-            const response = await fetch(`http://10.76.149.63:3000/validation/${healthZoneId}/reports`, {
+            const response = await fetch(`${DEV_DOMAIN}/validation/${healthZoneId}/reports`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

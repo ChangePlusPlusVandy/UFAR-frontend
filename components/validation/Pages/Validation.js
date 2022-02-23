@@ -36,7 +36,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(function Validation 
 });
 
 function mapStateToProps(state) {
-    console.log("mapStateToProps", state);
     return {
         name: state.reducer.name,
         validationReports: state.reducer.validationReports,
