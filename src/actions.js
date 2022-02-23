@@ -1,3 +1,5 @@
+import { DEV_DOMAIN } from "@env" 
+
 
 /**
  * When a user adds a report online, it is added to our redux store and marked as submitted 
@@ -13,7 +15,7 @@ export const addReport = (report, id) => {
         // submit the report to the server
         // todo: better way to pass in url
         try {
-            const response = await fetch('http://10.76.170.134:3000/form/insert', {
+            const response = await fetch(`${DEV_DOMAIN}/form/insert`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

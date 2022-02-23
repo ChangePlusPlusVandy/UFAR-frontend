@@ -1,10 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import { StyleSheet, View } from 'react-native';
-import GreetingHeader from '../components/nurse-landing-page/GreetingHeader';
-import Bridge from '../components/daily-report-form/Bridge';
-import RecentsList from '../components/nurse-landing-page/RecentsList';
+
 import NetworkBar from '../components/nurse-landing-page/NetworkBar';
+import Validation from '../components/validation/Pages/Validation';
 
 // authorization
 import { AuthContext } from '../src/context/AuthContext';
@@ -15,26 +14,32 @@ import jwt_decode from "jwt-decode"; // todo: to decode tokens
 
 
 
-export default function NurseApp(props){
-    // todo: decode the type of user if asked to
+export default function AdminApp(props){
 
     const authContext = useContext(AuthContext);
     const [status, setStatus] = useState('loading');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const loadJWT = useCallback(async () => {
       try {
         const value = await SecureStore.getItemAsync('jwt');
+        const user = jwt_decode(value);
 
-        authContext.setAuthState({
-          accessToken: value || null,
-          authenticated: value !== null,
-          user: jwt_decode(value).user
-        });
-        setStatus('success');
+        if (user.user.role.toLowerCase() === "ADMIN".toLowerCase()) {
+          authContext.setAuthState({
+            accessToken: value || null,
+            authenticated: value !== null,
+            user: user.user
+          });
+          setStatus('success');
+        } else {
+          setStatus('failed');
+          setErrorMessage('You are not authorized to access the Admin page');
+        }
+
       } catch (error) {
         setStatus('error');
         console.log(`SecureStore Error: ${error.message}`);
-        // console.log("keychain", Keychain);
         authContext.setAuthState({
           accessToken: null,
           authenticated: false,
@@ -47,24 +52,19 @@ export default function NurseApp(props){
       loadJWT();
     }, [loadJWT]);
 
-  // if (status === 'loading') {
-  //   return <Spinner />;
-  // }
+    // if (status === 'loading') {
+    //     return <Spinner/>;
+    // }
 
+    if ((authContext?.authState?.authenticated === false) || (status === 'failed')) {
+        return <Login setStatus={setStatus} user={"Admin"} initial={0} errorMessage={errorMessage} navigation={props.navigation}/>;
+    } 
 
-  if (authContext?.authState?.authenticated === false) {
-    return <Login setStatus={setStatus} user={"Normal"} initial={1} navigation={props.navigation} />;
-  } else {
     return (
-      <View style={styles.container}>
-          <NetworkBar />
-          <StatusBar style="auto" />
-          <GreetingHeader navigation={props.navigation}/>
-          <RecentsList/>
-          <Bridge/>
-      </View>
+      <>
+        <Validation navigation={props.navigation} />
+      </>
     );
-  }
 };
 
 
