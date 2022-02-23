@@ -12,7 +12,7 @@ export default function Dashboard1(props) {
         <VictoryChart
             theme={VictoryTheme.grayscale}
             domainPadding={{x: 20}}
-            padding={{top: 50, left: 80, right: 80}}
+            padding={{top: 50, left: 100, right: 70}}
             >
               <VictoryBar
                 horizontal
