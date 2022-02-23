@@ -104,6 +104,7 @@ const reducer = (state = initialState, action) => {
 
     // validation cases
     case 'ADD_VALIDATION_REPORTS':
+      console.log("Add validation reports: ", action.reports);
       return { ...state, validationReports: [...action.reports] };
 
     case 'MARK_VALIDATED_REPORT':
@@ -157,7 +158,7 @@ export default function App() {
     <MenuProvider>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}> 
-          <ReduxNetworkProvider pingInterval={3000} shouldPing={true} pingServerUrl='http://10.76.170.134:3000'>
+          <ReduxNetworkProvider pingInterval={3000} shouldPing={true} pingServerUrl='http://10.76.149.63:3000'>
             <UfarApp />
           </ReduxNetworkProvider>
         </PersistGate> 

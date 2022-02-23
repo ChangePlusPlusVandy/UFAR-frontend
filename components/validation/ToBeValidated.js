@@ -37,7 +37,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidat
         <View style={styles.container}>
             <View style={styles.flexbox}>
                 <RightArrow setActivePage={props.setActivePage} />
-                
                 <Text style={styles.header}>À Valider</Text>
                 <FetchButton/>
             </View>

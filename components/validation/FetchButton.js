@@ -5,14 +5,13 @@ import { connect } from 'react-redux';
 import { getReports } from '../../src/actions';
 
 export default connect(mapStateToProps, mapDispatchToProps)(function FetchButton (props) {
-
-    console.log("fetch button props", props);
     return (
         <View style={styles.flexbox}>
             <TouchableOpacity style={styles.checkbadge} onPress={()=>{
                 // todo: make it so that you display a pop up if a use tries to fetch data when current
                 // todo: reports are not validated
                 
+                // todo: way to get the health zone id dynamically from the user
                 props.getReports("618b21eb8453970bd916764c");
                 
 
