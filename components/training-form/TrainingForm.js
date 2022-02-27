@@ -121,6 +121,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
   const [organizedTrainingDC, setOrganizedTrainingDC] = useState("");
   const [trainingDCStartDate, setTrainingDCStartDate] = useState("");
+  const [trainingDCEndDate, setTrainingDCEndDate] = useState("");
   const [numFemaleTrainersDC, setNumFemaleTrainersDC] = useState(0);
   const [numMaleTrainersDC, setNumMaleTrainersDC] = useState(0);
   const [numTotalTrainersDC, setNumTotalTrainersDC] = useState(
@@ -284,6 +285,8 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
       setOrganizedTrainingDC={setOrganizedTrainingDC}
       trainingDCStartDate={trainingDCStartDate}
       setTrainingDCStartDate={setTrainingDCStartDate}
+      trainingDCEndDate={trainingDCStartDate}
+      setTrainingDCEndDate={setTrainingDCStartDate}
       numFemaleTrainersDC={numFemaleTrainersDC}
       setNumFemaleTrainersDC={setNumFemaleTrainersDC}
       numMaleTrainersDC={numMaleTrainersDC}
