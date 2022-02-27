@@ -42,7 +42,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   const [supportingPartner, setSupportingPartner] = useState("");
   const [ASNumber, setASNumber] = useState(0);
   const [numCommunities, setNumCommunities] = useState(0);
-  const [mtnTreated, setMtnTreated] = useState(0);
+  const [mtnTreated, setMtnTreated] = useState("");
 
   // Covid Situation state
   const [activeCovidCases, setActiveCovidCases] = useState(0);
