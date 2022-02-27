@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet , View, Text } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryGroup, VictoryLabel } from 'victory-native'
+import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryGroup, VictoryLabel, VictoryLegend } from 'victory-native'
 
 // the way this works is a bit odd, you create a 3 overlaid and offset bar charts
 // Say the data looks like this
@@ -18,7 +18,6 @@ export default function DrugsUsedDashboard(props) {
     return (
         <View style={styles.container}>
           <ScrollView>
-          <Text style={styles.chartTitle}>Graph Title</Text>
             <VictoryChart
               domainPadding={30} // makes the data pad from end of axes
               domain={{ y: [0, 100]}} 
@@ -81,6 +80,17 @@ export default function DrugsUsedDashboard(props) {
                     />
                 </VictoryGroup>
             </VictoryChart>
+            <Text style={styles.chartTitle}>Graph Title</Text>
+            <VictoryLegend y={10} x = {35}
+  	            title=""
+                orientation="horizontal"
+                gutter={20}
+                data={[
+                  { name: "Praziquantel", symbol: { fill: "#84BD62" } },
+                  { name: "Albendazole", symbol: { fill: "#EC1C24" } },
+                  { name: "Mectizan", symbol: { fill: "#55A5C4" } }
+                ]}
+              />
           </ScrollView>
         </View>
   )
@@ -90,6 +100,7 @@ export default function DrugsUsedDashboard(props) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFFFF",
+    height: 1000,
   },
   chartTitle: {
     textAlign: 'center',
