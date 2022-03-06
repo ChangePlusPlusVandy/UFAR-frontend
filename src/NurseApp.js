@@ -34,7 +34,6 @@ export default function NurseApp(props){
       } catch (error) {
         setStatus('error');
         console.log(`SecureStore Error: ${error.message}`);
-        // console.log("keychain", Keychain);
         authContext.setAuthState({
           accessToken: null,
           authenticated: false,

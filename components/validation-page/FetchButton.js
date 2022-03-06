@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, Text, View,  TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { connect } from 'react-redux';
 import { getReports } from '../../src/actions';
+import { AxiosContext } from '../../src/context/AxiosContext';
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(function FetchButton (props) {
+
+    const {authAxios} = useContext(AxiosContext);
+
     return (
         <View style={styles.flexbox}>
             <TouchableOpacity style={styles.checkbadge} onPress={()=>{
@@ -12,10 +17,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(function FetchButton
                 // todo: reports are not validated
                 
                 // todo: way to get the health zone id dynamically from the user
-                props.getReports("618b21eb8453970bd916764c");
+                props.getReports("618b21eb8453970bd916764c", authAxios);
                 
 
-                // console.log("fetch button pressed");
             }}>
                 <Icon name="cycle" color = '#FFFFFF' size = {25} iconStyle = {styles.icon} type="entypo" />
             </TouchableOpacity>
@@ -31,7 +35,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
     return {
-        getReports: (healthZoneId) => dispatch(getReports(healthZoneId))
+        getReports: (healthZoneId, authAxios) => dispatch(getReports(healthZoneId, authAxios))
     };
 }
 

@@ -70,7 +70,6 @@ export default function Registration(props){
             />
             <TextInput style={styles.input} placeholder="Verify Password"
                 onChange = {(e) => {
-                    console.log(e.nativeEvent.text);
                     setPasswordConfirm(e.nativeEvent.text);
                 }}
                 // value = {password}

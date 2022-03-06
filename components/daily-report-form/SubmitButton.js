@@ -1,20 +1,23 @@
 import parseOptionsFromUrl from 'metro/src/lib/parseOptionsFromUrl';
-import React from 'react';
+import React, {useContext} from 'react';
 import {Pressable, StyleSheet, Text, View, Modal} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { connect } from 'react-redux';
 import uuid from 'react-native-uuid';
-import { addReport, validateReport } from '../../src/actions.js'
+import { addReport, validateReport } from '../../src/actions.js';
+import { AxiosContext } from '../../src/context/AxiosContext.js';
 
 export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButton(props){
     const [modalVisible, setModalVisible] = React.useState(false);
+
+    const {authAxios} = useContext(AxiosContext);
 
     /**
      * Submits report, resets all states, sets in motion a function 
      * to delete it after 24 hours, and navigates back to nurse landing page
      */
     const submitReport = () => {
-        props.addReport(props.report, uuid.v4());
+        props.addReport(props.report, authAxios, uuid.v4());
         // remove the report from the redux store after 24 hours
         setTimeout(() => {
             props.removeReport(uuid.v4());
@@ -22,7 +25,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
 
         // navigate back to nurse landing page
         props.setLandingPage(true);
-        // console.log("submitReport");
     }
 
     /**
@@ -30,15 +32,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
      * back to validation pages
      */
     const submitEditReport = () => {
-        console.log("edit report submitted");
 
-        // console.log("props report", props.report);
         props.markValidatedReport(props.report, props.currentReportId);
 
-        // console.log("validated report: ", props.validationReports);
-
         // dispatch an action to validate the report at the backend
-        // props.validateReport(props.validationReports.find(report => report.id === currentReportId), props.currentReportId);
+        // props.validateReport(props.validationReports.find(report => report.id === currentReportId), authAxios, props.currentReportId);
 
         // navigate back to validation pages
         props.setLandingPage(true);
@@ -104,10 +102,10 @@ function mapDispatchToProps(dispatch){
         // addReport: (report, id) => dispatch({type: 'ADD_REPORT', report: report, id: id, meta: {
         //     retry: true,
         //   },}),
-        addReport: (report, id) => dispatch(addReport(report, id)),  
+        addReport: (report, authAxios, id) => dispatch(addReport(report, authAxios, id)),  
         removeReport: (id) => dispatch({type: 'REMOVE_REPORT', id: id}), 
         markValidatedReport: (report, id) => dispatch({type: 'MARK_VALIDATED_REPORT', report: report, id: id}),
-        validateReport: (report, id) => dispatch(validateReport(report, id)),
+        validateReport: (report, authAxios, id) => dispatch(validateReport(report, authAxios, id)),
     };
 }
 

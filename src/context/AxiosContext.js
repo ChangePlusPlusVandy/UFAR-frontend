@@ -46,6 +46,7 @@ const AxiosProvider = ({children}) => {
       return Promise.reject(error);
     },
   );
+  
 
   return (
     <Provider

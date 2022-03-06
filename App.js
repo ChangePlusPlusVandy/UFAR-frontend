@@ -84,8 +84,6 @@ const persistConfig = {
 
 const reducer = (state = initialState, action) => {
 
-  console.log("Dispatching action: ", action);
-
   switch (action.type) {
     case 'ADD_REPORT':
       // adds or updates the report in the state
@@ -109,17 +107,13 @@ const reducer = (state = initialState, action) => {
 
     // validation cases
     case 'ADD_VALIDATION_REPORTS':
-      console.log("Add validation reports: ", action.reports);
       return { ...state, validationReports: [...action.reports] };
 
     case 'MARK_VALIDATED_REPORT':
 
-      // console.log("validatedReport", action.report.is_validated);
 
       // updated reports
       var validatedReport = {...state.validationReports.find(report => report.id === action.id), ...action.report, "is_validated": true};
-
-      // console.log("validatedReport", validatedReport);
 
       // remove report with id from our state
       var newValidationReports = [...state.validationReports];
@@ -128,9 +122,6 @@ const reducer = (state = initialState, action) => {
           // remove the report from the state
           newValidationReports.splice(newValidationReports.indexOf(report), 1);
         }});
-
-      console.log("newValidationReports", newValidationReports);
-      console.log("validatedReport", validatedReport);
 
       // return { ...state, validationReports: [validatedReport, ...newValidationReports] };
       return { ...state, validationReports: [...newValidationReports, validatedReport] };

@@ -13,7 +13,6 @@ import { connect } from 'react-redux';
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(function Validation (props) {
-    // console.log("Validation props", props);
     const [activePage, setActivePage] = React.useState(0);
 
     
