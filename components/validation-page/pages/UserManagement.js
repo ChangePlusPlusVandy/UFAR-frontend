@@ -14,14 +14,8 @@ export default function UserManagement(props){
     ];
 
     const userManagement = [
-        {
-            title: "New User Token",
-            page: <TokenGeneration/>,
-        },
-        {
-            title: "Reset User Password",
-            page: <ResetUserPassword/>,
-        },
+        <TokenGeneration/>,
+        <ResetUserPassword/>,
     ];
 
     return (
@@ -36,9 +30,8 @@ export default function UserManagement(props){
                 selectedTextStyle={styles.switchSelectedText}
                 backgroundColor='#d8d8d8'
             />
-            <Text style={styles.dashboardTitle}>{userManagement[userPage].title}</Text>
             <View>
-               {userManagement[userPage].page}
+               {userManagement[userPage]}
             </View>
         </View>
     );

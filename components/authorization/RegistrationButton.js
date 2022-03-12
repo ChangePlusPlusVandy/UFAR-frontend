@@ -8,9 +8,11 @@ export default function RegistrationButton(props) {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} 
-                // onPress={() =>
-                //     // props.onLogin()
-                // }
+
+            // onPress={() => 
+                // call function to reset user password (also displayes successfully or error message)
+                //props.navigation.navigate('Login')}
+            
             >
                 <Icon name='arrow-right' type='feather' color='white' size={50}/>
             </TouchableOpacity>

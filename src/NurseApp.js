@@ -56,11 +56,7 @@ export default function NurseApp(props){
   } else {
     return (
       <View style={styles.container}>
-          <NetworkBar />
-          <StatusBar style="auto" />
-          <GreetingHeader navigation={props.navigation}/>
-          <RecentsList/>
-          <Bridge/>
+          <Bridge navigation={props.navigation}/>
       </View>
     );
   }

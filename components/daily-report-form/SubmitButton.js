@@ -24,7 +24,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
         }, 86400000);
 
         // navigate back to nurse landing page
-        props.setLandingPage(true);
+        props.setBridgeActivePage(0);
     }
 
     /**
@@ -39,7 +39,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
         // props.validateReport(props.validationReports.find(report => report.id === currentReportId), authAxios, props.currentReportId);
 
         // navigate back to validation pages
-        props.setLandingPage(true);
+        props.setBridgeActivePage(0);
     }
 
     return (

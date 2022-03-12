@@ -1,6 +1,10 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import React, {useEffect, useContext} from 'react';
+import {StyleSheet, TextInput, View, Text} from 'react-native';
 import ResetUserPasswordButton from '../ResetUserPasswordButton';
+
+// authorization
+import { AxiosContext } from '../../../src/context/AxiosContext';
+
 
 export default function ResetUserPassword(props){
     const [username, setUsername] = React.useState('');
@@ -9,9 +13,11 @@ export default function ResetUserPassword(props){
     const [successMessage, setSuccessMessage] = React.useState('');
     const [passwordConfirm, setPasswordConfirm] = React.useState('');
 
+    const {authAxios} = useContext(AxiosContext);
+
     const resetUserPassword = async () => {
         try {
-            const response = await publicAxios.post('/auth/update_password',
+            const response = await authAxios.post('/auth/update_password',
                 JSON.stringify({name: username, password: newPassword}),
                 {
                     headers: {
@@ -20,7 +26,7 @@ export default function ResetUserPassword(props){
                 }
             );
                 
-            if (response.status == 200) {
+            if (response && response.status == 201) {
                 // todo: Testing
                 setSuccessMessage("Password Reset Successfully");
                 setUsername('');
@@ -47,6 +53,7 @@ export default function ResetUserPassword(props){
 
     return (
         <View style={styles.container}>
+            <Text style={styles.title}>Reset User Password</Text>
             <TextInput style={styles.input} placeholder="Username" 
                 onChangeText={(text) => setUsername(text)}
                 value={username}
@@ -91,5 +98,11 @@ const styles = StyleSheet.create({
         color: 'green',
         fontSize: 12,
         fontStyle: 'italic',
+    },
+    title: {
+        fontWeight: 'bold',
+        color: '#EC1C24',
+        fontSize: 18,
+        alignSelf: 'center',
     },
 });

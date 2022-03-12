@@ -7,7 +7,7 @@ export default function NewReportButton(props){
 
     return(
         <View style={{...styles.container, ...styles.containerInactive}}>
-            <Pressable onPress={() => props.setLandingPage(false)} style={styles.newReportPressable} >
+            <Pressable onPress={() => props.setBridgeActivePage(1)} style={styles.newReportPressable} >
                 <Icon solid={true} name='plus' type='entypo' color='white' size={30}/>
                 <Text style={styles.newReportText}>New Report</Text>
             </Pressable>

@@ -16,11 +16,6 @@ export default function LoginButton(props) {
             </TouchableOpacity>
             <Text style={{...styles.text, ...styles.link}}
                 onPress={() =>
-                    props.navigation.navigate('ForgotPassword')
-                }
-            >Forgot password</Text>
-            <Text style={{...styles.text, ...styles.link}}
-                onPress={() =>
                     props.navigation.navigate('Registration')
                 }
             >Register, Instead</Text>

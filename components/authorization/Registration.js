@@ -5,8 +5,6 @@ import RegistrationButton from './RegistrationButton';
 import SwitchSelector from 'react-native-switch-selector';
 
 // authorization
-import { AuthContext } from '../../src/context/AuthContext';
-import * as SecureStore from 'expo-secure-store'
 import { AxiosContext } from '../../src/context/AxiosContext';
 
 import ufar from './ufar.png';
@@ -15,21 +13,12 @@ import ufar from './ufar.png';
 const IMAGE_DEF = Image.resolveAssetSource(ufar).uri;
 
 export default function Registration(props){
-    // todo: send request to backend:
-        // - if accouunt created, send user to login page
-        // - if account already exists || token expired/invalid, 
-                //return to this page with that error message
-
-
-
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [passwordConfirm, setPasswordConfirm] = React.useState('');
     const [token, setToken] = React.useState('');
     const [errorMessage, setErrorMessage] = React.useState('');
 
-
-    const authContext = useContext(AuthContext);
     const {publicAxios} = useContext(AxiosContext);
 
     const options = [
@@ -46,6 +35,37 @@ export default function Registration(props){
             setErrorMessage('');
         }
     }, [passwordConfirm, password]);
+
+    // todo: send request to backend:
+        // - if account created, send user to login page
+        // - if account already exists || token expired/invalid, 
+                //return to this page with that error message
+    
+    const registerUser = async () => {
+        try {
+            const response = await publicAxios.post('/auth/register',
+                JSON.stringify({name: username, token: token, password: password}),
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }
+            );
+                
+            if (response.status == 200) { // todo: testing
+                // alert user that account was created
+                Alert.alert("Account Created", "Please login to continue");
+                props.navigation.navigate('Home'); 
+            } else {
+                setErrorMessage("User Registration Failed: " + response.json().message);
+                return;
+            }
+
+        } catch (error) {
+            setErrorMessage("Cannot register user: " + error);
+        }
+    };
+
     
 
     return (
@@ -76,7 +96,6 @@ export default function Registration(props){
                 secureTextEntry={true} 
             />
             <TextInput style={styles.error}>{errorMessage}</TextInput>
-            
             <RegistrationButton navigation={props.navigation}/>
         </View>
     )

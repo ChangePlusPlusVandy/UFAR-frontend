@@ -983,7 +983,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
                         {activePage < pages.length - 1 && <NextButton setActivePage={setActivePage}/>}
                         {activePage === pages.length - 1 && 
                         <SubmitButton 
-                            setLandingPage={props.setLandingPage}
+                            setBridgeActivePage={props.setBridgeActivePage}
                             report={report}
                             edit={props.edit}
                             currentReportId={props.currentReport && props.currentReport.id}
@@ -996,7 +996,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     
     return (
         <View style={styles.container}>
-            <CrossIcon setLandingPage={props.setLandingPage} landingPage={props.landingPage}/>
+            <CrossIcon setBridgeActivePage={props.setBridgeActivePage}/>
             {renderPageContent()}
         </View>
     );

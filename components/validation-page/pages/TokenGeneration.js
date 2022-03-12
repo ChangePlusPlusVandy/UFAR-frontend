@@ -5,17 +5,16 @@ import GenerateTokenButton from '../GenerateTokenButton';
 import data from '../../daily-report-form/pages/locations';
 
 // authorization
-import { AuthContext } from '../../../src/context/AuthContext';
 import { AxiosContext } from '../../../src/context/AxiosContext';
 
 export default function TokenGeneration(props){
-    const {publicAxios} = useContext(AxiosContext);
+    const {authAxios} = useContext(AxiosContext);
 
     const [ healthZoneId, setHealthZoneId ] = React.useState('');
     const [ role, setRole ] = React.useState('');
     const [ token, setToken ] = React.useState('');
     const [ errorMessage, setErrorMessage ] = React.useState('');
-    const isMounted = useRef(false);
+    const isMounted = useRef(false); // todo: not used yet
 
     const getHealthZones = () => {
         var items = [];
@@ -32,14 +31,10 @@ export default function TokenGeneration(props){
         {label: "Normal", value: "Normal"},
     ]
 
-    console.log("error message: " + errorMessage);
 
     const generateToken = async () => {
-        console.log("generate token");
         try {
-            console.log("generate token1");
-
-            const response = await publicAxios.post('/auth/newuuid',
+            const response = await authAxios.post('/auth/newuuid',
                 JSON.stringify({health_zone: healthZoneId, role: role}),
                 {
                     headers: {
@@ -47,8 +42,6 @@ export default function TokenGeneration(props){
                     }
                 }
             );
-
-            console.log("response: " + response);
                 
             if (response.status == 200) {
                 // todo: get uuid token and store it (state for now)
@@ -62,13 +55,13 @@ export default function TokenGeneration(props){
             }
 
         } catch (error) {
-            console.log("error: " + error);
             setErrorMessage("Cannot get token " + error);
         }
     };
 
     return (
         <View style={styles.container}>
+            <Text style={styles.title}>New User Token</Text>
             <View style={styles.RNPickerSelectContainer}>
                 <RNPickerSelect
                     useNativeAndroidPickerStyle={false}
@@ -145,5 +138,11 @@ const styles = StyleSheet.create({
         color: 'red',
         fontSize: 12,
         fontStyle: 'italic',
-    }
+    },
+    title: {
+        fontWeight: 'bold',
+        color: '#EC1C24',
+        fontSize: 18,
+        alignSelf: 'center',
+    },
 });
