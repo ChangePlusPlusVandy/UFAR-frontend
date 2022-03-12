@@ -76,6 +76,7 @@ export default function Registration(props){
                 secureTextEntry={true} 
             />
             <TextInput style={styles.error}>{errorMessage}</TextInput>
+            
             <RegistrationButton navigation={props.navigation}/>
         </View>
     )
