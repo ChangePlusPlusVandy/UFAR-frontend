@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet , View, Text } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryGroup, VictoryLabel } from 'victory-native'
@@ -14,7 +14,28 @@ const regionData = {
 // I.E. Instead of adding more victorybar components if you get more regions, you just add more data points inside each one.
 // Each bar should have the same number of data points and should correspond to the number of regions
 // The below data is obv all dummy
-export default function DrugsUsedDashboard(props) {
+export default function DrugsUsedDashboard({getDashboard}) {
+  const [data, setData] = React.useState({"ivermectin": [{ regionName: "", percentage: 0}],
+                                          "albendazole": [{ regionName: "", percentage: 0}],
+                                          "praziquantel": [{ regionName: "", percentage: 0}]});
+  const [errorMessage, setErrorMessage] = React.useState('');
+    console.log("data: ", data);
+    useEffect(() =>{
+      // call get dashboard and catch errors
+      getDashboard("drugs")
+      .then(data => {
+        var dataObject = {};
+        for (const [key, value] of Object.entries(data)){
+          for (const [key2, value2] of Object.entries(value)){
+            dataObject[key2]? dataObject[key2].push({x: key, percentage: value2}) : dataObject[key2] = [{x: key, percentage: value2}];
+          }
+        }
+        setData(dataObject);
+      }).catch(error => {
+        setErrorMessage(error.message);
+      });
+    }, [])
+
     return (
         <View style={styles.container}>
           <ScrollView>
@@ -29,18 +50,12 @@ export default function DrugsUsedDashboard(props) {
                 horizontal
                 offset={12}
                 colorScale={["#84BD62", "#EC1C24", "#55A5C4"]}
-                categories={{ x: ["RegionE", "RegionD", "RegionC", "RegionB", "RegionA"] }} // will need to update this with region names
+                // categories={{ x: ["RegionE", "RegionD", "RegionC", "RegionB", "RegionA"] }} // will need to update this with region names
                 >
                     <VictoryBar
                         style={styles.barChart}
-                        name="Mectizan"
-                        data={[
-                        { x: "RegionE", percentage: 32 },
-                        { x: "RegionD", percentage: 42 },
-                        { x: "RegionC", percentage: 39 },
-                        { x: "RegionB", percentage: 54 },
-                        { x: "RegionA", percentage: 76 },
-                        ]} 
+                        name="Ivermectin"
+                        data={data.ivermectin} 
                         barWidth={12}
                         y="percentage"
                         labels={({ datum }) => datum.percentage.toString() + "%"}
@@ -50,13 +65,7 @@ export default function DrugsUsedDashboard(props) {
                     <VictoryBar
                         style={styles.barChart}
                         name="Albendazole"
-                        data={[
-                          { x: "RegionE", percentage: 64 },
-                          { x: "RegionD", percentage: 50 },
-                          { x: "RegionC", percentage: 62 },
-                          { x: "RegionB", percentage: 92 },
-                          { x: "RegionA", percentage: 39 },
-                        ]}
+                        data={data.albendazole}
                         barWidth={12}
                         y="percentage"
                         labels={({ datum }) => datum.percentage.toString() + "%"}
@@ -66,13 +75,7 @@ export default function DrugsUsedDashboard(props) {
                     <VictoryBar
                         style={styles.barChart}
                         name="Praziquantel"
-                        data={[
-                          { x: "RegionE", percentage: 50 },
-                          { x: "RegionD", percentage: 72 },
-                          { x: "RegionC", percentage: 56 },
-                          { x: "RegionB", percentage: 47 },
-                          { x: "RegionA", percentage: 45 }
-                        ]}
+                        data={data.praziquantel}
                         barWidth={12}
                         y="percentage"
                         labels={({ datum }) => datum.percentage.toString() + "%"}
@@ -82,6 +85,7 @@ export default function DrugsUsedDashboard(props) {
                 </VictoryGroup>
             </VictoryChart>
           </ScrollView>
+          <Text style={styles.error}>{errorMessage}</Text>
         </View>
   )
 }
@@ -98,7 +102,13 @@ const styles = StyleSheet.create({
   barChart: {
     data: { fillOpacity: ({ datum }) => datum.percentage / 100},
     labels: { fill: "white" },
-  }
+  },
+  error: {
+    color: 'red',
+    fontSize: 10,
+    fontStyle: 'italic',
+    textAlign: 'center',
+  },
 })
 
 
