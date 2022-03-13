@@ -15,15 +15,22 @@ const regionData = {
 // Each bar should have the same number of data points and should correspond to the number of regions
 // The below data is obv all dummy
 export default function DrugsUsedDashboard({getDashboard}) {
-  const [data, setData] = React.useState([]);
+  const [data, setData] = React.useState({"ivermectin": [{ regionName: "", percentage: 0}],
+                                          "albendazole": [{ regionName: "", percentage: 0}],
+                                          "praziquantel": [{ regionName: "", percentage: 0}]});
   const [errorMessage, setErrorMessage] = React.useState('');
-  const healthZoneId = ""; // todo: get this from the user
-
+    console.log("data: ", data);
     useEffect(() =>{
       // call get dashboard and catch errors
-      getDashboard(healthZoneId, "drugs")
+      getDashboard("drugs")
       .then(data => {
-        setData(data);
+        var dataObject = {};
+        for (const [key, value] of Object.entries(data)){
+          for (const [key2, value2] of Object.entries(value)){
+            dataObject[key2]? dataObject[key2].push({x: key, percentage: value2}) : dataObject[key2] = [{x: key, percentage: value2}];
+          }
+        }
+        setData(dataObject);
       }).catch(error => {
         setErrorMessage(error.message);
       });
@@ -43,18 +50,12 @@ export default function DrugsUsedDashboard({getDashboard}) {
                 horizontal
                 offset={12}
                 colorScale={["#84BD62", "#EC1C24", "#55A5C4"]}
-                categories={{ x: ["RegionE", "RegionD", "RegionC", "RegionB", "RegionA"] }} // will need to update this with region names
+                // categories={{ x: ["RegionE", "RegionD", "RegionC", "RegionB", "RegionA"] }} // will need to update this with region names
                 >
                     <VictoryBar
                         style={styles.barChart}
-                        name="Mectizan"
-                        data={[
-                        { x: "RegionE", percentage: 32 },
-                        { x: "RegionD", percentage: 42 },
-                        { x: "RegionC", percentage: 39 },
-                        { x: "RegionB", percentage: 54 },
-                        { x: "RegionA", percentage: 76 },
-                        ]} 
+                        name="Ivermectin"
+                        data={data.ivermectin} 
                         barWidth={12}
                         y="percentage"
                         labels={({ datum }) => datum.percentage.toString() + "%"}
@@ -64,13 +65,7 @@ export default function DrugsUsedDashboard({getDashboard}) {
                     <VictoryBar
                         style={styles.barChart}
                         name="Albendazole"
-                        data={[
-                          { x: "RegionE", percentage: 64 },
-                          { x: "RegionD", percentage: 50 },
-                          { x: "RegionC", percentage: 62 },
-                          { x: "RegionB", percentage: 92 },
-                          { x: "RegionA", percentage: 39 },
-                        ]}
+                        data={data.albendazole}
                         barWidth={12}
                         y="percentage"
                         labels={({ datum }) => datum.percentage.toString() + "%"}
@@ -80,13 +75,7 @@ export default function DrugsUsedDashboard({getDashboard}) {
                     <VictoryBar
                         style={styles.barChart}
                         name="Praziquantel"
-                        data={[
-                          { x: "RegionE", percentage: 50 },
-                          { x: "RegionD", percentage: 72 },
-                          { x: "RegionC", percentage: 56 },
-                          { x: "RegionB", percentage: 47 },
-                          { x: "RegionA", percentage: 45 }
-                        ]}
+                        data={data.praziquantel}
                         barWidth={12}
                         y="percentage"
                         labels={({ datum }) => datum.percentage.toString() + "%"}

@@ -14,10 +14,12 @@ export default function Dashboards() {
     ];
 
     const {authAxios} = useContext(AxiosContext);
+    
+    const healthZoneId = "618b21eb8453970bd916764c"; // todo: get health zone id dynamically from the user
 
-    const getDashboard = async (healthZoneId, dashboard) => {
+    const getDashboard = async (dashboard, id=healthZoneId) => {
         try {
-            const response = await authAxios.post(`/data/${healthZoneId}/${dashboard}`,
+            const response = await authAxios.post(`/data/${id}/${dashboard}`,
                 {
                     headers: {
                         'Content-Type': 'application/json',

@@ -9,15 +9,25 @@ import {Icon} from 'react-native-elements';
 import {AxiosContext} from '../../../src/context/AxiosContext';
 
 export default function GeographicalDashboard({getDashboard}) {
-  const [data, setData] = React.useState([]);
+  const [data, setData] = React.useState([{ regionName: "", percentage: 0}]);
   const [errorMessage, setErrorMessage] = React.useState('');
 
-  const healthZoneId = ""; // todo: get this from the user
+  // iterate through the data object and create a new array with the data
+  // to be used in the VictoryChart
+  
 
   useEffect(()=>{
-    getDashboard(healthZoneId, "geographic_coverage")
+    getDashboard("geographic_coverage")
       .then(data => {
-        setData(data);
+        const dataArray = [];
+        for (const [key, value] of Object.entries(data)) {
+          dataArray.push({
+            regionName: key,
+            percentage: value,
+          });
+        }
+
+        setData(dataArray);
       }).catch(error => {
         setErrorMessage(error.message);
       });
@@ -35,27 +45,7 @@ export default function GeographicalDashboard({getDashboard}) {
               <VictoryBar
                 horizontal
                 style={styles.barChart}
-                data={[
-                  { regionName: "USA", percentage: 25},
-                  { regionName: "FRNCE", percentage: 56},
-                  { regionName: "IELAND", percentage: 90},
-                  { regionName: "ERMANY", percentage: 78},
-                  { regionName: "PAIN", percentage: 13},
-                  { regionName: "SA", percentage: 25},
-                  { regionName: "FANCE", percentage: 56},
-                  { regionName: "IEAND", percentage: 90},
-                  { regionName: "GERMNY", percentage: 78},
-                  { regionName: "SIN", percentage: 13},
-                  { regionName: "U", percentage: 25},
-                  { regionName: "FRE", percentage: 56},
-                  { regionName: "IAD", percentage: 90},
-                  { regionName: "GY", percentage: 78},
-                  { regionName: "SA", percentage: 13},
-                  { regionName: "FE", percentage: 56},
-                  { regionName: "ID", percentage: 90},
-                  { regionName: "NY", percentage: 78},
-                  { regionName: "SA", percentage: 13},
-                ]}
+                data={data}
                 x="regionName" 
                 y="percentage"
                 labels={({ datum }) => datum.percentage.toString() + "%"}
