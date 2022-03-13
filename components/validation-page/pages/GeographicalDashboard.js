@@ -1,10 +1,28 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {StyleSheet , View, Text } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory-native'
+import {Icon} from 'react-native-elements';
 
 
-export default function GeographicalDashboard(props) {
+// axios
+import {AxiosContext} from '../../../src/context/AxiosContext';
+
+export default function GeographicalDashboard({getDashboard}) {
+  const [data, setData] = React.useState([]);
+  const [errorMessage, setErrorMessage] = React.useState('');
+
+  const healthZoneId = ""; // todo: get this from the user
+
+  useEffect(()=>{
+    getDashboard(healthZoneId, "geographic_coverage")
+      .then(data => {
+        setData(data);
+      }).catch(error => {
+        setErrorMessage(error.message);
+      });
+  }, [])
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -19,10 +37,24 @@ export default function GeographicalDashboard(props) {
                 style={styles.barChart}
                 data={[
                   { regionName: "USA", percentage: 25},
-                  { regionName: "FRANCE", percentage: 56},
-                  { regionName: "IRELAND", percentage: 90},
-                  { regionName: "GERMANY", percentage: 78},
-                  { regionName: "SPAIN", percentage: 13},
+                  { regionName: "FRNCE", percentage: 56},
+                  { regionName: "IELAND", percentage: 90},
+                  { regionName: "ERMANY", percentage: 78},
+                  { regionName: "PAIN", percentage: 13},
+                  { regionName: "SA", percentage: 25},
+                  { regionName: "FANCE", percentage: 56},
+                  { regionName: "IEAND", percentage: 90},
+                  { regionName: "GERMNY", percentage: 78},
+                  { regionName: "SIN", percentage: 13},
+                  { regionName: "U", percentage: 25},
+                  { regionName: "FRE", percentage: 56},
+                  { regionName: "IAD", percentage: 90},
+                  { regionName: "GY", percentage: 78},
+                  { regionName: "SA", percentage: 13},
+                  { regionName: "FE", percentage: 56},
+                  { regionName: "ID", percentage: 90},
+                  { regionName: "NY", percentage: 78},
+                  { regionName: "SA", percentage: 13},
                 ]}
                 x="regionName" 
                 y="percentage"
@@ -38,6 +70,7 @@ export default function GeographicalDashboard(props) {
               <VictoryAxis/>
           </VictoryChart>
       </ScrollView>
+      <Text style={styles.error}>{errorMessage}</Text>
     </View>
   )
 }
@@ -55,7 +88,13 @@ const styles = StyleSheet.create({
   barChart: {
     data: { fill: "#c43a31", fillOpacity: ({ datum }) => datum.percentage / 100},
     labels: { fill: "white" },
-  }
+  },
+  error: {
+    color: 'red',
+    fontSize: 10,
+    fontStyle: 'italic',
+    textAlign: 'center',
+  },
 })
 
 

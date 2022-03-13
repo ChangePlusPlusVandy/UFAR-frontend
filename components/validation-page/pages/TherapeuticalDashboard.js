@@ -1,10 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet , View, Text } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory-native'
 
 
-export default function TherapeuticalDashboard(props) {
+export default function TherapeuticalDashboard({getDashboard}) {
+  const [data, setData] = React.useState([]);
+  const [errorMessage, setErrorMessage] = React.useState('');
+
+  const healthZoneId = ""; // todo: get this from the user
+
+  useEffect(()=>{
+    getDashboard(healthZoneId, "therapeutic_coverage")
+      .then(data => {
+        setData(data);
+      }).catch(error => {
+        setErrorMessage(error.message);
+      });
+  }, [])
+
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -39,6 +54,7 @@ export default function TherapeuticalDashboard(props) {
               <VictoryAxis/>
           </VictoryChart>
       </ScrollView>
+      <Text style={styles.error}>{errorMessage}</Text>
     </View>
   )
 }
@@ -55,7 +71,13 @@ const styles = StyleSheet.create({
   barChart: {
     data: { fill: "#c43a31", fillOpacity: ({ datum }) => datum.percentage / 100},
     labels: { fill: "white" },
-  }
+  },
+  error: {
+    color: 'red',
+    fontSize: 10,
+    fontStyle: 'italic',
+    textAlign: 'center',
+  },
 })
 
 

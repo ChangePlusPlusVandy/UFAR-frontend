@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet , View, Text } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryGroup, VictoryLabel } from 'victory-native'
@@ -14,7 +14,21 @@ const regionData = {
 // I.E. Instead of adding more victorybar components if you get more regions, you just add more data points inside each one.
 // Each bar should have the same number of data points and should correspond to the number of regions
 // The below data is obv all dummy
-export default function DrugsUsedDashboard(props) {
+export default function DrugsUsedDashboard({getDashboard}) {
+  const [data, setData] = React.useState([]);
+  const [errorMessage, setErrorMessage] = React.useState('');
+  const healthZoneId = ""; // todo: get this from the user
+
+    useEffect(() =>{
+      // call get dashboard and catch errors
+      getDashboard(healthZoneId, "drugs")
+      .then(data => {
+        setData(data);
+      }).catch(error => {
+        setErrorMessage(error.message);
+      });
+    }, [])
+
     return (
         <View style={styles.container}>
           <ScrollView>
@@ -82,6 +96,7 @@ export default function DrugsUsedDashboard(props) {
                 </VictoryGroup>
             </VictoryChart>
           </ScrollView>
+          <Text style={styles.error}>{errorMessage}</Text>
         </View>
   )
 }
@@ -98,7 +113,13 @@ const styles = StyleSheet.create({
   barChart: {
     data: { fillOpacity: ({ datum }) => datum.percentage / 100},
     labels: { fill: "white" },
-  }
+  },
+  error: {
+    color: 'red',
+    fontSize: 10,
+    fontStyle: 'italic',
+    textAlign: 'center',
+  },
 })
 
 
