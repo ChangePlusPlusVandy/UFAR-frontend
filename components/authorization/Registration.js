@@ -19,6 +19,12 @@ export default function Registration(props){
     const [token, setToken] = React.useState('');
     const [errorMessage, setErrorMessage] = React.useState('');
 
+    console.log("username: " + username);
+    console.log("password: " + password);
+    console.log("token: " + token);
+
+    
+
     const {publicAxios} = useContext(AxiosContext);
 
     const options = [
@@ -44,15 +50,18 @@ export default function Registration(props){
     const registerUser = async () => {
         try {
             const response = await publicAxios.post('/auth/register',
-                JSON.stringify({name: username, token: token, password: password}),
+                JSON.stringify({name: username, uuid: token, password: password}),
                 {
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 }
             );
+
+            console.log("response: " + response.data);
+            console.log("response.status: " + response.status);
                 
-            if (response.status == 200) { // todo: testing
+            if (response.status == 201) { // todo: testing
                 // alert user that account was created
                 Alert.alert("Account Created", "Please login to continue");
                 props.navigation.navigate('Home'); 
@@ -75,11 +84,11 @@ export default function Registration(props){
             <Text>{props.user}</Text>
 
             <TextInput style={styles.input} placeholder="Username" 
-                onChangeText={(e) => setUsername(e.nativeEvent.text)}
+                onChangeText={text => setUsername(text)}
                 value={username}
             />
              <TextInput style={styles.input} placeholder="Token"
-                onChange = {(e) => setToken(e.nativeEvent.text)}
+                onChange = {e => setToken(e.nativeEvent.text)}
                 // value = {password}
                 secureTextEntry={true} 
             />
@@ -96,7 +105,7 @@ export default function Registration(props){
                 secureTextEntry={true} 
             />
             <TextInput style={styles.error}>{errorMessage}</TextInput>
-            <RegistrationButton navigation={props.navigation}/>
+            <RegistrationButton registerUser={registerUser} navigation={props.navigation}/>
         </View>
     )
 }

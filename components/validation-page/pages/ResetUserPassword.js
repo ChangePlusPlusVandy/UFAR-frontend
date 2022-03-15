@@ -18,7 +18,7 @@ export default function ResetUserPassword(props){
     const resetUserPassword = async () => {
         try {
             const response = await authAxios.post('/auth/update_password',
-                JSON.stringify({name: username, password: newPassword}),
+                JSON.stringify({username: username, password: newPassword}),
                 {
                     headers: {
                         'Content-Type': 'application/json',

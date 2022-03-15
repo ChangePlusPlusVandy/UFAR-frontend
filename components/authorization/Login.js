@@ -30,7 +30,7 @@ export default function Login(props){
 
     const options = [
         { label: 'Admin', value: 0 },
-        { label: 'Nurse', value: 1 },
+        { label: 'Normal', value: 1 },
 
     ];
 
