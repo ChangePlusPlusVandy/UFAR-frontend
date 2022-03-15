@@ -1,10 +1,38 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {StyleSheet , View, Text } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory-native'
+import {Icon} from 'react-native-elements';
 
 
-export default function GeographicalDashboard(props) {
+// axios
+import {AxiosContext} from '../../../src/context/AxiosContext';
+
+export default function GeographicalDashboard({getDashboard}) {
+  const [data, setData] = React.useState([{ regionName: "", percentage: 0}]);
+  const [errorMessage, setErrorMessage] = React.useState('');
+
+  // iterate through the data object and create a new array with the data
+  // to be used in the VictoryChart
+  
+
+  useEffect(()=>{
+    getDashboard("geographic_coverage")
+      .then(data => {
+        const dataArray = [];
+        for (const [key, value] of Object.entries(data)) {
+          dataArray.push({
+            regionName: key,
+            percentage: value,
+          });
+        }
+
+        setData(dataArray);
+      }).catch(error => {
+        setErrorMessage(error.message);
+      });
+  }, [])
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -17,13 +45,7 @@ export default function GeographicalDashboard(props) {
               <VictoryBar
                 horizontal
                 style={styles.barChart}
-                data={[
-                  { regionName: "USA", percentage: 25},
-                  { regionName: "FRANCE", percentage: 56},
-                  { regionName: "IRELAND", percentage: 90},
-                  { regionName: "GERMANY", percentage: 78},
-                  { regionName: "SPAIN", percentage: 13},
-                ]}
+                data={data}
                 x="regionName" 
                 y="percentage"
                 labels={({ datum }) => datum.percentage.toString() + "%"}
@@ -38,6 +60,7 @@ export default function GeographicalDashboard(props) {
               <VictoryAxis/>
           </VictoryChart>
       </ScrollView>
+      <Text style={styles.error}>{errorMessage}</Text>
     </View>
   )
 }
@@ -55,7 +78,13 @@ const styles = StyleSheet.create({
   barChart: {
     data: { fill: "#c43a31", fillOpacity: ({ datum }) => datum.percentage / 100},
     labels: { fill: "white" },
-  }
+  },
+  error: {
+    color: 'red',
+    fontSize: 10,
+    fontStyle: 'italic',
+    textAlign: 'center',
+  },
 })
 
 
