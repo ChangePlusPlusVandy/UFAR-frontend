@@ -1,6 +1,7 @@
 import uuid from 'react-native-uuid';
 import { DEV_DOMAIN } from "@env" 
 
+
 // Note: Every action function should have an identifier that is unique to the action as
 // the last parameter. This is used to detect if an action has already been dispatched.
 
@@ -14,18 +15,16 @@ import { DEV_DOMAIN } from "@env"
  * @param {*} id uuid of the report
  * @returns a redux thunk action
  */
-export const addReport = (report, id) => {
+export const addReport = (report, authAxios, id) => {
     async function thunk(dispatch){
-        // submit the report to the server
-        // todo: better way to pass in url
         try {
-            const response = await fetch(`${DEV_DOMAIN}/form/insert`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify(report),
+            const response = await authAxios.post('/form/insert', 
+            JSON.stringify(report),
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
             })
             if (response.status == 200){
                 dispatch({type: 'ADD_REPORT', report: report, id: id})
@@ -61,17 +60,17 @@ export const addReport = (report, id) => {
  * @param {*} id -- unique id of the current function
  * @returns thunk action
  */
-export const validateReport = (report, id=uuid.v4()) => {
+export const validateReport = (report, authAxios, id=uuid.v4()) => {
     async function thunk(dispatch){
         // submit the report to the server
         try {
-            const response = await fetch(`${DEV_DOMAIN}/validation/reports/validate`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify(report),
+            const response = await authAxios.post('/validation/reports/validate', 
+            JSON.stringify([report]),
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
             })
             if (response.status == 200){
                 console.log("report successfully validated");
@@ -94,21 +93,28 @@ export const validateReport = (report, id=uuid.v4()) => {
 }
 
 
-export function getReports(healthZoneId, id=uuid.v4()){
+/**
+ * Returns a thunk action that fetches all reports from a specific healthzone from the server.
+ * @param {*} healthZoneId 
+ * @param {*} authAxios An authenticated axios instance that can be used to make requests to the backend
+ * @param {*} id A unique id for this action
+ * @returns thunk action
+ */
+// todo: might need to use the same identifer for all actions
+export function getReports(healthZoneId, authAxios, id=uuid.v4()){
     async function thunk(dispatch){
         // submit the report to the server
         try {
-            const response = await fetch(`${DEV_DOMAIN}/validation/${healthZoneId}/reports`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            })
+            const response = await authAxios.get(`/validation/${healthZoneId}/reports`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+            }
+            );
             if (response.status == 200){
-                const reports = await response.json();
-                console.log("reports: ", reports); // todo: delete after debuging
-                // todo: action to reinitialize the reports in our store
+                const reports = await response.data;
                 dispatch({type: 'ADD_VALIDATION_REPORTS', reports: reports})
             } else {
                 console.log("Failed to get reports", response.status);

@@ -3,22 +3,14 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function LoginButton(props) {
-    // todo: add a link to the forgot password page
+export default function GenerateTokenButton(props) {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} 
-                onPress={() =>
-                    props.onLogin()
-                }
+                onPress={() => props.generateToken()}
             >
                 <Icon name='arrow-right' type='feather' color='white' size={50}/>
             </TouchableOpacity>
-            <Text style={{...styles.text, ...styles.link}}
-                onPress={() =>
-                    props.navigation.navigate('Registration')
-                }
-            >Register, Instead</Text>
         </View>
     )
 }
@@ -26,7 +18,6 @@ export default function LoginButton(props) {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        top: 40,
     },
     button: {
         backgroundColor: '#EC1C24',

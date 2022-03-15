@@ -11,7 +11,6 @@ import { convertFromYYYYMMDDToDDMMYYYY } from '../../../src/utils';
 
 export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidated(props) {
 
-    // console.log("to be validated props", props);
 
     const [landingPage, setLandingPage] = React.useState(true);
     const [ currentReport, setCurrentReport ] = React.useState(null);

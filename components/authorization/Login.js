@@ -18,18 +18,6 @@ const IMAGE_DEF = Image.resolveAssetSource(ufar).uri;
 
 export default function Login(props){
 
-    // todo: add endpoint for login
-
-    // Login logic
-    
-    // user selects type -- admin or normal
-    // logs in with username and password
-    // if type doesn't match with the token, only for admin logins for now
-        // don't authorize user
-        // return to login page with a message "Not authorized user: select the right type"
-    // else authorize user
-
-
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [errorMessage, setErrorMessage] = React.useState(props.errorMessage||'');
@@ -42,7 +30,7 @@ export default function Login(props){
 
     const options = [
         { label: 'Admin', value: 0 },
-        { label: 'Nurse', value: 1 },
+        { label: 'Normal', value: 1 },
 
     ];
 
