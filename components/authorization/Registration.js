@@ -18,13 +18,7 @@ export default function Registration(props){
     const [passwordConfirm, setPasswordConfirm] = React.useState('');
     const [token, setToken] = React.useState('');
     const [errorMessage, setErrorMessage] = React.useState('');
-
-    console.log("username: " + username);
-    console.log("password: " + password);
-    console.log("token: " + token);
-
     
-
     const {publicAxios} = useContext(AxiosContext);
 
     const options = [

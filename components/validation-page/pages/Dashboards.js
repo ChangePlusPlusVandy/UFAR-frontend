@@ -5,6 +5,7 @@ import GeographicalDashboard from './GeographicalDashboard';
 import TherapeuticalDashboard from './TherapeuticalDashboard';
 import DrugsUsedDashboard from './DrugsUsedDashboard';
 import {AxiosContext} from '../../../src/context/AxiosContext';
+import {AuthContext} from '../../../src/context/AuthContext';
 
 export default function Dashboards() {
     const options = [
@@ -14,10 +15,9 @@ export default function Dashboards() {
     ];
 
     const {authAxios} = useContext(AxiosContext);
+    const authContext = useContext(AuthContext);
     
-    const healthZoneId = "618b21eb8453970bd916764c"; // todo: get health zone id dynamically from the user
-
-    const getDashboard = async (dashboard, id=healthZoneId) => {
+    const getDashboard = async (dashboard, id=authContext.authState.user.health_zone) => {
         try {
             const response = await authAxios.post(`/data/${id}/${dashboard}`,
                 {

@@ -1,5 +1,4 @@
 import uuid from 'react-native-uuid';
-import { DEV_DOMAIN } from "@env" 
 
 
 // Note: Every action function should have an identifier that is unique to the action as
@@ -115,7 +114,7 @@ export function getReports(healthZoneId, authAxios, id=uuid.v4()){
             );
             if (response.status == 200){
                 const reports = await response.data;
-                dispatch({type: 'ADD_VALIDATION_REPORTS', reports: reports})
+                reports && dispatch({type: 'ADD_VALIDATION_REPORTS', reports: reports})
             } else {
                 console.log("Failed to get reports", response.status);
             }
