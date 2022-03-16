@@ -16,9 +16,6 @@ export default function TokenGeneration(props){
     const [ errorMessage, setErrorMessage ] = React.useState('');
     const isMounted = useRef(false); // todo: not used yet
 
-    console.log("healthzone id: ", healthZoneId);
-    console.log("role", role);
-
     const getHealthZones = () => {
         var items = [];
         Object.keys(data.provinces).forEach(province => {
