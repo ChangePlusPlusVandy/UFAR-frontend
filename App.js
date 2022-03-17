@@ -101,13 +101,18 @@ const reducer = (state = initialState, action) => {
       // todo: better way not to include literals
       if (action.meta.name === 'addReport'){
         var report = action.meta.args[0];
-        var id = action.meta.args[1];
+        console.log("action meta args", action.meta.args);
+        var id = action.meta.args[2];
         return { ...state, reports: { ...state.reports, [id]: {report: report, isSbumitted: false} } };
       }
 
     // validation cases
     case 'ADD_VALIDATION_REPORTS':
-      return { ...state, validationReports: [...action.reports] };
+      if (action.reports){
+        return { ...state, validationReports: [...action.reports] }
+      } else {
+        return {...state};
+      }
 
     case 'MARK_VALIDATED_REPORT':
 
