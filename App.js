@@ -152,12 +152,6 @@ const pReducer = persistReducer(persistConfig, rootReducer);
 const store = createStore(pReducer, applyMiddleware(networkMiddleware, thunk, logger));
 const persistor = persistStore(store);
 
-
-
-
-
-
-
 export default function App() {
   // todo: change the ping interval to a more reasonable value
   return (

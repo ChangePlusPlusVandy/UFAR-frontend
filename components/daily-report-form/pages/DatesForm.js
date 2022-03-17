@@ -1,7 +1,17 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
+import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 
 export default function DatesForm(props) {
+  const [date, setDate] = React.useState(new Date(Date.now()));
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setDate(currentDate);
+  };
+
+  console.log("date", date);
+  
   return (
     <View>
       <Text style={styles.header}>Dates</Text>
@@ -11,47 +21,98 @@ export default function DatesForm(props) {
         </Text>
         {/* TODO: calendar/date picker? */}
         <TextInput
+          onPressIn={() => {
+            DateTimePickerAndroid.open({
+              value: props.DCTrainingCompletionDate,
+              onChange: (event, selectedDate) => {
+                props.setDCTrainingCompletionDate(selectedDate);
+              },
+              mode: 'date',
+              is24Hour: true
+            })
+          }
+          }
           editable={!props.validate}
           style={styles.inputField}
-          onChange={(e) =>
-            props.setDCTrainingCompletionDate(e.nativeEvent.text)
-          }
-          defaultValue={props.DCTrainingCompletionDate}
-          placeholder="DD/MM/YYYY"
+          value={new Date(props.DCTrainingCompletionDate).toLocaleDateString()}
+          // defaultValue={props.DCTrainingCompletionDate}
+          placeholder="MM/DD/YYYY"
         />
         <Text style={styles.inputLabel}>Date d'arrivée de médicaments</Text>
         <TextInput
+          onPressIn={() => {
+            DateTimePickerAndroid.open({
+              value: props.medicineArrivalDate,
+              onChange: (event, selectedDate) => {
+                props.setMedicineArrivalDate(selectedDate);
+              },
+              mode: 'date',
+              is24Hour: true
+            })
+          }
+          }
           editable={!props.validate}
           style={styles.inputField}
-          onChange={(e) => props.setMedicineArrivalDate(e.nativeEvent.text)}
-          defaultValue={props.medicineArrivalDate}
-          placeholder="DD/MM/YYYY"
+          value={new Date(props.medicineArrivalDate).toLocaleDateString()}
+          // defaultValue={props.medicineArrivalDate}
+          placeholder="MM/DD/YYYY"
         />
         <Text style={styles.inputLabel}>Date du début de la DMM</Text>
         <TextInput
+          onPressIn={() => {
+            DateTimePickerAndroid.open({
+              value: props.MDDStartDate,
+              onChange: (event, selectedDate) => {
+                props.setMDDStartDate(selectedDate);
+              },
+              mode: 'date',
+              is24Hour: true
+            })
+          }
+          }
           editable={!props.validate}
           style={styles.inputField}
-          onChange={(e) => props.setMDDStartDate(e.nativeEvent.text)}
-          defaultValue={props.MDDStartDate}
-          placeholder="DD/MM/YYYY"
+          value={new Date(props.MDDStartDate).toLocaleDateString()}
+          // defaultValue={props.MDDStartDate}
+          placeholder="MM/DD/YYYY"
         />
         <Text style={styles.inputLabel}>Date de la fin de la DMM</Text>
         <TextInput
+          onPressIn={() => {
+            DateTimePickerAndroid.open({
+              value: props.DMMEndDate,
+              onChange: (event, selectedDate) => {
+                props.setDMMEndDate(selectedDate);
+              },
+              mode: 'date',
+              is24Hour: true
+            })
+          }
+          }
           editable={!props.validate}
           style={styles.inputField}
-          onChange={(e) => props.setDMMEndDate(e.nativeEvent.text)}
-          defaultValue={props.DMMEndDate}
-          placeholder="DD/MM/YYYY"
+          value={new Date(props.DMMEndDate).toLocaleDateString()}
+          placeholder="MM/DD/YYYY"
         />
         <Text style={styles.inputLabel}>
           Date de la transmission du rapport
         </Text>
         <TextInput
+          onPressIn={() => {
+            DateTimePickerAndroid.open({
+              value: props.reportTransmissionDate,
+              onChange: (event, selectedDate) => {
+                props.setReportTransmissionDate(selectedDate);
+              },
+              mode: 'date',
+              is24Hour: true
+            })
+          }
+          }
           editable={!props.validate}
           style={styles.inputField}
-          onChange={(e) => props.setReportTransmissionDate(e.nativeEvent.text)}
-          defaultValue={props.reportTransmissionDate}
-          placeholder="DD/MM/YYYY"
+          value={new Date(props.reportTransmissionDate).toLocaleDateString()}
+          placeholder="MM/DD/YYYY"
         />
       </View>
     </View>

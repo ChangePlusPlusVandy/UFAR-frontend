@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Platform,
-  Pressable,
   StatusBar,
   StyleSheet,
-  Text,
   View,
 } from "react-native";
 
@@ -90,6 +88,8 @@ const replaceIdsWithNames = (
 
 export default connect(mapStateToProps)(function DailyReportForm(props) {
   const [validate, setValidate] = useState(props.validate);
+  // useRef to keep track of edit
+  const edit = useRef(props.edit);
 
   const [activePage, setActivePage] = useState(0);
 
@@ -147,11 +147,11 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   }, [lymphaticFilariasis]);
 
   // Dates state
-  const [DCTrainingCompletionDate, setDCTrainingCompletionDate] = useState("");
-  const [medicineArrivalDate, setMedicineArrivalDate] = useState("");
-  const [MDDStartDate, setMDDStartDate] = useState("");
-  const [DMMEndDate, setDMMEndDate] = useState("");
-  const [reportTransmissionDate, setReportTransmissionDate] = useState("");
+  const [DCTrainingCompletionDate, setDCTrainingCompletionDate] = useState(new Date(Date.now()));
+  const [medicineArrivalDate, setMedicineArrivalDate] = useState(new Date(Date.now()));
+  const [MDDStartDate, setMDDStartDate] = useState(new Date(Date.now()));
+  const [DMMEndDate, setDMMEndDate] = useState(new Date(Date.now()));
+  const [reportTransmissionDate, setReportTransmissionDate] = useState(new Date(Date.now()));
 
   // Distributors state
   const [numMenDistributors, setNumMenDistributors] = useState(0);
@@ -842,21 +842,19 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
 
     // Dates state
     setDCTrainingCompletionDate(
-      convertFromYYYYMMDDToDDMMYYYY(
-        report.dcs_training_completion_date.split("T")[0]
-      )
+        new Date(report.dcs_training_completion_date)
     );
     setMedicineArrivalDate(
-      convertFromYYYYMMDDToDDMMYYYY(report.medicines_arrival_date.split("T")[0])
+      new Date(report.medicines_arrival_date)
     );
     setMDDStartDate(
-      convertFromYYYYMMDDToDDMMYYYY(report.MDD_start_date.split("T")[0])
+      new Date(report.MDD_start_date)
     );
     setDMMEndDate(
-      convertFromYYYYMMDDToDDMMYYYY(report.MDD_end_date.split("T")[0])
+      new Date(report.MDD_end_date)
     );
     setReportTransmissionDate(
-      convertFromYYYYMMDDToDDMMYYYY(report.date_of_transmission.split("T")[0])
+      new Date(report.date_of_transmission)
     );
 
     // Distributors state
@@ -972,7 +970,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     health_zone: healthZoneId,
     village: villageId,
     // DATE
-    date: Date.now(),
+    date: (new Date(Date.now())).toISOString(),
     // 1.11 diseases treated
     onchocerciasis: {
       first_round: onchocerciasisFirst,
@@ -988,29 +986,11 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     schistosomiasis: schistosomiasis,
     soil_transmitted_helminthiasis: soilTransmittedHelminthiasis,
     trachoma: trachoma,
-
-    // 1.12 number of treatment cycles
-    // todo: Embeded within 1.11: delete if not needed later
-    // "treatment_circles": {
-    //     "onchocerciasis": numCyclesOnchocerciasis,
-    //     // todo: implement and correct the rest
-    //     "lymphatic_filariasis": 0,
-    //     "schistosomiasis": 0,
-    //     "soil_transmitted_helminthiasis": 0,
-    //     "trachoma": 0,
-    // },
-
-    dcs_training_completion_date: new Date(
-      DCTrainingCompletionDate.replace(/:\/:/, "-")
-    ).getTime(),
-    medicines_arrival_date: new Date(
-      medicineArrivalDate.replace(/:\/:/, "-")
-    ).getTime(),
-    MDD_start_date: new Date(MDDStartDate.replace(/:\/:/, "-")).getTime(),
-    MDD_end_date: new Date(DMMEndDate.replace(/:\/:/, "-")).getTime(),
-    date_of_transmission: new Date(
-      reportTransmissionDate.replace(/:\/:/, "-")
-    ).getTime(),
+    dcs_training_completion_date: DCTrainingCompletionDate,
+    medicines_arrival_date: medicineArrivalDate,
+    MDD_start_date: MDDStartDate,
+    MDD_end_date: DMMEndDate,
+    date_of_transmission: reportTransmissionDate,
     distributors: {
       men: numMenDistributors,
       women: numWomenDistributors,
@@ -1162,6 +1142,9 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     // if there's a report to validate, reset all states
     if (validate) {
       setValidate(false);
+      resetAllStates(props.currentReport);
+    } else if (edit.current){
+      edit.current = false;
       resetAllStates(props.currentReport);
     }
 

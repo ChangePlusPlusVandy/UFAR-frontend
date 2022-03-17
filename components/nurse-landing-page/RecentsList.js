@@ -2,6 +2,7 @@ import React from 'react';
 import {ScrollView, FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { connect } from 'react-redux';
+import DailyReportForm from '../daily-report-form/DailyReportForm';
 
 import { convertFromYYYYMMDDToDDMMYYYY } from '../../src/utils';
 
@@ -17,9 +18,15 @@ export default connect(mapStateToProps)(function RecentsList(props){
                 <Icon name="check" color = 'green' size = {25} /> :
                 <Icon name="time-slot" color = 'green' size = {20} type="entypo" />}  
             </TouchableOpacity>
-            <TouchableOpacity style={styles.edit}>
+            {props.reports[item].isSubmitted && <TouchableOpacity style={styles.edit}
+                onPress={() => {
+                    props.setEdit(true);
+                    props.setCurrentReport(props.reports[item].report);
+                    props.setBridgeActivePage(1);
+                }}
+            >
                 <Icon name="edit" color = 'green' size = {25} />
-            </TouchableOpacity>
+            </TouchableOpacity>}
         </View>
     );
     

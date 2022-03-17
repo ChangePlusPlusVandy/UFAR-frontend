@@ -13,10 +13,17 @@ import {Platform, Pressable, StatusBar, StyleSheet, Text, View} from 'react-nati
 
 export default function Bridge(props){
     const [bridgeActivePage, setBridgeActivePage] = React.useState(0);
+    const [edit, setEdit] = React.useState(false);
+    const [currentReport, setCurrentReport] = React.useState(null);
+    console.log("current report", currentReport);
 
     const pages = [
         <NewReportButton setBridgeActivePage={setBridgeActivePage}/>,
-        <DailyReportForm setBridgeActivePage={setBridgeActivePage}/>,
+        <DailyReportForm
+            edit={edit} 
+            setBridgeActivePage={setBridgeActivePage}
+            currentReport={currentReport}
+        />,
         <View style={styles.container}>
             <ResetUserPassword />
         </View> 
@@ -27,7 +34,12 @@ export default function Bridge(props){
             <NetworkBar />
             <StatusBar style="auto" />
             <GreetingHeader setBridgeActivePage={setBridgeActivePage} navigation={props.navigation}/>
-            {bridgeActivePage != 2 && <RecentsList />}
+            {bridgeActivePage != 2 && 
+            <RecentsList 
+                setEdit={setEdit} 
+                setCurrentReport={setCurrentReport} 
+                setBridgeActivePage={setBridgeActivePage} 
+            />}
             {pages[bridgeActivePage]}
         </>
     )
