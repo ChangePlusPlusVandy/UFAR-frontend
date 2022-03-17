@@ -23,8 +23,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
             props.removeReport(uuid.v4());
         }, 86400000);
 
-        // navigate back to nurse landing page
-        props.setBridgeActivePage(0);
+        // navigate back to respective landing page
+        props.edit? props.setLandingPage(true): props.setBridgeActivePage(0)
     }
 
     /**
