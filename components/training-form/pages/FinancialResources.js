@@ -1,7 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View, Picker} from 'react-native';
 
 export default function FinancialResourcesForm(props) {
+    const options = ['Yes', 'No'];
+
     return (
         <View>
             <Text style={styles.header}>Ressources Financieres</Text>

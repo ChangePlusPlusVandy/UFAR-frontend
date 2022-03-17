@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import DatePicker from 'react-native-date-picker'
 import {
   Platform,
   Pressable,
@@ -116,7 +117,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   );
 
   useEffect(() => {
-    setTotalTrainersIT(numMaleTrainersIT + numFemaleTrainersIT);
+    setNumTotalTrainersIT(numMaleTrainersIT + numFemaleTrainersIT);
   }, [numMaleTrainersIT, numFemaleTrainersIT]);
 
   const [organizedTrainingDC, setOrganizedTrainingDC] = useState("");
@@ -129,7 +130,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   );
 
   useEffect(() => {
-    setTotalTrainersDC(numMaleTrainersDC + numFemaleTrainersDC);
+    setNumTotalTrainersDC(numMaleTrainersDC + numFemaleTrainersDC);
   }, [numMaleTrainersDC, numFemaleTrainersDC]);
 
   // Training Supervision
@@ -161,14 +162,14 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   const [DMMHierarchyVisits, setDMMHierarchyVisits] = useState("");
 
   // Data Validation
-  const [validationASStartDateZS, setValidationASStartDateZS] = useState("");
-  const [validationASEndDateZS, setValidationASEndDateZS] = useState("");
+  const [validationASStartDateZS, setValidationASStartDateZS] = useState(new Date());
+  const [validationASEndDateZS, setValidationASEndDateZS] = useState(new Date());
   const [
     validationASStartDateCoordination,
     setValidationASStartDateCoordination,
-  ] = useState("");
+  ] = useState(new Date());
   const [validationASEndDateCoordination, setValidationASEndDateCoordination] =
-    useState("");
+    useState(new Date());
 
   // Processing Start Date
   const [encodingStartDate, setEncodingStartDate] = useState("");
@@ -285,8 +286,8 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
       setOrganizedTrainingDC={setOrganizedTrainingDC}
       trainingDCStartDate={trainingDCStartDate}
       setTrainingDCStartDate={setTrainingDCStartDate}
-      trainingDCEndDate={trainingDCStartDate}
-      setTrainingDCEndDate={setTrainingDCStartDate}
+      trainingDCEndDate ={trainingDCEndDate}
+      setTrainingDCEndDate={setTrainingDCEndDate}
       numFemaleTrainersDC={numFemaleTrainersDC}
       setNumFemaleTrainersDC={setNumFemaleTrainersDC}
       numMaleTrainersDC={numMaleTrainersDC}

@@ -10218,6 +10218,11 @@
     "jscodeshift" "^0.11.0"
     "nullthrows" "^1.1.1"
 
+"react-native-date-picker@^4.2.0":
+  "integrity" "sha512-IfbK7Eh5By8rdjiu/pvqLF8NkFX9pVsY7Vn6+MkLSiFcLIGFd7NaENRJKl75/xNZuY5CkIiRVksS9abEl/II8g=="
+  "resolved" "https://registry.npmjs.org/react-native-date-picker/-/react-native-date-picker-4.2.0.tgz"
+  "version" "4.2.0"
+
 "react-native-elements@^3.4.2":
   "integrity" "sha512-m0eAWOn7JuR1wNTNY0WHuaqst4LI/gFE4N5Bbyfsc4DiryWsMST7aAg5w/Gos4IexWIzhLKCIkPxthND1m/8Xg=="
   "resolved" "https://registry.npmjs.org/react-native-elements/-/react-native-elements-3.4.2.tgz"
