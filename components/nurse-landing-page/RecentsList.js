@@ -15,7 +15,10 @@ export default connect(mapStateToProps)(function RecentsList(props){
             <TouchableOpacity style={styles.edit}>
                 {props.reports[item].isSubmitted ? 
                 <Icon name="check" color = 'green' size = {25} /> :
-                <Icon name="time-slot" color = 'green' size = {20} type="entypo" />}                
+                <Icon name="time-slot" color = 'green' size = {20} type="entypo" />}  
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.edit}>
+                <Icon name="edit" color = 'green' size = {25} />
             </TouchableOpacity>
         </View>
     );
@@ -86,5 +89,9 @@ const styles = StyleSheet.create({
     },
     edit: {
         flex: 1,
+        flexDirection: 'row',
     },
+    icon:{
+        marginHorizontal: 5,
+    }
 })

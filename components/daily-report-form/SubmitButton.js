@@ -24,14 +24,14 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
         }, 86400000);
 
         // navigate back to respective landing page
-        props.edit? props.setLandingPage(true): props.setBridgeActivePage(0)
+        props.validate? props.setLandingPage(true): props.setBridgeActivePage(0)
     }
 
     /**
      * Validates report through redux and finally at the backend, navigates
      * back to validation pages
      */
-    const submitEditReport = () => {
+    const submitValidateReport = () => {
 
         props.markValidatedReport(props.report, props.currentReportId);
 
@@ -60,7 +60,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                             <Pressable
                             style={styles.button}
                             onPress={() => {
-                                props.edit? submitEditReport():submitReport();
+                                props.validate? submitValidateReport():submitReport();
                                 setModalVisible(!modalVisible)
                             }}
                             >
@@ -73,7 +73,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
             <View style={styles.container}>
                 <Pressable onPress={ () => {
                     if (props.isConnected) {
-                        props.edit? submitEditReport():submitReport();
+                        props.validate? submitEditReport():submitReport();
                     } else {
                         setModalVisible(true);
                     }
@@ -81,7 +81,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                 style={styles.button}>
                     <Icon name='sc-telegram' type='evilicon' color='white' size={45}/>
                 </Pressable>
-                <Text style={styles.text}> {props.edit? "Validate": "Submit/Save" }</Text>
+                <Text style={styles.text}> {props.validate? "Validate": "Submit/Save" }</Text>
             </View>
         </View>
     )

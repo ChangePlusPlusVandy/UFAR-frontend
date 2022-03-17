@@ -46,7 +46,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidat
         <DailyReportForm
             setLandingPage={setLandingPage}
             currentReport={currentReport}
-            edit={true}
+            validate={true}
         />
     );
 });
