@@ -18,6 +18,9 @@ import uuid from 'react-native-uuid';
 export const addReport = (report, authAxios, id) => {
     async function thunk(dispatch){
         try {
+
+            // remove id field from the report object
+            delete report._id;
             const response = await authAxios.post('/form/insert', 
             JSON.stringify(report),
             {
@@ -27,17 +30,17 @@ export const addReport = (report, authAxios, id) => {
                 },
             })
             if (response.status == 200){
-                dispatch({type: 'ADD_REPORT', report: report, id: id})
+                dispatch({type: 'ADD_REPORT', report: report, id: id, isSubmitted: true})
             }  else {
-                // if there's an error, call the add function which marks it is not submitted
+                // if there's an error, call the add action which marks it is not submitted
                 console.log("error while submitting report1: ", err);
-                dispatch({type: 'ADD_REPORT', report: report, id: id})
+                dispatch({type: 'ADD_REPORT', report: report, id: id, isSubmitted: false})
             }
         } catch (err) {
         
-            // if there's an error, call the add function which marks it is not submitted
+            // if there's an error, call the add action which marks it is not submitted
             console.log("error while submitting report2: ", err);
-            dispatch({type: 'ADD_REPORT', report: report, id: id})
+            dispatch({type: 'ADD_REPORT', report: report, id: id, isSubmitted: false})
 
         }
 
@@ -58,10 +61,10 @@ export const addReport = (report, authAxios, id) => {
  * for later execution when online. The report will be marked as validated unless an error occurs, and it is marked as not submitted
  * @param {*} report 
  * @param {*} authAxios 
- * @param {*} id -- function identifier for the offline queue
+ * @param {*} id -- report id and also function identifier for the offline queue
  * @returns 
  */
-export const validateReport = (report, authAxios, id=uuid.v4()) => {
+export const validateReport = (report, authAxios, id) => {
     async function thunk(dispatch){
         // submit the report to the server
         try {
@@ -75,6 +78,8 @@ export const validateReport = (report, authAxios, id=uuid.v4()) => {
             })
             if (response.status == 200){
                 console.log("report successfully validated");
+                // set isSubmitted to true since the report validation was successfully submitted
+                dispatch({type: 'MARK_VALIDATED_REPORT_SUBMITTED', report: report, id: id, isSubmitted: true})
             }  else {
                 console.log("report not succesfully validated: ", response);
             }
@@ -102,7 +107,6 @@ export const validateReport = (report, authAxios, id=uuid.v4()) => {
  * so we use the same id to prevent duplicate actions. 
  * @returns thunk action
  */
-// todo: might need to use the same identifer for all actions
 export function getReports(healthZoneId, authAxios, id=1){
     async function thunk(dispatch){
         // submit the report to the server
@@ -117,8 +121,22 @@ export function getReports(healthZoneId, authAxios, id=1){
             );
             if (response.status == 200){
                 const reports = await response.data;
-                console.log("reports from the thunk: ", reports);
-                reports && dispatch({type: 'ADD_VALIDATION_REPORTS', reports: reports})
+
+                // [action.id]: {report: action.report, isSubmitted: action.isSubmitted}
+                // check type of reports
+                console.log("reports: ", typeof reports);
+
+                reformatedReports = {};
+                reports.forEach(report => {
+                    // save with report id, so that we can update the report later
+                    // when edited by the user
+                    // isSubmitted is true if the report validation was submitted to the server
+                    reformatedReports[report._id] = {report: report, isSubmitted: false}
+                });
+                
+                dispatch({type: 'ADD_VALIDATION_REPORTS', reports: reformatedReports})
+
+
             } else {
                 console.log("Failed to get reports", response.status);
             }
@@ -134,5 +152,96 @@ export function getReports(healthZoneId, authAxios, id=1){
         name: `getReports`,
         args: [healthZoneId, authAxios, id],
     };
+    return thunk;
+}
+
+
+/**
+ * Gets unvalidated reports specific to a given user id
+ * @param {*} userId -- user id
+ * @param {*} authAxios -- authenticated axios instance
+ * @param {*} id -- function identifier for the offline queue
+ * @returns 
+ */
+export function getReportsUser(userId, authAxios, id=1){
+    async function thunk(dispatch){
+        // submit the report to the server
+        try {
+            const response = await authAxios.get(`/*****/${userId}/reports`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+            }
+            );
+            if (response.status == 200){
+                const reports = await response.data;
+                // [action.id]: {report: action.report, isSubmitted: action.isSubmitted}
+                reformatedReports = {};
+                reports.forEach(report => {
+                    // save with report id, so that we can update the report later
+                    // when edited by the user
+                    reformatedReports[report._id] = {report: report, isSubmitted: true}
+                });
+                dispatch({type: 'ADD_USER_REPORTS', reports: reformatedReports})
+            } else {
+                console.log("Failed to get user reports", response.status);
+            }
+        } catch (err) {
+            console.log("error while retrieving user reports: ", err);
+        }
+    }
+
+
+    thunk.interceptInOffline = true;
+    thunk.meta = {
+        retry: true,
+        name: `getReportsUser`,
+        args: [userId, authAxios, id],
+    };
+    return thunk;
+}
+
+
+/**
+ * saves new user changes to the backend and updates the user object in the store
+ * @param {*} report 
+ * @param {*} authAxios 
+ * @param {*} id 
+ * @returns 
+ */
+export const saveEditReport = (report, authAxios, id) => {
+    async function thunk(dispatch){
+        // submit the report to the server
+        try {
+            // todo: add endpoint to save edits
+            const response = await authAxios.post('***', 
+            JSON.stringify([report]),
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+            })
+            if (response.status == 200){
+                dispatch({type: 'ADD_REPORT', report: report, id: id, isSubmitted: true})
+            }  else {
+                dispatch({type: 'ADD_REPORT', report: report, id: id, isSubmitted: false})
+                console.log("report not succesfully validated: ", response);
+            }
+        } catch (err) {
+            dispatch({type: 'ADD_REPORT', report: report, id: id, isSubmitted: false})
+            console.log("error while validating report: ", err);
+        }
+    }
+
+    thunk.interceptInOffline = true;
+
+    thunk.meta = {
+        retry: true,
+        name: `saveEditReport`,
+        args: [report, authAxios, id],
+    };    
     return thunk;
 }

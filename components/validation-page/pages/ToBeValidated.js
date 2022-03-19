@@ -20,12 +20,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidat
     // for date.
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
-            <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY(item.date.split('T')[0])}</Text>
-            <Text style={styles.namelist}>{`Jour #${item.DMM_day}`}</Text>
+            <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY(props.validationReports[item].report.date.split('T')[0])}</Text>
+            <Text style={styles.namelist}>{`Jour #${props.validationReports[item].report.DMM_day}`}</Text>
             <TouchableOpacity style={styles.edit}>
                 <Icon name="edit" color = '#000000' size = {25} 
                     onPress={() => {
-                        setCurrentReport(item);
+                        setCurrentReport(props.validationReports[item].report);
                         setLandingPage(false);
                     }}
                 />
@@ -40,7 +40,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidat
                 <Text style={styles.header}>À Valider</Text>
                 <FetchButton/>
             </View>
-            <FlatList data={props.reports} renderItem={renderItem} keyExtractor={item => item.id}/>
+            <FlatList data={props.reportIds} renderItem={renderItem} keyExtractor={id => id}/>
         </View> 
     ) : (
         <DailyReportForm

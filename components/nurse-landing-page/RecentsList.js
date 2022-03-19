@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ScrollView, FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -8,6 +8,10 @@ import { convertFromYYYYMMDDToDDMMYYYY } from '../../src/utils';
 
 
 export default connect(mapStateToProps)(function RecentsList(props){    
+
+    useEffect(()=>{
+        // todo: call thunk action to fetch user reports 
+    })
 
     const renderItem = ({item}) => (
         <View style={styles.listitem}>

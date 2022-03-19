@@ -88,6 +88,7 @@ const replaceIdsWithNames = (
 
 export default connect(mapStateToProps)(function DailyReportForm(props) {
   const [validate, setValidate] = useState(props.validate);
+  const [reportId, setReportId] = useState("");
   // useRef to keep track of edit
   const edit = useRef(props.edit);
 
@@ -803,6 +804,8 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         report.village
       );
 
+    setReportId(report._id? report._id: "");
+
     setDMMDay(report.DMM_day);
     setRegisteredNurse(report.nurse);
 
@@ -962,6 +965,8 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   // report object to be sent to the server
   var report = {
     // IDENTIFICATION
+    _id: reportId, // might be empt or there depending on
+    //if it's a new report or backend report
     DMM_day: DMMDay,
     nurse: registeredNurse,
     village: villageId,
@@ -1162,7 +1167,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
               setLandingPage={props.setLandingPage}
               report={report}
               validate={props.validate}
-              currentReportId={props.currentReport && props.currentReport.id}
+              currentReportId={props.currentReport && props.currentReport._id}
             />
           )}
         </View>
