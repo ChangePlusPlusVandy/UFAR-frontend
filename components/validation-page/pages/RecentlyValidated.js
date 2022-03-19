@@ -17,7 +17,12 @@ export default connect(mapStateToProps)(function RecentlyValidated(props) {
             <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(props.validationReports[item].report.date)).toISOString().split('T')[0])}</Text>
             <Text style={styles.namelist}>{`Jour #${props.validationReports[item].report.DMM_day}`}</Text>
             <TouchableOpacity style={styles.edit}>
-            <Icon name="check" color = '#fff' style = {styles.icon} />
+                <Icon name="check" color = '#fff' style = {styles.icon} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+                {props.validationReports[item].isSubmitted ? 
+                <Icon name="check" color = 'green' size = {25} /> :
+                <Icon name="time-slot" color = 'green' size = {20} type="entypo" />}  
             </TouchableOpacity>
         </View>
     );
@@ -111,6 +116,7 @@ const styles = StyleSheet.create({
         flex: 0.55,
         backgroundColor: "#7DB415",
         borderRadius: 20,
+        marginRight: 10,
     },
     icon: {
         size: 20,

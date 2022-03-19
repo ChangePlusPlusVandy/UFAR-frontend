@@ -32,17 +32,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
      * back to validation pages
      */
     const submitValidateReport = () => {
-
-        console.log("current report id", props.currentReportId);
-
         props.markValidatedReport(props.report, props.currentReportId);
-
-        // todo: call action to validate report at the backend
-
-        // dispatch an action to validate the report at the backend
-        // props.validateReport(props.validationReports.find(report => report.id === currentReportId), authAxios, props.currentReportId);
-
-        // navigate back to validation pages
+        props.validateReport(props.report, authAxios, props.currentReportId);
         props.validate? props.setLandingPage(true): props.setBridgeActivePage(0)    
     }
 

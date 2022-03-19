@@ -89,6 +89,7 @@ const replaceIdsWithNames = (
 export default connect(mapStateToProps)(function DailyReportForm(props) {
   const [validate, setValidate] = useState(props.validate);
   const [reportId, setReportId] = useState("");
+  const [is_validated, setIs_validated] = useState(false);
   // useRef to keep track of edit
   const edit = useRef(props.edit);
 
@@ -805,6 +806,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       );
 
     setReportId(report._id? report._id: "");
+    setIs_validated(report.is_validated);
 
     setDMMDay(report.DMM_day);
     setRegisteredNurse(report.nurse);
@@ -966,6 +968,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   var report = {
     // IDENTIFICATION
     _id: reportId, // might be empt or there depending on
+    is_validated: is_validated,
     //if it's a new report or backend report
     DMM_day: DMMDay,
     nurse: registeredNurse,

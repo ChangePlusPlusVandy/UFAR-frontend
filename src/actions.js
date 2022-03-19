@@ -68,8 +68,9 @@ export const validateReport = (report, authAxios, id) => {
     async function thunk(dispatch){
         // submit the report to the server
         try {
+            report.is_validated = true;
             const response = await authAxios.post('/validation/reports/validate', 
-            JSON.stringify([report]),
+            JSON.stringify(report),
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -78,7 +79,6 @@ export const validateReport = (report, authAxios, id) => {
             })
             if (response.status == 200){
                 console.log("report successfully validated");
-                // set isSubmitted to true since the report validation was successfully submitted
                 dispatch({type: 'MARK_VALIDATED_REPORT_SUBMITTED', report: report, id: id, isSubmitted: true})
             }  else {
                 console.log("report not succesfully validated: ", response);
