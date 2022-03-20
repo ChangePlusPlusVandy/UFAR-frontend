@@ -151,30 +151,30 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
   // Mass Distribution of Medicinal Products
   const [ASDMMDebut, setASDMMDebut] = useState("");
-  const [LFOVSTHStartDate, setLFOVSTHStartDate] = useState("");
-  const [LFOVSTHEndDate, setLFOVSTHEndDate] = useState("");
-  const [SCHStartDate, setSCHStartDate] = useState("");
-  const [SCHEndDate, setSCHEndDate] = useState("");
+  const [LFOVSTHStartDate, setLFOVSTHStartDate] = useState(null);
+  const [LFOVSTHEndDate, setLFOVSTHEndDate] = useState(null);
+  const [SCHStartDate, setSCHStartDate] = useState(null);
+  const [SCHEndDate, setSCHEndDate] = useState(null);
 
   // DMM Supervision
-  const [ASDMMDebutDate, setASDMMDebutDate] = useState("");
-  const [ASStartDate, setASStartDate] = useState("");
+  const [ASDMMDebutDate, setASDMMDebutDate] = useState(null);
+  const [ASStartDate, setASStartDate] = useState(null);
   const [DMMHierarchyVisits, setDMMHierarchyVisits] = useState("");
 
   // Data Validation
-  const [validationASStartDateZS, setValidationASStartDateZS] = useState(new Date());
-  const [validationASEndDateZS, setValidationASEndDateZS] = useState(new Date());
+  const [validationASStartDateZS, setValidationASStartDateZS] = useState(null);
+  const [validationASEndDateZS, setValidationASEndDateZS] = useState(null);
   const [
     validationASStartDateCoordination,
     setValidationASStartDateCoordination,
-  ] = useState(new Date());
+  ] = useState(null);
   const [validationASEndDateCoordination, setValidationASEndDateCoordination] =
-    useState(new Date());
+    useState(null);
 
   // Processing Start Date
-  const [encodingStartDate, setEncodingStartDate] = useState("");
+  const [encodingStartDate, setEncodingStartDate] = useState(null);
   const [numVillagesAlreadyEncoded, setNumVillagesAlreadyEncoded] = useState(0);
-  const [formTransmissionDate, setFormTransmissionDate] = useState("");
+  const [formTransmissionDate, setFormTransmissionDate] = useState(null);
 
   const pages = [
     <IdentificationForm

@@ -4,6 +4,8 @@ import {StyleSheet, Text, TextInput, View, Picker} from 'react-native';
 export default function FinancialResourcesForm(props) {
     const options = ['Yes', 'No'];
 
+    // needs the first question and the last one (both are yes/no questions)
+
     return (
         <View>
             <Text style={styles.header}>Ressources Financieres</Text>
