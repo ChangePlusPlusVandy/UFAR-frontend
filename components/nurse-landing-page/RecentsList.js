@@ -2,8 +2,7 @@ import React, {useEffect} from 'react';
 import {ScrollView, FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { connect } from 'react-redux';
-import DailyReportForm from '../daily-report-form/DailyReportForm';
-
+import FetchButton from '../validation-page/FetchButton';
 import { convertFromYYYYMMDDToDDMMYYYY } from '../../src/utils';
 
 
@@ -26,6 +25,7 @@ export default connect(mapStateToProps)(function RecentsList(props){
                 onPress={() => {
                     props.setEdit(true);
                     props.setCurrentReport(props.reports[item].report);
+                    props.setCurrentReportId(item)
                     props.setBridgeActivePage(1);
                 }}
             >
@@ -37,6 +37,9 @@ export default connect(mapStateToProps)(function RecentsList(props){
         return (
             <ScrollView style={styles.container} persistentScrollbar={true}>
                 <Text style={styles.header}>Récent</Text>
+                <View style={styles.fetch}>
+                    <FetchButton admin={false}/>
+                </View>
                 <FlatList data={ props.reports? Object.keys(props.reports): []}renderItem={renderItem} keyExtractor={item => item.id}/>
             </ScrollView>
         );
@@ -104,5 +107,8 @@ const styles = StyleSheet.create({
     },
     icon:{
         marginHorizontal: 5,
-    }
+    }, 
+    fetch: {
+        margin: 10,
+    },
 })

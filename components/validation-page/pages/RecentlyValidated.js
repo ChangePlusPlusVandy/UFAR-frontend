@@ -12,7 +12,6 @@ import { convertFromYYYYMMDDToDDMMYYYY } from '../../../src/utils';
 export default connect(mapStateToProps)(function RecentlyValidated(props) {
 
     const renderItem = ({item}) => (
-        console.log("item", item),
         <View style={styles.listitem}>
             <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(props.validationReports[item].report.date)).toISOString().split('T')[0])}</Text>
             <Text style={styles.namelist}>{`Jour #${props.validationReports[item].report.DMM_day}`}</Text>

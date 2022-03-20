@@ -15,11 +15,12 @@ export default function Bridge(props){
     const [bridgeActivePage, setBridgeActivePage] = React.useState(0);
     const [edit, setEdit] = React.useState(false);
     const [currentReport, setCurrentReport] = React.useState(null);
-    console.log("current report", currentReport);
+    const [currentReportId, setCurrentReportId] = React.useState(null);
 
     const pages = [
         <NewReportButton setBridgeActivePage={setBridgeActivePage}/>,
         <DailyReportForm
+            currentReportId={currentReportId}
             edit={edit} 
             setBridgeActivePage={setBridgeActivePage}
             currentReport={currentReport}
@@ -36,6 +37,7 @@ export default function Bridge(props){
             <GreetingHeader setBridgeActivePage={setBridgeActivePage} navigation={props.navigation}/>
             {bridgeActivePage != 2 && 
             <RecentsList 
+                setCurrentReportId={setCurrentReportId}
                 setEdit={setEdit} 
                 setCurrentReport={setCurrentReport} 
                 setBridgeActivePage={setBridgeActivePage} 

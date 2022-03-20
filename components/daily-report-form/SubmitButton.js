@@ -4,7 +4,7 @@ import {Pressable, StyleSheet, Text, View, Modal} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { connect } from 'react-redux';
 import uuid from 'react-native-uuid';
-import { addReport, validateReport } from '../../src/actions.js';
+import { addReport, validateReport, saveEditReport } from '../../src/actions.js';
 import { AxiosContext } from '../../src/context/AxiosContext.js';
 
 export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButton(props){
@@ -18,13 +18,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
      */
     const submitReport = () => {
         props.addReport(props.report, authAxios, uuid.v4());
-        // remove the report from the redux store after 24 hours
-        setTimeout(() => {
-            props.removeReport(uuid.v4());
-        }, 86400000);
-
         // navigate back to respective landing page
-        props.validate? props.setLandingPage(true): props.setBridgeActivePage(0)
+        props.setBridgeActivePage(0)
     }
 
     /**
@@ -34,7 +29,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
     const submitValidateReport = () => {
         props.markValidatedReport(props.report, props.currentReportId);
         props.validateReport(props.report, authAxios, props.currentReportId);
-        props.validate? props.setLandingPage(true): props.setBridgeActivePage(0)    
+        props.setLandingPage(true);
+    }
+
+
+    const saveEditReport = () => {
+        // todo: after backend integration, call the saveEditReport action
+        // props.saveEditReport(props.report, authAxios, props.currentReportId);
+        
+        console.log("report edit saved/submitted id", props.currentReportId);
+        props.setBridgeActivePage(0);
     }
 
     return (
@@ -55,7 +59,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                             <Pressable
                             style={styles.button}
                             onPress={() => {
-                                props.validate? submitValidateReport():submitReport();
+                                if(props.validate){
+                                    submitValidateReport();
+                                } else if (props.edit){
+                                    saveEditReport();
+                                } else {
+                                    submitReport();
+                                }
                                 setModalVisible(!modalVisible)
                             }}
                             >
@@ -68,7 +78,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
             <View style={styles.container}>
                 <Pressable onPress={ () => {
                     if (props.isConnected) {
-                        props.validate? submitValidateReport():submitReport();
+                        if(props.validate){
+                            submitValidateReport();
+                        } else if (props.edit){
+                            saveEditReport();
+                        } else {
+                            submitReport();
+                        }
                     } else {
                         setModalVisible(true);
                     }
@@ -98,9 +114,9 @@ function mapDispatchToProps(dispatch){
         //     retry: true,
         //   },}),
         addReport: (report, authAxios, id) => dispatch(addReport(report, authAxios, id)),  
-        removeReport: (id) => dispatch({type: 'REMOVE_REPORT', id: id}), 
         markValidatedReport: (report, id) => dispatch({type: 'MARK_VALIDATED_REPORT', report: report, id: id}),
         validateReport: (report, authAxios, id) => dispatch(validateReport(report, authAxios, id)),
+        saveEditReport: (report, authAxios, id) => dispatch(saveEditReport(report, authAxios, id)),
     };
 }
 

@@ -10,7 +10,6 @@ export default function DatesForm(props) {
     setDate(currentDate);
   };
 
-  console.log("date", date);
   
   return (
     <View>

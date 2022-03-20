@@ -100,11 +100,6 @@ const reducer = (state = initialState, action) => {
     case 'SET_NAME':
       return { ...state, name: action.name }
 
-    case 'REMOVE_REPORT':
-        const newReports = { ...state.reports };
-        delete newReports[action.id];
-      return {...state, reports: newReports};
-
     case offlineActionTypes.FETCH_OFFLINE_MODE:
       // todo: better way not to include literals
       if (action.meta.name === 'addReport' || action.meta.name === 'saveEditReport') {

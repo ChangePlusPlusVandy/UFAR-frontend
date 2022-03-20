@@ -11,7 +11,6 @@ export default function LoginButton(props) {
                 onPress={() =>
                     {
                         props.onLogin();
-                        console.log("login button pressed");
                     }
                 }
             >

@@ -19,7 +19,8 @@ export const addReport = (report, authAxios, id) => {
     async function thunk(dispatch){
         try {
 
-            // remove id field from the report object
+            // remove id field from the report object since the backend
+            // creates it's own
             delete report._id;
             const response = await authAxios.post('/form/insert', 
             JSON.stringify(report),
@@ -122,10 +123,6 @@ export function getReports(healthZoneId, authAxios, id=1){
             if (response.status == 200){
                 const reports = await response.data;
 
-                // [action.id]: {report: action.report, isSubmitted: action.isSubmitted}
-                // check type of reports
-                console.log("reports: ", typeof reports);
-
                 reformatedReports = {};
                 reports.forEach(report => {
                     // save with report id, so that we can update the report later
@@ -133,9 +130,7 @@ export function getReports(healthZoneId, authAxios, id=1){
                     // isSubmitted is true if the report validation was submitted to the server
                     reformatedReports[report._id] = {report: report, isSubmitted: false}
                 });
-                
                 dispatch({type: 'ADD_VALIDATION_REPORTS', reports: reformatedReports})
-
 
             } else {
                 console.log("Failed to get reports", response.status);
@@ -217,7 +212,7 @@ export const saveEditReport = (report, authAxios, id) => {
         try {
             // todo: add endpoint to save edits
             const response = await authAxios.post('***', 
-            JSON.stringify([report]),
+            JSON.stringify(report),
             {
                 headers: {
                     'Content-Type': 'application/json',
