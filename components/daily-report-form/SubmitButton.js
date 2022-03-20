@@ -39,6 +39,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
         
         console.log("report edit saved/submitted id", props.currentReportId);
         props.setBridgeActivePage(0);
+        props.setEdit(false);
     }
 
     return (

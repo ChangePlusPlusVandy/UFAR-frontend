@@ -21,6 +21,7 @@ export default function Bridge(props){
         <NewReportButton setBridgeActivePage={setBridgeActivePage}/>,
         <DailyReportForm
             currentReportId={currentReportId}
+            setEdit={setEdit}
             edit={edit} 
             setBridgeActivePage={setBridgeActivePage}
             currentReport={currentReport}
