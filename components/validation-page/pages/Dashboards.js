@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import SwitchSelector from 'react-native-switch-selector';
 import GeographicalDashboard from './GeographicalDashboard';
 import TherapeuticalDashboard from './TherapeuticalDashboard';
 import DrugsUsedDashboard from './DrugsUsedDashboard';
+import {AxiosContext} from '../../../src/context/AxiosContext';
+import {AuthContext} from '../../../src/context/AuthContext';
 
 export default function Dashboards() {
     const options = [
@@ -12,18 +14,42 @@ export default function Dashboards() {
         { label: 'Drugs Used', value: 2 },
     ];
 
+    const {authAxios} = useContext(AxiosContext);
+    const authContext = useContext(AuthContext);
+    
+    const getDashboard = async (dashboard, id=authContext.authState.user.health_zone) => {
+        try {
+            const response = await authAxios.post(`/data/${id}/${dashboard}`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }
+            );
+                
+            if (response && response.status == 200) {
+                return response.data;
+            } else {
+                throw new Error(`${dashboard} query failed: `, response.statusText);
+            }
+  
+        } catch (error) {
+            throw new Error (`Cannot get ${dashboard}: ` + error);
+        }
+    };
+
     const dashboards = [
         {
             title: "Geographical Coverage",
-            graph: <GeographicalDashboard/>,
+            graph: <GeographicalDashboard getDashboard={getDashboard}/>,
         },
         {
             title: "Therapeutical Coverage",
-            graph: <TherapeuticalDashboard/>,
+            graph: <TherapeuticalDashboard getDashboard={getDashboard}/>,
         },
         {
             title: "Drugs Used",
-            graph: <DrugsUsedDashboard/>,
+            graph: <DrugsUsedDashboard getDashboard={getDashboard}/>,
         },
     ];
 

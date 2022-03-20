@@ -6,6 +6,7 @@ import ToBeValidated from './pages/ToBeValidated';
 import RecentlyValidated from './pages/RecentlyValidated';
 import Dashboards from './pages/Dashboards';
 import NetworkBar from '../nurse-landing-page/NetworkBar';
+import TokenGenerationPage from './pages/UserManagement';
 
 import { connect } from 'react-redux';
 
@@ -13,7 +14,6 @@ import { connect } from 'react-redux';
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(function Validation (props) {
-    // console.log("Validation props", props);
     const [activePage, setActivePage] = React.useState(0);
 
     
@@ -24,7 +24,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(function Validation 
         <RecentlyValidated setActivePage={setActivePage}
             reports={props.validationReports?.filter(report => report.is_validated === true)}
         />,
-        <Dashboards/>
+        <Dashboards/>,
+        <TokenGenerationPage/>
     ]
 
     return (

@@ -12,7 +12,7 @@ export default connect(mapStateToProps)(function GreetingHeader(props) {
 
     return (
         <View style = {styles.over}>
-            <Hamburger navigation={props.navigation}/>
+            <Hamburger setBridgeActivePage={props.setBridgeActivePage} navigation={props.navigation}/>
             <View style={styles.container}>
                 <Text style={styles.greeting}>Bienvenue</Text>
                 <Text style={styles.name}>{authContext.authState.user?.name || ""}</Text>
@@ -22,7 +22,6 @@ export default connect(mapStateToProps)(function GreetingHeader(props) {
 });
 
 function mapStateToProps(state) {
-    console.log("mapStateToProps: ", state);
 
     return {
       name: state.reducer.name,

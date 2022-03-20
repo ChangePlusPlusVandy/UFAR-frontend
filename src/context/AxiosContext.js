@@ -40,12 +40,13 @@ const AxiosProvider = ({children}) => {
       return response;
     },
     error => {
-      if (error.response.status === 401) {
+      if (error.response?.status === 401) {
         authContext.logout();
       }
       return Promise.reject(error);
     },
   );
+  
 
   return (
     <Provider

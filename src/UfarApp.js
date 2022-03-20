@@ -8,7 +8,6 @@ import Validation from '../components/validation-page/Validation';
 import AdminApp from './AdminApp';
 import Login from '../components/authorization/Login';
 import Registration from '../components/authorization/Registration';
-import ForgotPassword from '../components/authorization/ForgotPassword';
 
 export default function UfarApp() {
   return (
@@ -66,13 +65,6 @@ const UfarAppNavigator = createStackNavigator({
 
   Registration: {
     screen: Registration,
-    navigationOptions: {
-      headerShown: false,
-    }
-  },
-
-  ForgotPassword: {
-    screen: ForgotPassword,
     navigationOptions: {
       headerShown: false,
     }
