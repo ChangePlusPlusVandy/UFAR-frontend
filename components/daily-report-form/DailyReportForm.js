@@ -1185,6 +1185,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     <View style={styles.container}>
       <CrossIcon
         setEdit={props.setEdit}
+        edit={props.edit}
         validate={props.validate}
         setLandingPage={props.setLandingPage}
         setBridgeActivePage={props.setBridgeActivePage}
