@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import DatePicker from 'react-native-date-picker'
+import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+
 import {
   Platform,
   Pressable,
@@ -101,8 +102,8 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
   // Training of Trainers
   const [trainingParticipation, setTrainingParticipation] = useState("");
-  const [trainingStartDate, setTrainingStartDate] = useState("");
-  const [trainingEndDate, setTrainingEndDate] = useState("");
+  const [trainingStartDate, setTrainingStartDate] = useState(new Date(Data.now()));
+  const [trainingEndDate, setTrainingEndDate] = useState(new Date(Date.now()));
   const [numFemaleTrainers, setNumFemaleTrainers] = useState(0);
   const [numMaleTrainers, setNumMaleTrainers] = useState(0);
 
@@ -136,18 +137,18 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   // Training Supervision
   const [supervisionDCTraining, setSupervisionDCTraining] = useState("");
   const [supervisionTrainingStartDate, setSupervisionTrainingStartDate] =
-    useState("");
+    useState(new Date(Data.now()));
   const [supervisionTrainingEndDate, setSupervisionTrainingEndDate] =
-    useState("");
+    useState(new Date(Data.now()));
   const [supervisionHierachyVisits, setSupervisionHierachyVisits] =
     useState("");
 
   // ESPM
   const [implementationESPM, setImplementationESPM] = useState("");
-  const [awarenessStartDate, setAwarenessStartDate] = useState("");
-  const [awarenessEndDate, setAwarenessEndDate] = useState("");
+  const [awarenessStartDate, setAwarenessStartDate] = useState(new Date(Date.now()));
+  const [awarenessEndDate, setAwarenessEndDate] = useState(new Date(Date.now()));
   const [organizedDMMCeremony, setOrganizedDMMCeremony] = useState("");
-  const [DMMStartDate, setDMMStartDate] = useState("");
+  const [DMMStartDate, setDMMStartDate] = useState(new Date(Date.now()));
 
   // Mass Distribution of Medicinal Products
   const [ASDMMDebut, setASDMMDebut] = useState("");
