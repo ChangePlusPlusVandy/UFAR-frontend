@@ -33,38 +33,36 @@ export default function IdentificationForm(props) {
     <View>
       <Text style={styles.header}>Identification</Text>
       <View style={styles.inputContainer}>
-        <View style={{ flexDirection: "row" }}>
-          <TextInput
-            style={{ ...styles.inputField, flex: 1, marginRight: 5.5 }}
-            onChange={(e) => props.setContactNumber(e.nativeEvent.text)}
-            defaultValue={props.contactNumber}
-            placeholder="Numero de contact"
-          />
-          <TextInput
-            style={{ ...styles.inputField, flex: 2, marginLeft: 5.5 }}
-            onChange={(e) => props.setChiefName(e.nativeEvent.text)}
-            defaultValue={props.chiefName}
-            placeholder="Nom du Medecin Chef de zone"
-          />
-          <TextInput
-            style={{ ...styles.inputField, flex: 3, marginLeft: 5.5 }}
-            onChange={(e) => props.setASNumber(e.nativeEvent.text)}
-            defaultValue={props.ASNumber}
-            placeholder="Nombre de AS"
-          />
-          <TextInput
-            style={{ ...styles.inputField, flex: 4, marginLeft: 5.5 }}
-            onChange={(e) => props.setIdentificationYear(e.nativeEvent.text)}
-            defaultValue={props.identificationYear}
-            placeholder="Annee de mise en oeuvre"
-          />
-          <TextInput
-            style={{ ...styles.inputField, flex: 4, marginLeft: 5.5 }}
-            onChange={(e) => props.setNumCommunities(e.nativeEvent.text)}
-            defaultValue={props.numCommunities}
-            placeholder="Nombre de communautes/villages"
-          />
-        </View>
+        <TextInput
+          style={styles.inputField}
+          onChange={(e) => props.setContactNumber(e.nativeEvent.text)}
+          defaultValue={props.contactNumber}
+          placeholder="Numero de contact"
+        />
+        <TextInput
+          style={styles.inputField}
+          onChange={(e) => props.setChiefName(e.nativeEvent.text)}
+          defaultValue={props.chiefName}
+          placeholder="Nom du Medecin Chef de zone"
+        />
+        <TextInput
+          style={styles.inputField}
+          onChange={(e) => props.setASNumber(e.nativeEvent.text)}
+          defaultValue={props.ASNumber}
+          placeholder="Nombre de AS"
+        />
+        <TextInput
+          style={styles.inputField}
+          onChange={(e) => props.setIdentificationYear(e.nativeEvent.text)}
+          defaultValue={props.identificationYear}
+          placeholder="Annee de mise en oeuvre"
+        />
+        <TextInput
+          style={styles.inputField}
+          onChange={(e) => props.setNumCommunities(e.nativeEvent.text)}
+          defaultValue={props.numCommunities}
+          placeholder="Nombre de communautes/villages"
+        />
         <View style={styles.RNPickerSelectContainer}>
           <RNPickerSelect
             useNativeAndroidPickerStyle={false}
