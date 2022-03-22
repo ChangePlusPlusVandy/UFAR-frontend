@@ -105,7 +105,7 @@ export default function ProcessingForm(props) {
                     <View style={styles.rowContainer}>
                         <View style={styles.inputFieldContainer}>
                             <Text style={styles.inputLabelBigger}>Effets secondaires signalés</Text>
-                            <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReported(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReported || '').toString()} />
+                            <TextInput style={styles.inputField} onChange={(e) => props.setNumSideEffectsReported(parseInt(e.nativeEvent.text) || 0)} defaultValue={(props.numSideEffectsReported || '0').toString()} />
                         </View>
                     </View>
                 </View>

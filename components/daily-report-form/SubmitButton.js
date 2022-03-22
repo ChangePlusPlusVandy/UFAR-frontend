@@ -1,28 +1,45 @@
 import parseOptionsFromUrl from 'metro/src/lib/parseOptionsFromUrl';
-import React from 'react';
+import React, {useContext} from 'react';
 import {Pressable, StyleSheet, Text, View, Modal} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { connect } from 'react-redux';
 import uuid from 'react-native-uuid';
-import { addReport } from '../../src/actions.js'
+import { addReport, validateReport } from '../../src/actions.js';
+import { AxiosContext } from '../../src/context/AxiosContext.js';
 
 export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButton(props){
     const [modalVisible, setModalVisible] = React.useState(false);
+
+    const {authAxios} = useContext(AxiosContext);
 
     /**
      * Submits report, resets all states, sets in motion a function 
      * to delete it after 24 hours, and navigates back to nurse landing page
      */
     const submitReport = () => {
-        props.addReport(props.report, uuid.v4());
+        props.addReport(props.report, authAxios, uuid.v4());
         // remove the report from the redux store after 24 hours
         setTimeout(() => {
             props.removeReport(uuid.v4());
         }, 86400000);
 
-        // navigate back to nurse landing page
-        props.setLandingPage(true);
-        // console.log("submitReport");
+        // navigate back to respective landing page
+        props.edit? props.setLandingPage(true): props.setBridgeActivePage(0)
+    }
+
+    /**
+     * Validates report through redux and finally at the backend, navigates
+     * back to validation pages
+     */
+    const submitEditReport = () => {
+
+        props.markValidatedReport(props.report, props.currentReportId);
+
+        // dispatch an action to validate the report at the backend
+        // props.validateReport(props.validationReports.find(report => report.id === currentReportId), authAxios, props.currentReportId);
+
+        // navigate back to validation pages
+        props.setBridgeActivePage(0);
     }
 
     return (
@@ -43,7 +60,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                             <Pressable
                             style={styles.button}
                             onPress={() => {
-                                submitReport();
+                                props.edit? submitEditReport():submitReport();
                                 setModalVisible(!modalVisible)
                             }}
                             >
@@ -56,7 +73,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
             <View style={styles.container}>
                 <Pressable onPress={ () => {
                     if (props.isConnected) {
-                        submitReport();
+                        props.edit? submitEditReport():submitReport();
                     } else {
                         setModalVisible(true);
                     }
@@ -64,7 +81,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                 style={styles.button}>
                     <Icon name='sc-telegram' type='evilicon' color='white' size={45}/>
                 </Pressable>
-                <Text style={styles.text}>Envoyer/Sauvegarder</Text>
+                <Text style={styles.text}> {props.edit? "Validate": "Submit/Save" }</Text>
             </View>
         </View>
     )
@@ -75,6 +92,7 @@ function mapStateToProps(state) {
       name: state.reducer.name,
       reports: state.reducer.reports,
       isConnected: state.network.isConnected,
+      validationReports: state.reducer.validationReports,
     };
 }
 
@@ -84,8 +102,10 @@ function mapDispatchToProps(dispatch){
         // addReport: (report, id) => dispatch({type: 'ADD_REPORT', report: report, id: id, meta: {
         //     retry: true,
         //   },}),
-        addReport: (report, id) => dispatch(addReport(report, id)),  
-        removeReport: (id) => dispatch({type: 'REMOVE_REPORT', id: id}),  
+        addReport: (report, authAxios, id) => dispatch(addReport(report, authAxios, id)),  
+        removeReport: (id) => dispatch({type: 'REMOVE_REPORT', id: id}), 
+        markValidatedReport: (report, id) => dispatch({type: 'MARK_VALIDATED_REPORT', report: report, id: id}),
+        validateReport: (report, authAxios, id) => dispatch(validateReport(report, authAxios, id)),
     };
 }
 

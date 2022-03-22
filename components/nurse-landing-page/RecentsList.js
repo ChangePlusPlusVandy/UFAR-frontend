@@ -3,20 +3,15 @@ import {ScrollView, FlatList, StyleSheet, Text, View, TouchableOpacity} from 're
 import {Icon} from 'react-native-elements';
 import { connect } from 'react-redux';
 
+import { convertFromYYYYMMDDToDDMMYYYY } from '../../src/utils';
 
 
 export default connect(mapStateToProps)(function RecentsList(props){    
 
-
-    const convertDateToString = (date) => {
-        let dateString = new Date(date);
-        return `${dateString.getMonth()}/${dateString.getDay()}/${dateString.getFullYear()}`;
-    }
-
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
-            <Text style={styles.timelist}>{ convertDateToString(props.reports[item].report.date)}</Text>
-            <Text style={styles.namelist}>{`Jour #${props.reports[item].report.DMM_day}`}</Text>
+            <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(props.reports[item].report.date)).toISOString().split('T')[0])}</Text>
+            <Text style={styles.namelist}>{`Joul #${props.reports[item].report.DMM_day}`}</Text>
             <TouchableOpacity style={styles.edit}>
                 {props.reports[item].isSubmitted ? 
                 <Icon name="check" color = 'green' size = {25} /> :

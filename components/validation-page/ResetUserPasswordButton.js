@@ -1,15 +1,16 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Icon} from 'react-native-elements';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function NormalButton(props) {
+export default function ResetUserPasswordButton(props) {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => 
-                // todo: if not authorized, redirect to login page
-                props.navigation.navigate('NurseMain')} style={styles.button}>
-                {/* INSERT ICON */}
+            <TouchableOpacity style={styles.button} 
+                onPress={() => props.resetUserPassword()}
+            >
+                <Icon name='arrow-right' type='feather' color='white' size={50}/>
             </TouchableOpacity>
-            <Text style={styles.text}>Normal</Text>
         </View>
     )
 }
@@ -19,10 +20,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     button: {
-        backgroundColor: '#59AECF',
-        height: 54,
-        width: 54,
-        borderRadius: 27,
+        backgroundColor: '#EC1C24',
+        height: 60,
+        width: 60,
+        borderRadius: 30,
         alignContent: 'center',
         justifyContent: 'center',
 
@@ -39,10 +40,15 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
     },
     text: {
+        margin: 10,
         paddingVertical: 3,
-        color: 'white',
+        color: '#EC1C24',
         fontFamily: Platform.OS === 'android' ? 'sans-serif-medium' : 'Avenir-Roman',
         fontSize: 13,
         lineHeight: 15,
+    },
+
+    link: {
+        textDecorationLine: 'underline',
     }
 });

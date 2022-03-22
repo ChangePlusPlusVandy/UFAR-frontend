@@ -12,13 +12,21 @@ import { PersistGate } from 'redux-persist/integration/react';
 import  AsyncStorage from '@react-native-async-storage/async-storage';
 import { offlineActionTypes } from 'react-native-offline';
 import { MenuProvider } from 'react-native-popup-menu';
+import { DEV_DOMAIN } from "@env" 
+
+// authorization 
+import {AuthProvider} from './src/context/AuthContext';
+import {AxiosProvider} from './src/context/AxiosContext';
 
 
-import { addReport } from './src/actions.js';
+import { addReport, getReports, validateReport } from './src/actions.js';
 import { comparisonFn } from './src/utils.js';
+
 
 const actions = {
     addReport,
+    getReports,
+    validateReport
 };
 
 // @credit: https://www.npmjs.com/package/react-native-offline#offline-queue
@@ -64,7 +72,7 @@ const networkTransform = createTransform(
 const initialState = {
   name: 'Jean Deport', // todo: get this from the server
   reports: {}, // holds report objects for the day
-  // todo: add more state for unchanging data - to be done later
+  validationReports: [], // holds report objects for the day
 };
   
 const persistConfig = {
@@ -75,29 +83,56 @@ const persistConfig = {
 
 
 const reducer = (state = initialState, action) => {
+
   switch (action.type) {
     case 'ADD_REPORT':
       // adds or updates the report in the state
-      return { reports: { ...state.reports, [action.id]: {report: action.report, isSubmitted: true} } };
+      return { ...state, reports: { ...state.reports, [action.id]: {report: action.report, isSubmitted: true} } };
       
     case 'SET_NAME':
-      return { name: action.name }
+      return { ...state, name: action.name }
 
     case 'REMOVE_REPORT':
         const newReports = { ...state.reports };
         delete newReports[action.id];
-      return {reports: newReports};
+      return {...state, reports: newReports};
 
     case offlineActionTypes.FETCH_OFFLINE_MODE:
       // todo: better way not to include literals
       if (action.meta.name === 'addReport'){
         var report = action.meta.args[0];
-        var id = action.meta.args[1];
-        return { reports: { ...state.reports, [id]: {report: report, isSbumitted: false} } };
+        console.log("action meta args", action.meta.args);
+        var id = action.meta.args[2];
+        return { ...state, reports: { ...state.reports, [id]: {report: report, isSbumitted: false} } };
       }
+
+    // validation cases
+    case 'ADD_VALIDATION_REPORTS':
+      if (action.reports){
+        return { ...state, validationReports: [...action.reports] }
+      } else {
+        return {...state};
+      }
+
+    case 'MARK_VALIDATED_REPORT':
+
+
+      // updated reports
+      var validatedReport = {...state.validationReports.find(report => report.id === action.id), ...action.report, "is_validated": true};
+
+      // remove report with id from our state
+      var newValidationReports = [...state.validationReports];
+      newValidationReports.forEach(report => {
+        if (report.id === action.id) {
+          // remove the report from the state
+          newValidationReports.splice(newValidationReports.indexOf(report), 1);
+        }});
+
+      // return { ...state, validationReports: [validatedReport, ...newValidationReports] };
+      return { ...state, validationReports: [...newValidationReports, validatedReport] };
   } 
+
   return state;
-  
 };
 
 const rootReducer = combineReducers({
@@ -118,17 +153,26 @@ const store = createStore(pReducer, applyMiddleware(networkMiddleware, thunk, lo
 const persistor = persistStore(store);
 
 
+
+
+
+
+
 export default function App() {
   // todo: change the ping interval to a more reasonable value
   return (
-    <MenuProvider>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}> 
-          <ReduxNetworkProvider pingInterval={3000} shouldPing={true} pingServerUrl='http://10.76.170.134:3000'>
-            <UfarApp />
-          </ReduxNetworkProvider>
-        </PersistGate> 
-      </Provider>
-    </MenuProvider>
+    <AuthProvider>
+      <AxiosProvider>
+        <MenuProvider>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}> 
+              <ReduxNetworkProvider pingInterval={3000} shouldPing={true} pingServerUrl={DEV_DOMAIN}>
+                <UfarApp />
+              </ReduxNetworkProvider>
+            </PersistGate> 
+          </Provider>
+        </MenuProvider>
+      </AxiosProvider>
+    </AuthProvider>
   );
 }
