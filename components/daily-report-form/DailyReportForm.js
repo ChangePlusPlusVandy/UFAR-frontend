@@ -482,7 +482,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
 
   // update the total amount of ivermectin remaining once the other values change
   useEffect(() => {
-    setIvermectinRemaining((prev) => prev - (ivermectinUsed + ivermectinLost));
+    setIvermectinRemaining(ivermectinReceived - (ivermectinUsed + ivermectinLost));
   }, [ivermectinUsed, ivermectinLost]);
 
   // Drug Management: Albendazole
@@ -497,7 +497,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   // update the total amount of albendazole remaining once the other values change
   useEffect(() => {
     setAlbendazoleRemaining(
-      (prev) => prev - (albendazoleUsed + albendazoleLost)
+      albendazoleReceived - (albendazoleUsed + albendazoleLost)
     );
   }, [albendazoleUsed, albendazoleLost]);
 
@@ -513,7 +513,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   // update the total amount of albendazole remaining once the other values change
   useEffect(() => {
     setPraziquantelRemaining(
-      (prev) => prev - (praziquantelUsed + praziquantelLost)
+        praziquantelReceived - (praziquantelUsed + praziquantelLost)
     );
   }, [praziquantelUsed, praziquantelLost]);
 

@@ -18,6 +18,7 @@ export default function DrugsUsedDashboard({getDashboard}) {
   const [data, setData] = React.useState({"ivermectin": [{ regionName: "", percentage: 0}],
                                           "albendazole": [{ regionName: "", percentage: 0}],
                                           "praziquantel": [{ regionName: "", percentage: 0}]});
+
   const [errorMessage, setErrorMessage] = React.useState('');
     console.log("data: ", data);
     useEffect(() =>{
@@ -30,7 +31,8 @@ export default function DrugsUsedDashboard({getDashboard}) {
             dataObject[key2]? dataObject[key2].push({x: key, percentage: value2}) : dataObject[key2] = [{x: key, percentage: value2}];
           }
         }
-        setData(dataObject);
+
+        Object.keys(dataObject).length && setData(dataObject);
       }).catch(error => {
         setErrorMessage(error.message);
       });

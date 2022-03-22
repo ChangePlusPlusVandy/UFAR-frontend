@@ -15,7 +15,7 @@ export default function GeographicalDashboard({getDashboard}) {
   // iterate through the data object and create a new array with the data
   // to be used in the VictoryChart
   
-
+  console.log("data: ", data);
   useEffect(()=>{
     getDashboard("geographic_coverage")
       .then(data => {
@@ -27,7 +27,7 @@ export default function GeographicalDashboard({getDashboard}) {
           });
         }
 
-        setData(dataArray);
+        dataArray.length && setData(dataArray);
       }).catch(error => {
         setErrorMessage(error.message);
       });

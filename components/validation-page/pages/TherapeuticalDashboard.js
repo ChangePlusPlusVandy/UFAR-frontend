@@ -24,7 +24,7 @@ export default function TherapeuticalDashboard({getDashboard}) {
             });
           }
         }
-        setData(dataObject);
+        dataObject && setData(dataObject);
       }).catch(error => {
         setErrorMessage(error.message);
       });
