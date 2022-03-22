@@ -13,7 +13,7 @@ export default function DataValidationForm(props) {
 
     return (
         <View>
-          <Text style={styles.header}>EVALUATION ET VALIDATION DE DONNEES</Text>
+          <Text style={styles.header}>Evaluation et validation de donnees</Text>
           <View style={styles.inputContainer}>
             <Text style={styles.inputLabel}>
             Date du début de la validation des données au niveau AS (Niveau ZS)

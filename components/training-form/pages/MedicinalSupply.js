@@ -2,7 +2,11 @@ import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
 export default function MedicinalSupplyForm(props) {
-    return null;
+    return (
+        <View>
+            <Text style={styles.header}>Approvisionement en medicaments</Text>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

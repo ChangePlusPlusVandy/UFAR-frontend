@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 
 import {
   Platform,
@@ -101,8 +100,9 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   }, [amountPlanning, amountTraining, amountESPM, amountDMM, amountSupervision, amountManagement, amountOther]);
 
   // Training of Trainers
+  const [isTrainingTrainers, setIsTrainingTrainers] = useState(false);
   const [trainingParticipation, setTrainingParticipation] = useState("");
-  const [trainingStartDate, setTrainingStartDate] = useState(new Date(Data.now()));
+  const [trainingStartDate, setTrainingStartDate] = useState(new Date(Date.now()));
   const [trainingEndDate, setTrainingEndDate] = useState(new Date(Date.now()));
   const [numFemaleTrainers, setNumFemaleTrainers] = useState(0);
   const [numMaleTrainers, setNumMaleTrainers] = useState(0);
@@ -137,9 +137,9 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   // Training Supervision
   const [supervisionDCTraining, setSupervisionDCTraining] = useState("");
   const [supervisionTrainingStartDate, setSupervisionTrainingStartDate] =
-    useState(new Date(Data.now()));
+    useState(new Date(Date.now()));
   const [supervisionTrainingEndDate, setSupervisionTrainingEndDate] =
-    useState(new Date(Data.now()));
+    useState(new Date(Date.now()));
   const [supervisionHierachyVisits, setSupervisionHierachyVisits] =
     useState("");
 
@@ -257,6 +257,8 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
       setHasSupportingDocs={setHasSupportingDocs}
     />,
     <TrainingTrainersForm
+      isTrainingTrainers={isTrainingTrainers}
+      setIsTrainingTrainers={setIsTrainingTrainers}
       trainingParticipation={trainingParticipation}
       setTrainingParticipation={setTrainingParticipation}
       trainingStartDate={trainingStartDate}
@@ -566,8 +568,8 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
           )}
           {activePage === pages.length - 1 && (
             <SubmitButton
-              setLandingPage={props.setLandingPage}
-              report={report}
+              setLandingPage={setActivePage(0)}
+              // report={report}
             />
           )}
         </View>
@@ -578,10 +580,6 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
   return (
     <View style={styles.container}>
-      <CrossIcon
-        setLandingPage={props.setLandingPage}
-        landingPage={props.landingPage}
-      />
       {renderPageContent()}
     </View>
   );
@@ -598,25 +596,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
-    position: "absolute",
-    width: "100%",
-    top: Platform.OS === "android" ? StatusBar.currentHeight : 45,
-    bottom: 0,
     backgroundColor: "#EC1C24",
-    borderTopLeftRadius: 11,
-    borderTopRightRadius: 11,
-
-    /* Android Drop Shadow Styling */
-    elevation: 10,
-
-    /* iOS Drop Shadow Styling */
-    shadowColor: "black",
-    shadowOffset: {
-      width: 10,
-      height: 10,
-    },
-    shadowRadius: 10,
-    shadowOpacity: 0.3,
   },
 
   buttonsContainer: {

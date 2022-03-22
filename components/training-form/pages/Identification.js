@@ -65,91 +65,91 @@ export default function IdentificationForm(props) {
             placeholder="Nombre de communautes/villages"
           />
         </View>
-      </View>
-      <View style={styles.RNPickerSelectContainer}>
-        <RNPickerSelect
-          useNativeAndroidPickerStyle={false}
-          style={{
-            inputAndroid: styles.RNPickerSelectInput,
-            iconContainer: styles.RNPickerSelectIconContainer,
-            placeholder: styles.placeholder,
-          }}
-          onValueChange={(value) => {
-            props.setReportingMonth(value);
-          }}
-          items={months}
-          value={props.reportingMonth}
-          placeholder={{ label: "Mois de rapportage", value: null }}
-          Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
-        />
-      </View>
-      <View style={styles.RNPickerSelectContainer}>
-        <RNPickerSelect
-          useNativeAndroidPickerStyle={false}
-          style={{
-            inputAndroid: styles.RNPickerSelectInput,
-            iconContainer: styles.RNPickerSelectIconContainer,
-            placeholder: styles.placeholder,
-          }}
-          onValueChange={(value) => {
-            props.setReportingProvince(value);
-          }}
-          items={provinces}
-          value={props.reportingProvince}
-          placeholder={{ label: "Province", value: null }}
-          Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
-        />
-      </View>
-      <View style={styles.RNPickerSelectContainer}>
-        <RNPickerSelect
-          useNativeAndroidPickerStyle={false}
-          style={{
-            inputAndroid: styles.RNPickerSelectInput,
-            iconContainer: styles.RNPickerSelectIconContainer,
-            placeholder: styles.placeholder,
-          }}
-          onValueChange={(value) => {
-            props.setCoordinatingProvince(value);
-          }}
-          items={provinces}
-          value={props.coordinatingProvince}
-          placeholder={{ label: "Coordination", value: null }}
-          Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
-        />
-      </View>
-      <View style={styles.RNPickerSelectContainer}>
-        <RNPickerSelect
-          useNativeAndroidPickerStyle={false}
-          style={{
-            inputAndroid: styles.RNPickerSelectInput,
-            iconContainer: styles.RNPickerSelectIconContainer,
-            placeholder: styles.placeholder,
-          }}
-          onValueChange={(value) => {
-            props.setSupportingPartner(value);
-          }}
-          items={partners}
-          value={props.supportingPartner}
-          placeholder={{ label: "Partenaires d'appui", value: null }}
-          Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
-        />
-      </View>
-      <View style={styles.RNPickerSelectContainer}>
-        <RNPickerSelect
-          useNativeAndroidPickerStyle={false}
-          style={{
-            inputAndroid: styles.RNPickerSelectInput,
-            iconContainer: styles.RNPickerSelectIconContainer,
-            placeholder: styles.placeholder,
-          }}
-          onValueChange={(value) => {
-            props.setMtnTreated(value);
-          }}
-          items={diseases}
-          value={props.mtnTreated}
-          placeholder={{ label: "MTN-CTP à traiter", value: null }}
-          Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
-        />
+        <View style={styles.RNPickerSelectContainer}>
+          <RNPickerSelect
+            useNativeAndroidPickerStyle={false}
+            style={{
+              inputAndroid: styles.RNPickerSelectInput,
+              iconContainer: styles.RNPickerSelectIconContainer,
+              placeholder: styles.placeholder,
+            }}
+            onValueChange={(value) => {
+              props.setReportingMonth(value);
+            }}
+            items={months}
+            value={props.reportingMonth}
+            placeholder={{ label: "Mois de rapportage", value: null }}
+            Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
+          />
+        </View>
+        <View style={styles.RNPickerSelectContainer}>
+          <RNPickerSelect
+            useNativeAndroidPickerStyle={false}
+            style={{
+              inputAndroid: styles.RNPickerSelectInput,
+              iconContainer: styles.RNPickerSelectIconContainer,
+              placeholder: styles.placeholder,
+            }}
+            onValueChange={(value) => {
+              props.setReportingProvince(value);
+            }}
+            items={provinces}
+            value={props.reportingProvince}
+            placeholder={{ label: "Province", value: null }}
+            Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
+          />
+        </View>
+        <View style={styles.RNPickerSelectContainer}>
+          <RNPickerSelect
+            useNativeAndroidPickerStyle={false}
+            style={{
+              inputAndroid: styles.RNPickerSelectInput,
+              iconContainer: styles.RNPickerSelectIconContainer,
+              placeholder: styles.placeholder,
+            }}
+            onValueChange={(value) => {
+              props.setCoordinatingProvince(value);
+            }}
+            items={provinces}
+            value={props.coordinatingProvince}
+            placeholder={{ label: "Coordination", value: null }}
+            Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
+          />
+        </View>
+        <View style={styles.RNPickerSelectContainer}>
+          <RNPickerSelect
+            useNativeAndroidPickerStyle={false}
+            style={{
+              inputAndroid: styles.RNPickerSelectInput,
+              iconContainer: styles.RNPickerSelectIconContainer,
+              placeholder: styles.placeholder,
+            }}
+            onValueChange={(value) => {
+              props.setSupportingPartner(value);
+            }}
+            items={partners}
+            value={props.supportingPartner}
+            placeholder={{ label: "Partenaires d'appui", value: null }}
+            Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
+          />
+        </View>
+        <View style={styles.RNPickerSelectContainer}>
+          <RNPickerSelect
+            useNativeAndroidPickerStyle={false}
+            style={{
+              inputAndroid: styles.RNPickerSelectInput,
+              iconContainer: styles.RNPickerSelectIconContainer,
+              placeholder: styles.placeholder,
+            }}
+            onValueChange={(value) => {
+              props.setMtnTreated(value);
+            }}
+            items={diseases}
+            value={props.mtnTreated}
+            placeholder={{ label: "MTN-CTP à traiter", value: null }}
+            Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
+          />
+        </View>
       </View>
     </View>
   );

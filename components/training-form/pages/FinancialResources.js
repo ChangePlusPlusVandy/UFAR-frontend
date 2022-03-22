@@ -8,7 +8,7 @@ export default function FinancialResourcesForm(props) {
 
     return (
         <View>
-            <Text style={styles.header}>Ressources Financieres</Text>
+            <Text style={styles.header}>Ressources financieres</Text>
             <View style={styles.inputContainer}>
                 <Text style={styles.inputLabelBigger} >Si oui determiner le montant encaissé par activités</Text>
                 <Text style={styles.inputLabel}>Planification</Text>

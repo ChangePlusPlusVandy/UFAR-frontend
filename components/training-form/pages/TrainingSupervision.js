@@ -1,5 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
+import RNPickerSelect from "react-native-picker-select";
+import { Chevron } from "react-native-shapes";
 
 export default function TrainingSupervisionForm(props) {
   const [date, setDate] = React.useState(new Date(Date.now()));
@@ -13,7 +15,7 @@ export default function TrainingSupervisionForm(props) {
 
   return (
     <View>
-      <Text style={styles.header}>SUPERVISION DE LA FORMATION</Text>
+      <Text style={styles.header}>Supervision de la formation</Text>
       <View style={styles.inputContainer}>
         <View style={styles.RNPickerSelectContainer}>
           <RNPickerSelect

@@ -13,7 +13,7 @@ export default function MassDistributionForm(props) {
 
     return (
         <View>
-          <Text style={styles.header}>DISTRIBUTION DE MASSE DE MEDICAMENT</Text>
+          <Text style={styles.header}>Distribution de masse de medicament</Text>
           <View style={styles.inputContainer}>
             <Text style={styles.inputLabel}>Date du début de la DMM LF/OV/STH</Text>
             <TextInput
@@ -95,7 +95,7 @@ export default function MassDistributionForm(props) {
     const styles = StyleSheet.create({
       header: {
         paddingVertical: 18,
-        alignSelf: "center",
+        textAlign: "center",
         fontFamily: Platform.OS === "android" ? "Roboto" : "Helvetica Neue",
         fontWeight: "bold",
         fontSize: 23,
