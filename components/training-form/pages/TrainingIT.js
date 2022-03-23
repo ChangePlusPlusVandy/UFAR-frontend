@@ -15,7 +15,7 @@ export default function TrainingITForm(props) {
 
   return (
       <View>
-          <Text style={styles.header}>FORMATION DES IT ET ITA</Text>
+          <Text style={styles.header}>Formation Des IT et ITA</Text>
           <View style={styles.inputContainer}>
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                   <Text style={styles.inputLabel}>Organisation de la formation des IT et ITA</Text>

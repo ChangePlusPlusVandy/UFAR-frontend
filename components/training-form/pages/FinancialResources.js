@@ -1,16 +1,22 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View, Picker} from 'react-native';
+import CheckBox from '../CheckBox';
 
 export default function FinancialResourcesForm(props) {
-    const options = ['Yes', 'No'];
 
-    // needs the first question and the last one (both are yes/no questions)
+    // needs last question
+
+    const toggleFundsArrived = () => props.setFundsArrived(prev => !prev);
 
     return (
         <View>
             <Text style={styles.header}>Ressources financieres</Text>
             <View style={styles.inputContainer}>
-                <Text style={styles.inputLabelBigger} >Si oui determiner le montant encaissé par activités</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                  <Text style={styles.inputLabel}>Arrivée des fonds pour la mise en oeuvre des activités</Text>
+                  <CheckBox isChecked={props.fundsArrived} onPress={toggleFundsArrived} />
+            </View>
+              {props.fundsArrived && <>
                 <Text style={styles.inputLabel}>Planification</Text>
                 <TextInput style={styles.inputField} value={props.amountPlanning.toString()}  onChange={(e) => props.setAmountPlanning(parseInt(e.nativeEvent.text) || 0)}/>
                 <Text style={styles.inputLabel}>Formation</Text>
@@ -29,6 +35,7 @@ export default function FinancialResourcesForm(props) {
                     <Text style={styles.inputLabelBigger}>Total des fonds reçus pour la mise en œuvre de activités</Text>
                     <TextInput style={styles.inputField} value={props.amountTotal.toString()} />
                 </View>
+            </>}
             </View>
         </View>
     );
@@ -49,7 +56,7 @@ const styles = StyleSheet.create({
     },
     inputLabel: {
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
-        fontSize: 12,
+        fontSize: 14,
         lineHeight: 13,
         color: 'white',
     },

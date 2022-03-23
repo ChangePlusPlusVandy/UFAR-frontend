@@ -15,13 +15,12 @@ export default function TrainingDCForm(props) {
 
   return (
       <View>
-          <Text style={styles.header}>FORMATION DES DC</Text>
+          <Text style={styles.header}>Formation Des DC</Text>
           <View style={styles.inputContainer}>
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                   <Text style={styles.inputLabel}>Organisation de la formation des DCs</Text>
                   <CheckBox isChecked={props.organizedTrainingDC} onPress={toggleOrganizedTrainingDC} />
               </View>
-
               {props.organizedTrainingDC && <>
               <Text style={styles.inputLabel}>La date du debut de la formation des DCs</Text>
               <TextInput

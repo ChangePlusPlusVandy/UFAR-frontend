@@ -14,7 +14,7 @@ export default function ProcessingForm(props) {
 
     return (
         <View>
-          <Text style={styles.header}>DATE DE DEBUT DE L'ENCODAGE DES DONNEES DE TRAITEMENT</Text>
+          <Text style={styles.header}>Date de debut de L'encodage des donnees de traitement</Text>
           <View style={styles.inputContainer}>
             <Text style={styles.inputLabel}>
             Date du debut de l'encodage et transmission des donnees des traitements

@@ -124,8 +124,8 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
   // DC Training
   const [organizedTrainingDC, setOrganizedTrainingDC] = useState(false);
-  const [trainingDCStartDate, setTrainingDCStartDate] = useState("");
-  const [trainingDCEndDate, setTrainingDCEndDate] = useState("");
+  const [trainingDCStartDate, setTrainingDCStartDate] = useState(new Date(Date.now()));
+  const [trainingDCEndDate, setTrainingDCEndDate] = useState(new Date(Date.now()));
   const [numFemaleTrainersDC, setNumFemaleTrainersDC] = useState(0);
   const [numMaleTrainersDC, setNumMaleTrainersDC] = useState(0);
   const [numTotalTrainersDC, setNumTotalTrainersDC] = useState(
@@ -154,30 +154,30 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
   // Mass Distribution of Medicinal Products
   const [ASDMMDebut, setASDMMDebut] = useState(false);
-  const [LFOVSTHStartDate, setLFOVSTHStartDate] = useState(null);
-  const [LFOVSTHEndDate, setLFOVSTHEndDate] = useState(null);
-  const [SCHStartDate, setSCHStartDate] = useState(null);
-  const [SCHEndDate, setSCHEndDate] = useState(null);
+  const [LFOVSTHStartDate, setLFOVSTHStartDate] = useState(new Date(Date.now()));
+  const [LFOVSTHEndDate, setLFOVSTHEndDate] = useState(new Date(Date.now()));
+  const [SCHStartDate, setSCHStartDate] = useState(new Date(Date.now()));
+  const [SCHEndDate, setSCHEndDate] = useState(new Date(Date.now()));
 
   // DMM Supervision
-  const [ASDMMDebutDate, setASDMMDebutDate] = useState(null);
-  const [ASStartDate, setASStartDate] = useState(null);
+  const [ASDMMDebutDate, setASDMMDebutDate] = useState(new Date(Date.now()));
+  const [ASStartDate, setASStartDate] = useState(new Date(Date.now()));
   const [DMMHierarchyVisits, setDMMHierarchyVisits] = useState(false);
 
   // Data Validation
-  const [validationASStartDateZS, setValidationASStartDateZS] = useState(null);
-  const [validationASEndDateZS, setValidationASEndDateZS] = useState(null);
+  const [validationASStartDateZS, setValidationASStartDateZS] = useState(new Date(Date.now()));
+  const [validationASEndDateZS, setValidationASEndDateZS] = useState(new Date(Date.now()));
   const [
     validationASStartDateCoordination,
     setValidationASStartDateCoordination,
-  ] = useState(null);
+  ] = useState(new Date(Date.now()));
   const [validationASEndDateCoordination, setValidationASEndDateCoordination] =
-    useState(null);
+    useState(new Date(Date.now()));
 
   // Processing Start Date
-  const [encodingStartDate, setEncodingStartDate] = useState(null);
+  const [encodingStartDate, setEncodingStartDate] = useState(new Date(Date.now()));
   const [numVillagesAlreadyEncoded, setNumVillagesAlreadyEncoded] = useState(0);
-  const [formTransmissionDate, setFormTransmissionDate] = useState(null);
+  const [formTransmissionDate, setFormTransmissionDate] = useState(new Date(Date.now()));
 
   const pages = [
     <IdentificationForm

@@ -2,11 +2,14 @@ import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import { Chevron } from "react-native-shapes";
+import CheckBox from '../CheckBox';
 
 export default function TrainingSupervisionForm(props) {
   const [date, setDate] = React.useState(new Date(Date.now()));
 
   const options = ["Oui", "Non"];
+
+  const toggleSupervisionDCTraining = () => props.setSupervisionDCTraining(prev => !prev);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
@@ -17,26 +20,13 @@ export default function TrainingSupervisionForm(props) {
     <View>
       <Text style={styles.header}>Supervision de la formation</Text>
       <View style={styles.inputContainer}>
-        <View style={styles.RNPickerSelectContainer}>
-          <RNPickerSelect
-            useNativeAndroidPickerStyle={false}
-            style={{
-              inputAndroid: styles.RNPickerSelectInput,
-              iconContainer: styles.RNPickerSelectIconContainer,
-              placeholder: styles.placeholder,
-            }}
-            onValueChange={(value) => {
-              props.setSupervisionDCTraining(value);
-            }}
-            items={options}
-            value={props.supervisionDCTraining}
-            placeholder={{
-              label: "Organisation de la supervision de la formation des DCs",
-              value: null,
-            }}
-            Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
-          />
-        </View>
+              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                  <Text style={styles.inputLabel}>Organisation de la supervision de la formation des DCs</Text>
+                  <CheckBox isChecked={props.supervisionDCTraining} onPress={toggleSupervisionDCTraining} />
+              </View>
+      </View>
+      {props.supervisionDCTraining && <> 
+      <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>La date du debut de la supervision de la formation des DCs</Text>
         <TextInput
           onPressIn={() => {
@@ -92,6 +82,7 @@ export default function TrainingSupervisionForm(props) {
           />
         </View>
       </View>
+      </>}
     </View>
   );
 }
