@@ -22,6 +22,7 @@ import MedicinalSupplyForm from "./pages/MedicinalSupply";
 import FinancialResourcesForm from "./pages/FinancialResources";
 import TrainingTrainersForm from "./pages/TrainingTrainers";
 import TrainingITForm from "./pages/TrainingIT";
+import TrainingDCForm from "./pages/TrainingDC";
 import TrainingSupervisionForm from "./pages/TrainingSupervision";
 import ESPMForm from "./pages/ESPM";
 import MassDistributionForm from "./pages/MassDistribution";
@@ -68,7 +69,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   const [numPraziquantelReceived, setNumPraziquantelReceived] = useState(0);
 
   // Financial Resources
-  const [fundsArrived, setFundsArrived] = useState("");
+  const [fundsArrived, setFundsArrived] = useState(false);
   const [amountPlanning, setAmountPlanning] = useState(0);
   const [amountTraining, setAmountTraining] = useState(0);
   const [amountESPM, setAmountESPM] = useState(0);
@@ -85,7 +86,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
       amountManagement +
       amountOther
   );
-  const [hasSupportingDocs, setHasSupportingDocs] = useState("");
+  const [hasSupportingDocs, setHasSupportingDocs] = useState(false);
 
   useEffect(() => {
     setAmountTotal(
@@ -108,9 +109,9 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   const [numMaleTrainers, setNumMaleTrainers] = useState(0);
 
   // IT Training
-  const [organizedTrainingIT, setOrganizedTrainingIT] = useState("");
-  const [trainingITStartDate, setTrainingITStartDate] = useState("");
-  const [trainingITEndDate, setTrainingITEndDate] = useState("");
+  const [organizedTrainingIT, setOrganizedTrainingIT] = useState(false);
+  const [trainingITStartDate, setTrainingITStartDate] = useState(new Date(Date.now()));
+  const [trainingITEndDate, setTrainingITEndDate] = useState(new Date(Date.now()));
   const [numMaleTrainersIT, setNumMaleTrainersIT] = useState(0);
   const [numFemaleTrainersIT, setNumFemaleTrainersIT] = useState(0);
   const [numTotalTrainersIT, setNumTotalTrainersIT] = useState(
@@ -121,7 +122,8 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
     setNumTotalTrainersIT(numMaleTrainersIT + numFemaleTrainersIT);
   }, [numMaleTrainersIT, numFemaleTrainersIT]);
 
-  const [organizedTrainingDC, setOrganizedTrainingDC] = useState("");
+  // DC Training
+  const [organizedTrainingDC, setOrganizedTrainingDC] = useState(false);
   const [trainingDCStartDate, setTrainingDCStartDate] = useState("");
   const [trainingDCEndDate, setTrainingDCEndDate] = useState("");
   const [numFemaleTrainersDC, setNumFemaleTrainersDC] = useState(0);
@@ -135,23 +137,23 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   }, [numMaleTrainersDC, numFemaleTrainersDC]);
 
   // Training Supervision
-  const [supervisionDCTraining, setSupervisionDCTraining] = useState("");
+  const [supervisionDCTraining, setSupervisionDCTraining] = useState(false);
   const [supervisionTrainingStartDate, setSupervisionTrainingStartDate] =
     useState(new Date(Date.now()));
   const [supervisionTrainingEndDate, setSupervisionTrainingEndDate] =
     useState(new Date(Date.now()));
   const [supervisionHierachyVisits, setSupervisionHierachyVisits] =
-    useState("");
+    useState(false);
 
   // ESPM
-  const [implementationESPM, setImplementationESPM] = useState("");
+  const [implementationESPM, setImplementationESPM] = useState(false);
   const [awarenessStartDate, setAwarenessStartDate] = useState(new Date(Date.now()));
   const [awarenessEndDate, setAwarenessEndDate] = useState(new Date(Date.now()));
-  const [organizedDMMCeremony, setOrganizedDMMCeremony] = useState("");
+  const [organizedDMMCeremony, setOrganizedDMMCeremony] = useState(false);
   const [DMMStartDate, setDMMStartDate] = useState(new Date(Date.now()));
 
   // Mass Distribution of Medicinal Products
-  const [ASDMMDebut, setASDMMDebut] = useState("");
+  const [ASDMMDebut, setASDMMDebut] = useState(false);
   const [LFOVSTHStartDate, setLFOVSTHStartDate] = useState(null);
   const [LFOVSTHEndDate, setLFOVSTHEndDate] = useState(null);
   const [SCHStartDate, setSCHStartDate] = useState(null);
@@ -160,7 +162,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   // DMM Supervision
   const [ASDMMDebutDate, setASDMMDebutDate] = useState(null);
   const [ASStartDate, setASStartDate] = useState(null);
-  const [DMMHierarchyVisits, setDMMHierarchyVisits] = useState("");
+  const [DMMHierarchyVisits, setDMMHierarchyVisits] = useState(false);
 
   // Data Validation
   const [validationASStartDateZS, setValidationASStartDateZS] = useState(null);
@@ -285,6 +287,8 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
       setNumMaleTrainersIT={setNumMaleTrainersIT}
       numTotalTrainersIT={numTotalTrainersIT}
       setNumTotalTrainersIT={setNumTotalTrainersIT}
+    />,
+    <TrainingDCForm
       organizedTrainingDC={organizedTrainingDC}
       setOrganizedTrainingDC={setOrganizedTrainingDC}
       trainingDCStartDate={trainingDCStartDate}
@@ -297,7 +301,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
       setNumMaleTrainersDC={setNumMaleTrainersDC}
       numTotalTrainersDC={numTotalTrainersDC}
       setNumTotalTrainersDC={setNumTotalTrainersDC}
-    />,
+      />,
     <TrainingSupervisionForm
       supervisionDCTraining={supervisionDCTraining}
       setSupervisionDCTraining={setSupervisionDCTraining}
