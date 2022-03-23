@@ -56,16 +56,16 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   const [numAlbendazoleRemaining, setNumAlbendazoleRemaining] = useState(0);
   const [numPraziquantelRemaining, setNumPraziquantelRemaining] = useState(0);
 
-  const [ivermectinArrival, setIvermectinArrival] = useState("");
-  const [ivermectinArrivalDate, setIvermectinArrivalDate] = useState("");
+  const [ivermectinArrival, setIvermectinArrival] = useState(false);
+  const [ivermectinArrivalDate, setIvermectinArrivalDate] = useState(new Date(Date.now()));
   const [numIvermectinReceived, setNumIvermectinReceived] = useState(0);
 
-  const [albendazoleArrival, setAlbendazoleArrival] = useState("");
-  const [albendazoleArrivalDate, setAlbendazoleArrivalDate] = useState("");
+  const [albendazoleArrival, setAlbendazoleArrival] = useState(false);
+  const [albendazoleArrivalDate, setAlbendazoleArrivalDate] = useState(new Date(Date.now()));
   const [numAlbendazoleReceived, setNumAlbendazoleReceived] = useState(0);
 
-  const [praziquantelArrival, setPraziquantelArrival] = useState("");
-  const [praziquantelArrivalDate, setPraziquantelArrivalDate] = useState("");
+  const [praziquantelArrival, setPraziquantelArrival] = useState(false);
+  const [praziquantelArrivalDate, setPraziquantelArrivalDate] = useState(new Date(Date.now()));
   const [numPraziquantelReceived, setNumPraziquantelReceived] = useState(0);
 
   // Financial Resources
