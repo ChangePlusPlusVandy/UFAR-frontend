@@ -29,13 +29,14 @@ export default function TreatmentInformationForm(props) {
     const toggleSoilTransmittedHelminthiasis = () => props.setSoilTransmittedHelminthiasis(prev => !prev);
     const toggleTrachoma = () => props.setTrachoma(prev => !prev);
 
+    console.log("props.validate: ", props.validate);
     return (
         <View>
             <Text style={styles.header}>Maladies traitées</Text>
             <View style={styles.inputContainer}>
                 <Text style={styles.inputLabel}>Sélectionner</Text>
-                <Pressable style={styles.inputField} onPress={toggleOnchocerciasis}>
-                    <CheckBox isChecked={props.onchocerciasis} style={styles.checkBox} onPress={toggleOnchocerciasis} />
+                <Pressable disabled={props.validate} style={styles.inputField} onPress={toggleOnchocerciasis}>
+                    <CheckBox isChecked={props.onchocerciasis} style={styles.checkBox} onPress={toggleOnchocerciasis} disabled={props.validate}/>
                     <Text style={styles.choiceLabel}>Onchocercose</Text>
                 </Pressable>
                 {props.onchocerciasis && 
@@ -49,18 +50,18 @@ export default function TreatmentInformationForm(props) {
                                 <Text style={styles.choiceLabel}>Onchocercose</Text>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>1er tour</Text>
-                                    <CheckBox isChecked={props.onchocerciasisFirst} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisFirst} fillColor='#EC1C24' />
+                                    <CheckBox isChecked={props.onchocerciasisFirst} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisFirst} fillColor='#EC1C24' disabled={props.validate}/>
                                 </View>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>2e tour</Text>
-                                    <CheckBox isChecked={props.onchocerciasisSecond} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisSecond} fillColor='#EC1C24' />
+                                    <CheckBox isChecked={props.onchocerciasisSecond} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisSecond} fillColor='#EC1C24' disabled={props.validate}/>
                              </View>
                             </View>
                         </View>
                     </View>
                 }
-                <Pressable style={styles.inputField} onPress={toggleLymphaticFilariasis}>
-                    <CheckBox isChecked={props.lymphaticFilariasis} style={styles.checkBox} onPress={toggleLymphaticFilariasis} />
+                <Pressable disabled={props.validate} style={styles.inputField} onPress={toggleLymphaticFilariasis}>
+                    <CheckBox isChecked={props.lymphaticFilariasis} style={styles.checkBox} onPress={toggleLymphaticFilariasis} disabled={props.validate}/>
                     <Text style={styles.choiceLabel}>Filariose lymphatique</Text>
                 </Pressable>
                 {props.lymphaticFilariasis && 
@@ -74,7 +75,7 @@ export default function TreatmentInformationForm(props) {
                                 <Text style={styles.choiceLabel}>Mectizan + Albendazole</Text>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>Sélectionner</Text>
-                                    <CheckBox isChecked={props.LFMectizanAlbendazole} style={styles.subfieldCheckBox} onPress={toggleLFMectizanAlbendazole} fillColor='#EC1C24' />
+                                    <CheckBox isChecked={props.LFMectizanAlbendazole} style={styles.subfieldCheckBox} onPress={toggleLFMectizanAlbendazole} fillColor='#EC1C24' disabled={props.validate}/>
                                 </View>
                             </View>
                         </View>
@@ -88,26 +89,26 @@ export default function TreatmentInformationForm(props) {
                                 <Text style={styles.choiceLabel}>Albendazole seul</Text>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>1er tour</Text>
-                                    <CheckBox isChecked={props.LFAlbendazoleFirst} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleFirst} fillColor='#EC1C24' />
+                                    <CheckBox isChecked={props.LFAlbendazoleFirst} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleFirst} fillColor='#EC1C24' disabled={props.validate}/>
                                 </View>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>2e tour</Text>
-                                    <CheckBox isChecked={props.LFAlbendazoleSecond} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleSecond} fillColor='#EC1C24' />
+                                    <CheckBox isChecked={props.LFAlbendazoleSecond} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleSecond} fillColor='#EC1C24' disabled={props.validate}/>
                                 </View>
                             </View>
                         </View>
                     </View>
                 }
-                <Pressable style={styles.inputField} onPress={toggleSchistosomiasis}>
-                    <CheckBox isChecked={props.schistosomiasis} style={styles.checkBox} onPress={toggleSchistosomiasis} />
+                <Pressable disabled={props.validate} style={styles.inputField} onPress={toggleSchistosomiasis}>
+                    <CheckBox isChecked={props.schistosomiasis} style={styles.checkBox} onPress={toggleSchistosomiasis} disabled={props.validate}/>
                     <Text style={styles.choiceLabel}>Schistosomiase</Text>
                 </Pressable>
-                <Pressable style={styles.inputField} onPress={toggleSoilTransmittedHelminthiasis}>
-                    <CheckBox isChecked={props.soilTransmittedHelminthiasis} style={styles.checkBox} onPress={toggleSoilTransmittedHelminthiasis} />
+                <Pressable disabled={props.validate} style={styles.inputField} onPress={toggleSoilTransmittedHelminthiasis}>
+                    <CheckBox isChecked={props.soilTransmittedHelminthiasis} style={styles.checkBox} onPress={toggleSoilTransmittedHelminthiasis} disabled={props.validate} />
                     <Text style={styles.choiceLabel}>Géohelminthiases</Text>
                 </Pressable>
-                <Pressable style={styles.inputField} onPress={toggleTrachoma}>
-                    <CheckBox isChecked={props.trachoma} style={styles.checkBox} onPress={toggleTrachoma} />
+                <Pressable disabled={props.validate} style={styles.inputField} onPress={toggleTrachoma}>
+                    <CheckBox isChecked={props.trachoma} style={styles.checkBox} onPress={toggleTrachoma} disabled={props.validate}/>
                     <Text style={styles.choiceLabel}>Trachome</Text>
                 </Pressable>
             </View>
