@@ -34,10 +34,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
 
 
     const saveEditReport = () => {
-        // todo: after backend integration, call the saveEditReport action
-        // props.saveEditReport(props.report, authAxios, props.currentReportId);
-        
-        console.log("report edit saved/submitted id", props.currentReportId);
+        props.saveEditReport(props.report, authAxios, props.currentReportId);
         props.setBridgeActivePage(0);
         props.setEdit(false);
     }

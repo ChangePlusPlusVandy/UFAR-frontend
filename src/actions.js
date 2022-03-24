@@ -162,7 +162,7 @@ export function getReportsUser(userId, authAxios, id=1){
     async function thunk(dispatch){
         // submit the report to the server
         try {
-            const response = await authAxios.get(`/*****/${userId}/reports`,
+            const response = await authAxios.get(`/form/get_unvalidated`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -210,8 +210,7 @@ export const saveEditReport = (report, authAxios, id) => {
     async function thunk(dispatch){
         // submit the report to the server
         try {
-            // todo: add endpoint to save edits
-            const response = await authAxios.post('***', 
+            const response = await authAxios.post('/form/insert', 
             JSON.stringify(report),
             {
                 headers: {

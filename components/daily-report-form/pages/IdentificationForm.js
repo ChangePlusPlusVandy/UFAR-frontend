@@ -197,7 +197,7 @@ export default function IdentificationForm(props) {
                 props.setVillageId(
                   data.provinces[props.provinceName].health_zones[
                     props.healthZoneName
-                  ].health_areas[props.healthAreaName].villages[value].id
+                  ].health_areas[props.healthAreaName].villages[value]
                 );
             }}
             items={getVillages()}

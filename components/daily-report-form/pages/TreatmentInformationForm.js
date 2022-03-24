@@ -29,7 +29,6 @@ export default function TreatmentInformationForm(props) {
     const toggleSoilTransmittedHelminthiasis = () => props.setSoilTransmittedHelminthiasis(prev => !prev);
     const toggleTrachoma = () => props.setTrachoma(prev => !prev);
 
-    console.log("props.validate: ", props.validate);
     return (
         <View>
             <Text style={styles.header}>Maladies traitées</Text>
