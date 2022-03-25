@@ -3,29 +3,19 @@ import {StyleSheet, Text, View,  TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { connect } from 'react-redux';
 import { getReports } from '../../src/actions';
-import { getReportsUser } from '../../src/actions';
 import { AxiosContext } from '../../src/context/AxiosContext';
 import { AuthContext } from '../../src/context/AuthContext';
 
 
-
-/**
- * @description: FetchButton component, used to fetch reports from the server depending on the user
- * if admin, we call an action to fetch all reports from the specific healthzone
- * if nurse, we call an action to fetch unvalidated reports from a specific user
- */
 export default connect(mapStateToProps, mapDispatchToProps)(function FetchButton (props) {
 
     const {authAxios} = useContext(AxiosContext);
     const authContext = useContext(AuthContext);
 
-    console.log("user: ", authContext.authState.user);
-
     return (
         <View style={styles.flexbox}>
             <TouchableOpacity style={styles.checkbadge} onPress={()=>{
-                props.admin? props.getReports(authContext.authState.user.health_zone, authAxios): 
-                props.getReportsUser(authContext.authState.user?._id, authAxios);
+                props.getReports(authContext.authState.user.health_zone, authAxios);
             }}>
                 <Icon name="cycle" color = '#FFFFFF' size = {25} iconStyle = {styles.icon} type="entypo" />
             </TouchableOpacity>
@@ -41,8 +31,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
     return {
-        getReports: (healthZoneId, authAxios) => dispatch(getReports(healthZoneId, authAxios)),
-        getReportsUser: (userId, authAxios) => dispatch(getReportsUser(userId, authAxios)),
+        getReports: (healthZoneId, authAxios) => dispatch(getReports(healthZoneId, authAxios))
     };
 }
 

@@ -11,8 +11,6 @@ const {Provider} = AxiosContext;
 
 const AxiosProvider = ({children}) => {
 
-  console.log("DEV_DOMAIN", DEV_DOMAIN);
-
   const authContext = useContext(AuthContext);
 
   const authAxios = axios.create({

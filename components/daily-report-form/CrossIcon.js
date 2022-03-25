@@ -5,10 +5,7 @@ export default function CrossIcon (props) {
     
     return (
         <Pressable onPress={() => {
-                props.validate? props.setLandingPage(true): 
-                props.setBridgeActivePage(0);
-                
-                props.edit? props.setEdit(false): null;
+                props.edit? props.setLandingPage(true): props.setBridgeActivePage(0)
             }} style={styles.container} >
             <View style={{...styles.line, transform: [{rotate: '45deg'}], top: 2}}/>
             <View style={{...styles.line, transform: [{rotate: '-45deg'}], top: -2}}/>

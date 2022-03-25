@@ -27,7 +27,7 @@ export default function GeographicalDashboard({getDashboard}) {
           });
         }
 
-        dataArray.length && setData(dataArray);
+        setData(dataArray);
       }).catch(error => {
         setErrorMessage(error.message);
       });
