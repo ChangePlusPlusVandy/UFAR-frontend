@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import RNPickerSelect from "react-native-picker-select";
+import { Chevron } from "react-native-shapes";
 
 // done 
 
@@ -15,7 +17,7 @@ export default function DMMSupervisionForm(props) {
 
   return (
     <View>
-      <Text style={styles.header}>SUPERVISION DE LA DMM</Text>
+      <Text style={styles.header}>Supervision de la DMM</Text>
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>
           Date du début de la supervision de DMM dans les AS

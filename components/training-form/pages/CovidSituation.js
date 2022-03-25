@@ -1,13 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-
 // done 
 
 export default function CovidSituationForm(props) {
     return (
         <View>
-            <Text style={styles.header}>Situation Epidemiologique de la COVID-19 Dans La Zone De Sante</Text>
+            <Text style={styles.header}>Situation epidemiologique de la COVID-19 dans la zone de sante</Text>
             <View style={styles.inputContainer}>
                 <Text style={styles.inputLabelBigger} >Situation Epidemiologique</Text>
                 <Text style={styles.inputLabel}>Cumul des cas actifs de Covid-19</Text>
@@ -36,7 +35,7 @@ export default function CovidSituationForm(props) {
 const styles = StyleSheet.create({
     header: {
         paddingVertical: 18,
-        alignSelf: 'center',
+        textAlign: 'center',
         fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Helvetica Neue',
         fontWeight: 'bold',
         fontSize: 23,

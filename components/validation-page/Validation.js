@@ -7,6 +7,7 @@ import RecentlyValidated from './pages/RecentlyValidated';
 import Dashboards from './pages/Dashboards';
 import NetworkBar from '../nurse-landing-page/NetworkBar';
 import TokenGenerationPage from './pages/UserManagement';
+import TrainingForm from '../training-form/TrainingForm';
 
 import { connect } from 'react-redux';
 
@@ -25,7 +26,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(function Validation 
             reportIds={Object.keys(props.validationReports).filter(key => props.validationReports[key].report.is_validated === true)}
         />,
         <Dashboards/>,
-        <TokenGenerationPage/>
+        <TokenGenerationPage/>,
+        <TrainingForm/>
     ]
 
     return (

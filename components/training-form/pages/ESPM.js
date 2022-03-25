@@ -1,13 +1,16 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
-
-// just need conditional rendering
+import RNPickerSelect from "react-native-picker-select";
+import { Chevron } from "react-native-shapes";
+import CheckBox from '../CheckBox';
 
 export default function ESPMForm(props) {
     const [date, setDate] = React.useState(new Date(Date.now()));
 
-    const options = ['Oui', 'Non'];
+    const options = ["Oui", "Non"];
+    
+    const toggleImplementationESPM = () => props.setImplementationESPM(prev => !prev);
 
     const onChange = (event, selectedDate) => {
       const currentDate = selectedDate;
@@ -18,26 +21,12 @@ export default function ESPMForm(props) {
         <View>
           <Text style={styles.header}>ESPM</Text>
           <View style={styles.inputContainer}>
-        <View style={styles.RNPickerSelectContainer}>
-          <RNPickerSelect
-            useNativeAndroidPickerStyle={false}
-            style={{
-              inputAndroid: styles.RNPickerSelectInput,
-              iconContainer: styles.RNPickerSelectIconContainer,
-              placeholder: styles.placeholder,
-            }}
-            onValueChange={(value) => {
-              props.setImplementationESPM(value);
-            }}
-            items={options}
-            value={props.implementationESPM}
-            placeholder={{
-              label:"Mise en oeuvre des activités de ESPM",
-              value: null,
-            }}
-            Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
-          />
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                  <Text style={styles.inputLabel}>Mise en oeuvre des activités de ESPM</Text>
+                  <CheckBox isChecked={props.implementationESPM} onPress={toggleImplementationESPM} />
+              </View>
         </View>
+            {props.implementationESPM && <> 
             <Text style={styles.inputLabel}>Date du début de la sensibilisation</Text>
             <TextInput
               onPressIn={() => {
@@ -112,8 +101,8 @@ export default function ESPMForm(props) {
               value={new Date(props.DMMStartDate).toLocaleDateString()}
               placeholder="MM/DD/YYYY"
             /> 
+           </> }
           </View>
-        </View>
       );
     }
     

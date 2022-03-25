@@ -1806,10 +1806,10 @@
   "resolved" "https://registry.npmjs.org/@react-native-community/clipboard/-/clipboard-1.5.1.tgz"
   "version" "1.5.1"
 
-"@react-native-community/datetimepicker@^6.0.1":
-  "integrity" "sha512-tVEJIe67gCidgmU6BzTrPZgDi5jJe+sndUBu6Yvjs6jeW8ktul76G28MxEniIq4M6jdoMX6JAsh/7zUTOTlLdg=="
-  "resolved" "https://registry.npmjs.org/@react-native-community/datetimepicker/-/datetimepicker-6.0.1.tgz"
-  "version" "6.0.1"
+"@react-native-community/datetimepicker@^6.0.2":
+  "integrity" "sha512-OqLYTpmOITC0hP0gzF7Xg9NqigRNzWeexNYdGkYFoOnH1tCVNBKU1SOwJX64ado5b4EapZWKU4nyOOuiGlg1OQ=="
+  "resolved" "https://registry.npmjs.org/@react-native-community/datetimepicker/-/datetimepicker-6.0.2.tgz"
+  "version" "6.0.2"
   dependencies:
     "invariant" "^2.2.4"
 

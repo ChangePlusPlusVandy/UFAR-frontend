@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import CheckBox from '../CheckBox';
 
 // needs the yes/no and conditional rendering 
 export default function MassDistributionForm(props) {
@@ -11,9 +12,18 @@ export default function MassDistributionForm(props) {
       setDate(currentDate);
     };
 
+    const toggleASDMMDebut = () => props.setASDMMDebut(prev => !prev);
+
     return (
         <View>
-          <Text style={styles.header}>DISTRIBUTION DE MASSE DE MEDICAMENT</Text>
+          <Text style={styles.header}>Distribution de masse de medicament</Text>
+          <View style={styles.inputContainer}>
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                  <Text style={styles.inputLabel}>Debut de la DMM dans les AS</Text>
+                  <CheckBox isChecked={props.ASDMMDDebut} onPress={toggleASDMMDebut} />
+              </View>
+          </View>
+          {props.ASDMMDebut && <> 
           <View style={styles.inputContainer}>
             <Text style={styles.inputLabel}>Date du début de la DMM LF/OV/STH</Text>
             <TextInput
@@ -88,6 +98,7 @@ export default function MassDistributionForm(props) {
               placeholder="MM/DD/YYYY"
             />
           </View>
+          </>}
         </View>
       );
     }
@@ -95,7 +106,7 @@ export default function MassDistributionForm(props) {
     const styles = StyleSheet.create({
       header: {
         paddingVertical: 18,
-        alignSelf: "center",
+        textAlign: "center",
         fontFamily: Platform.OS === "android" ? "Roboto" : "Helvetica Neue",
         fontWeight: "bold",
         fontSize: 23,
