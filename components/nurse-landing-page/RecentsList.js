@@ -1,16 +1,12 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {ScrollView, FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { connect } from 'react-redux';
-import FetchButton from '../validation-page/FetchButton';
+
 import { convertFromYYYYMMDDToDDMMYYYY } from '../../src/utils';
 
 
 export default connect(mapStateToProps)(function RecentsList(props){    
-
-    useEffect(()=>{
-        // todo: call thunk action to fetch user reports 
-    })
 
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
@@ -19,27 +15,14 @@ export default connect(mapStateToProps)(function RecentsList(props){
             <TouchableOpacity style={styles.edit}>
                 {props.reports[item].isSubmitted ? 
                 <Icon name="check" color = 'green' size = {25} /> :
-                <Icon name="time-slot" color = 'green' size = {20} type="entypo" />}  
+                <Icon name="time-slot" color = 'green' size = {20} type="entypo" />}                
             </TouchableOpacity>
-            {props.reports[item].isSubmitted && <TouchableOpacity style={styles.edit}
-                onPress={() => {
-                    props.setEdit(true);
-                    props.setCurrentReport(props.reports[item].report);
-                    props.setCurrentReportId(item)
-                    props.setBridgeActivePage(1);
-                }}
-            >
-                <Icon name="edit" color = 'green' size = {25} />
-            </TouchableOpacity>}
         </View>
     );
     
         return (
             <ScrollView style={styles.container} persistentScrollbar={true}>
                 <Text style={styles.header}>Récent</Text>
-                <View style={styles.fetch}>
-                    <FetchButton admin={false}/>
-                </View>
                 <FlatList data={ props.reports? Object.keys(props.reports): []}renderItem={renderItem} keyExtractor={item => item.id}/>
             </ScrollView>
         );
@@ -103,12 +86,5 @@ const styles = StyleSheet.create({
     },
     edit: {
         flex: 1,
-        flexDirection: 'row',
-    },
-    icon:{
-        marginHorizontal: 5,
-    }, 
-    fetch: {
-        margin: 10,
     },
 })

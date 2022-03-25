@@ -4,7 +4,7 @@ import {Pressable, StyleSheet, Text, View, Modal} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { connect } from 'react-redux';
 import uuid from 'react-native-uuid';
-import { addReport, validateReport, saveEditReport } from '../../src/actions.js';
+import { addReport, validateReport } from '../../src/actions.js';
 import { AxiosContext } from '../../src/context/AxiosContext.js';
 
 export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButton(props){
@@ -18,25 +18,28 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
      */
     const submitReport = () => {
         props.addReport(props.report, authAxios, uuid.v4());
+        // remove the report from the redux store after 24 hours
+        setTimeout(() => {
+            props.removeReport(uuid.v4());
+        }, 86400000);
+
         // navigate back to respective landing page
-        props.setBridgeActivePage(0)
+        props.edit? props.setLandingPage(true): props.setBridgeActivePage(0)
     }
 
     /**
      * Validates report through redux and finally at the backend, navigates
      * back to validation pages
      */
-    const submitValidateReport = () => {
+    const submitEditReport = () => {
+
         props.markValidatedReport(props.report, props.currentReportId);
-        props.validateReport(props.report, authAxios, props.currentReportId);
-        props.setLandingPage(true);
-    }
 
+        // dispatch an action to validate the report at the backend
+        // props.validateReport(props.validationReports.find(report => report.id === currentReportId), authAxios, props.currentReportId);
 
-    const saveEditReport = () => {
-        props.saveEditReport(props.report, authAxios, props.currentReportId);
+        // navigate back to validation pages
         props.setBridgeActivePage(0);
-        props.setEdit(false);
     }
 
     return (
@@ -57,13 +60,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                             <Pressable
                             style={styles.button}
                             onPress={() => {
-                                if(props.validate){
-                                    submitValidateReport();
-                                } else if (props.edit){
-                                    saveEditReport();
-                                } else {
-                                    submitReport();
-                                }
+                                props.edit? submitEditReport():submitReport();
                                 setModalVisible(!modalVisible)
                             }}
                             >
@@ -76,13 +73,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
             <View style={styles.container}>
                 <Pressable onPress={ () => {
                     if (props.isConnected) {
-                        if(props.validate){
-                            submitValidateReport();
-                        } else if (props.edit){
-                            saveEditReport();
-                        } else {
-                            submitReport();
-                        }
+                        props.edit? submitEditReport():submitReport();
                     } else {
                         setModalVisible(true);
                     }
@@ -90,7 +81,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                 style={styles.button}>
                     <Icon name='sc-telegram' type='evilicon' color='white' size={45}/>
                 </Pressable>
-                <Text style={styles.text}> {props.validate? "Validate": "Submit/Save" }</Text>
+                <Text style={styles.text}> {props.edit? "Validate": "Submit/Save" }</Text>
             </View>
         </View>
     )
@@ -112,9 +103,9 @@ function mapDispatchToProps(dispatch){
         //     retry: true,
         //   },}),
         addReport: (report, authAxios, id) => dispatch(addReport(report, authAxios, id)),  
+        removeReport: (id) => dispatch({type: 'REMOVE_REPORT', id: id}), 
         markValidatedReport: (report, id) => dispatch({type: 'MARK_VALIDATED_REPORT', report: report, id: id}),
         validateReport: (report, authAxios, id) => dispatch(validateReport(report, authAxios, id)),
-        saveEditReport: (report, authAxios, id) => dispatch(saveEditReport(report, authAxios, id)),
     };
 }
 

@@ -2,26 +2,19 @@ import React from 'react';
 import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {Icon} from 'react-native-elements';
 import LeftArrow from '../LeftArrow';
-import { connect } from 'react-redux';
-
 //uses material icons
 import { convertFromYYYYMMDDToDDMMYYYY } from '../../../src/utils';
 
 //uses material icons
 
-export default connect(mapStateToProps)(function RecentlyValidated(props) {
+export default function RecentlyValidated(props) {
 
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
-            <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(props.validationReports[item].report.date)).toISOString().split('T')[0])}</Text>
-            <Text style={styles.namelist}>{`Jour #${props.validationReports[item].report.DMM_day}`}</Text>
+            <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(item.date)).toISOString().split('T')[0])}</Text>
+            <Text style={styles.namelist}>{`Jour #${item.DMM_day}`}</Text>
             <TouchableOpacity style={styles.edit}>
-                <Icon name="check" color = '#fff' style = {styles.icon} />
-            </TouchableOpacity>
-            <TouchableOpacity>
-                {props.validationReports[item].isSubmitted ? 
-                <Icon name="check" color = 'green' size = {25} /> :
-                <Icon name="time-slot" color = 'green' size = {20} type="entypo" />}  
+            <Icon name="check" color = '#fff' style = {styles.icon} />
             </TouchableOpacity>
         </View>
     );
@@ -34,15 +27,9 @@ export default connect(mapStateToProps)(function RecentlyValidated(props) {
                 <LeftArrow setActivePage={props.setActivePage}/>
                 <Text style={styles.header}>Récemment Validé</Text>
             </View>
-            <FlatList data={props.reportIds} renderItem={renderItem} keyExtractor={id => id}/>
+            <FlatList data={props.reports} renderItem={renderItem} keyExtractor={item => item.id}/>
         </View>
     );
-});
-
-function mapStateToProps(state) {
-    return {
-        validationReports: state.reducer.validationReports,
-    };
 }
 
 const styles = StyleSheet.create({
@@ -115,7 +102,6 @@ const styles = StyleSheet.create({
         flex: 0.55,
         backgroundColor: "#7DB415",
         borderRadius: 20,
-        marginRight: 10,
     },
     icon: {
         size: 20,
