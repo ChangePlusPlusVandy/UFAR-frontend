@@ -19,8 +19,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(function FetchButton
     const {authAxios} = useContext(AxiosContext);
     const authContext = useContext(AuthContext);
 
-    console.log("user: ", authContext.authState.user);
-
     return (
         <View style={styles.flexbox}>
             <TouchableOpacity style={styles.checkbadge} onPress={()=>{

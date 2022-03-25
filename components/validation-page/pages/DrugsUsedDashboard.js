@@ -23,7 +23,6 @@ export default function DrugsUsedDashboard({getDashboard}) {
                                           "praziquantel": [{ regionName: "", percentage: 0}]});
 
   const [errorMessage, setErrorMessage] = React.useState('');
-    console.log("data: ", data);
     useEffect(() =>{
       // call get dashboard and catch errors
       getDashboard("drugs")
