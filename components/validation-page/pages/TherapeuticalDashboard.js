@@ -25,9 +25,7 @@ export default function TherapeuticalDashboard({getDashboard}) {
             });
           }
         }
-        setData(dataObject);
-        console.log("WIDTH: ", width)
-        console.log("HEIGHT: ", height)
+        dataObject && setData(dataObject);
       }).catch(error => {
         setErrorMessage(error.message);
       });
