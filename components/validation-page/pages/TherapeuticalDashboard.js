@@ -1,16 +1,17 @@
 import React, {useEffect} from 'react';
-import {StyleSheet , View, Text } from 'react-native';
+import {StyleSheet , View, Text, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory-native'
+import RNPickerSelect from 'react-native-picker-select';
 
+const {height, width} = Dimensions.get('window');
+const BAR_WIDTH = Math.round(height*0.017)
 
 export default function TherapeuticalDashboard({getDashboard}) {
   const [data, setData] = React.useState({"mectizan": [{ regionName: "", percentage: 0}]});
   const [errorMessage, setErrorMessage] = React.useState('');
-  const [therapeutic, setTherapeutic] = React.useState("mectizan"); // todo: get therapeutic data dynamically from the user
-
-  console.log("data: ", data);
-
+  const [therapeutic, setTherapeutic] = React.useState("mectizan"); // this is set by the RNPicker
+  
   useEffect(()=>{
     getDashboard("therapeutic_coverage")
       .then(data => {
@@ -24,21 +25,31 @@ export default function TherapeuticalDashboard({getDashboard}) {
             });
           }
         }
-        setData(dataObject);
+        dataObject && setData(dataObject);
       }).catch(error => {
         setErrorMessage(error.message);
       });
   }, [])
 
-
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Text style={styles.chartTitle}>Title of Graph</Text>
+        <Text style={styles.chartTitle}>Therapeutic Coverage</Text>
+        <RNPickerSelect
+            value={therapeutic}
+            placeholder={{ label: "Select your therapy of choice", value: null }}
+            onValueChange={(value) => setTherapeutic(value)}
+            items={[
+                { label: 'Mectizan', value: 'mectizan' },
+                { label: 'Albendazole', value: 'albendazole' },
+                { label: 'Mectizan & Albendazole', value: 'mectizan_and_albendazole' },
+                { label: 'Praziquantel', value: 'praziquantel' },
+            ]}
+        />
         <VictoryChart
             theme={VictoryTheme.grayscale}
-            domainPadding={{x: 20}}
-            padding={{top: 50, left: 80, right: 80}}
+            domainPadding={{x: Math.round(width*0.05)}}
+            padding={{top: Math.round(height*0.05), left: Math.round(width*0.2), right: Math.round(width*0.2)}}
             >
               <VictoryBar
                 horizontal
@@ -47,13 +58,14 @@ export default function TherapeuticalDashboard({getDashboard}) {
                 x="regionName" 
                 y="percentage"
                 labels={({ datum }) => datum.percentage.toString() + "%"}
-                labelComponent={<VictoryLabel dx={-30}/>}
+                labelComponent={<VictoryLabel dx={Math.round(width*(-0.1))}/>}
                 animate={{
                   duration: 120,
                   onLoad: { duration: 120 }
                 }}
                 barRatio={0.8}
-                cornerRadius={10}
+                barWidth={BAR_WIDTH} // get rid of this line if you start running into issues, not sure if it works with ratio
+                cornerRadius={Math.round(BAR_WIDTH*0.5)}
               />
               <VictoryAxis/>
           </VictoryChart>

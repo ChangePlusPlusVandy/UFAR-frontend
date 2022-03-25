@@ -1,9 +1,11 @@
 import React, {useContext, useEffect} from 'react';
-import {StyleSheet , View, Text } from 'react-native';
+import {StyleSheet , View, Text, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryLabel } from 'victory-native'
 import {Icon} from 'react-native-elements';
 
+const {height, width} = Dimensions.get('window');
+const BAR_WIDTH = Math.round(height*0.017)
 
 // axios
 import {AxiosContext} from '../../../src/context/AxiosContext';
@@ -14,8 +16,6 @@ export default function GeographicalDashboard({getDashboard}) {
 
   // iterate through the data object and create a new array with the data
   // to be used in the VictoryChart
-  
-
   useEffect(()=>{
     getDashboard("geographic_coverage")
       .then(data => {
@@ -27,7 +27,7 @@ export default function GeographicalDashboard({getDashboard}) {
           });
         }
 
-        setData(dataArray);
+        dataArray.length && setData(dataArray);
       }).catch(error => {
         setErrorMessage(error.message);
       });
@@ -39,8 +39,8 @@ export default function GeographicalDashboard({getDashboard}) {
         <Text style={styles.chartTitle}>Proportion des ménages de I'AS ayant bénéficié du traitement pendant la DMM</Text>
         <VictoryChart
             theme={VictoryTheme.grayscale}
-            domainPadding={{x: 20}}
-            padding={{top: 50, left: 100, right: 70}}
+            domainPadding={{x: Math.round(width*0.05)}}
+            padding={{top: Math.round(height*0.05), left: Math.round(width*0.2), right: Math.round(width*0.18)}}
             >
               <VictoryBar
                 horizontal
@@ -49,13 +49,14 @@ export default function GeographicalDashboard({getDashboard}) {
                 x="regionName" 
                 y="percentage"
                 labels={({ datum }) => datum.percentage.toString() + "%"}
-                labelComponent={<VictoryLabel dx={-30}/>}
+                labelComponent={<VictoryLabel dx={Math.round(width*(-0.1))}/>}
                 animate={{
                   duration: 120,
                   onLoad: { duration: 120 }
                 }}
                 barRatio={0.8}
-                cornerRadius={10}
+                barWidth={BAR_WIDTH}
+                cornerRadius={Math.round(BAR_WIDTH*0.5)}
               />
               <VictoryAxis/>
           </VictoryChart>

@@ -2,7 +2,6 @@ import { getResolveDependencyFn } from 'metro/src/lib/transformHelpers';
 import React, {useContext, useCallback, useEffect} from 'react';
 import { StyleSheet, View, Text, Alert, TextInput, Image} from 'react-native';
 import RegistrationButton from './RegistrationButton';
-import SwitchSelector from 'react-native-switch-selector';
 
 // authorization
 import { AxiosContext } from '../../src/context/AxiosContext';
@@ -51,9 +50,6 @@ export default function Registration(props){
                     }
                 }
             );
-
-            console.log("response: " + response.data);
-            console.log("response.status: " + response.status);
                 
             if (response.status == 201) { // todo: testing
                 // alert user that account was created
