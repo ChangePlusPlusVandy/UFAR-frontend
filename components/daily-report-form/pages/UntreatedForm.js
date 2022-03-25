@@ -60,7 +60,7 @@ export default function UntreatedForm(props) {
           style={styles.inputField}
           value={props.numAbsent.toString()}
           onChange={(e) =>
-            props.setNumRefused(parseInt(e.nativeEvent.text) || 0)
+            props.setNumAbsent(parseInt(e.nativeEvent.text) || 0)
           }
         />
         <View style={{ alignItems: "center", marginTop: 10 }}>
