@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   image: {
-    height: 79,
-    width: 360,
-    bottom: 200,
+    height: '9.4%',
+    width: '92%',
+    bottom: '24%',
     alignSelf:'center',
   },
   buttonsContainer: {

@@ -1,7 +1,10 @@
 import React from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View, Dimensions} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
+const {height, width} = Dimensions.get('window');
+const buttonDiameter = Math.round(height * 0.072)
 
 export default function LoginButton(props) {
     // todo: add a link to the forgot password page
@@ -31,13 +34,13 @@ export default function LoginButton(props) {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        top: 40,
+        top: '4.7%',
     },
     button: {
         backgroundColor: '#EC1C24',
-        height: 60,
-        width: 60,
-        borderRadius: 30,
+        height: buttonDiameter,
+        width: buttonDiameter,
+        borderRadius: Math.floor(buttonDiameter/2),
         alignContent: 'center',
         justifyContent: 'center',
 
@@ -59,7 +62,7 @@ const styles = StyleSheet.create({
         color: '#EC1C24',
         fontFamily: Platform.OS === 'android' ? 'sans-serif-medium' : 'Avenir-Roman',
         fontSize: 13,
-        lineHeight: 15,
+        lineHeight: Math.round(0.018 * height),
     },
 
     link: {

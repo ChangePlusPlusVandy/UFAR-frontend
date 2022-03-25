@@ -1,6 +1,6 @@
 import { getResolveDependencyFn } from 'metro/src/lib/transformHelpers';
 import React, {useContext, useCallback} from 'react';
-import { StyleSheet, View, Text, Alert, TextInput, Image} from 'react-native';
+import { StyleSheet, View, Text, Alert, TextInput, Image, Dimensions} from 'react-native';
 import LoginButton from './LoginButton';
 import SwitchSelector from 'react-native-switch-selector';
 
@@ -13,6 +13,7 @@ import jwt_decode from "jwt-decode"; // todo: to decode tokens
 
 import ufar from './ufar.png';
 
+const {height, width} = Dimensions.get('window');
 
 const IMAGE_DEF = Image.resolveAssetSource(ufar).uri;
 
@@ -130,24 +131,24 @@ const styles = StyleSheet.create({
         overflow: 'scroll',
     },
     image: {
-        height: 79,
-        width: 360,
-        bottom: 100,
+        height: '9.4%',
+        width: '92%',
+        bottom: '12%',
         alignSelf:'center',
     },
 
     input: {
-        height: 50,
-        width: 300,
+        height: '7.5%',
+        width: '92%',
         borderColor: 'gray',
         borderWidth: 0.5,
         margin: 10,
         padding: 10,
-        borderRadius: 20,
+        borderRadius: Math.round(height * 0.024),
     },
 
     switch: {
-        width: 300,
+        width: '92%',
         marginBottom: 20,  
     },
 

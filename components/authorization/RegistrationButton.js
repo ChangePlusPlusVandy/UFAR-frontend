@@ -1,7 +1,10 @@
 import React from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View, Dimensions} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
+const {height, width} = Dimensions.get('window');
+const buttonDiameter = Math.round(height * 0.072)
 
 export default function RegistrationButton(props) {
     // todo: add a link to the login page
@@ -27,13 +30,13 @@ export default function RegistrationButton(props) {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        top: 40,
+        top: '4.7%',
     },
     button: {
         backgroundColor: '#EC1C24',
-        height: 60,
-        width: 60,
-        borderRadius: 30,
+        height: buttonDiameter,
+        width: buttonDiameter,
+        borderRadius: Math.floor(buttonDiameter/2),
         alignContent: 'center',
         justifyContent: 'center',
 

@@ -1,5 +1,8 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
+import {TouchableOpacity, StyleSheet, Text, View, Dimensions} from 'react-native';
+
+const {height, width} = Dimensions.get('window');
+const buttonDiameter = Math.round(0.065 * height)
 
 export default function NormalButton(props) {
     return (
@@ -20,9 +23,9 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#59AECF',
-        height: 54,
-        width: 54,
-        borderRadius: 27,
+        height: buttonDiameter,
+        width: buttonDiameter,
+        borderRadius: Math.floor(buttonDiameter/2),
         alignContent: 'center',
         justifyContent: 'center',
 
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
         paddingVertical: 3,
         color: 'white',
         fontFamily: Platform.OS === 'android' ? 'sans-serif-medium' : 'Avenir-Roman',
-        fontSize: 13,
-        lineHeight: 15,
+        fontSize: Math.floor(height*0.016),
+        lineHeight: Math.round(height*0.018),
     }
 });
