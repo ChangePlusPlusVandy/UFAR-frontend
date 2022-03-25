@@ -14,18 +14,20 @@ export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidat
 
     const [landingPage, setLandingPage] = React.useState(true);
     const [ currentReport, setCurrentReport ] = React.useState(null);
+    const [ currentReportId, setCurrentReportId ] = React.useState(null);
 
     // Note: the conversion of the date is different from the  validated component bcs this
     // component deals with a report object immidiatly from the backend, which has a different format 
     // for date.
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
-            <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY(item.date.split('T')[0])}</Text>
-            <Text style={styles.namelist}>{`Jour #${item.DMM_day}`}</Text>
-            <TouchableOpacity style={styles.edit}>
+            <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY(props.validationReports[item].report.date.split('T')[0])}</Text>
+            <Text style={styles.namelist}>{`Jour #${props.validationReports[item].report.DMM_day}`}</Text>
+            <TouchableOpacity style={styles.validate}>
                 <Icon name="edit" color = '#000000' size = {25} 
                     onPress={() => {
-                        setCurrentReport(item);
+                        setCurrentReport(props.validationReports[item].report);
+                        setCurrentReportId(item);
                         setLandingPage(false);
                     }}
                 />
@@ -38,15 +40,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidat
             <View style={styles.flexbox}>
                 <RightArrow setActivePage={props.setActivePage} />
                 <Text style={styles.header}>À Valider</Text>
-                <FetchButton/>
+                <FetchButton admin={true}/>
             </View>
-            <FlatList data={props.reports} renderItem={renderItem} keyExtractor={item => item.id}/>
+            <FlatList data={props.reportIds} renderItem={renderItem} keyExtractor={id => id}/>
         </View> 
     ) : (
         <DailyReportForm
             setLandingPage={setLandingPage}
             currentReport={currentReport}
-            edit={true}
+            currentReportId={currentReportId}
+            validate={true}
         />
     );
 });
@@ -130,7 +133,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         flex: 5,
     },
-    edit: {
+    validate: {
         flex: 1,
     },
     flexbox: {

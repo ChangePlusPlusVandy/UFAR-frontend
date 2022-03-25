@@ -9,7 +9,9 @@ export default function LoginButton(props) {
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} 
                 onPress={() =>
-                    props.onLogin()
+                    {
+                        props.onLogin();
+                    }
                 }
             >
                 <Icon name='arrow-right' type='feather' color='white' size={50}/>
