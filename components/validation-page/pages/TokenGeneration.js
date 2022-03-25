@@ -48,7 +48,6 @@ export default function TokenGeneration(props){
                 // secure store might be a good idea, just in case, 
                 // they need to retrive it later.
                 const uuidToken = response.data;
-                console.log(uuidToken);
                 setToken(uuidToken.token);
                 setErrorMessage('');
             } else {
