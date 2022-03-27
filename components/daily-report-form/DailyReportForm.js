@@ -675,6 +675,14 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       validate={props.validate}
     />,
     <ProcessingForm
+      // Treatments
+      onchocerciasis={onchocerciasis}
+      lymphaticFilariasis={lymphaticFilariasis}
+      LFMectizanAlbendazole={LFMectizanAlbendazole}
+      LFAlbendazoleFirst={LFAlbendazoleFirst}
+      LFAlbendazoleSecond={LFAlbendazoleSecond}
+      schistosomiasis={schistosomiasis}
+      soilTransmittedHelminthiasis={soilTransmittedHelminthiasis}
       // Mectizan
       setNumYoungMenMectizan={setNumYoungMenMectizan}
       setNumOldMenMectizan={setNumOldMenMectizan}
@@ -758,6 +766,11 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       validate={props.validate}
     />,
     <DrugManagementForm
+      // Treatments
+      onchocerciasis={onchocerciasis}
+      lymphaticFilariasis={lymphaticFilariasis}
+      schistosomiasis={schistosomiasis}
+      soilTransmittedHelminthiasis={soilTransmittedHelminthiasis}
       // Ivermectin
       ivermectinReceived={ivermectinReceived}
       ivermectinUsed={ivermectinUsed}

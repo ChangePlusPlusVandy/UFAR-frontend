@@ -10,8 +10,11 @@ import ProcessingPraziquantelForm from "./processing-pages/ProcessingPraziquante
 import ProcessingAlbendazoleHelminthiasisForm from "./processing-pages/ProcessingAlbedazoleHelminthiasisForm";
 
 export default function ProcessingForm(props) {
-  const pages = [
-    {
+  const pages = [];
+
+  // Mectizan (Onchocercose) page
+  if (props.onchocerciasis) {
+    pages.push({
       title: "Mectizan (Onchocercose)",
       content: (
         <ProcessingMectizanForm
@@ -31,8 +34,12 @@ export default function ProcessingForm(props) {
           validate={props.validate}
         />
       ),
-    },
-    {
+    });
+  }
+
+  // Mectizan et Albendazole (Filariose lymphatique) page
+  if (props.LFMectizanAlbendazole) {
+    pages.push({
       title: "Mectizan et Albendazole (Filariose lymphatique)",
       content: (
         <ProcessingMectAlbForm
@@ -51,8 +58,12 @@ export default function ProcessingForm(props) {
           validate={props.validate}
         />
       ),
-    },
-    {
+    });
+  }
+
+  // Albendazole seul (Filariose lymphatique) page
+  if (props.LFAlbendazoleFirst || props.LFAlbendazoleSecond) {
+    pages.push({
       title: "Albendazole seul (Filariose lymphatique)",
       content: (
         <ProcessingAlbendazoleForm
@@ -73,24 +84,32 @@ export default function ProcessingForm(props) {
           validate={props.validate}
         />
       ),
-    },
-    {
-      title: "Praziquantel (Schistosomiase)",
-      content: (
-        <ProcessingPraziquantelForm
-          setNumMenPrazi={props.setNumMenPrazi}
-          numMenPrazi={props.numMenPrazi}
-          setNumWomenPrazi={props.setNumWomenPrazi}
-          numWomenPrazi={props.numWomenPrazi}
-          setTotalNumPrazi={props.setTotalNumPrazi}
-          totalNumPrazi={props.totalNumPrazi}
-          setTotalCoveragePrazi={props.setTotalCoveragePrazi}
-          totalCoveragePrazi={props.totalCoveragePrazi}
-          validate={props.validate}
-        />
-      ),
-    },
-    {
+    });
+  }
+
+  // Praziquantel (Schistosomiase) page
+  if (props.schistosomiasis) {
+    pages.push({
+        title: "Praziquantel (Schistosomiase)",
+        content: (
+          <ProcessingPraziquantelForm
+            setNumMenPrazi={props.setNumMenPrazi}
+            numMenPrazi={props.numMenPrazi}
+            setNumWomenPrazi={props.setNumWomenPrazi}
+            numWomenPrazi={props.numWomenPrazi}
+            setTotalNumPrazi={props.setTotalNumPrazi}
+            totalNumPrazi={props.totalNumPrazi}
+            setTotalCoveragePrazi={props.setTotalCoveragePrazi}
+            totalCoveragePrazi={props.totalCoveragePrazi}
+            validate={props.validate}
+          />
+        ),
+    });
+  }
+
+  // Albendazole (Géohelminthiases) page
+  if (props.soilTransmittedHelminthiasis) {
+    pages.push({
       title: "Albendazole (Géohelminthiases)",
       content: (
         <ProcessingAlbendazoleHelminthiasisForm
@@ -119,8 +138,8 @@ export default function ProcessingForm(props) {
           validate={props.validate}
         />
       ),
-    },
-  ];
+    });
+  }
 
   return (
     <View>

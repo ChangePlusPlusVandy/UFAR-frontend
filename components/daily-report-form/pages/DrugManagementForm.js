@@ -8,8 +8,11 @@ import DrugManagementAlbendazoleForm from "./drug-management-pages/DrugManagemen
 import DrugManagementPraziquantelForm from "./drug-management-pages/DrugManagementPraziquantelForm";
 
 export default function DrugManagementForm(props) {
-  const pages = [
-    {
+  const pages = [];
+
+  // Ivermectine (Oncho/FL) page
+  if (props.onchocerciasis || props.lymphaticFilariasis) {
+    pages.push({
       title: "Ivermectine (Oncho/FL)",
       content: (
         <DrugManagementIvermectinForm
@@ -26,8 +29,12 @@ export default function DrugManagementForm(props) {
           validate={props.validate}
         />
       ),
-    },
-    {
+    });
+  }
+
+  // Albendazole (FL/STH) page
+  if (props.soilTransmittedHelminthiasis || props.lymphaticFilariasis) {
+    pages.push({
       title: "Albendazole (FL/STH)",
       content: (
         <DrugManagementAlbendazoleForm
@@ -44,8 +51,12 @@ export default function DrugManagementForm(props) {
           validate={props.validate}
         />
       ),
-    },
-    {
+    });
+  }
+
+  // Praziquantel (SCH) page
+  if (props.schistosomiasis) {
+    pages.push({
       title: "Praziquantel (SCH)",
       content: (
         <DrugManagementPraziquantelForm
@@ -62,8 +73,8 @@ export default function DrugManagementForm(props) {
           validate={props.validate}
         />
       ),
-    },
-  ];
+    });
+  }
 
   return (
     <View>
