@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
 
         height: 54,
         width: 54,
-        backgroundColor: '#b30000',
+        backgroundColor: '#cb0d00',
         borderRadius: 27,
 
         /* Android Drop Shadow Styling */

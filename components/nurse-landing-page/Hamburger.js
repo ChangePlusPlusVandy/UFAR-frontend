@@ -15,7 +15,7 @@ export default function Hamburger (props) {
         <TouchableOpacity style={styles.hamburger}>
             <Menu name="hamburger">
                 <MenuTrigger>
-                    <Icon name="menu" color = '#FFFFFF' size = {44} iconStyle = {styles.icon} />
+                    <Icon name="menu" color = '#FFFFFF' size = {41} iconStyle = {styles.icon} />
                 </MenuTrigger>
                 <MenuOptions customStyles = {styles.menuOptions}>
                     <MenuOption onSelect={() => props.navigation.navigate('Home')}>
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         height: buttonDiameter,
         width: buttonDiameter,
         borderRadius: Math.floor(buttonDiameter/2),
-        backgroundColor: '#b30000',
+        backgroundColor: '#cb0d00',
         alignContent: "center",
         marginLeft: 15,
         marginTop: '8%',
@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
     },
     icon:{
-        marginTop: 8,
-        marginLeft: 2,
+        marginTop: 5,
+        marginLeft: 0,
     },
     menuOptions:{
         optionsContainer:{
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
             borderRadius: 20,
             alignContent: "center",
             padding: '23%',
-            backgroundColor: '#b30000',
+            backgroundColor: '#cb0d00',
         },
     },
 })

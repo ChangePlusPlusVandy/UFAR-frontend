@@ -41,6 +41,25 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
 
     return (
         <View>
+            <View style={styles.container}>
+                <Pressable onPress={ () => {
+                    if (props.isConnected) {
+                        if(props.validate){
+                            submitValidateReport();
+                        } else if (props.edit){
+                            saveEditReport();
+                        } else {
+                            submitReport();
+                        }
+                    } else {
+                        setModalVisible(true);
+                    }
+                }} 
+                style={styles.button}>
+                    <Icon name='sc-telegram' type='evilicon' color='white' size={45}/>
+                </Pressable>
+                <Text style={styles.text}> {props.validate? "Validate": "Submit" }</Text>
+            </View>
             <View style={styles.centeredView}>
                 <Modal
                     animationType="slide"
@@ -73,25 +92,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                     </View>
                 </Modal>
             </View>
-            <View style={styles.container}>
-                <Pressable onPress={ () => {
-                    if (props.isConnected) {
-                        if(props.validate){
-                            submitValidateReport();
-                        } else if (props.edit){
-                            saveEditReport();
-                        } else {
-                            submitReport();
-                        }
-                    } else {
-                        setModalVisible(true);
-                    }
-                }} 
-                style={styles.button}>
-                    <Icon name='sc-telegram' type='evilicon' color='white' size={45}/>
-                </Pressable>
-                <Text style={styles.text}> {props.validate? "Validate": "Submit/Save" }</Text>
-            </View>
         </View>
     )
 });
@@ -121,6 +121,7 @@ function mapDispatchToProps(dispatch){
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
+        marginBottom: 0,
     },
     button: {
         backgroundColor: '#59AECF',
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 22
+        marginTop: 0
     },
     modalView: {
         margin: 20,

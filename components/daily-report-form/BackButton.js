@@ -18,7 +18,7 @@ export default function BackButton({setActivePage}) {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        // bottom: 0,
+        marginBottom: 0,
     },
     button: {
         backgroundColor: '#CCCDCF',

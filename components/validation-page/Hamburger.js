@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     hamburger: {
         height: 54,
         width: 54,
-        backgroundColor: '#b30000',
+        backgroundColor: '#cb0d00',
         borderRadius: 27,
         alignContent: "center",
         marginLeft: 15,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
             borderRadius: 20,
             alignContent: "center",
             padding: 20,
-            backgroundColor: '#b30000',
+            backgroundColor: '#cb0d00',
         },
     },
 });

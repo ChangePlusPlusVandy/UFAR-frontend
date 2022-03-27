@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     button: {
-        backgroundColor: '#b30000',
+        backgroundColor: '#cb0d00',
         height: 60,
         width: 60,
         borderRadius: 30,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     text: {
         margin: 10,
         paddingVertical: 3,
-        color: '#b30000',
+        color: '#cb0d00',
         fontFamily: Platform.OS === 'android' ? 'sans-serif-medium' : 'Avenir-Roman',
         fontSize: 13,
         lineHeight: 15,

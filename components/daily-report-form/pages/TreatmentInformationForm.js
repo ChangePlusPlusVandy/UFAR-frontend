@@ -49,11 +49,11 @@ export default function TreatmentInformationForm(props) {
                                 <Text style={styles.choiceLabel}>Onchocercose</Text>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>1er tour</Text>
-                                    <CheckBox isChecked={props.onchocerciasisFirst} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisFirst} fillColor='#b30000' disabled={props.validate}/>
+                                    <CheckBox isChecked={props.onchocerciasisFirst} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisFirst} fillColor='#cb0d00' disabled={props.validate}/>
                                 </View>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>2e tour</Text>
-                                    <CheckBox isChecked={props.onchocerciasisSecond} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisSecond} fillColor='#b30000' disabled={props.validate}/>
+                                    <CheckBox isChecked={props.onchocerciasisSecond} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisSecond} fillColor='#cb0d00' disabled={props.validate}/>
                              </View>
                             </View>
                         </View>
@@ -74,7 +74,7 @@ export default function TreatmentInformationForm(props) {
                                 <Text style={styles.choiceLabel}>Mectizan + Albendazole</Text>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>Sélectionner</Text>
-                                    <CheckBox isChecked={props.LFMectizanAlbendazole} style={styles.subfieldCheckBox} onPress={toggleLFMectizanAlbendazole} fillColor='#b30000' disabled={props.validate}/>
+                                    <CheckBox isChecked={props.LFMectizanAlbendazole} style={styles.subfieldCheckBox} onPress={toggleLFMectizanAlbendazole} fillColor='#cb0d00' disabled={props.validate}/>
                                 </View>
                             </View>
                         </View>
@@ -88,11 +88,11 @@ export default function TreatmentInformationForm(props) {
                                 <Text style={styles.choiceLabel}>Albendazole seul</Text>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>1er tour</Text>
-                                    <CheckBox isChecked={props.LFAlbendazoleFirst} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleFirst} fillColor='#b30000' disabled={props.validate}/>
+                                    <CheckBox isChecked={props.LFAlbendazoleFirst} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleFirst} fillColor='#cb0d00' disabled={props.validate}/>
                                 </View>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>2e tour</Text>
-                                    <CheckBox isChecked={props.LFAlbendazoleSecond} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleSecond} fillColor='#b30000' disabled={props.validate}/>
+                                    <CheckBox isChecked={props.LFAlbendazoleSecond} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleSecond} fillColor='#cb0d00' disabled={props.validate}/>
                                 </View>
                             </View>
                         </View>
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
         fontSize: 9,
         lineHeight: 13,
-        color: '#b30000',
+        color: '#cb0d00',
     },
     inputField: {
         marginVertical: 5,
@@ -190,10 +190,10 @@ const styles = StyleSheet.create({
         left: 10,
     },
     subfieldCheckBox: {
-        borderColor: '#b30000',
+        borderColor: '#cb0d00',
     },
     choiceLabel: {
-        color: '#b30000',
+        color: '#cb0d00',
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
         fontSize: 18,
         lineHeight: 25,
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end'
     },
     horizontalDivider: {
-        backgroundColor: '#b30000',
+        backgroundColor: '#cb0d00',
         height: 1,
         margin: 5
     }

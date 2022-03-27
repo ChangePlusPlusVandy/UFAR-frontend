@@ -54,6 +54,6 @@ function mapDispatchToProps(dispatch){
 const styles = StyleSheet.create({
     admin: {
         flex: 1,
-        backgroundColor: '#b30000',
+        backgroundColor: '#cb0d00',
     },
 })

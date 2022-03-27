@@ -21,7 +21,7 @@ export default function HomePage(props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#b30000",
+    backgroundColor: "#cb0d00",
     height: "100%",
     width: "100%",
     justifyContent: 'center'

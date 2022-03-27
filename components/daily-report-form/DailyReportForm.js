@@ -1223,7 +1223,7 @@ const styles = StyleSheet.create({
     width: "100%",
     top: Platform.OS === "android" ? StatusBar.currentHeight : 45,
     bottom: 0,
-    backgroundColor: "#b30000",
+    backgroundColor: "#cb0d00",
     borderTopLeftRadius: 11,
     borderTopRightRadius: 11,
 
