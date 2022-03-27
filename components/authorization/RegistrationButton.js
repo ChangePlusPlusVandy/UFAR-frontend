@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         top: '4.7%',
     },
     button: {
-        backgroundColor: '#EC1C24',
+        backgroundColor: '#b30000',
         height: buttonDiameter,
         width: buttonDiameter,
         borderRadius: Math.floor(buttonDiameter/2),
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     text: {
         margin: 10,
         paddingVertical: 3,
-        color: '#EC1C24',
+        color: '#b30000',
         fontFamily: Platform.OS === 'android' ? 'sans-serif-medium' : 'Avenir-Roman',
         fontSize: 13,
         lineHeight: 15,

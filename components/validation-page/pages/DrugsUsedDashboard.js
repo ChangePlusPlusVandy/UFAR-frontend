@@ -52,7 +52,7 @@ export default function DrugsUsedDashboard({getDashboard}) {
                 <VictoryGroup // DO NOT use VictoryAxis with this component
                 horizontal
                 offset={Math.round(height*0.017)}
-                colorScale={["#84BD62", "#EC1C24", "#55A5C4"]}
+                colorScale={["#84BD62", "#b30000", "#55A5C4"]}
                 >
                     <VictoryBar
                         style={styles.barChart}
@@ -93,7 +93,7 @@ export default function DrugsUsedDashboard({getDashboard}) {
                 gutter={20}
                 data={[
                   { name: "Praziquantel", symbol: { fill: "#84BD62" } },
-                  { name: "Albendazole", symbol: { fill: "#EC1C24" } },
+                  { name: "Albendazole", symbol: { fill: "#b30000" } },
                   { name: "Mectizan", symbol: { fill: "#55A5C4" } }
                 ]}
               />

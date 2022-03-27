@@ -24,7 +24,7 @@ export default function UserManagement(props){
             <SwitchSelector 
                 options={options} initial={userPage} 
                 onPress={value => setUserPage(value)} 
-                buttonColor='#EC1C24'
+                buttonColor='#b30000'
                 style={styles.switch}
                 textStyle={styles.switchText}
                 selectedTextStyle={styles.switchSelectedText}
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     },
     dashboardTitle: {
         fontWeight: 'bold',
-        color: '#EC1C24',
+        color: '#b30000',
         fontSize: 18,
     },
 });

@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         height: buttonDiameter,
         width: buttonDiameter,
         borderRadius: Math.floor(buttonDiameter/2),
-        backgroundColor: '#EC1C24',
+        backgroundColor: '#b30000',
         alignContent: "center",
         marginLeft: 15,
         marginTop: '8%',
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
             borderRadius: 20,
             alignContent: "center",
             padding: '23%',
-            backgroundColor: '#EC1C24',
+            backgroundColor: '#b30000',
         },
     },
 })
