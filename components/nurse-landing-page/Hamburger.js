@@ -1,8 +1,11 @@
 import React, {useContext} from 'react';
-import {StyleSheet , TouchableOpacity, View} from 'react-native';
+import {StyleSheet , TouchableOpacity, View, Dimensions} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 import { AuthContext } from '../../src/context/AuthContext';
+
+const {height, width} = Dimensions.get('window');
+const buttonDiameter = Math.round(height * 0.072)
 
 export default function Hamburger (props) {
 
@@ -42,13 +45,13 @@ export default function Hamburger (props) {
 
 const styles = StyleSheet.create({
     hamburger: {
-        height: 54,
-        width: 54,
+        height: buttonDiameter,
+        width: buttonDiameter,
+        borderRadius: Math.floor(buttonDiameter/2),
         backgroundColor: '#EC1C24',
-        borderRadius: 27,
         alignContent: "center",
         marginLeft: 15,
-        marginTop: 30,
+        marginTop: '8%',
 
         /* Android Drop Shadow Styling */
         elevation: 10,
@@ -63,15 +66,15 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
     },
     icon:{
-        marginTop: 5,
+        marginTop: 8,
         marginLeft: 2,
     },
     menuOptions:{
         optionsContainer:{
-            width: 85,
+            width: '21%',
             borderRadius: 20,
             alignContent: "center",
-            padding: 20,
+            padding: '23%',
             backgroundColor: '#EC1C24',
         },
     },
