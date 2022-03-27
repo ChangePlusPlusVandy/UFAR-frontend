@@ -1,8 +1,9 @@
 import React, {useContext} from 'react';
 import Hamburger from './Hamburger';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import { AuthContext } from '../../src/context/AuthContext';
 
+const {height, width} = Dimensions.get('window');
 
 export default function GreetingHeader(props) {
 
@@ -35,15 +36,15 @@ const styles = StyleSheet.create({
     greeting: {
         textAlign: 'right',
         // fontFamily: 'Helvetica Neue',
-        fontSize: 20,
-        lineHeight: 24,
+        fontSize: Math.floor(height*0.024),
+        lineHeight: Math.round(height*0.029),
         color: '#FFFFFF',
     },
     name: {
         textAlign: 'right',
         fontWeight: 'bold',
-        fontSize: 30,
-        lineHeight: 32,
+        fontSize: Math.floor(height*0.036),
+        lineHeight: Math.round(height*0.038),
         color: '#fff',
     },
 });

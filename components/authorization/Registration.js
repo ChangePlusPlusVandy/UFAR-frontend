@@ -1,14 +1,14 @@
 import { getResolveDependencyFn } from 'metro/src/lib/transformHelpers';
 import React, {useContext, useCallback, useEffect} from 'react';
-import { StyleSheet, View, Text, Alert, TextInput, Image} from 'react-native';
+import { StyleSheet, View, Text, Alert, TextInput, Image, Dimensions} from 'react-native';
 import RegistrationButton from './RegistrationButton';
-import SwitchSelector from 'react-native-switch-selector';
 
 // authorization
 import { AxiosContext } from '../../src/context/AxiosContext';
 
 import ufar from './ufar.png';
 
+const {height, width} = Dimensions.get('window');
 
 const IMAGE_DEF = Image.resolveAssetSource(ufar).uri;
 
@@ -36,11 +36,6 @@ export default function Registration(props){
         }
     }, [passwordConfirm, password]);
 
-    // todo: send request to backend:
-        // - if account created, send user to login page
-        // - if account already exists || token expired/invalid, 
-                //return to this page with that error message
-    
     const registerUser = async () => {
         try {
             const response = await publicAxios.post('/auth/register',
@@ -51,9 +46,6 @@ export default function Registration(props){
                     }
                 }
             );
-
-            console.log("response: " + response.data);
-            console.log("response.status: " + response.status);
                 
             if (response.status == 201) { // todo: testing
                 // alert user that account was created
@@ -113,24 +105,24 @@ const styles = StyleSheet.create({
         overflow: 'scroll',
     },
     image: {
-        height: 79,
-        width: 360,
-        bottom: 100,
+        height: '9.5%',
+        width: '92%',
+        bottom: '12%',
         alignSelf:'center',
     },
 
     input: {
-        height: 50,
-        width: 300,
+        height: '7.3%',// 50
+        width: '76.5%', // 300
         borderColor: 'gray',
         borderWidth: 0.5,
         margin: 10,
         padding: 10,
-        borderRadius: 20,
+        borderRadius: Math.round(height * 0.024),
     },
 
     switch: {
-        width: 300,
+        width: '76.5%',
         marginBottom: 20,  
     },
 

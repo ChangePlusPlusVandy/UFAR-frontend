@@ -1,7 +1,10 @@
 import React, {useEffect} from 'react';
-import {StyleSheet , View, Text } from 'react-native';
+import {StyleSheet , View, Text, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryGroup, VictoryLabel, VictoryLegend } from 'victory-native'
+
+const {height, width} = Dimensions.get('window');
+const BAR_WIDTH = Math.round(height*0.017)
 
 // the way this works is a bit odd, you create a 3 overlaid and offset bar charts
 // Say the data looks like this
@@ -18,8 +21,8 @@ export default function DrugsUsedDashboard({getDashboard}) {
   const [data, setData] = React.useState({"ivermectin": [{ regionName: "", percentage: 0}],
                                           "albendazole": [{ regionName: "", percentage: 0}],
                                           "praziquantel": [{ regionName: "", percentage: 0}]});
+
   const [errorMessage, setErrorMessage] = React.useState('');
-    console.log("data: ", data);
     useEffect(() =>{
       // call get dashboard and catch errors
       getDashboard("drugs")
@@ -30,7 +33,8 @@ export default function DrugsUsedDashboard({getDashboard}) {
             dataObject[key2]? dataObject[key2].push({x: key, percentage: value2}) : dataObject[key2] = [{x: key, percentage: value2}];
           }
         }
-        setData(dataObject);
+
+        Object.keys(dataObject).length && setData(dataObject);
       }).catch(error => {
         setErrorMessage(error.message);
       });
@@ -40,46 +44,45 @@ export default function DrugsUsedDashboard({getDashboard}) {
         <View style={styles.container}>
           <ScrollView>
             <VictoryChart
-              domainPadding={30} // makes the data pad from end of axes
+              domainPadding={Math.round(width*0.076)} // makes the data pad from end of axes
               domain={{ y: [0, 100]}} 
-              padding={{top: 30, left: 80, right: 60, bottom: 80}}
-              height={450} // should make this a function of how much data there is!!
+              padding={{top: Math.round(height*0.05), left: Math.round(width*0.19), right: Math.round(width*0.18), bottom: Math.round(height*0.1)}}
+              height={Math.round(height*0.539)} // should make this a function of how much data there is??
               >
                 <VictoryGroup // DO NOT use VictoryAxis with this component
                 horizontal
-                offset={12}
+                offset={Math.round(height*0.017)}
                 colorScale={["#84BD62", "#EC1C24", "#55A5C4"]}
-                // categories={{ x: ["RegionE", "RegionD", "RegionC", "RegionB", "RegionA"] }} // will need to update this with region names
                 >
                     <VictoryBar
                         style={styles.barChart}
                         name="Ivermectin"
                         data={data.ivermectin} 
-                        barWidth={12}
+                        barWidth={BAR_WIDTH}
                         y="percentage"
                         labels={({ datum }) => datum.percentage.toString() + "%"}
-                        labelComponent={<VictoryLabel dx={-30}/>}
-                        cornerRadius={4}
+                        labelComponent={<VictoryLabel dx={Math.round(width*(-0.1))}/>}
+                        cornerRadius={Math.round(BAR_WIDTH*0.5)}
                     />
                     <VictoryBar
                         style={styles.barChart}
                         name="Albendazole"
                         data={data.albendazole}
-                        barWidth={12}
+                        barWidth={BAR_WIDTH}
                         y="percentage"
                         labels={({ datum }) => datum.percentage.toString() + "%"}
-                        labelComponent={<VictoryLabel dx={-30}/>}
-                        cornerRadius={4}
+                        labelComponent={<VictoryLabel dx={Math.round(width*(-0.1))}/>}
+                        cornerRadius={Math.round(BAR_WIDTH*0.5)}
                     />
                     <VictoryBar
                         style={styles.barChart}
                         name="Praziquantel"
                         data={data.praziquantel}
-                        barWidth={12}
+                        barWidth={BAR_WIDTH}
                         y="percentage"
                         labels={({ datum }) => datum.percentage.toString() + "%"}
-                        labelComponent={<VictoryLabel dx={-30}/>}
-                        cornerRadius={4}
+                        labelComponent={<VictoryLabel dx={Math.round(width*(-0.1))}/>}
+                        cornerRadius={Math.round(BAR_WIDTH*0.5)}
                     />
                 </VictoryGroup>
             </VictoryChart>

@@ -19,10 +19,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(function Validation 
     
     const page = [
         <ToBeValidated setActivePage={setActivePage} 
-            reports={props.validationReports?.filter(report => report.is_validated === false)} 
+            reportIds={Object.keys(props.validationReports).filter(key => props.validationReports[key].report.is_validated === false)} 
         />,
         <RecentlyValidated setActivePage={setActivePage}
-            reports={props.validationReports?.filter(report => report.is_validated === true)}
+            reportIds={Object.keys(props.validationReports).filter(key => props.validationReports[key].report.is_validated === true)}
         />,
         <Dashboards/>,
         <TokenGenerationPage/>
