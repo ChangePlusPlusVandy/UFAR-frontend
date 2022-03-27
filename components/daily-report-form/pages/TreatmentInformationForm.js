@@ -71,7 +71,7 @@ export default function TreatmentInformationForm(props) {
                                 <TextInput style={styles.inputCycles} defaultValue={props.numCyclesLFMectizanAlbendazole.toString()} onChange={(e) => props.setNumCyclesLFMectizanAlbendazole(parseInt(e.nativeEvent.text) || 0)} />
                             </View>
                             <View style={styles.inputSubfieldDetailsContainer}>
-                                <Text style={styles.choiceLabel}>Mectizan + Albendazole</Text>
+                                <Text style={styles.choiceLabel}>Ivermectin + Albendazole</Text>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>Sélectionner</Text>
                                     <CheckBox isChecked={props.LFMectizanAlbendazole} style={styles.subfieldCheckBox} onPress={toggleLFMectizanAlbendazole} fillColor='#EC1C24' disabled={props.validate}/>

@@ -12,7 +12,7 @@ import ProcessingAlbendazoleHelminthiasisForm from "./processing-pages/Processin
 export default function ProcessingForm(props) {
   const pages = [
     {
-      title: "Mectizan (Onchocercose)",
+      title: "Ivermectin (Onchocercose)",
       content: (
         <ProcessingMectizanForm
           setNumYoungMenMectizan={props.setNumYoungMenMectizan}
@@ -33,7 +33,7 @@ export default function ProcessingForm(props) {
       ),
     },
     {
-      title: "Mectizan et Albendazole (Filariose lymphatique)",
+      title: "Ivermectin et Albendazole (Filariose lymphatique)",
       content: (
         <ProcessingMectAlbForm
           setNumYoungMenMectAlb={props.setNumYoungMenMectAlb}
