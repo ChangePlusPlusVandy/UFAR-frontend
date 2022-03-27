@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
 import Hamburger from './Hamburger';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import { connect } from 'react-redux';
 import { AuthContext } from '../../src/context/AuthContext';
 
-
+const {height, width} = Dimensions.get('window');
 
 export default connect(mapStateToProps)(function GreetingHeader(props) {
 
@@ -32,8 +32,8 @@ function mapStateToProps(state) {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 30,
-        paddingHorizontal: 24,
+        paddingTop: '7.7%',
+        paddingHorizontal: '6%',
         flex: 1, 
     },
     over: {
@@ -45,14 +45,14 @@ const styles = StyleSheet.create({
     greeting: {
         textAlign: 'right',
         // fontFamily: 'Helvetica Neue',
-        fontSize: 20,
-        lineHeight: 24,
+        fontSize: Math.floor(height*0.024),
+        lineHeight: Math.round(height*0.029),
         color: '#707070',
     },
     name: {
         textAlign: 'right',
         fontWeight: 'bold',
-        fontSize: 30,
-        lineHeight: 32,
+        fontSize: Math.floor(height*0.036),
+        lineHeight: Math.round(height*0.038),
     },
 });
