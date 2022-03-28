@@ -1,30 +1,37 @@
 import parseOptionsFromUrl from 'metro/src/lib/parseOptionsFromUrl';
 import React from 'react';
-import {Pressable, StyleSheet, Text, View, Modal} from 'react-native';
+import {Pressable, StyleSheet, Text, View, Modal, Alert} from 'react-native';
 import {Icon} from 'react-native-elements';
-import { connect } from 'react-redux';
 import uuid from 'react-native-uuid';
-import { addReport } from '../../src/actions.js'
 
-export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButton(props){
+export default function SubmitButton(props){
     const [modalVisible, setModalVisible] = React.useState(false);
 
-    /**
-     * Submits report, resets all states, sets in motion a function 
-     * to delete it after 24 hours, and navigates back to nurse landing page
-     */
-    const submitReport = () => {
-        props.addReport(props.report, uuid.v4());
-        // remove the report from the redux store after 24 hours
-        setTimeout(() => {
-            props.removeReport(uuid.v4());
-        }, 86400000);
-
-        // navigate back to nurse landing page
-        props.setLandingPage(true);
-        // console.log("submitReport");
-    }
-
+    const onSubmit = async (form) => {
+        try {
+            const response = await publicAxios.post('**',
+                JSON.stringify(form),
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }
+            );
+                
+            if (response.status == 201) { // todo: migth need to change status
+                // alert user that account was created
+                Alert.alert("Success", "Form submitted");
+                // todo: navigate to homepage
+            } else {
+                Alert.alert("Saving form Failed: " + response.json().message);
+                return;
+            }
+    
+        } catch (error) {
+            Alert.alert("Cannot save form: " + error);
+        }
+    };
+   
     return (
         <View>
             <View style={styles.centeredView}>
@@ -43,7 +50,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                             <Pressable
                             style={styles.button}
                             onPress={() => {
-                                submitReport();
+                                onSubmit(props.trainingForm);
                                 setModalVisible(!modalVisible)
                             }}
                             >
@@ -55,11 +62,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
             </View>
             <View style={styles.container}>
                 <Pressable onPress={ () => {
-                    if (props.isConnected) {
-                        submitReport();
-                    } else {
-                        setModalVisible(true);
-                    }
+                    onSubmit(props.trainingForm);
+                    // if (props.isConnected) {
+                    //     submitReport();
+                    // } else {
+                    //     setModalVisible(true);
+                    // }
                 }} 
                 style={styles.button}>
                     <Icon name='sc-telegram' type='evilicon' color='white' size={45}/>
@@ -68,26 +76,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
             </View>
         </View>
     )
-});
+};
 
-function mapStateToProps(state) {
-    return {
-      name: state.reducer.name,
-      reports: state.reducer.reports,
-      isConnected: state.network.isConnected,
-    };
-}
-
-function mapDispatchToProps(dispatch){
-    return {
-        // todo: delete first argument: only for deubg
-        // addReport: (report, id) => dispatch({type: 'ADD_REPORT', report: report, id: id, meta: {
-        //     retry: true,
-        //   },}),
-        addReport: (report, id) => dispatch(addReport(report, id)),  
-        removeReport: (id) => dispatch({type: 'REMOVE_REPORT', id: id}),  
-    };
-}
 
 const styles = StyleSheet.create({
     container: {

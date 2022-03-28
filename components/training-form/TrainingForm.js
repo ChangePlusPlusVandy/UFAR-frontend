@@ -31,6 +31,7 @@ import DataValidationForm from "./pages/DataValidation";
 import ProcessingForm from "./pages/Processing";
 
 export default connect(mapStateToProps)(function TrainingForm(props) {
+
   console.log("TrainingForm props: ", props);
   const [activePage, setActivePage] = useState(0);
 
@@ -40,7 +41,9 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   const [identificationYear, setIdentificationYear] = useState(0);
   const [reportingMonth, setReportingMonth] = useState("");
   const [reportingProvince, setReportingProvince] = useState("");
+  const [reportingProvinceId, setReportingProvinceId] = useState("");
   const [coordinatingProvince, setCoordinatingProvince] = useState("");
+  const [coordinatingProvinceId, setCoordinatingProvinceId] = useState("");
   const [supportingPartner, setSupportingPartner] = useState("");
   const [ASNumber, setASNumber] = useState(0);
   const [numCommunities, setNumCommunities] = useState(0);
@@ -52,6 +55,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   const [covidDeaths, setCovidDeaths] = useState(0);
 
   // Medicinal Supply
+  // todo: No used?? which is used to calculate remaining stock?
   const [numMectizanRemaining, setNumMectizanRemaining] = useState(0);
   const [numAlbendazoleRemaining, setNumAlbendazoleRemaining] = useState(0);
   const [numPraziquantelRemaining, setNumPraziquantelRemaining] = useState(0);
@@ -102,7 +106,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
   // Training of Trainers
   const [isTrainingTrainers, setIsTrainingTrainers] = useState(false);
-  const [trainingParticipation, setTrainingParticipation] = useState("");
+  const [trainingParticipation, setTrainingParticipation] = useState(""); // TODO: not used
   const [trainingStartDate, setTrainingStartDate] = useState(new Date(Date.now()));
   const [trainingEndDate, setTrainingEndDate] = useState(new Date(Date.now()));
   const [numFemaleTrainers, setNumFemaleTrainers] = useState(0);
@@ -367,198 +371,228 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   ];
 
   // resets all states to default values
-  const resetAllStates = () => {};
+  const resetAllStates = (form) => {
+    setChiefName(form.identification.chiefName);
+    setContactNumber(form.identification.contactNumber);
+    setIdentificationYear(form.identification.identificationYear);
+    setASNumber(form.identification.ASNumber);
+    setNumCommunities(form.identification.numCommunities);
+    setReportingMonth(form.identification.reportingMonth);
+    // setReportingProvince(form.identification.reportingProvince);
+    // setCoordinatingProvince(form.identification.coordinatingProvince);
+    setSupportingPartner(form.identification.supportingPartner);
+    setMtnTreated(form.identification.mtnTreated);
 
-  /*
+    setActiveCovidCases(form.covidSitation.activeCovidCases);
+    setNewActiveCovidCases(form.covidSitation.newActiveCovidCases);
+    setCovidDeaths(form.covidSitation.covidDeaths);
+
+    // setNumMectizanRemaining()
+    // setNumAlbendazoleRemaining
+    // setNumPraziquantelRemaining
+    setIvermectinArrivalDate(form.medicinalSupply.ivermectin.ivermectinArrivalDate);
+    setNumIvermectinReceived(form.medicinalSupply.ivermectin.numIvermectinReceived);
+    setAlbendazoleArrivalDate(form.medicinalSupply.albendazole.albendazoleArrivalDate);
+    setNumAlbendazoleReceived(form.medicinalSupply.albendazole.numAlbendazoleReceived);
+    setPraziquantelArrivalDate(form.medicinalSupply.praziquantel.praziquantelArrivalDate);
+    setNumPraziquantelReceived(form.medicinalSupply.praziquantel.numPraziquantelReceived);
+    
+    setFundsArrived(form.financialResources.fundsArrived);
+    setAmountPlanning(form.financialResources.amountPlanning);
+    setAmountTraining(form.financialResources.amountTraining);
+    setAmountESPM(form.financialResources.amountESPM);
+    setAmountDMM(form.financialResources.amountDMM);
+    setAmountSupervision(form.financialResources.amountSupervision);
+    setAmountManagement(form.financialResources.amountManagement);
+    setAmountOther(form.financialResources.amountOther);
+    setHasSupportingDocs(form.financialResources.hasSupportingDocs);
+
+    setTrainingParticipation(form.trainingOfTrainers.trainingParticipation);
+    setTrainingStartDate(form.trainingOfTrainers.trainingStartDate);
+    setTrainingEndDate(form.trainingOfTrainers.trainingEndDate);
+    setNumFemaleTrainers(form.trainingOfTrainers.numFemaleTrainers);
+    setNumMaleTrainers(form.trainingOfTrainers.numMaleTrainers);
+    
+    // training it form
+    setOrganizedTrainingIT(form.trainingIT.organizedTrainingIT);
+    // setTrainingParticipation
+    setTrainingITEndDate(form.trainingIT.trainingITEndDate);
+    setNumFemaleTrainersIT(form.trainingIT.numFemaleTrainersIT);
+    setNumMaleTrainersIT(form.trainingIT.numMaleTrainersIT);
+    setOrganizedTrainingDC(form.trainingDC.organizedTrainingDC);
+    setTrainingDCStartDate(form.trainingDC.trainingDCStartDate);
+    setNumFemaleTrainersDC(form.trainingDC.numFemaleTrainersDC);
+    setNumMaleTrainersDC(form.trainingDC.numMaleTrainersDC);
+
+    // training supervision form
+    setSupervisionDCTraining(form.trainingSupervision.supervisionDCTraining);
+    setSupervisionTrainingStartDate(form.trainingSupervision.supervisionTrainingStartDate);
+    setSupervisionTrainingEndDate(form.trainingSupervision.supervisionTrainingEndDate);
+    setSupervisionHierachyVisits(form.trainingSupervision.supervisionHierachyVisits);
+    
+    // ESPM form
+    setImplementationESPM(form.ESPM.implementationESPM);
+    setAwarenessStartDate(form.ESPM.awarenessStartDate);
+    setAwarenessEndDate(form.ESPM.awarenessEndDate);
+    setOrganizedDMMCeremony(form.ESPM.organizedDMMCeremony);
+    setDMMStartDate(form.ESPM.DMMStartDate);
+    
+    // Mass distribution form
+    setASDMMDebut(form.massDistribution.ASDMMDebut);
+    setLFOVSTHStartDate(form.massDistribution.LFOVSTHStartDate);
+    setLFOVSTHEndDate(form.massDistribution.LFOVSTHEndDate);
+    setSCHStartDate(form.massDistribution.SCHStartDate);
+    setSCHEndDate(form.massDistribution.SCHEndDate);
+
+    // DMM supervision form
+    setASDMMDebutDate(form.DMMSupervision.ASDMMDebutDate);
+    setASStartDate(form.DMMSupervision.ASStartDate);
+    setDMMHierarchyVisits(form.DMMSupervision.DMMHierarchyVisits);
+    
+    // Data validation form
+    setValidationASStartDateZS(form.dataValidation.validationASStartDateZS);
+    setValidationASEndDateZS(form.dataValidation.validationASEndDateZS);
+    setValidationASStartDateCoordination(form.dataValidation.validationASStartDateCoordination);
+    setValidationASEndDateCoordination(form.dataValidation.validationASEndDateCoordination);
+
+    // Processing form
+    setEncodingStartDate(form.processing.encodingStartDate);
+    setNumVillagesAlreadyEncoded(form.processing.numVillagesAlreadyEncoded);
+    setFormTransmissionDate(form.processing.formTransmissionDate);
+  };
+
+  
     // report object to be sent to the server
-    var report = {
-        // IDENTIFICATION
-        "DMM_day": DMMDay,
-        "nurse": registeredNurse,
-        "village": villageId,
-        "health_area": healthAreaId,
-        "health_zone": healthZoneId,
-        // DATE
-        "date": Date.now(),
-        // 1.11 diseases treated
-        "onchocerciasis": {
-            "first_round": onchocerciasisFirst,
-            "second_round": onchocerciasisSecond,
-        },
-        "lymphatic_filariasis": {
-            "mectizan_and_albendazole": LFMectizanAlbendazole,
-            "albendazole_alone": {
-                "first_round": LFAlbendazoleFirst,
-                "second_round": LFAlbendazoleSecond,
-            },
-        },
-        "schistosomiasis": schistosomiasis,
-        "soil_transmitted_helminthiasis": soilTransmittedHelminthiasis,
-        "trachoma": trachoma,
+  var trainingForm = {
+    // DATE
+    "date": Date.now(),
 
-        // 1.12 number of treatment cycles 
-        // todo: Embeded within 1.11: delete if not needed later
-        // "treatment_circles": {
-        //     "onchocerciasis": numCyclesOnchocerciasis,
-        //     // todo: implement and correct the rest
-        //     "lymphatic_filariasis": 0,
-        //     "schistosomiasis": 0,
-        //     "soil_transmitted_helminthiasis": 0,
-        //     "trachoma": 0,
-        // },
+    // IDENTIFICATION
+    "identification": {
+      // "chiefName":chiefName, // todo: get dynamically user id
+      "contactNumber":contactNumber,
+      "identificationYear": identificationYear,
+      "ASNumber": ASNumber,
+      "numCommunities": numCommunities,
+      "reportingMonth": reportingMonth,
+      "reportingProvince": reportingProvince,
+      "coordinatingProvince": coordinatingProvince,
+      "supportingPartner": supportingPartner,
+      "mtnTreated": mtnTreated,
+    },
+      
+      // Covid Situation Form
+    "covidSitation": {
+      "activeCovidCases": activeCovidCases,
+      "newActiveCovidCases": newActiveCovidCases,
+      "covidDeaths": covidDeaths,
+    },
+      
+      // Medicinal Supply Form
+    "medicinalSupply": {
+      "praziquantel": {
+        "numPraziquantelRemaining": numPraziquantelRemaining,
+        "praziquantelArrivalDate": praziquantelArrivalDate,
+        "numPraziquantelReceived": numPraziquantelReceived,
+      },
+      "ivermectin": {
+        "numMectizanRemaining": numMectizanRemaining,
+        "ivermectinArrivalDate": ivermectinArrivalDate, // todo: difference with above
+        "numIvermectinReceived": numIvermectinReceived,
+      },
+      "albendazole": {
+        "numAlbendazoleRemaining": numAlbendazoleRemaining,
+        "albendazoleArrivalDate": albendazoleArrivalDate,
+        "numAlbendazoleReceived": numAlbendazoleReceived,
+      },
+    },
 
-        "dcs_training_completion_date": DCTrainingCompletionDate,
-        "medicines_arrival_date": medicineArrivalDate,
-        "MDD_start_date": MDDStartDate,
-        "MDD_end_date": DMMEndDate,
-        "date_of_transmission": reportTransmissionDate,
-        "distributors": {
-            "men": numMenDistributors,
-            "women": numWomenDistributors
-        },
-        // II. DENUMBER
-        "patients": {
-            "men": {
-                "lessThanSixMonths": menUnderSixMonths,
-                "sixMonthsToFiveYears": menSixMonthsToFiveYears,
-                "fiveToFourteen": menFiveToFourteenYears,
-                "fifteenAndAbove": menFifteenAndOlder,
-            },
-            "women": {
-                "lessThanSixMonths": womenLessThanSixMonths,
-                "sixMonthsToFiveYears": womenSixMonthsToFiveYears,
-                "fiveToFourteen": womenFiveToFourteenYears,
-                "fifteenAndAbove": womenFifteenAndOlder
-            }
-        },
-        "households": {
-            "visited": numHouseholdsVisited,
-            "treated": numHouseholdsTreated
-        },
-        // III. MORBIDITY
-        "blind": {
-            "men": numMenBlind,
-            "women": numWomenBlind
-        },
-        "lymphedema": {
-            "men": {
-                "upper_limbs": {
-                    "left": numMenLUpperLimbs,
-                    "right": numMenRUpperLimbs
-                },
-                "lower_limbs": {
-                    "left": numMenLLowerMembers,
-                    "right": numMenRLowerMembers
-                }
-            },
-            "women": {
-                "upper_limbs": {
-                    "left": numWomenLUpperLimbs,
-                    "right": numWomenRUpperLimbs
-                },
-                "lower_limbs": {
-                    "left": numWomenLLowerMembers,
-                    "right": numWomenRLowerMembers
-                },
-                "breast": {
-                    "left": numWomenLeftBreast,
-                    "right": numWomenRightBreast
-                }
-            }
-        },
+    // Financial resources form
+    "financialResources": {
+      "fundsArrived": fundsArrived,
+      "amountPlanning": amountPlanning,
+      "amountTraining": amountTraining,
+      "amountESPM": amountESPM,
+      "amountDMM": amountDMM,
+      "amountSupervision": amountDMM, 
+      "amountManagement": amountManagement,
+      "amountOther": amountOther,
+      "amountTotal": amountTotal,
+      "hasSupportingDocs": hasSupportingDocs,
+    },
 
-        "hydroceles": {
-            "men": numMenHydroceles
-        },
-        "trichiasis": {
-            "men": numMenTrichiasis, 
-            "women": numWomenTrichiasis
-        },
-        "guinea_worm": {
-            "men": numMenGuineaWorm,
-            "women": numWomenGuineaWorm
-        },
+    "trainingOfTrainers": {
+      "trainingParticipation": trainingParticipation,
+      "trainingStartDate": trainingStartDate,
+      "trainingEndDate": trainingEndDate,
+      "numFemaleTrainers": numFemaleTrainers,
+      "numMaleTrainers": numMaleTrainers, 
+    },
 
-        // IV. PROCESSING
-        "mectizan": {
-            "men": {
-                "fiveToFourteen": numYoungMenMectizan,
-                "fifteenAndOver": numOldMenMectizan
-            },
-            "women": {
-                "fiveToFourteen": numYoungWomenMectizan,
-                "fifteenAndOver": numOldWomenMectizan
-            }, 
-        },
-        "mectizan_and_albendazole": {
-            "men": {
-                "fiveToFourteen": numYoungMenMectAlb,
-                "fifteenAndOver": numOldMenMectAlb
-            },
-            "women": {
-                "fiveToFourteen": numYoungWomenMectAlb,
-                "fifteenAndOver": numOldWomenMectAlb
-            },
-            
-        },
-        "albendazole": {
-            "men": {
-                "fiveToFourteen": numYoungMenAlbendazoleTreat,
-                "fifteenAndOver": numOldMenAlbendazoleTreat
-            },
-            "women": {
-                "fiveToFourteen": numYoungWomenAlbendazoleTreat,
-                "fifteenAndOver": numOldWomenAlbendazoleTreat
-            },
-            
-        },
-        "praziquantel": {
-            "men": {
-                "fiveToFourteen": numMenPrazi
-            },
-            "women": {
-                "fiveToFourteen": numWomenPrazi
-            }
-        },
-        "albendazole_soil_transmitted": {
-            "men": {
-                "fiveToFourteen": numMenAlbendazoleHelminthiasis
-            },
-            "women": {
-                "fiveToFourteen": numWomenAlbendazoleHelminthiasis
-            }
-        },
-        "side_effects_num": numSideEffectsReported,
+    // TrainingITForm
+    "trainingIT": {
+      "organizedTrainingIT": organizedTrainingIT,
+      "trainingParticipation": trainingParticipation,
+      "trainingITStartDate": trainingITStartDate,
+      "trainingITEndDate": trainingITEndDate,
+      "numFemaleTrainersIT": numFemaleTrainersIT,
+      "numMaleTrainersIT": numMaleTrainersIT, 
+      "numTotalTrainersIT": numTotalTrainersIT,
+      "organizedTrainingDC": organizedTrainingDC,
+      "trainingDCStartDate": trainingDCStartDate,
+      "numFemaleTrainersDC": numFemaleTrainersDC,
+      "numMaleTrainersDC": numMaleTrainersDC, 
+      "numTotalTrainersDC": numTotalTrainersDC,
+    },
 
-        // V. UNTREATED PERSONS
-        "untreated_persons": {
-            "childrenYoungerThanFive": numInfants,
-            "pregnantWomen": numPregnant,
-            "breastfeedingWomen": numBreastfeeding,
-            "bedriddenPatients": numBedridden,
-            "refusals": numRefused,
-            "absent": numAbsent,
-        },
-        // VI. DRUG management is done by the DRUG model
-        "ivermectin_management": {
-            "quantityReceived": ivermectinReceived,
-            "quantityUsed": ivermectinUsed,
-            "amountLost": ivermectinLost,
-            "quantityReturnedToCS": ivermectinReturned,        
-        },
-        "albendazole_management": {
-            "quantityReceived": albendazoleReceived,
-            "quantityUsed": albendazoleUsed,
-            "amountLost": albendazoleLost,
-            "quantityReturnedToCS": albendazoleReturned      
-        },
-        "praziquantel_management": {
-            "quantityReceived": praziquantelReceived,
-            "quantityUsed": praziquantelUsed,
-            "amountLost": praziquantelLost,
-            "quantityReturnedToCS": praziquantelReturned        
-        },
-    } */
+    // TrainingSupervisionForm
+    "trainingSupervision": {
+      "supervisionDCTraining": supervisionDCTraining,
+      "supervisionTrainingStartDate": supervisionTrainingStartDate,
+      "supervisionTrainingEndDate": supervisionTrainingEndDate,
+      "supervisionHierachyVisits": supervisionHierachyVisits, 
+    },
+
+    // ESPMForm
+    "ESPM": {
+      "implementationESPM": implementationESPM,
+      "awarenessStartDate": awarenessStartDate,
+      "awarenessEndDate": awarenessEndDate,
+      "organizedDMMCeremony": organizedDMMCeremony,
+      "DMMStartDate": DMMStartDate,
+    },
+
+    // MassDistributionForm
+    "massDistribution": {
+      "ASDMMDebut": ASDMMDebut, 
+      "LFOVSTHStartDate": LFOVSTHStartDate,
+      "LFOVSTHEndDate": LFOVSTHEndDate,
+      "SCHStartDate": SCHStartDate,
+      "SCHEndDate": SCHEndDate, 
+    },
+
+    // DMMSupervisionForm
+    "DMMSupervision": {
+      "ASDMMDebutDate": ASDMMDebutDate,
+      "ASStartDate": ASStartDate,
+      "DMMHierarchyVisits": DMMHierarchyVisits,
+    },
+
+    // DataValidationForm
+    "dataValidation": {
+      "validationASStartDateZS": validationASStartDateZS,
+      "validationASEndDateZS": validationASEndDateZS,
+      "validationASStartDateCoordination": validationASStartDateCoordination,
+      "validationASEndDateCoordination": validationASEndDateCoordination,
+    },
+
+    // ProcessingForm
+    "processing": {
+      "encodingStartDate": encodingStartDate,
+      "numVillagesAlreadyEncoded": numVillagesAlreadyEncoded,
+      "formTransmissionDate": formTransmissionDate,
+    },
+  } 
 
   // Conditional rendering page navigation
   const renderPageContent = () => {
@@ -573,7 +607,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
           {activePage === pages.length - 1 && (
             <SubmitButton
               setLandingPage={setActivePage(0)}
-              // report={report}
+              trainingForm={trainingForm}
             />
           )}
         </View>
