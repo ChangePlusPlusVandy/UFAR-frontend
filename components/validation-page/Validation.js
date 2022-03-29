@@ -8,10 +8,9 @@ import Dashboards from './pages/Dashboards';
 import NetworkBar from '../nurse-landing-page/NetworkBar';
 import TokenGenerationPage from './pages/UserManagement';
 import TrainingForm from '../training-form/TrainingForm';
+import TrainingPage from '../training-form/training-landing/TrainingPage';
 
 import { connect } from 'react-redux';
-
-
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(function Validation (props) {
@@ -27,7 +26,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function Validation 
         />,
         <Dashboards/>,
         <TokenGenerationPage/>,
-        <TrainingForm/>
+        <TrainingPage/>
     ]
 
     return (
