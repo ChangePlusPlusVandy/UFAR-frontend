@@ -1,5 +1,5 @@
 import React from 'react';
-import DailyReportForm from './DailyReportForm';
+import TrainingForm from '../../components/training-form/TrainingForm';
 import NewReportButton from './NewReportButtom';
 import {Platform, Pressable, StatusBar, StyleSheet, Text, View} from 'react-native';
 
@@ -11,11 +11,15 @@ export default function Bridge(){
         <>
             {    landingPage ? 
                 <NewReportButton  setLandingPage={setLandingPage} landingPage={landingPage}/> : 
-                <DailyReportForm setLandingPage={setLandingPage} />}
+                <TrainingForm setLandingPage={setLandingPage} />}
         </>
     )
 }
 
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 })

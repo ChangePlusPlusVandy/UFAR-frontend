@@ -10,8 +10,7 @@ import * as SecureStore from 'expo-secure-store'
 import Login from '../components/authorization/Login';
 import jwt_decode from "jwt-decode";
 
-
-
+//admin app
 export default function AdminApp(props){
 
     const authContext = useContext(AuthContext);

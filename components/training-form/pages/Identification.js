@@ -6,28 +6,11 @@ import { Chevron } from "react-native-shapes";
 // done
 
 export default function IdentificationForm(props) {
-  const provinces = ["Kwango", "Kwilu"];
-  const partners = ["END Fund", "SCIF", "Sightsavers", "GiveWell"];
-  const diseases = [
-    "Onchocercose",
-    "Filariose lymphatique",
-    "Schistosomiase",
-    "Géohelminthiases",
-  ];
-  const months = [
-    "Janvier",
-    "Fevrier",
-    "Mars",
-    "Avril",
-    "Mai",
-    "Juin",
-    "Juillet",
-    "Aout",
-    "Septembre",
-    "Octobre",
-    "Novembre",
-    "Decembre",
-  ];
+  const provinces = [{label: 'Kwango'}, {label:'Kwilu'}];
+  const partners = [{label: 'END Fund'}, {label: 'SCIF'}, {label:'Sightsavers'}, {label:'GiveWell'}];
+  const diseases = [{label:'Onchocercose'}, {label:'Filariose lymphatique'}, {label:'Schistosomiase'}, {label:'Géohelminthiases'}];
+  const months = [{label:'Janvier'}, {label:'Fevrier'}, {label:'Mars'}, {label:'Avril'}, {label:'Mai'}, {label:'Juin'}, {label:'Juillet'}, {label:'Aout'},
+    {label:'Septembre'}, {label:'Octobre'}, {label:'Novembre'}, {label:'Decembre'}];
 
   return (
     <View>
