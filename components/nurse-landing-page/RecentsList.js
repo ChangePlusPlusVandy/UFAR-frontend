@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     listitem: {
         marginHorizontal: 7,
         marginVertical: 3,
-        marginBottom: 3,
+        marginBottom: 15,
         paddingHorizontal: 10,
         paddingVertical: 10,
         flexDirection: "row",
