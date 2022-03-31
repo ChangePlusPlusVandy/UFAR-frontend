@@ -7,7 +7,7 @@ import CheckBox from '../CheckBox';
 export default function TrainingSupervisionForm(props) {
   const [date, setDate] = React.useState(new Date(Date.now()));
 
-  const options = ["Oui", "Non"];
+  const options = [{label: 'Oui'}, {label:'Non'}];
 
   const toggleSupervisionDCTraining = () => props.setSupervisionDCTraining(prev => !prev);
 
