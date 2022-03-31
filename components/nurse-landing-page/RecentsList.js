@@ -8,10 +8,6 @@ import { convertFromYYYYMMDDToDDMMYYYY } from '../../src/utils';
 
 export default connect(mapStateToProps)(function RecentsList(props){    
 
-    useEffect(()=>{
-        // todo: call thunk action to fetch user reports 
-    })
-
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
             <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(props.reports[item].report.date)).toISOString().split('T')[0])}</Text>
@@ -38,7 +34,7 @@ export default connect(mapStateToProps)(function RecentsList(props){
             <ScrollView style={styles.container} persistentScrollbar={true}>
                 <Text style={styles.header}>Récent</Text>
                 <View style={styles.fetch}>
-                    <FetchButton admin={false}/>
+                    <FetchButton fetchReportsUser={false}/>
                 </View>
                 <FlatList data={ props.reports? Object.keys(props.reports): []}renderItem={renderItem} keyExtractor={item => item.id}/>
             </ScrollView>

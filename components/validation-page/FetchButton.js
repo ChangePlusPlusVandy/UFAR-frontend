@@ -19,13 +19,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(function FetchButton
     const {authAxios} = useContext(AxiosContext);
     const authContext = useContext(AuthContext);
 
-    console.log("user: ", authContext.authState.user);
-
     return (
         <View style={styles.flexbox}>
             <TouchableOpacity style={styles.checkbadge} onPress={()=>{
-                props.admin? props.getReports(authContext.authState.user.health_zone, authAxios): 
-                props.getReportsUser(authContext.authState.user?._id, authAxios);
+
+                if(props.fetchReportsAdmin){
+                    props.getReports(authContext.authState.user.health_zone, authAxios);
+                } else if (props.fetchReportsUser){
+                    props.getReportsUser(authContext.authState.user?._id, authAxios);
+                } else if (props.fetchTrainingFormsAdmin){
+                    props.getTrainingForms();
+                }
             }}>
                 <Icon name="cycle" color = '#FFFFFF' size = {25} iconStyle = {styles.icon} type="entypo" />
             </TouchableOpacity>

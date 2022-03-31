@@ -1,30 +1,80 @@
 import React from 'react';
-import {FlatList, StyleSheet, Text, View, TouchableOpacity, ScrollView} from 'react-native';
+import {FlatList, StyleSheet, Text, View, TouchableOpacity, ScrollView, Alert} from 'react-native';
 import TrainingForm from '../TrainingForm';
 import NewTrainingFormButton from './NewTrainingFormButton';
 import {Icon} from 'react-native-elements';
+import FetchButton from '../../validation-page/FetchButton';
+import { convertFromYYYYMMDDToDDMMYYYY } from '../../../src/utils';
+import data from '../../daily-report-form/pages/locations.js';
+import { AuthContext } from '../../../src/context/AuthContext';
+import { AxiosContext } from '../../../src/context/AxiosContext';
 
+function getProvinceId(healthZoneId){
+    Object.keys(data.provinces).forEach((province) => {
+        Object.keys(data.provinces[province].health_zones).forEach((healthZone) => {
+            if (healthZoneId === data.provinces[province].health_zones[healthZone].id) {
+                console.log("healthZoneIdkk: " + data.provinces[province].health_zones[healthZone].id);
+                console.log("province id: " + data.provinces[province].id);
+                return data.provinces[province].id;
+            }
+        });
+    });
+    // return 0;
+}
 
 export default function TrainingPage(props){
     const [landingPage, setLandingPage] = React.useState(true);
+    const [trainingForms, setTrainingForms] = React.useState([]);
+    const [currentForm, setCurrentForm] = React.useState(null);
+    const [view, setView] = React.useState(false);
+    const [provinceId, setProvinceId] = React.useState(0);
+    const authContext = React.useContext(AuthContext);
+    const {authAxios} = React.useContext(AxiosContext);
 
-    const DATA = [
-        {
-          id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-          title: "First Item",
-        },
-        {
-          id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-          title: "Second Item",
-        },
-      ];
+    // console.log("healthzoneIddd", authContext.authState.user.health_zone);
+    // console.log("province", getProvinceId(authContext.authState.user.health_zone));
+
+    // console.log("provinceID: ", getProvinceId(props.healthZoneId));
+    console.log("trainingforms: ", trainingForms);
+
+    const getTrainingForms = async () => {
+        // var provinceId = getProvinceId(props.healthZoneId);
+        try {
+            // todo: replace with dynamic province id
+            const response = await authAxios.get(`form/618b21eb8453970bd916764b/getTrainingForms`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }
+            );
+                
+            if (response.status == 200) {
+                // alert user that account was created
+                const trainingForms = await response.data;
+                setTrainingForms(trainingForms);
+            } else {
+                Alert.alert("Getting training Forms Failed: " + response.json().message);
+                return;
+            }
+    
+        } catch (error) {
+            Alert.alert("Error: " + error);
+        }
+    };
 
     const renderItem = ({item}) => (
         <View style={styles.listitem}>
-            <Text style={styles.timelist}>{`4/4/4`}</Text>
-            <Text style={styles.namelist}>{`Training Form #3`}</Text>
+            <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(item.date)).toISOString().split('T')[0])}</Text>
+            <Text style={styles.namelist}>{`Training Form`}</Text>
             <TouchableOpacity style={styles.edit}>
-                <Icon name="eye" color = 'green' size = {20} type="entypo" />
+                <Icon name="eye" color = 'green' size = {20} type="entypo" onPress={
+                    () => {
+                        setLandingPage(false);
+                        setCurrentForm(item);
+                        setView(true);
+                    }
+                }/>
             </TouchableOpacity>
         </View>
     );
@@ -33,12 +83,15 @@ export default function TrainingPage(props){
         <>
             {landingPage ?
             <View style={styles.container}>
+                <View style={styles.fetch}>
+                    <FetchButton fetchTrainingFormsAdmin={true} getTrainingForms={getTrainingForms}/>
+                </View>
                 <ScrollView style={styles.list} persistentScrollbar={true}>
-                    <FlatList data={DATA} renderItem={renderItem} keyExtractor={item => item.id}/>
+                    <FlatList data={trainingForms} renderItem={renderItem} keyExtractor={item => item.id}/>
                 </ScrollView> 
                 <NewTrainingFormButton setLandingPage={setLandingPage}/>
             </View>: 
-            <TrainingForm/>}
+            <TrainingForm view={view}  currentForm={currentForm}/>}
         </>
     )
 
@@ -122,5 +175,8 @@ const styles = StyleSheet.create({
 
     flexbox: {
         flexDirection: "row",
+    },
+    fetch: {
+        left: 0,
     },
 })

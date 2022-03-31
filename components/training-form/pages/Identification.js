@@ -2,15 +2,23 @@ import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import { Chevron } from "react-native-shapes";
+import data from "../../daily-report-form/pages/locations.js";
 
-// done
+const getProvinces = () => {
+  var provinces = [];
+  Object.keys(data.provinces).forEach((province) => {
+    provinces.push({ label: province, value: data.provinces[province].id });
+  });
+  return provinces;
+};
 
 export default function IdentificationForm(props) {
-  const provinces = [{label: 'Kwango'}, {label:'Kwilu'}];
   const partners = [{label: 'END Fund'}, {label: 'SCIF'}, {label:'Sightsavers'}, {label:'GiveWell'}];
   const diseases = [{label:'Onchocercose'}, {label:'Filariose lymphatique'}, {label:'Schistosomiase'}, {label:'Géohelminthiases'}];
   const months = [{label:'Janvier'}, {label:'Fevrier'}, {label:'Mars'}, {label:'Avril'}, {label:'Mai'}, {label:'Juin'}, {label:'Juillet'}, {label:'Aout'},
     {label:'Septembre'}, {label:'Octobre'}, {label:'Novembre'}, {label:'Decembre'}];
+
+  console.log("province", props.reportingProvince);
 
   return (
     <View>
@@ -20,6 +28,7 @@ export default function IdentificationForm(props) {
           style={styles.inputField}
           onChange={(e) => props.setContactNumber(e.nativeEvent.text)}
           defaultValue={props.contactNumber}
+          value={props.contactNumber}
           placeholder="Numero de contact"
         />
         <TextInput
@@ -74,7 +83,7 @@ export default function IdentificationForm(props) {
             onValueChange={(value) => {
               props.setReportingProvince(value);
             }}
-            items={provinces}
+            items={getProvinces()}
             value={props.reportingProvince}
             placeholder={{ label: "Province", value: null }}
             Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
@@ -91,7 +100,7 @@ export default function IdentificationForm(props) {
             onValueChange={(value) => {
               props.setCoordinatingProvince(value);
             }}
-            items={provinces}
+            items={getProvinces()}
             value={props.coordinatingProvince}
             placeholder={{ label: "Coordination", value: null }}
             Icon={() => <Chevron size={1.5} color="#9D9D9D" />}

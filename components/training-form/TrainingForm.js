@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 
 import {
-  Platform,
-  Pressable,
-  StatusBar,
   StyleSheet,
-  Text,
   View,
 } from "react-native";
 
@@ -29,11 +25,14 @@ import MassDistributionForm from "./pages/MassDistribution";
 import DMMSupervisionForm from "./pages/DMMSupervision";
 import DataValidationForm from "./pages/DataValidation";
 import ProcessingForm from "./pages/Processing";
+import { AuthContext } from "../../src/context/AuthContext";
+
 
 export default connect(mapStateToProps)(function TrainingForm(props) {
 
-  console.log("TrainingForm props: ", props);
+  const authContext = useContext(AuthContext);
   const [activePage, setActivePage] = useState(0);
+  const view = useRef(props.view);
 
   // Identification state
   const [chiefName, setChiefName] = useState("");
@@ -41,9 +40,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   const [identificationYear, setIdentificationYear] = useState(0);
   const [reportingMonth, setReportingMonth] = useState("");
   const [reportingProvince, setReportingProvince] = useState("");
-  const [reportingProvinceId, setReportingProvinceId] = useState("");
   const [coordinatingProvince, setCoordinatingProvince] = useState("");
-  const [coordinatingProvinceId, setCoordinatingProvinceId] = useState("");
   const [supportingPartner, setSupportingPartner] = useState("");
   const [ASNumber, setASNumber] = useState(0);
   const [numCommunities, setNumCommunities] = useState(0);
@@ -383,9 +380,9 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
     setSupportingPartner(form.identification.supportingPartner);
     setMtnTreated(form.identification.mtnTreated);
 
-    setActiveCovidCases(form.covidSitation.activeCovidCases);
-    setNewActiveCovidCases(form.covidSitation.newActiveCovidCases);
-    setCovidDeaths(form.covidSitation.covidDeaths);
+    setActiveCovidCases(form.covidSituation.activeCovidCases);
+    setNewActiveCovidCases(form.covidSituation.newActiveCovidCases);
+    setCovidDeaths(form.covidSituation.covidDeaths);
 
     // setNumMectizanRemaining()
     // setNumAlbendazoleRemaining
@@ -419,10 +416,10 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
     setTrainingITEndDate(form.trainingIT.trainingITEndDate);
     setNumFemaleTrainersIT(form.trainingIT.numFemaleTrainersIT);
     setNumMaleTrainersIT(form.trainingIT.numMaleTrainersIT);
-    setOrganizedTrainingDC(form.trainingDC.organizedTrainingDC);
-    setTrainingDCStartDate(form.trainingDC.trainingDCStartDate);
-    setNumFemaleTrainersDC(form.trainingDC.numFemaleTrainersDC);
-    setNumMaleTrainersDC(form.trainingDC.numMaleTrainersDC);
+    setOrganizedTrainingDC(form.trainingIT.organizedTrainingDC);
+    setTrainingDCStartDate(form.trainingIT.trainingDCStartDate);
+    setNumFemaleTrainersDC(form.trainingIT.numFemaleTrainersDC);
+    setNumMaleTrainersDC(form.trainingIT.numMaleTrainersDC);
 
     // training supervision form
     setSupervisionDCTraining(form.trainingSupervision.supervisionDCTraining);
@@ -469,7 +466,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
     // IDENTIFICATION
     "identification": {
-      // "chiefName":chiefName, // todo: get dynamically user id
+      "chiefName": authContext.authState.user._id, 
       "contactNumber":contactNumber,
       "identificationYear": identificationYear,
       "ASNumber": ASNumber,
@@ -596,6 +593,12 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
   // Conditional rendering page navigation
   const renderPageContent = () => {
+
+    if (view.current){
+      view.current = false;
+      resetAllStates(props.currentForm);
+    }
+
     return (
       <>
         {pages[activePage]}

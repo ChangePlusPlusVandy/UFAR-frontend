@@ -1,6 +1,3 @@
-import uuid from 'react-native-uuid';
-
-
 // Note: Every action function should have an identifier that is unique to the action as
 // the last parameter. This is used to detect if an action has already been dispatched.
 
