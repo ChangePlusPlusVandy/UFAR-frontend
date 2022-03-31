@@ -2,14 +2,16 @@ import parseOptionsFromUrl from 'metro/src/lib/parseOptionsFromUrl';
 import React from 'react';
 import {Pressable, StyleSheet, Text, View, Modal, Alert} from 'react-native';
 import {Icon} from 'react-native-elements';
-import uuid from 'react-native-uuid';
+import { AxiosContext } from '../../src/context/AxiosContext';
 
 export default function SubmitButton(props){
     const [modalVisible, setModalVisible] = React.useState(false);
+    
+    const {authAxios} = React.useContext(AxiosContext);
 
     const onSubmit = async (form) => {
         try {
-            const response = await publicAxios.post('**',
+            const response = await authAxios.post('form/insertTrainingForm',
                 JSON.stringify(form),
                 {
                     headers: {
@@ -18,12 +20,11 @@ export default function SubmitButton(props){
                 }
             );
                 
-            if (response.status == 201) { // todo: migth need to change status
-                // alert user that account was created
-                Alert.alert("Success", "Form submitted");
-                // todo: navigate to homepage
+            if (response.status == 200) { // todo: migth need to change status
+                // alert user that training form was created
+                Alert.alert("Success", "Form submitted: Press the fetch button to get the latest form");
             } else {
-                Alert.alert("Saving form Failed: " + response.json().message);
+                Alert.alert("Saving form Failed: " + response);
                 return;
             }
     
@@ -63,11 +64,7 @@ export default function SubmitButton(props){
             <View style={styles.container}>
                 <Pressable onPress={ () => {
                     onSubmit(props.trainingForm);
-                    // if (props.isConnected) {
-                    //     submitReport();
-                    // } else {
-                    //     setModalVisible(true);
-                    // }
+                    props.setLandingPage(true);
                 }} 
                 style={styles.button}>
                     <Icon name='sc-telegram' type='evilicon' color='white' size={45}/>

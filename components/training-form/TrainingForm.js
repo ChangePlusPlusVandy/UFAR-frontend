@@ -607,7 +607,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
           {activePage < pages.length - 1 && (
             <NextButton setActivePage={setActivePage} />
           )}
-          {activePage === pages.length - 1 && (
+          {activePage === pages.length - 1 && !props.view  &&(
             <SubmitButton
               setLandingPage={props.setLandingPage}
               trainingForm={trainingForm}
@@ -621,8 +621,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
   return (
     <View style={styles.container}>
-      <CrossIcon
-      />
+      <CrossIcon setLandingPage={props.setLandingPage} />
       {renderPageContent()}
     </View>
   );

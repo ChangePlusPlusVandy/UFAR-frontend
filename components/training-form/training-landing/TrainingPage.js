@@ -91,7 +91,7 @@ export default function TrainingPage(props){
                 </ScrollView> 
                 <NewTrainingFormButton setLandingPage={setLandingPage}/>
             </View>: 
-            <TrainingForm view={view}  currentForm={currentForm}/>}
+            <TrainingForm view={view}  currentForm={currentForm} setLandingPage={setLandingPage}/>}
         </>
     )
 
