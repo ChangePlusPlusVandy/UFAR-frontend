@@ -7,7 +7,7 @@ import { Chevron } from "react-native-shapes";
 // done 
 
 export default function DMMSupervisionForm(props) {
-  const options = ["Oui", "Non"];
+  const options = [{label: 'Oui'}, {label:'Non'}];
   const [date, setDate] = React.useState(new Date(Date.now()));
 
   const onChange = (event, selectedDate) => {
