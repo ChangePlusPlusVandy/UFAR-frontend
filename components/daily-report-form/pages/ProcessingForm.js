@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 
 import SlideshowPaginator from "../SlideshowPaginator";
 
-import ProcessingMectizanForm from "./processing-pages/ProcessingMectizanForm";
+import ProcessingIvermectineForm from "./processing-pages/ProcessingIvermectineForm";
 import ProcessingMectAlbForm from "./processing-pages/ProcessingMectAlbForm";
 import ProcessingAlbendazoleForm from "./processing-pages/ProcessingAlbendazoleForm";
 import ProcessingPraziquantelForm from "./processing-pages/ProcessingPraziquantelForm";
@@ -12,35 +12,35 @@ import ProcessingAlbendazoleHelminthiasisForm from "./processing-pages/Processin
 export default function ProcessingForm(props) {
   const pages = [];
 
-  // Mectizan (Onchocercose) page
+  // Ivermectine (Onchocercose) page
   if (props.onchocerciasis) {
     pages.push({
-      title: "Mectizan (Onchocercose)",
+      title: "Ivermectine (Onchocercose)",
       content: (
-        <ProcessingMectizanForm
-          setNumYoungMenMectizan={props.setNumYoungMenMectizan}
-          setNumOldMenMectizan={props.setNumOldMenMectizan}
-          setNumYoungWomenMectizan={props.setNumYoungWomenMectizan}
-          setNumOldWomenMectizan={props.setNumOldWomenMectizan}
-          numYoungMenMectizan={props.numYoungMenMectizan}
-          numYoungWomenMectizan={props.numYoungWomenMectizan}
-          numOldMenMectizan={props.numOldMenMectizan}
-          numOldWomenMectizan={props.numOldWomenMectizan}
-          totalNumWomenMectizan={props.totalNumWomenMectizan}
-          totalNumMenMectizan={props.totalNumMenMectizan}
-          totalNumMectizan={props.totalNumMectizan}
-          totalCoverageMectizan={props.totalCoverageMectizan}
-          numSideEffectsReportedMectizan={props.numSideEffectsReportedMectizan}
+        <ProcessingIvermectineForm
+          setNumYoungMenIvermectine={props.setNumYoungMenIvermectine}
+          setNumOldMenIvermectine={props.setNumOldMenIvermectine}
+          setNumYoungWomenIvermectine={props.setNumYoungWomenIvermectine}
+          setNumOldWomenIvermectine={props.setNumOldWomenIvermectine}
+          numYoungMenIvermectine={props.numYoungMenIvermectine}
+          numYoungWomenIvermectine={props.numYoungWomenIvermectine}
+          numOldMenIvermectine={props.numOldMenIvermectine}
+          numOldWomenIvermectine={props.numOldWomenIvermectine}
+          totalNumWomenIvermectine={props.totalNumWomenIvermectine}
+          totalNumMenIvermectine={props.totalNumMenIvermectine}
+          totalNumIvermectine={props.totalNumIvermectine}
+          totalCoverageIvermectine={props.totalCoverageIvermectine}
+          numSideEffectsReportedIvermectine={props.numSideEffectsReportedIvermectine}
           validate={props.validate}
         />
       ),
     });
   }
 
-  // Mectizan et Albendazole (Filariose lymphatique) page
-  if (props.LFMectizanAlbendazole) {
+  // Ivermectine et Albendazole (Filariose lymphatique) page
+  if (props.LFIvermectineAlbendazole) {
     pages.push({
-      title: "Mectizan et Albendazole (Filariose lymphatique)",
+      title: "Ivermectine et Albendazole (Filariose lymphatique)",
       content: (
         <ProcessingMectAlbForm
           setNumYoungMenMectAlb={props.setNumYoungMenMectAlb}

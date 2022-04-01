@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-export default function ProcessingMectizanForm(props) {
+export default function ProcessingIvermectineForm(props) {
   return (
     <View>
       <Text style={styles.inputLabelBigger}>Hommes</Text>
@@ -12,9 +12,9 @@ export default function ProcessingMectizanForm(props) {
             editable={!props.validate}
             style={styles.inputField}
             onChange={(e) =>
-              props.setNumYoungMenMectizan(parseInt(e.nativeEvent.text) || 0)
+              props.setNumYoungMenIvermectine(parseInt(e.nativeEvent.text) || 0)
             }
-            defaultValue={(props.numYoungMenMectizan || "0").toString()}
+            defaultValue={(props.numYoungMenIvermectine || "0").toString()}
           />
         </View>
         <View style={styles.inputFieldContainer}>
@@ -23,9 +23,9 @@ export default function ProcessingMectizanForm(props) {
             editable={!props.validate}
             style={styles.inputField}
             onChange={(e) =>
-              props.setNumOldMenMectizan(parseInt(e.nativeEvent.text) || 0)
+              props.setNumOldMenIvermectine(parseInt(e.nativeEvent.text) || 0)
             }
-            defaultValue={(props.numOldMenMectizan || "0").toString()}
+            defaultValue={(props.numOldMenIvermectine || "0").toString()}
           />
         </View>
         <View style={styles.inputFieldContainer}>
@@ -33,7 +33,7 @@ export default function ProcessingMectizanForm(props) {
           <TextInput
             editable={!props.validate}
             style={styles.inputField}
-            value={props.totalNumMenMectizan.toString()}
+            value={props.totalNumMenIvermectine.toString()}
           />
         </View>
       </View>
@@ -46,9 +46,9 @@ export default function ProcessingMectizanForm(props) {
             editable={!props.validate}
             style={styles.inputField}
             onChange={(e) =>
-              props.setNumYoungWomenMectizan(parseInt(e.nativeEvent.text) || 0)
+              props.setNumYoungWomenIvermectine(parseInt(e.nativeEvent.text) || 0)
             }
-            defaultValue={(props.numYoungWomenMectizan || "0").toString()}
+            defaultValue={(props.numYoungWomenIvermectine || "0").toString()}
           />
         </View>
         <View style={styles.inputFieldContainer}>
@@ -57,9 +57,9 @@ export default function ProcessingMectizanForm(props) {
             editable={!props.validate}
             style={styles.inputField}
             onChange={(e) =>
-              props.setNumOldWomenMectizan(parseInt(e.nativeEvent.text) || 0)
+              props.setNumOldWomenIvermectine(parseInt(e.nativeEvent.text) || 0)
             }
-            defaultValue={(props.numOldWomenMectizan || "0").toString()}
+            defaultValue={(props.numOldWomenIvermectine || "0").toString()}
           />
         </View>
         <View style={styles.inputFieldContainer}>
@@ -67,7 +67,7 @@ export default function ProcessingMectizanForm(props) {
           <TextInput
             editable={!props.validate}
             style={styles.inputField}
-            value={props.totalNumWomenMectizan.toString()}
+            value={props.totalNumWomenIvermectine.toString()}
           />
         </View>
       </View>
@@ -80,7 +80,7 @@ export default function ProcessingMectizanForm(props) {
           <TextInput
             editable={!props.validate}
             style={styles.inputField}
-            value={props.totalNumMectizan.toString()}
+            value={props.totalNumIvermectine.toString()}
           />
         </View>
         <View style={styles.inputFieldContainer}>
@@ -91,8 +91,8 @@ export default function ProcessingMectizanForm(props) {
             editable={!props.validate}
             style={styles.inputField}
             value={`${
-              isFinite(props.totalCoverageMectizan)
-                ? props.totalCoverageMectizan.toString()
+              isFinite(props.totalCoverageIvermectine)
+                ? props.totalCoverageIvermectine.toString()
                 : "0"
             }%`}
           />

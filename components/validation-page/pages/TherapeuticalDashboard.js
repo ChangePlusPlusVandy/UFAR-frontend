@@ -8,9 +8,9 @@ const {height, width} = Dimensions.get('window');
 const BAR_WIDTH = Math.round(height*0.017)
 
 export default function TherapeuticalDashboard({getDashboard}) {
-  const [data, setData] = React.useState({"mectizan": [{ regionName: "", percentage: 0}]});
+  const [data, setData] = React.useState({"Ivermectine": [{ regionName: "", percentage: 0}]});
   const [errorMessage, setErrorMessage] = React.useState('');
-  const [therapeutic, setTherapeutic] = React.useState("mectizan"); // this is set by the RNPicker
+  const [therapeutic, setTherapeutic] = React.useState("Ivermectine"); // this is set by the RNPicker
   
   useEffect(()=>{
     getDashboard("therapeutic_coverage")
@@ -40,9 +40,9 @@ export default function TherapeuticalDashboard({getDashboard}) {
             placeholder={{ label: "Select your therapy of choice", value: null }}
             onValueChange={(value) => setTherapeutic(value)}
             items={[
-                { label: 'Mectizan', value: 'mectizan' },
+                { label: 'Ivermectine', value: 'Ivermectine' },
                 { label: 'Albendazole', value: 'albendazole' },
-                { label: 'Mectizan & Albendazole', value: 'mectizan_and_albendazole' },
+                { label: 'Ivermectine & Albendazole', value: 'Ivermectine_and_albendazole' },
                 { label: 'Praziquantel', value: 'praziquantel' },
             ]}
         />

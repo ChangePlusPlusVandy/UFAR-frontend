@@ -9,7 +9,7 @@ const BAR_WIDTH = Math.round(height*0.017)
 // the way this works is a bit odd, you create a 3 overlaid and offset bar charts
 // Say the data looks like this
 const regionData = {
-    "RegionA": [12, 37, 49], // where 12 is Mectizan, 37 is Albendazole...
+    "RegionA": [12, 37, 49], // where 12 is Ivermectine, 37 is Albendazole...
     "RegionB": [34, 25, 56],
     "RegionC": [22, 67, 98],
 }
@@ -94,7 +94,7 @@ export default function DrugsUsedDashboard({getDashboard}) {
                 data={[
                   { name: "Praziquantel", symbol: { fill: "#84BD62" } },
                   { name: "Albendazole", symbol: { fill: "#cb0d00" } },
-                  { name: "Mectizan", symbol: { fill: "#55A5C4" } }
+                  { name: "Ivermectine", symbol: { fill: "#55A5C4" } }
                 ]}
               />
           </ScrollView>

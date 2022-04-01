@@ -15,7 +15,7 @@ export default function TreatmentInformationForm(props) {
     });
 
     const toggleLymphaticFilariasis = () => props.setLymphaticFilariasis(prev => !prev);
-    const toggleLFMectizanAlbendazole = () => props.setLFMectizanAlbendazole(prev => !prev);
+    const toggleLFIvermectineAlbendazole = () => props.setLFIvermectineAlbendazole(prev => !prev);
     const toggleLFAlbendazoleFirst = () => props.setLFAlbendazoleFirst(prev => {
         props.setLFAlbendazoleSecond(prev); 
         return !prev;
@@ -68,13 +68,13 @@ export default function TreatmentInformationForm(props) {
                         <View style={styles.singleRowContainer}>
                             <View style={styles.inputCyclesContainer}>
                                 <Text style={styles.inputSubfieldLabel}># de cycle</Text>
-                                <TextInput style={styles.inputCycles} defaultValue={props.numCyclesLFMectizanAlbendazole.toString()} onChange={(e) => props.setNumCyclesLFMectizanAlbendazole(parseInt(e.nativeEvent.text) || 0)} />
+                                <TextInput style={styles.inputCycles} defaultValue={props.numCyclesLFIvermectineAlbendazole.toString()} onChange={(e) => props.setNumCyclesLFIvermectineAlbendazole(parseInt(e.nativeEvent.text) || 0)} />
                             </View>
                             <View style={styles.inputSubfieldDetailsContainer}>
-                                <Text style={styles.choiceLabel}>Mectizan + Albendazole</Text>
+                                <Text style={styles.choiceLabel}>Ivermectine + Albendazole</Text>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>Sélectionner</Text>
-                                    <CheckBox isChecked={props.LFMectizanAlbendazole} style={styles.subfieldCheckBox} onPress={toggleLFMectizanAlbendazole} fillColor='#cb0d00' disabled={props.validate}/>
+                                    <CheckBox isChecked={props.LFIvermectineAlbendazole} style={styles.subfieldCheckBox} onPress={toggleLFIvermectineAlbendazole} fillColor='#cb0d00' disabled={props.validate}/>
                                 </View>
                             </View>
                         </View>
