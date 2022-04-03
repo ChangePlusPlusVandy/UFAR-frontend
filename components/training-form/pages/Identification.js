@@ -13,12 +13,11 @@ const getProvinces = () => {
 };
 
 export default function IdentificationForm(props) {
-  const partners = [{label: 'END Fund'}, {label: 'SCIF'}, {label:'Sightsavers'}, {label:'GiveWell'}];
-  const diseases = [{label:'Onchocercose'}, {label:'Filariose lymphatique'}, {label:'Schistosomiase'}, {label:'Géohelminthiases'}];
-  const months = [{label:'Janvier'}, {label:'Fevrier'}, {label:'Mars'}, {label:'Avril'}, {label:'Mai'}, {label:'Juin'}, {label:'Juillet'}, {label:'Aout'},
-    {label:'Septembre'}, {label:'Octobre'}, {label:'Novembre'}, {label:'Decembre'}];
-
-  console.log("province", props.reportingProvince);
+  const partners = [{label: 'END Fund', value: 'END Fund'}, {label: 'SCIF', value: 'SCIF'}, {label:'Sightsavers', value: 'Sightsavers'}, {label:'GiveWell', value: 'GiveWell'}, {label:'Other', value: 'Other'}];
+  const diseases = [{label:'Onchocercose', value: 'Onchocercose'}, {label:'Filariose lymphatique', value: 'Filariose lymphatique'}, {label:'Schistosomiase', value: 'Schmistosomiase'}, {label:'Géohelminthiases', value: 
+'Géohelminthiases'}];
+  const months = [{label:'Janvier', value: 'Janvier'}, {label:'Fevrier', value: 'Fevrier'}, {label:'Mars', value: 'Mars'}, {label:'Avril', value: 'Avril'}, {label:'Mai', value: 'Mai'}, {label:'Juin', value: 'Juin'}, {label:'Juillet', value: 'Juillet'}, {label:'Aout', value: 'Auot'},
+    {label:'Septembre', value: 'Septembre'}, {label:'Octobre', value: 'Octobre'}, {label:'Novembre', value: 'Novembre'}, {label:'Decembre', value:'Decembre'}];
 
   return (
     <View>
