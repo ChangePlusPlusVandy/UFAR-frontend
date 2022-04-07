@@ -7,6 +7,7 @@ import * as SecureStore from 'expo-secure-store'
 const AuthContext = createContext(null);
 const {Provider} = AuthContext;
 
+
 const AuthProvider = ({children}) => {
   const [authState, setAuthState] = useState({
     accessToken: null,
