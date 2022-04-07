@@ -47,7 +47,7 @@ export default function MassDistributionForm(props) {
             <TextInput
               onPressIn={() => {
                 DateTimePickerAndroid.open({
-                  value: props.validationASEndDateZS,
+                  value: props.LFOVSTHEndDate,
                   onChange: (event, selectedDate) => {
                     props.setLFOVSTHEndDate(selectedDate);
                   },
@@ -56,7 +56,6 @@ export default function MassDistributionForm(props) {
                 })
               }
               }
-              editable={!props.validate}
               style={styles.inputField}
               value={new Date(props.LFOVSTHEndDate).toLocaleDateString()}
               placeholder="MM/DD/YYYY"
@@ -74,7 +73,6 @@ export default function MassDistributionForm(props) {
                 })
               }
               }
-              editable={!props.validate}
               style={styles.inputField}
               value={new Date(props.SCHStartDate).toLocaleDateString()}
               placeholder="MM/DD/YYYY"
@@ -92,7 +90,6 @@ export default function MassDistributionForm(props) {
                 })
               }
               }
-              editable={!props.validate}
               style={styles.inputField}
               value={new Date(props.SCHEndDate).toLocaleDateString()}
               placeholder="MM/DD/YYYY"

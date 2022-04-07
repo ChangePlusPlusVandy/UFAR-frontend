@@ -4,6 +4,11 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 // done 
 
 export default function CovidSituationForm(props) {
+
+    console.log("covid activeCovidCases:", props.activeCovidCases);
+    console.log("covid newActiveCovidCases:", props.newActiveCovidCases);
+    console.log("covid covidDeaths:", props.covidDeaths);
+
     return (
         <View>
             <Text style={styles.header}>Situation epidemiologique de la COVID-19 dans la zone de sante</Text>
@@ -18,6 +23,7 @@ export default function CovidSituationForm(props) {
                 <Text style={styles.inputLabel}>Nombre de nouveau cas actifs de Covid-19 confirmés au cours du mois</Text>
                 <TextInput style={styles.inputField} 
                     onChange={(e) => props.setNewActiveCovidCases(parseInt(e.nativeEvent.text) || 0)}
+                    value={(props.newActiveCovidCases || '0').toString()}
                     defaultValue={(props.newActiveCovidCases|| '0').toString()}
                 />
 

@@ -30,12 +30,13 @@ import { AuthContext } from "../../src/context/AuthContext";
 
 export default connect(mapStateToProps)(function TrainingForm(props) {
 
+
   const authContext = useContext(AuthContext);
   const [activePage, setActivePage] = useState(0);
   const view = useRef(props.view);
 
   // Identification state
-  const [chiefName, setChiefName] = useState("");
+  const [chiefName, setChiefName] = useState(authContext.authState.user.name);
   const [contactNumber, setContactNumber] = useState(0);
   const [identificationYear, setIdentificationYear] = useState(0);
   const [reportingMonth, setReportingMonth] = useState("");
@@ -103,7 +104,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
   // Training of Trainers
   const [isTrainingTrainers, setIsTrainingTrainers] = useState(false);
-  const [trainingParticipation, setTrainingParticipation] = useState(""); // TODO: not used
+  // const [trainingParticipation, setTrainingParticipation] = useState(""); // TODO: not used
   const [trainingStartDate, setTrainingStartDate] = useState(new Date(Date.now()));
   const [trainingEndDate, setTrainingEndDate] = useState(new Date(Date.now()));
   const [numFemaleTrainers, setNumFemaleTrainers] = useState(0);
@@ -202,6 +203,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
       setSupportingPartner={setSupportingPartner}
       mtnTreated={mtnTreated}
       setMtnTreated={setMtnTreated}
+      view={props.view}
     />,
     <CovidSituationForm
       activeCovidCases={activeCovidCases}
@@ -262,8 +264,8 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
     <TrainingTrainersForm
       isTrainingTrainers={isTrainingTrainers}
       setIsTrainingTrainers={setIsTrainingTrainers}
-      trainingParticipation={trainingParticipation}
-      setTrainingParticipation={setTrainingParticipation}
+      // trainingParticipation={trainingParticipation}
+      // setTrainingParticipation={setTrainingParticipation}
       trainingStartDate={trainingStartDate}
       setTrainingStartDate={setTrainingStartDate}
       trainingEndDate={trainingEndDate}
@@ -276,8 +278,8 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
     <TrainingITForm
       organizedTrainingIT={organizedTrainingIT}
       setOrganizedTrainingIT={setOrganizedTrainingIT}
-      trainingParticipation={trainingParticipation}
-      setTrainingParticipation={setTrainingParticipation}
+      // trainingParticipation={trainingParticipation}
+      // setTrainingParticipation={setTrainingParticipation}
       trainingITStartDate={trainingITStartDate}
       setTrainingITStartDate={setTrainingITStartDate}
       trainingITEndDate={trainingITEndDate}
@@ -369,14 +371,14 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
   // resets all states to default values
   const resetAllStates = (form) => {
-    setChiefName(form.identification.chiefName);
     setContactNumber(form.identification.contactNumber);
+    setChiefName(form.identification.chiefName);
     setIdentificationYear(form.identification.identificationYear);
     setASNumber(form.identification.ASNumber);
     setNumCommunities(form.identification.numCommunities);
     setReportingMonth(form.identification.reportingMonth);
-    // setReportingProvince(form.identification.reportingProvince);
-    // setCoordinatingProvince(form.identification.coordinatingProvince);
+    setReportingProvince(form.identification.reportingProvince);
+    setCoordinatingProvince(form.identification.coordinatingProvince);
     setSupportingPartner(form.identification.supportingPartner);
     setMtnTreated(form.identification.mtnTreated);
 
@@ -384,14 +386,18 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
     setNewActiveCovidCases(form.covidSituation.newActiveCovidCases);
     setCovidDeaths(form.covidSituation.covidDeaths);
 
-    // setNumMectizanRemaining()
-    // setNumAlbendazoleRemaining
-    // setNumPraziquantelRemaining
-    setIvermectinArrivalDate(form.medicinalSupply.ivermectin.ivermectinArrivalDate);
+    setIvermectinArrival(form.medicinalSupply.ivermectin.ivermectinArrival? true: false);
+    setNumMectizanRemaining(form.medicinalSupply.ivermectin.numMectizanRemaining)
+    setNumAlbendazoleRemaining(form.medicinalSupply.albendazole.numAlbendazoleRemaining)
+    setNumPraziquantelRemaining(form.medicinalSupply.praziquantel.numPraziquantelRemaining)
+    
+    setIvermectinArrivalDate(new Date(form.medicinalSupply.ivermectin.ivermectinArrivalDate));
     setNumIvermectinReceived(form.medicinalSupply.ivermectin.numIvermectinReceived);
-    setAlbendazoleArrivalDate(form.medicinalSupply.albendazole.albendazoleArrivalDate);
+    setAlbendazoleArrival(form.medicinalSupply.albendazole.albendazoleArrival? true: false);
+    setAlbendazoleArrivalDate(new Date(form.medicinalSupply.albendazole.albendazoleArrivalDate));
     setNumAlbendazoleReceived(form.medicinalSupply.albendazole.numAlbendazoleReceived);
-    setPraziquantelArrivalDate(form.medicinalSupply.praziquantel.praziquantelArrivalDate);
+    setPraziquantelArrival(form.medicinalSupply.praziquantel.praziquantelArrival? true: false);
+    setPraziquantelArrivalDate(new Date(form.medicinalSupply.praziquantel.praziquantelArrivalDate));
     setNumPraziquantelReceived(form.medicinalSupply.praziquantel.numPraziquantelReceived);
     
     setFundsArrived(form.financialResources.fundsArrived);
@@ -404,58 +410,60 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
     setAmountOther(form.financialResources.amountOther);
     setHasSupportingDocs(form.financialResources.hasSupportingDocs);
 
-    setTrainingParticipation(form.trainingOfTrainers.trainingParticipation);
-    setTrainingStartDate(form.trainingOfTrainers.trainingStartDate);
-    setTrainingEndDate(form.trainingOfTrainers.trainingEndDate);
+    // training of trainers
+    setTrainingStartDate(new Date(form.trainingOfTrainers.trainingStartDate));
+    setTrainingEndDate(new Date(form.trainingOfTrainers.trainingEndDate));
     setNumFemaleTrainers(form.trainingOfTrainers.numFemaleTrainers);
     setNumMaleTrainers(form.trainingOfTrainers.numMaleTrainers);
-    
+    setIsTrainingTrainers(form.trainingOfTrainers.isTrainingTrainers? true: false);
+
+
     // training it form
     setOrganizedTrainingIT(form.trainingIT.organizedTrainingIT);
     // setTrainingParticipation
-    setTrainingITEndDate(form.trainingIT.trainingITEndDate);
+    setTrainingITEndDate(new Date(form.trainingIT.trainingITEndDate));
     setNumFemaleTrainersIT(form.trainingIT.numFemaleTrainersIT);
     setNumMaleTrainersIT(form.trainingIT.numMaleTrainersIT);
     setOrganizedTrainingDC(form.trainingIT.organizedTrainingDC);
-    setTrainingDCStartDate(form.trainingIT.trainingDCStartDate);
+    setTrainingDCStartDate(new Date(form.trainingIT.trainingDCStartDate));
     setNumFemaleTrainersDC(form.trainingIT.numFemaleTrainersDC);
     setNumMaleTrainersDC(form.trainingIT.numMaleTrainersDC);
 
     // training supervision form
     setSupervisionDCTraining(form.trainingSupervision.supervisionDCTraining);
-    setSupervisionTrainingStartDate(form.trainingSupervision.supervisionTrainingStartDate);
-    setSupervisionTrainingEndDate(form.trainingSupervision.supervisionTrainingEndDate);
+    setSupervisionTrainingStartDate(new Date(form.trainingSupervision.supervisionTrainingStartDate));
+    setSupervisionTrainingEndDate(new Date(form.trainingSupervision.supervisionTrainingEndDate));
     setSupervisionHierachyVisits(form.trainingSupervision.supervisionHierachyVisits);
     
     // ESPM form
     setImplementationESPM(form.ESPM.implementationESPM);
-    setAwarenessStartDate(form.ESPM.awarenessStartDate);
-    setAwarenessEndDate(form.ESPM.awarenessEndDate);
+    setAwarenessStartDate(new Date(form.ESPM.awarenessStartDate));
+    setAwarenessEndDate(new Date(form.ESPM.awarenessEndDate));
     setOrganizedDMMCeremony(form.ESPM.organizedDMMCeremony);
-    setDMMStartDate(form.ESPM.DMMStartDate);
+    setDMMStartDate(new Date(form.ESPM.DMMStartDate));
     
     // Mass distribution form
     setASDMMDebut(form.massDistribution.ASDMMDebut);
-    setLFOVSTHStartDate(form.massDistribution.LFOVSTHStartDate);
-    setLFOVSTHEndDate(form.massDistribution.LFOVSTHEndDate);
-    setSCHStartDate(form.massDistribution.SCHStartDate);
-    setSCHEndDate(form.massDistribution.SCHEndDate);
+    setLFOVSTHStartDate(new Date(form.massDistribution.LFOVSTHStartDate));
+    setLFOVSTHEndDate(new Date(form.massDistribution.LFOVSTHEndDate));
+    setSCHStartDate(new Date(form.massDistribution.SCHStartDate));
+    setSCHEndDate(new Date(form.massDistribution.SCHEndDate));
 
     // DMM supervision form
-    setASDMMDebutDate(form.DMMSupervision.ASDMMDebutDate);
-    setASStartDate(form.DMMSupervision.ASStartDate);
+    setASDMMDebutDate(new Date(form.DMMSupervision.ASDMMDebutDate));
+    setASStartDate(new Date(form.DMMSupervision.ASStartDate));
     setDMMHierarchyVisits(form.DMMSupervision.DMMHierarchyVisits);
     
     // Data validation form
-    setValidationASStartDateZS(form.dataValidation.validationASStartDateZS);
-    setValidationASEndDateZS(form.dataValidation.validationASEndDateZS);
-    setValidationASStartDateCoordination(form.dataValidation.validationASStartDateCoordination);
-    setValidationASEndDateCoordination(form.dataValidation.validationASEndDateCoordination);
+    setValidationASStartDateZS(new Date(form.dataValidation.validationASStartDateZS));
+    setValidationASEndDateZS(new Date(form.dataValidation.validationASEndDateZS));
+    setValidationASStartDateCoordination(new Date(form.dataValidation.validationASStartDateCoordination));
+    setValidationASEndDateCoordination(new Date(form.dataValidation.validationASEndDateCoordination));
 
     // Processing form
-    setEncodingStartDate(form.processing.encodingStartDate);
+    setEncodingStartDate(new Date(form.processing.encodingStartDate));
     setNumVillagesAlreadyEncoded(form.processing.numVillagesAlreadyEncoded);
-    setFormTransmissionDate(form.processing.formTransmissionDate);
+    setFormTransmissionDate(new Date(form.processing.formTransmissionDate));
   };
 
   
@@ -466,7 +474,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
     // IDENTIFICATION
     "identification": {
-      "chiefName": authContext.authState.user._id, 
+      "chiefName": chiefName, 
       "contactNumber":contactNumber,
       "identificationYear": identificationYear,
       "ASNumber": ASNumber,
@@ -479,7 +487,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
     },
       
       // Covid Situation Form
-    "covidSitation": {
+    "covidSituation": {
       "activeCovidCases": activeCovidCases,
       "newActiveCovidCases": newActiveCovidCases,
       "covidDeaths": covidDeaths,
@@ -488,16 +496,19 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
       // Medicinal Supply Form
     "medicinalSupply": {
       "praziquantel": {
+        "praziquantelArrival": praziquantelArrival,
         "numPraziquantelRemaining": numPraziquantelRemaining,
         "praziquantelArrivalDate": praziquantelArrivalDate,
         "numPraziquantelReceived": numPraziquantelReceived,
       },
       "ivermectin": {
+        "ivermectinArrival": ivermectinArrival,
         "numMectizanRemaining": numMectizanRemaining,
         "ivermectinArrivalDate": ivermectinArrivalDate, // todo: difference with above
         "numIvermectinReceived": numIvermectinReceived,
       },
       "albendazole": {
+        "albendazoleArrival": albendazoleArrival,
         "numAlbendazoleRemaining": numAlbendazoleRemaining,
         "albendazoleArrivalDate": albendazoleArrivalDate,
         "numAlbendazoleReceived": numAlbendazoleReceived,
@@ -519,7 +530,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
     },
 
     "trainingOfTrainers": {
-      "trainingParticipation": trainingParticipation,
+      "isTrainingTrainers": isTrainingTrainers,
       "trainingStartDate": trainingStartDate,
       "trainingEndDate": trainingEndDate,
       "numFemaleTrainers": numFemaleTrainers,
@@ -529,7 +540,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
     // TrainingITForm
     "trainingIT": {
       "organizedTrainingIT": organizedTrainingIT,
-      "trainingParticipation": trainingParticipation,
+      // "trainingParticipation": trainingParticipation,
       "trainingITStartDate": trainingITStartDate,
       "trainingITEndDate": trainingITEndDate,
       "numFemaleTrainersIT": numFemaleTrainersIT,
@@ -621,7 +632,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
   return (
     <View style={styles.container}>
-      <CrossIcon setLandingPage={props.setLandingPage} />
+      <CrossIcon setView={props.setView} setLandingPage={props.setLandingPage} />
       {renderPageContent()}
     </View>
   );

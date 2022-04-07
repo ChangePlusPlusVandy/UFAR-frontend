@@ -3,11 +3,12 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import { Chevron } from "react-native-shapes";
 import CheckBox from '../CheckBox';
+import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 
 export default function TrainingSupervisionForm(props) {
   const [date, setDate] = React.useState(new Date(Date.now()));
 
-  const options = [{label: 'Oui'}, {label:'Non'}];
+  const options = [{label: 'Oui', value: 'Oui'}, {label: 'Non', value: 'Non'}];
 
   const toggleSupervisionDCTraining = () => props.setSupervisionDCTraining(prev => !prev);
 

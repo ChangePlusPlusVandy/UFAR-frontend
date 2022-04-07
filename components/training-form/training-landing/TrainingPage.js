@@ -35,7 +35,7 @@ export default function TrainingPage(props){
     // console.log("province", getProvinceId(authContext.authState.user.health_zone));
 
     // console.log("provinceID: ", getProvinceId(props.healthZoneId));
-    console.log("trainingforms: ", trainingForms);
+    console.log("Form: ", currentForm);
 
     const getTrainingForms = async () => {
         // var provinceId = getProvinceId(props.healthZoneId);
@@ -91,7 +91,7 @@ export default function TrainingPage(props){
                 </ScrollView> 
                 <NewTrainingFormButton setLandingPage={setLandingPage}/>
             </View>: 
-            <TrainingForm view={view}  currentForm={currentForm} setLandingPage={setLandingPage}/>}
+            <TrainingForm setView={setView} view={view}  currentForm={currentForm} setLandingPage={setLandingPage}/>}
         </>
     )
 

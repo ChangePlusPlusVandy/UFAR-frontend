@@ -70,11 +70,7 @@ export default function DMMSupervisionForm(props) {
             }}
             items={options}
             value={props.DMMHierarchyVisits}
-            placeholder={{
-              label:
-                "Visites de la supervision de la hierarchie cette annee lors de la DMM",
-              value: null,
-            }}
+            placeholder={{ label: "Visites de la supervision de la hierarchie cette annee lors de la DMM", value: null }}
             Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
           />
         </View>

@@ -4,7 +4,10 @@ import {Pressable, View, StyleSheet} from 'react-native';
 export default function CrossIcon (props) {
     
     return (
-        <Pressable onPress={() => props.setLandingPage(true)} style={styles.container} >
+        <Pressable onPress={() => {
+            props.setLandingPage(true); 
+            props.setView(false);
+            }} style={styles.container} >
             <View style={{...styles.line, transform: [{rotate: '45deg'}], top: 2}}/>
             <View style={{...styles.line, transform: [{rotate: '-45deg'}], top: -2}}/>
         </Pressable>

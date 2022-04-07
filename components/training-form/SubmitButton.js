@@ -51,8 +51,8 @@ export default function SubmitButton(props){
                             <Pressable
                             style={styles.button}
                             onPress={() => {
-                                onSubmit(props.trainingForm);
-                                setModalVisible(!modalVisible)
+                                // onSubmit(props.trainingForm);
+                                // setModalVisible(!modalVisible)
                             }}
                             >
                             <Text style={styles.textStyle}>Ok!</Text>
@@ -63,6 +63,7 @@ export default function SubmitButton(props){
             </View>
             <View style={styles.container}>
                 <Pressable onPress={ () => {
+                    // console.log(props.trainingForm);
                     onSubmit(props.trainingForm);
                     props.setLandingPage(true);
                 }} 

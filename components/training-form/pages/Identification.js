@@ -24,13 +24,15 @@ export default function IdentificationForm(props) {
       <Text style={styles.header}>Identification</Text>
       <View style={styles.inputContainer}>
         <TextInput
+          // editable={!props.view}
           style={styles.inputField}
-          onChange={(e) => props.setContactNumber(e.nativeEvent.text)}
+          onChange={(e) => props.setContactNumber(parseInt(e.nativeEvent.text || 0))}
           defaultValue={props.contactNumber}
-          value={props.contactNumber}
+          value={props.contactNumber && props.contactNumber.toString()}
           placeholder="Numero de contact"
         />
         <TextInput
+          editable={false}
           style={styles.inputField}
           onChange={(e) => props.setChiefName(e.nativeEvent.text)}
           defaultValue={props.chiefName}
@@ -38,20 +40,21 @@ export default function IdentificationForm(props) {
         />
         <TextInput
           style={styles.inputField}
-          onChange={(e) => props.setASNumber(e.nativeEvent.text)}
+          onChange={(e) => props.setASNumber(parseInt(e.nativeEvent.text || 0))}
           defaultValue={props.ASNumber}
+          value={props.ASNumber && props.ASNumber.toString()}
           placeholder="Nombre de AS"
         />
         <TextInput
           style={styles.inputField}
-          onChange={(e) => props.setIdentificationYear(e.nativeEvent.text)}
-          defaultValue={props.identificationYear}
+          onChange={(e) => props.setIdentificationYear(parseInt(e.nativeEvent.text || 0))}
+          defaultValue={props.identificationYear && props.identificationYear.toString()}
           placeholder="Annee de mise en oeuvre"
         />
         <TextInput
           style={styles.inputField}
-          onChange={(e) => props.setNumCommunities(e.nativeEvent.text)}
-          defaultValue={props.numCommunities}
+          onChange={(e) => props.setNumCommunities(parseInt(e.nativeEvent.text || 0))}
+          defaultValue={props.numCommunities && props.numCommunities.toString()}
           placeholder="Nombre de communautes/villages"
         />
         <View style={styles.RNPickerSelectContainer}>
