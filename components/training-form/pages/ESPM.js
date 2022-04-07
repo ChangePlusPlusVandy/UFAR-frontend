@@ -8,7 +8,7 @@ import CheckBox from '../CheckBox';
 export default function ESPMForm(props) {
     const [date, setDate] = React.useState(new Date(Date.now()));
 
-    const options = [{label: 'Oui'}, {label:'Non'}];
+    const options = [{label: 'Oui', value: 'Oui'}, {label:'Non', value: 'Oui'}];
     
     const toggleImplementationESPM = () => props.setImplementationESPM(prev => !prev);
 

@@ -71,7 +71,7 @@ export default function TrainingSupervisionForm(props) {
               placeholder: styles.placeholder,
             }}
             onValueChange={(value) => {
-              props.setSupervisionHierarchyVisits(value);
+              props.setSupervisionHierachyVisits(value);
             }}
             items={options}
             value={props.supervisionHierarchyVisits}
