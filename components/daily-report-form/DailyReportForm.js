@@ -69,7 +69,7 @@ const replaceIdsWithNames = (
                 ).forEach((village) => {
                   if (
                     data.provinces[province].health_zones[healthZone]
-                      .health_areas[healthArea].villages[village].id ===
+                      .health_areas[healthArea].villages[village] ===
                     villageId
                   ) {
                     result.villageName = village;
