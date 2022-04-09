@@ -251,7 +251,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
       setAmountESPM={setAmountESPM}
       amountDMM={amountDMM}
       setAmountDMM={setAmountDMM}
-      amountSupervision={amountDMM}
+      amountSupervision={amountSupervision}
       setAmountSupervision={setAmountSupervision}
       amountManagement={amountManagement}
       setAmountManagement={setAmountManagement}
