@@ -27,8 +27,8 @@ export default function TrainingPage(props){
     const [trainingForms, setTrainingForms] = React.useState([]);
     const [currentForm, setCurrentForm] = React.useState(null);
     const [view, setView] = React.useState(false);
+    const [edit, setEdit] = React.useState(false);
     const [provinceId, setProvinceId] = React.useState(0);
-    const authContext = React.useContext(AuthContext);
     const {authAxios} = React.useContext(AxiosContext);
 
     // console.log("healthzoneIddd", authContext.authState.user.health_zone);
@@ -50,9 +50,14 @@ export default function TrainingPage(props){
             );
                 
             if (response.status == 200) {
-                // alert user that account was created
                 const trainingForms = await response.data;
-                setTrainingForms(trainingForms);
+                const forms = {};
+
+                trainingForms.forEach((form) => {
+                    forms[form._id] = form;
+                });
+
+                setTrainingForms(forms);
             } else {
                 Alert.alert("Getting training Forms Failed: " + response.json().message);
                 return;
@@ -76,6 +81,15 @@ export default function TrainingPage(props){
                     }
                 }/>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.edit}>
+                <Icon name="edit" color = 'green' size = {20} type="entypo" onPress={
+                    () => {
+                        setLandingPage(false);
+                        setCurrentForm(item);
+                        setEdit(true);
+                    }
+                }/>
+            </TouchableOpacity>
         </View>
     );
 
@@ -87,11 +101,19 @@ export default function TrainingPage(props){
                     <FetchButton fetchTrainingFormsAdmin={true} getTrainingForms={getTrainingForms}/>
                 </View>
                 <ScrollView style={styles.list} persistentScrollbar={true}>
-                    <FlatList data={trainingForms} renderItem={renderItem} keyExtractor={item => item.id}/>
+                    <FlatList data={Object.values(trainingForms)} renderItem={renderItem} keyExtractor={item => item.id}/>
                 </ScrollView> 
                 <NewTrainingFormButton setLandingPage={setLandingPage}/>
             </View>: 
-            <TrainingForm setView={setView} view={view}  currentForm={currentForm} setLandingPage={setLandingPage}/>}
+            <TrainingForm 
+                trainingForms={trainingForms} 
+                setTrainingForms={setTrainingForms}  
+                setView={setView} 
+                edit={edit} 
+                setEdit={setEdit}
+                view={view}  
+                currentForm={currentForm} 
+                setLandingPage={setLandingPage}/>}
         </>
     )
 
@@ -121,6 +143,10 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOpacity: 0.3,
         // backgroundColor:'grey',
+    },
+    edit: {
+        flex: 1,
+        // flexDirection: 'row',
     },
     list:{
         marginTop: 27,
@@ -163,13 +189,12 @@ const styles = StyleSheet.create({
 
     timelist: {
         color: '#555555',
-        flex: 2,
+        flex: 3,
         textAlignVertical: "center",
-        marginTop: 5,
     },
     namelist: {
         color: '#000000',
-        fontSize: 20,
+        fontSize: 18,
         flex: 5,
     },
 
@@ -177,6 +202,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     fetch: {
-        left: 0,
+        flexDirection: 'row',
     },
 })

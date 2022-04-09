@@ -32,7 +32,7 @@ export default function IdentificationForm(props) {
           placeholder="Numero de contact"
         />
         <TextInput
-          editable={false}
+          // editable={false}
           style={styles.inputField}
           onChange={(e) => props.setChiefName(e.nativeEvent.text)}
           defaultValue={props.chiefName}
