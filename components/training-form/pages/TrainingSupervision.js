@@ -91,6 +91,8 @@ export default function TrainingSupervisionForm(props) {
 const styles = StyleSheet.create({
   header: {
     paddingVertical: 18,
+    marginHorizontal: 45,
+    textAlign: 'center',
     alignSelf: "center",
     fontFamily: Platform.OS === "android" ? "Roboto" : "Helvetica Neue",
     fontWeight: "bold",

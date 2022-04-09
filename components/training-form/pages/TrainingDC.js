@@ -68,7 +68,7 @@ export default function TrainingDCForm(props) {
                   onChange={(e) => props.setNumFemaleTrainersDC(parseInt(e.nativeEvent.text) || 0)}
                   defaultValue={(props.numFemaleTrainersDC || '0').toString()}
               />
-              <Text style={styles.inputLabelBigger}>Total des formés (DCs)</Text>
+              <Text style={styles.inputLabel}>Total des formés (DCs)</Text>
                     <TextInput style={styles.inputField} value={props.numTotalTrainersDC.toString()} />
               </>
               }

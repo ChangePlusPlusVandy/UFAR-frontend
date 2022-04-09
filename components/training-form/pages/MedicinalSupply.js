@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import CheckBox from '../CheckBox';
 
@@ -17,100 +17,102 @@ export default function MedicinalSupplyForm(props) {
   return (
     <View>
       <Text style={styles.header}>Approvisionement en medicaments</Text>
-      <View style={styles.inputContainer}>
-                <Text style={styles.inputLabelBigger} >Quantité des medicants restant lors de la DMM antérieur</Text>
-                <Text style={styles.inputLabel}>Mectizan</Text>
-                <TextInput style={styles.inputField} value={props.numMectizanRemaining.toString()}  onChange={(e) => props.setNumMectizanRemaining(parseInt(e.nativeEvent.text) || 0)}/>
-                <Text style={styles.inputLabel}>Albendazole</Text>
-                <TextInput style={styles.inputField} value={props.numAlbendazoleRemaining.toString()}  onChange={(e) => props.setNumAlbendazoleRemaining(parseInt(e.nativeEvent.text) || 0)}/>
-                <Text style={styles.inputLabel}>Praziquantel</Text>
-                <TextInput style={styles.inputField} value={props.numPraziquantelRemaining.toString()}  onChange={(e) => props.setNumPraziquantelRemaining(parseInt(e.nativeEvent.text) || 0)}/>
-            </View>
-              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                  <Text style={styles.inputLabel}>Arrivée de l’Ivermectine dans la zone de santé</Text>
-                  <CheckBox isChecked={props.ivermectinArrival} onPress={toggleIvermectinArrival} />
-              </View>
-              {props.ivermectinArrival && <> 
-              <Text style={styles.inputLabel}>La date</Text>
-              <TextInput
-                  onPressIn={() => {
-                      DateTimePickerAndroid.open({
-                      value: props.ivermectinArrivalDate,
-                      onChange: (event, selectedDate) => {
-                          props.setIvermectinArrivalDate(selectedDate);
-                      },
-                      mode: 'date',
-                      is24Hour: true
-                      })
-                  }
-                  }
-                  editable={!props.validate}
-                  style={styles.inputField}
-                  value={new Date(props.ivermectinArrivalDate).toLocaleDateString()}
-                  placeholder="MM/DD/YYYY"
-              />
-              <Text style={styles.inputLabel}>La quantité reçue (Comprimés) de l’Ivermectine</Text>
-              <TextInput style={styles.inputField} value={props.numIvermectinReceived.toString()} onChange={(e) => props.setNumIvermectinReceived(parseInt(e.nativeEvent.text) || 0)}/>
-              </>}
-              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                  <Text style={styles.inputLabel}>Arrivée de l’Albendazole (FL/STH)</Text>
-                  <CheckBox isChecked={props.albendazoleArrival} onPress={toggleAlbendazoleArrival} />
-              </View>
-              {props.albendazoleArrival && <> 
-              <Text style={styles.inputLabel}>La date</Text>
-              <TextInput
-                  onPressIn={() => {
-                      DateTimePickerAndroid.open({
-                      value: props.albendazoleArrivalDate,
-                      onChange: (event, selectedDate) => {
-                          props.setAlbendazoleArrivalDate(selectedDate);
-                      },
-                      mode: 'date',
-                      is24Hour: true
-                      })
-                  }
-                  }
-                  editable={!props.validate}
-                  style={styles.inputField}
-                  value={new Date(props.albendazoleArrivalDate).toLocaleDateString()}
-                  placeholder="MM/DD/YYYY"
-              />
-              <Text style={styles.inputLabel}>La quantité reçue (Comprimés) de l’Albendazole</Text>
-              <TextInput style={styles.inputField} value={props.numAlbendazoleReceived.toString()} onChange={(e) => props.setNumAlbendazoleReceived(parseInt(e.nativeEvent.text) || 0)}/>
-              </>}
-              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                  <Text style={styles.inputLabel}>Arrivée du Praziquantel (SCH)</Text>
-                  <CheckBox isChecked={props.praziquantelArrival} onPress={togglePraziquantelArrival} />
-              </View>
-              {props.praziquantelArrival && <> 
-              <Text style={styles.inputLabel}>La date</Text>
-              <TextInput
-                  onPressIn={() => {
-                      DateTimePickerAndroid.open({
-                      value: props.praziquantelArrivalDate,
-                      onChange: (event, selectedDate) => {
-                          props.setPraziquantelArrivalDate(selectedDate);
-                      },
-                      mode: 'date',
-                      is24Hour: true
-                      })
-                  }
-                  }
-                  editable={!props.validate}
-                  style={styles.inputField}
-                  value={new Date(props.praziquantelArrivalDate).toLocaleDateString()}
-                  placeholder="MM/DD/YYYY"
-              />
-              <Text style={styles.inputLabel}>La quantité reçue (Comprimés) de Praziquantel</Text>
-              <TextInput style={styles.inputField} value={props.numPraziquantelReceived.toString()} onChange={(e) => props.setNumPraziquantelReceived(parseInt(e.nativeEvent.text) || 0)}/>
-              </>}
-            </View>
+      <ScrollView style={styles.inputContainer}>
+          <Text style={styles.inputLabelBigger} >Quantité des medicants restant lors de la DMM antérieur</Text>
+          <Text style={styles.inputLabel}>Mectizan</Text>
+          <TextInput style={styles.inputField} value={props.numMectizanRemaining.toString()}  onChange={(e) => props.setNumMectizanRemaining(parseInt(e.nativeEvent.text) || 0)}/>
+          <Text style={styles.inputLabel}>Albendazole</Text>
+          <TextInput style={styles.inputField} value={props.numAlbendazoleRemaining.toString()}  onChange={(e) => props.setNumAlbendazoleRemaining(parseInt(e.nativeEvent.text) || 0)}/>
+          <Text style={styles.inputLabel}>Praziquantel</Text>
+          <TextInput style={styles.inputField} value={props.numPraziquantelRemaining.toString()}  onChange={(e) => props.setNumPraziquantelRemaining(parseInt(e.nativeEvent.text) || 0)}/>
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+              <Text style={styles.inputLabel}>Arrivée de l’Ivermectine dans la zone de santé</Text>
+              <CheckBox isChecked={props.ivermectinArrival} onPress={toggleIvermectinArrival} />
+          </View>
+          {props.ivermectinArrival && <> 
+          <Text style={styles.inputLabel}>La date</Text>
+          <TextInput
+              onPressIn={() => {
+                  DateTimePickerAndroid.open({
+                  value: props.ivermectinArrivalDate,
+                  onChange: (event, selectedDate) => {
+                      props.setIvermectinArrivalDate(selectedDate);
+                  },
+                  mode: 'date',
+                  is24Hour: true
+                  })
+              }
+              }
+              editable={!props.validate}
+              style={styles.inputField}
+              value={new Date(props.ivermectinArrivalDate).toLocaleDateString()}
+              placeholder="MM/DD/YYYY"
+          />
+          <Text style={styles.inputLabel}>La quantité reçue (Comprimés) de l’Ivermectine</Text>
+          <TextInput style={styles.inputField} value={props.numIvermectinReceived.toString()} onChange={(e) => props.setNumIvermectinReceived(parseInt(e.nativeEvent.text) || 0)}/>
+          </>}
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+              <Text style={styles.inputLabel}>Arrivée de l’Albendazole (FL/STH)</Text>
+              <CheckBox isChecked={props.albendazoleArrival} onPress={toggleAlbendazoleArrival} />
+          </View>
+          {props.albendazoleArrival && <> 
+          <Text style={styles.inputLabel}>La date</Text>
+          <TextInput
+              onPressIn={() => {
+                  DateTimePickerAndroid.open({
+                  value: props.albendazoleArrivalDate,
+                  onChange: (event, selectedDate) => {
+                      props.setAlbendazoleArrivalDate(selectedDate);
+                  },
+                  mode: 'date',
+                  is24Hour: true
+                  })
+              }
+              }
+              editable={!props.validate}
+              style={styles.inputField}
+              value={new Date(props.albendazoleArrivalDate).toLocaleDateString()}
+              placeholder="MM/DD/YYYY"
+          />
+          <Text style={styles.inputLabel}>La quantité reçue (Comprimés) de l’Albendazole</Text>
+          <TextInput style={styles.inputField} value={props.numAlbendazoleReceived.toString()} onChange={(e) => props.setNumAlbendazoleReceived(parseInt(e.nativeEvent.text) || 0)}/>
+          </>}
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+              <Text style={styles.inputLabel}>Arrivée du Praziquantel (SCH)</Text>
+              <CheckBox isChecked={props.praziquantelArrival} onPress={togglePraziquantelArrival} />
+          </View>
+          {props.praziquantelArrival && <> 
+          <Text style={styles.inputLabel}>La date</Text>
+          <TextInput
+              onPressIn={() => {
+                  DateTimePickerAndroid.open({
+                  value: props.praziquantelArrivalDate,
+                  onChange: (event, selectedDate) => {
+                      props.setPraziquantelArrivalDate(selectedDate);
+                  },
+                  mode: 'date',
+                  is24Hour: true
+                  })
+              }
+              }
+              editable={!props.validate}
+              style={styles.inputField}
+              value={new Date(props.praziquantelArrivalDate).toLocaleDateString()}
+              placeholder="MM/DD/YYYY"
+          />
+          <Text style={styles.inputLabel}>La quantité reçue (Comprimés) de Praziquantel</Text>
+          <TextInput style={styles.inputField} value={props.numPraziquantelReceived.toString()} onChange={(e) => props.setNumPraziquantelReceived(parseInt(e.nativeEvent.text) || 0)}/>
+          </>}
+        </ScrollView>
+      </View>
   );
 }
 
 const styles = StyleSheet.create({
   header: {
     paddingVertical: 18,
+    marginHorizontal: 45,
+    textAlign: 'center',
     alignSelf: "center",
     fontFamily: Platform.OS === "android" ? "Roboto" : "Helvetica Neue",
     fontWeight: "bold",
@@ -119,7 +121,9 @@ const styles = StyleSheet.create({
     color: "white",
   },
   inputContainer: {
-    marginHorizontal: 34,
+    paddingHorizontal: 8,
+    marginHorizontal: 26,
+    marginBottom: 215,
   },
   inputLabel: {
     fontFamily: Platform.OS === "android" ? "sans-serif" : "Avenir-Roman",

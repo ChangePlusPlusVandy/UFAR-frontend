@@ -21,11 +21,10 @@ export default function ESPMForm(props) {
         <View>
           <Text style={styles.header}>ESPM</Text>
           <View style={styles.inputContainer}>
-          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                  <Text style={styles.inputLabel}>Mise en oeuvre des activités de ESPM</Text>
-                  <CheckBox isChecked={props.implementationESPM} onPress={toggleImplementationESPM} />
-              </View>
-        </View>
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+              <Text style={styles.inputLabel}>Mise en oeuvre des activités de ESPM</Text>
+              <CheckBox isChecked={props.implementationESPM} onPress={toggleImplementationESPM} />
+            </View>
             {props.implementationESPM && <> 
             <Text style={styles.inputLabel}>Date du début de la sensibilisation</Text>
             <TextInput
@@ -63,27 +62,27 @@ export default function ESPMForm(props) {
               value={new Date(props.awarenessEndDate).toLocaleDateString()}
               placeholder="MM/DD/YYYY"
             /> 
-        <View style={styles.RNPickerSelectContainer}>
-          <RNPickerSelect
-            useNativeAndroidPickerStyle={false}
-            style={{
-              inputAndroid: styles.RNPickerSelectInput,
-              iconContainer: styles.RNPickerSelectIconContainer,
-              placeholder: styles.placeholder,
-            }}
-            onValueChange={(value) => {
-              props.setOrganizedDMMCeremony(value);
-            }}
-            items={options}
-            value={props.organizedDMMCeremony}
-            placeholder={{
-              label:"Organisation de la cérémonie de lancement de la DMM",
-              value: null,
-            }}
-            Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
-          />
-          </View>
-          <Text style={styles.inputLabel}>Date du début de lancement de la DMM</Text>
+            <View style={styles.RNPickerSelectContainer}>
+              <RNPickerSelect
+                useNativeAndroidPickerStyle={false}
+                style={{
+                  inputAndroid: styles.RNPickerSelectInput,
+                  iconContainer: styles.RNPickerSelectIconContainer,
+                  placeholder: styles.placeholder,
+                }}
+                onValueChange={(value) => {
+                  props.setOrganizedDMMCeremony(value);
+                }}
+                items={options}
+                value={props.organizedDMMCeremony}
+                placeholder={{
+                  label:"Organisation de la cérémonie de lancement de la DMM",
+                  value: null,
+                }}
+                Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
+              />
+            </View>
+            <Text style={styles.inputLabel}>Date du début de lancement de la DMM</Text>
             <TextInput
               onPressIn={() => {
                 DateTimePickerAndroid.open({
@@ -103,6 +102,7 @@ export default function ESPMForm(props) {
             /> 
            </> }
           </View>
+        </View>
       );
     }
     

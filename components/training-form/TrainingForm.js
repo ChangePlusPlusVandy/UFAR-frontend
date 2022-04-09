@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 
 import {
+  StatusBar,
   StyleSheet,
   View,
 } from "react-native";
@@ -649,14 +650,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
-    backgroundColor: "#EC1C24",
     position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
+    width: "100%",
+    top: Platform.OS === "android" ? StatusBar.currentHeight : 45,
     bottom: 0,
-    // 
+    backgroundColor: "#EC1C24",
+    borderTopLeftRadius: 11,
+    borderTopRightRadius: 11,
 
+    /* Android Drop Shadow Styling */
+    elevation: 10,
+
+    /* iOS Drop Shadow Styling */
+    shadowColor: "black",
+    shadowOffset: {
+      width: 10,
+      height: 10,
+    },
+    shadowRadius: 10,
+    shadowOpacity: 0.3,
   },
 
   buttonsContainer: {

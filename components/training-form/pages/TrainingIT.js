@@ -69,7 +69,7 @@ export default function TrainingITForm(props) {
                   onChange={(e) => props.setNumFemaleTrainersIT(parseInt(e.nativeEvent.text) || 0)}
                   defaultValue={(props.numFemaleTrainersIT || '0').toString()}
               />
-              <Text style={styles.inputLabelBigger}>Total des formés (IT et ITA)</Text>
+              <Text style={styles.inputLabel}>Total des formés (IT et ITA)</Text>
                     <TextInput style={styles.inputField} value={props.numTotalTrainersIT.toString()} />
               </>
               }
