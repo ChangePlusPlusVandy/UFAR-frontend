@@ -10,26 +10,51 @@ export default function SubmitButton(props){
     const {authAxios} = React.useContext(AxiosContext);
 
     const onSubmit = async (form) => {
-        try {
-            const response = await authAxios.post('form/insertTrainingForm',
-                JSON.stringify(form),
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
+        if (props.edit) {
+            try {
+                const response = await authAxios.post('form/editTrainingForm',
+                    JSON.stringify(form),
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
                     }
+                );
+                    
+                if (response.status == 200) { // todo: migth need to change status
+                    props.setTrainingForms({...props.trainingForms, [form._id]: form});
+                    Alert.alert("Success", "Form submitted: Press the fetch button to get the latest form");
+                } else {
+                    Alert.alert("Saving form Failed: " + response);
+                    return;
                 }
-            );
-                
-            if (response.status == 200) { // todo: migth need to change status
-                // alert user that training form was created
-                Alert.alert("Success", "Form submitted: Press the fetch button to get the latest form");
-            } else {
-                Alert.alert("Saving form Failed: " + response);
-                return;
+        
+            } catch (error) {
+                Alert.alert("Cannot save form: " + error);
             }
-    
-        } catch (error) {
-            Alert.alert("Cannot save form: " + error);
+        }
+        else {
+            try {
+                const response = await authAxios.post('form/insertTrainingForm',
+                    JSON.stringify(form),
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    }
+                );
+                    
+                if (response.status == 200) { // todo: migth need to change status
+                    // alert user that training form was created
+                    Alert.alert("Success", "Form submitted: Press the fetch button to get the latest form");
+                } else {
+                    Alert.alert("Saving form Failed: " + response);
+                    return;
+                }
+        
+            } catch (error) {
+                Alert.alert("Cannot save form: " + error);
+            }
         }
     };
    
@@ -70,7 +95,8 @@ export default function SubmitButton(props){
                 style={styles.button}>
                     <Icon name='sc-telegram' type='evilicon' color='white' size={45}/>
                 </Pressable>
-                <Text style={styles.text}>Envoyer/Sauvegarder</Text>
+                {props.edit? <Text style={styles.text}>Éditer</Text>:
+                <Text style={styles.text}>Envoyer/Sauvegarder</Text>}
             </View>
         </View>
     )

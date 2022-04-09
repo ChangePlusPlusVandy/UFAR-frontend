@@ -34,8 +34,11 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   const authContext = useContext(AuthContext);
   const [activePage, setActivePage] = useState(0);
   const view = useRef(props.view);
+  const edit = useRef(props.edit);
+
 
   // Identification state
+  const [reportId, setReportId] = useState("");
   const [chiefName, setChiefName] = useState(authContext.authState.user.name);
   const [contactNumber, setContactNumber] = useState(0);
   const [identificationYear, setIdentificationYear] = useState(0);
@@ -371,6 +374,8 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
   // resets all states to default values
   const resetAllStates = (form) => {
+
+    setReportId(form._id? form._id : "");
     setContactNumber(form.identification.contactNumber);
     setChiefName(form.identification.chiefName);
     setIdentificationYear(form.identification.identificationYear);
@@ -469,6 +474,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   
     // report object to be sent to the server
   var trainingForm = {
+    "_id": reportId,
     // DATE
     "date": Date.now(),
 
@@ -605,8 +611,9 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   // Conditional rendering page navigation
   const renderPageContent = () => {
 
-    if (view.current){
+    if (view.current || edit.current) {
       view.current = false;
+      edit.current = false;
       resetAllStates(props.currentForm);
     }
 
@@ -622,6 +629,9 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
             <SubmitButton
               setLandingPage={props.setLandingPage}
               trainingForm={trainingForm}
+              edit={props.edit}
+              trainingForms={props.trainingForms} 
+              setTrainingForms={props.setTrainingForms}
             />
           )}
         </View>
@@ -632,7 +642,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
 
   return (
     <View style={styles.container}>
-      <CrossIcon setView={props.setView} setLandingPage={props.setLandingPage} />
+      <CrossIcon setEdit={props.setEdit} setView={props.setView} setLandingPage={props.setLandingPage} />
       {renderPageContent()}
     </View>
   );
