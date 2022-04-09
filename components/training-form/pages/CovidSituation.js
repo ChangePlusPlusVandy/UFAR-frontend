@@ -41,6 +41,8 @@ export default function CovidSituationForm(props) {
 const styles = StyleSheet.create({
     header: {
         paddingVertical: 18,
+        marginHorizontal: 45,
+        alignSelf: 'center',
         textAlign: 'center',
         fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Helvetica Neue',
         fontWeight: 'bold',

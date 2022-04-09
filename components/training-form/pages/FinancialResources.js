@@ -44,12 +44,14 @@ export default function FinancialResourcesForm(props) {
 const styles = StyleSheet.create({
     header: {
         paddingVertical: 18,
-        alignSelf: 'center',
-        fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Helvetica Neue',
-        fontWeight: 'bold',
+        marginHorizontal: 45,
+        textAlign: 'center',
+        alignSelf: "center",
+        fontFamily: Platform.OS === "android" ? "Roboto" : "Helvetica Neue",
+        fontWeight: "bold",
         fontSize: 23,
         lineHeight: 28,
-        color: 'white',
+        color: "white",
     },
     inputContainer: {
         marginHorizontal: 34,

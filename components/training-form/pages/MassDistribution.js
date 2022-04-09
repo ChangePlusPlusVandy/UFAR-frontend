@@ -102,9 +102,10 @@ export default function MassDistributionForm(props) {
     
     const styles = StyleSheet.create({
       header: {
-        marginTop: 24,
         paddingVertical: 18,
-        textAlign: "center",
+        marginHorizontal: 45,
+        textAlign: 'center',
+        alignSelf: "center",
         fontFamily: Platform.OS === "android" ? "Roboto" : "Helvetica Neue",
         fontWeight: "bold",
         fontSize: 23,

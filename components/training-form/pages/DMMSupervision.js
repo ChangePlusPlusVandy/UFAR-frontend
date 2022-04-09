@@ -7,7 +7,7 @@ import { Chevron } from "react-native-shapes";
 // done 
 
 export default function DMMSupervisionForm(props) {
-  const options = [{label: 'Oui'}, {label:'Non'}];
+  const options = [{label: 'Oui', value: 'Oui'}, {label:'Non', value: 'Non'}];
   const [date, setDate] = React.useState(new Date(Date.now()));
 
   const onChange = (event, selectedDate) => {
@@ -82,6 +82,8 @@ export default function DMMSupervisionForm(props) {
 const styles = StyleSheet.create({
   header: {
     paddingVertical: 18,
+    marginHorizontal: 45,
+    textAlign: 'center',
     alignSelf: "center",
     fontFamily: Platform.OS === "android" ? "Roboto" : "Helvetica Neue",
     fontWeight: "bold",
