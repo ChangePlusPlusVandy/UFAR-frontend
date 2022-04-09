@@ -23,7 +23,7 @@ export default function SubmitButton(props){
                     
                 if (response.status == 200) { // todo: migth need to change status
                     props.setTrainingForms({...props.trainingForms, [form._id]: form});
-                    Alert.alert("Success", "Form submitted: Press the fetch button to get the latest form");
+                    Alert.alert("Success", "Form edited: new changes saved");
                 } else {
                     Alert.alert("Saving form Failed: " + response);
                     return;
