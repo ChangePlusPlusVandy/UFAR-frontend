@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
     },
     listitem: {
         marginHorizontal: 7,
-        marginVertical: 3,
-        marginBottom: 15,
+        marginVertical: 5,
+        // marginBottom: 20,
         paddingHorizontal: 10,
         paddingVertical: 10,
         flexDirection: "row",
