@@ -10,9 +10,6 @@ import { connect } from 'react-redux';
 import { convertFromYYYYMMDDToDDMMYYYY } from '../../../src/utils';
 
 export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidated(props) {
-    const [reports, setReports] = React.useState(props.reportIds);   
-
-
     const [landingPage, setLandingPage] = React.useState(true);
     const [ currentReport, setCurrentReport ] = React.useState(null);
     const [ currentReportId, setCurrentReportId ] = React.useState(null);
@@ -21,7 +18,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidat
     // component deals with a report object immidiatly from the backend, which has a different format 
     // for date.
     const renderItem = ({item, index}) => (
-        <View style={(index == (reports.length - 1))? {...styles.listitem, ...styles.bottom}: (index == 0)? {...styles.top, ...styles.listitem}: {...styles.listitem} }>
+        <View style={(index == (props.reportIds.length - 1))? {...styles.listitem, ...styles.bottom}: (index == 0)? {...styles.top, ...styles.listitem}: {...styles.listitem} }>
             <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY(props.validationReports[item].report.date.split('T')[0])}</Text>
             <Text style={styles.namelist}>{`Jour #${props.validationReports[item].report.DMM_day}`}</Text>
             <TouchableOpacity style={styles.validate}>
@@ -43,7 +40,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidat
                 <Text style={styles.header}>À Valider</Text>
                 <FetchButton admin={true}/>
             </View>
-            <FlatList data={reports} renderItem={renderItem} keyExtractor={id => id}/>
+            <FlatList data={props.reportIds} renderItem={renderItem} keyExtractor={id => id}/>
         </View> 
     ) : (
         <DailyReportForm

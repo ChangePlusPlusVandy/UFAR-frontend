@@ -10,10 +10,8 @@ import { convertFromYYYYMMDDToDDMMYYYY } from '../../../src/utils';
 //uses material icons
 
 export default connect(mapStateToProps)(function RecentlyValidated(props) {
-    const [reports, setReports] = React.useState(props.reportIds);   
-
     const renderItem = ({item, index}) => (
-        <View style={(index == (reports.length - 1))? {...styles.listitem, ...styles.bottom}: (index == 0)? {...styles.top, ...styles.listitem}: {...styles.listitem} }>
+        <View style={(index == (props.reportIds.length - 1))? {...styles.listitem, ...styles.bottom}: (index == 0)? {...styles.top, ...styles.listitem}: {...styles.listitem} }>
             <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(props.validationReports[item].report.date)).toISOString().split('T')[0])}</Text>
             <Text style={styles.namelist}>{`Jour #${props.validationReports[item].report.DMM_day}`}</Text>
             <TouchableOpacity style={styles.edit}>
@@ -35,7 +33,7 @@ export default connect(mapStateToProps)(function RecentlyValidated(props) {
                 <LeftArrow setActivePage={props.setActivePage}/>
                 <Text style={styles.header}>Récemment Validé</Text>
             </View>
-            <FlatList data={reports} renderItem={renderItem} keyExtractor={id => id}/>
+            <FlatList data={props.reportIds} renderItem={renderItem} keyExtractor={id => id}/>
         </View>
     );
 });

@@ -7,10 +7,9 @@ import { convertFromYYYYMMDDToDDMMYYYY } from '../../src/utils';
 
 
 export default connect(mapStateToProps)(function RecentsList(props){ 
-    const [reports, setReports] = React.useState(props.reports? Object.keys(props.reports): []);   
 
     const renderItem = ({item, index}) => (
-        <View style={(index == (reports.length - 1))? {...styles.listitem, ...styles.bottom}: (index == 0)? {...styles.top, ...styles.listitem}: {...styles.listitem} }>
+        <View style={(index == (Object.keys(props.reports).length - 1))? {...styles.listitem, ...styles.bottom}: (index == 0)? {...styles.top, ...styles.listitem}: {...styles.listitem} }>
             <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(props.reports[item].report.date)).toISOString().split('T')[0])}</Text>
             <Text style={styles.namelist}>{`Joul #${props.reports[item].report.DMM_day}`}</Text>
             <TouchableOpacity style={styles.edit}>
@@ -37,7 +36,7 @@ export default connect(mapStateToProps)(function RecentsList(props){
             <View style={styles.fetch}>
                 <FetchButton admin={false}/>
             </View>
-            <FlatList data={reports} renderItem={renderItem} keyExtractor={item => item.id}/>
+            <FlatList data={props.reports? Object.keys(props.reports): []} renderItem={renderItem} keyExtractor={item => item.id}/>
         </ScrollView>
     );
 });

@@ -483,7 +483,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   // update the total amount of ivermectin remaining once the other values change
   useEffect(() => {
     setIvermectinRemaining(ivermectinReceived - (ivermectinUsed + ivermectinLost));
-  }, [ivermectinUsed, ivermectinLost]);
+  }, [ivermectinUsed, ivermectinLost, ivermectinReceived]);
 
   // Drug Management: Albendazole
   const [albendazoleReceived, setAlbendazoleReceived] = useState(0);
@@ -499,7 +499,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     setAlbendazoleRemaining(
       albendazoleReceived - (albendazoleUsed + albendazoleLost)
     );
-  }, [albendazoleUsed, albendazoleLost]);
+  }, [albendazoleUsed, albendazoleLost, albendazoleReceived]);
 
   // Drug Management: Praziquantel
   const [praziquantelReceived, setPraziquantelReceived] = useState(0);
@@ -515,7 +515,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     setPraziquantelRemaining(
         praziquantelReceived - (praziquantelUsed + praziquantelLost)
     );
-  }, [praziquantelUsed, praziquantelLost]);
+  }, [praziquantelUsed, praziquantelLost, praziquantelReceived]);
 
   const pages = [
     <IdentificationForm
@@ -839,12 +839,12 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     setOnchocerciasisFirst(report.onchocerciasis.first_round);
     setOnchocerciasisSecond(report.onchocerciasis.second_round);
     setLymphaticFilariasis(
-      report.lymphatic_filariasis.Ivermectine_and_albendazole ||
+      report.lymphatic_filariasis.ivermectine_and_albendazole ||
         report.lymphatic_filariasis.albendazole_alone.first_round ||
         report.lymphatic_filariasis.albendazole_alone.second_round
     );
     setLFIvermectineAlbendazole(
-      report.lymphatic_filariasis.Ivermectine_and_albendazole
+      report.lymphatic_filariasis.ivermectine_and_albendazole
     );
     setNumCyclesLFIvermectineAlbendazole(0);
     setNumCyclesLFAlbendazole(0);
@@ -915,18 +915,18 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     setNumWomenRightBreast(report.lymphedema.women.breast.right);
 
     // Processing: Ivermectine state
-    setNumYoungMenIvermectine(report.Ivermectine.men.fiveToFourteen);
-    setNumOldWomenIvermectine(report.Ivermectine.men.fifteenAndOver);
-    setNumOldMenIvermectine(report.Ivermectine.men.fifteenAndOver);
-    setNumYoungWomenIvermectine(report.Ivermectine.women.fiveToFourteen);
+    setNumYoungMenIvermectine(report.ivermectine.men.fiveToFourteen);
+    setNumOldWomenIvermectine(report.ivermectine.men.fifteenAndOver);
+    setNumOldMenIvermectine(report.ivermectine.men.fifteenAndOver);
+    setNumYoungWomenIvermectine(report.ivermectine.women.fiveToFourteen);
 
     // Processing: Ivermectine and Albendazole state
-    setNumYoungMenMectAlb(report.Ivermectine_and_albendazole.men.fiveToFourteen);
-    setNumOldMenMectAlb(report.Ivermectine_and_albendazole.men.fifteenAndOver);
+    setNumYoungMenMectAlb(report.ivermectine_and_albendazole.men.fiveToFourteen);
+    setNumOldMenMectAlb(report.ivermectine_and_albendazole.men.fifteenAndOver);
     setNumYoungWomenMectAlb(
-      report.Ivermectine_and_albendazole.women.fiveToFourteen
+      report.ivermectine_and_albendazole.women.fiveToFourteen
     );
-    setNumOldWomenMectAlb(report.Ivermectine_and_albendazole.women.fifteenAndOver);
+    setNumOldWomenMectAlb(report.ivermectine_and_albendazole.women.fifteenAndOver);
 
     setNumSideEffectsReported(report.side_effects_num);
 
@@ -998,7 +998,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       second_round: onchocerciasisSecond,
     },
     lymphatic_filariasis: {
-      Ivermectine_and_albendazole: LFIvermectineAlbendazole,
+      ivermectine_and_albendazole: LFIvermectineAlbendazole,
       albendazole_alone: {
         first_round: LFAlbendazoleFirst,
         second_round: LFAlbendazoleSecond,
@@ -1080,7 +1080,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     },
 
     // IV. PROCESSING
-    Ivermectine: {
+    ivermectine: {
       men: {
         fiveToFourteen: numYoungMenIvermectine,
         fifteenAndOver: numOldMenIvermectine,
@@ -1090,7 +1090,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         fifteenAndOver: numOldWomenIvermectine,
       },
     },
-    Ivermectine_and_albendazole: {
+    ivermectine_and_albendazole: {
       men: {
         fiveToFourteen: numYoungMenMectAlb,
         fifteenAndOver: numOldMenMectAlb,

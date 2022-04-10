@@ -58,7 +58,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                 style={styles.button}>
                     <Icon name='sc-telegram' type='evilicon' color='white' size={45}/>
                 </Pressable>
-                <Text style={styles.text}> {props.validate? "Validate": "Submit" }</Text>
+                <Text style={styles.text}> {props.validate? "Valider": "Envoyer" }</Text>
             </View>
             <View style={styles.centeredView}>
                 <Modal
