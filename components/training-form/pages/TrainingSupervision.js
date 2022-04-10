@@ -8,14 +8,11 @@ import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 export default function TrainingSupervisionForm(props) {
   const [date, setDate] = React.useState(new Date(Date.now()));
 
-  const options = [{label: 'Oui', value: true}, {label: 'Non', value: false}];
+  const options = [{label: 'Oui', value: 'Oui'}, {label: 'Non', value: 'Oui'}];
 
   const toggleSupervisionDCTraining = () => props.setSupervisionDCTraining(prev => !prev);
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate;
-    setDate(currentDate);
-  };
+  console.log("props.supervisionHierachyVisits", props.supervisionHierachyVisits);
 
   return (
     <View>
@@ -74,7 +71,7 @@ export default function TrainingSupervisionForm(props) {
               props.setSupervisionHierachyVisits(value);
             }}
             items={options}
-            value={props.supervisionHierarchyVisits}
+            value={props.supervisionHierachyVisits}
             placeholder={{
               label: "Visites de la supervision de la hierarchie cette annee lors de la formation",
               value: null,

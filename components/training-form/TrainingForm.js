@@ -373,6 +373,8 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
     />,
   ];
 
+  // console.log("herieachy", supervisionHierachyVisits);
+
   // resets all states to default values
   const resetAllStates = (form) => {
 

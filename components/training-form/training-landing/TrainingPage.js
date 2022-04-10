@@ -68,8 +68,8 @@ export default function TrainingPage(props){
         }
     };
 
-    const renderItem = ({item}) => (
-        <View style={styles.listitem}>
+    const renderItem = ({item, index}) => (
+        <View style={(index == (Object.values(trainingForms).length - 1))? {...styles.listitem, ...styles.bottom}: (index == 0)? {...styles.top, ...styles.listitem}: {...styles.listitem} }>
             <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(item.date)).toISOString().split('T')[0])}</Text>
             <Text style={styles.namelist}>{`Training Form`}</Text>
             <TouchableOpacity style={styles.edit}>
@@ -165,11 +165,10 @@ const styles = StyleSheet.create({
     },
 
     listitem: {
-        marginHorizontal: 7,
-        marginVertical: 3,
-        marginBottom: 3,
-        paddingHorizontal: 10,
-        paddingVertical: 10,
+        marginHorizontal: "2%",
+        marginVertical: '1.2%',
+        paddingHorizontal: '2.5%',
+        paddingVertical: '2.5%',
         flexDirection: "row",
         borderRadius: 10,
         backgroundColor: "white",
@@ -186,7 +185,12 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOpacity: 0.3,
     },
-
+    bottom: {
+        marginBottom: '5%',
+    },
+    top: {
+        marginTop: '2%',
+    },
     timelist: {
         color: '#555555',
         flex: 3,
