@@ -12,7 +12,7 @@ import { convertFromYYYYMMDDToDDMMYYYY } from '../../../src/utils';
 export default connect(mapStateToProps)(function RecentlyValidated(props) {
     const [reports, setReports] = React.useState(props.reportIds);   
 
-    const renderItem = ({item}) => (
+    const renderItem = ({item, index}) => (
         <View style={(index == (reports.length - 1))? {...styles.listitem, ...styles.bottom}: (index == 0)? {...styles.top, ...styles.listitem}: {...styles.listitem} }>
             <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(props.validationReports[item].report.date)).toISOString().split('T')[0])}</Text>
             <Text style={styles.namelist}>{`Jour #${props.validationReports[item].report.DMM_day}`}</Text>
@@ -80,10 +80,10 @@ const styles = StyleSheet.create({
         flex: 11,
     },
     listitem: {
-        marginHorizontal: 7,
-        marginVertical: 4,
-        paddingHorizontal: 10,
-        paddingVertical: 10,
+        marginHorizontal: "2%",
+        marginVertical: '1.2%',
+        paddingHorizontal: '2.5%',
+        paddingVertical: '2.5%',
         flexDirection: "row",
         borderRadius: 10,
         backgroundColor: "white",
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         marginBottom: '5%',
     },
     top: {
-        marginTop: '2%',
+        marginTop: '3%',
     },
     timelist: {
         color: '#555555',
