@@ -61,7 +61,7 @@ export default function Dashboards() {
             <SwitchSelector 
                 options={options} initial={activeDashboard} 
                 onPress={value => setActiveDashboard(value)} 
-                buttonColor='#EC1C24'
+                buttonColor='#cb0d00'
                 style={styles.switch}
                 textStyle={styles.switchText}
                 selectedTextStyle={styles.switchSelectedText}
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     },
     dashboardTitle: {
         fontWeight: 'bold',
-        color: '#EC1C24',
+        color: '#cb0d00',
         fontSize: 18,
     },
     dashboardContainer: {

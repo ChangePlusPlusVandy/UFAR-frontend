@@ -87,7 +87,7 @@ export default function Login(props){
                 onPress={ value => 
                     setUserOption(value)
                 } 
-                buttonColor='#EC1C24'
+                buttonColor='#cb0d00'
                 style={styles.switch}
                 fontSize={15}
                 backgroundColor='#C7C6C1'
