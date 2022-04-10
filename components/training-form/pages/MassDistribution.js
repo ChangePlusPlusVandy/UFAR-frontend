@@ -20,7 +20,7 @@ export default function MassDistributionForm(props) {
           <View style={styles.inputContainer}>
           <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                   <Text style={styles.inputLabel}>Debut de la DMM dans les AS</Text>
-                  <CheckBox isChecked={props.ASDMMDDebut} onPress={toggleASDMMDebut} />
+                  <CheckBox isChecked={props.ASDMMDebut} onPress={toggleASDMMDebut} />
               </View>
           </View>
           {props.ASDMMDebut && <> 

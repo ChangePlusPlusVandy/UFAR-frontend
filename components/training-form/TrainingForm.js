@@ -149,13 +149,13 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   const [supervisionTrainingEndDate, setSupervisionTrainingEndDate] =
     useState(new Date(Date.now()));
   const [supervisionHierachyVisits, setSupervisionHierachyVisits] =
-    useState(false);
+    useState(null);
 
   // ESPM
   const [implementationESPM, setImplementationESPM] = useState(false);
   const [awarenessStartDate, setAwarenessStartDate] = useState(new Date(Date.now()));
   const [awarenessEndDate, setAwarenessEndDate] = useState(new Date(Date.now()));
-  const [organizedDMMCeremony, setOrganizedDMMCeremony] = useState(false);
+  const [organizedDMMCeremony, setOrganizedDMMCeremony] = useState(null);
   const [DMMStartDate, setDMMStartDate] = useState(new Date(Date.now()));
 
   // Mass Distribution of Medicinal Products

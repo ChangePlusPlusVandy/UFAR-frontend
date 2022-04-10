@@ -8,7 +8,7 @@ import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 export default function TrainingSupervisionForm(props) {
   const [date, setDate] = React.useState(new Date(Date.now()));
 
-  const options = [{label: 'Oui', value: 'Oui'}, {label: 'Non', value: 'Non'}];
+  const options = [{label: 'Oui', value: true}, {label: 'Non', value: false}];
 
   const toggleSupervisionDCTraining = () => props.setSupervisionDCTraining(prev => !prev);
 
