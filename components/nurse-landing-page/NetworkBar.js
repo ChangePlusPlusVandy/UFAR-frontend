@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: -5,
     },
     // nothing if the user is online
     online: {},

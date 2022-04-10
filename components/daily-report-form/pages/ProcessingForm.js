@@ -3,37 +3,44 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 
 import SlideshowPaginator from "../SlideshowPaginator";
 
-import ProcessingMectizanForm from "./processing-pages/ProcessingMectizanForm";
+import ProcessingIvermectineForm from "./processing-pages/ProcessingIvermectineForm";
 import ProcessingMectAlbForm from "./processing-pages/ProcessingMectAlbForm";
 import ProcessingAlbendazoleForm from "./processing-pages/ProcessingAlbendazoleForm";
 import ProcessingPraziquantelForm from "./processing-pages/ProcessingPraziquantelForm";
 import ProcessingAlbendazoleHelminthiasisForm from "./processing-pages/ProcessingAlbedazoleHelminthiasisForm";
 
 export default function ProcessingForm(props) {
-  const pages = [
-    {
-      title: "Ivermectin (Onchocercose)",
+  const pages = [];
+
+  // Ivermectine (Onchocercose) page
+  if (props.onchocerciasis) {
+    pages.push({
+      title: "Ivermectine (Onchocercose)",
       content: (
-        <ProcessingMectizanForm
-          setNumYoungMenMectizan={props.setNumYoungMenMectizan}
-          setNumOldMenMectizan={props.setNumOldMenMectizan}
-          setNumYoungWomenMectizan={props.setNumYoungWomenMectizan}
-          setNumOldWomenMectizan={props.setNumOldWomenMectizan}
-          numYoungMenMectizan={props.numYoungMenMectizan}
-          numYoungWomenMectizan={props.numYoungWomenMectizan}
-          numOldMenMectizan={props.numOldMenMectizan}
-          numOldWomenMectizan={props.numOldWomenMectizan}
-          totalNumWomenMectizan={props.totalNumWomenMectizan}
-          totalNumMenMectizan={props.totalNumMenMectizan}
-          totalNumMectizan={props.totalNumMectizan}
-          totalCoverageMectizan={props.totalCoverageMectizan}
-          numSideEffectsReportedMectizan={props.numSideEffectsReportedMectizan}
+        <ProcessingIvermectineForm
+          setNumYoungMenIvermectine={props.setNumYoungMenIvermectine}
+          setNumOldMenIvermectine={props.setNumOldMenIvermectine}
+          setNumYoungWomenIvermectine={props.setNumYoungWomenIvermectine}
+          setNumOldWomenIvermectine={props.setNumOldWomenIvermectine}
+          numYoungMenIvermectine={props.numYoungMenIvermectine}
+          numYoungWomenIvermectine={props.numYoungWomenIvermectine}
+          numOldMenIvermectine={props.numOldMenIvermectine}
+          numOldWomenIvermectine={props.numOldWomenIvermectine}
+          totalNumWomenIvermectine={props.totalNumWomenIvermectine}
+          totalNumMenIvermectine={props.totalNumMenIvermectine}
+          totalNumIvermectine={props.totalNumIvermectine}
+          totalCoverageIvermectine={props.totalCoverageIvermectine}
+          numSideEffectsReportedIvermectine={props.numSideEffectsReportedIvermectine}
           validate={props.validate}
         />
       ),
-    },
-    {
-      title: "Ivermectin et Albendazole (Filariose lymphatique)",
+    });
+  }
+
+  // Ivermectine et Albendazole (Filariose lymphatique) page
+  if (props.LFIvermectineAlbendazole) {
+    pages.push({
+      title: "Ivermectine et Albendazole (Filariose lymphatique)",
       content: (
         <ProcessingMectAlbForm
           setNumYoungMenMectAlb={props.setNumYoungMenMectAlb}
@@ -51,8 +58,12 @@ export default function ProcessingForm(props) {
           validate={props.validate}
         />
       ),
-    },
-    {
+    });
+  }
+
+  // Albendazole seul (Filariose lymphatique) page
+  if (props.LFAlbendazoleFirst || props.LFAlbendazoleSecond) {
+    pages.push({
       title: "Albendazole seul (Filariose lymphatique)",
       content: (
         <ProcessingAlbendazoleForm
@@ -73,24 +84,32 @@ export default function ProcessingForm(props) {
           validate={props.validate}
         />
       ),
-    },
-    {
-      title: "Praziquantel (Schistosomiase)",
-      content: (
-        <ProcessingPraziquantelForm
-          setNumMenPrazi={props.setNumMenPrazi}
-          numMenPrazi={props.numMenPrazi}
-          setNumWomenPrazi={props.setNumWomenPrazi}
-          numWomenPrazi={props.numWomenPrazi}
-          setTotalNumPrazi={props.setTotalNumPrazi}
-          totalNumPrazi={props.totalNumPrazi}
-          setTotalCoveragePrazi={props.setTotalCoveragePrazi}
-          totalCoveragePrazi={props.totalCoveragePrazi}
-          validate={props.validate}
-        />
-      ),
-    },
-    {
+    });
+  }
+
+  // Praziquantel (Schistosomiase) page
+  if (props.schistosomiasis) {
+    pages.push({
+        title: "Praziquantel (Schistosomiase)",
+        content: (
+          <ProcessingPraziquantelForm
+            setNumMenPrazi={props.setNumMenPrazi}
+            numMenPrazi={props.numMenPrazi}
+            setNumWomenPrazi={props.setNumWomenPrazi}
+            numWomenPrazi={props.numWomenPrazi}
+            setTotalNumPrazi={props.setTotalNumPrazi}
+            totalNumPrazi={props.totalNumPrazi}
+            setTotalCoveragePrazi={props.setTotalCoveragePrazi}
+            totalCoveragePrazi={props.totalCoveragePrazi}
+            validate={props.validate}
+          />
+        ),
+    });
+  }
+
+  // Albendazole (Géohelminthiases) page
+  if (props.soilTransmittedHelminthiasis) {
+    pages.push({
       title: "Albendazole (Géohelminthiases)",
       content: (
         <ProcessingAlbendazoleHelminthiasisForm
@@ -119,8 +138,8 @@ export default function ProcessingForm(props) {
           validate={props.validate}
         />
       ),
-    },
-  ];
+    });
+  }
 
   return (
     <View>

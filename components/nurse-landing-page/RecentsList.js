@@ -6,16 +6,16 @@ import FetchButton from '../validation-page/FetchButton';
 import { convertFromYYYYMMDDToDDMMYYYY } from '../../src/utils';
 
 
-export default connect(mapStateToProps)(function RecentsList(props){    
+export default connect(mapStateToProps)(function RecentsList(props){ 
 
-    const renderItem = ({item}) => (
-        <View style={styles.listitem}>
+    const renderItem = ({item, index}) => (
+        <View style={(index == (Object.keys(props.reports).length - 1))? {...styles.listitem, ...styles.bottom}: (index == 0)? {...styles.top, ...styles.listitem}: {...styles.listitem} }>
             <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(props.reports[item].report.date)).toISOString().split('T')[0])}</Text>
             <Text style={styles.namelist}>{`Joul #${props.reports[item].report.DMM_day}`}</Text>
             <TouchableOpacity style={styles.edit}>
                 {props.reports[item].isSubmitted ? 
                 <Icon name="check" color = 'green' size = {25} /> :
-                <Icon name="time-slot" color = 'green' size = {20} type="entypo" />}  
+                <Icon name="time-slot" color = '#9b870c' size = {20} type="entypo" />}  
             </TouchableOpacity>
             {props.reports[item].isSubmitted && <TouchableOpacity style={styles.edit}
                 onPress={() => {
@@ -30,15 +30,15 @@ export default connect(mapStateToProps)(function RecentsList(props){
         </View>
     );
     
-        return (
-            <ScrollView style={styles.container} persistentScrollbar={true}>
-                <Text style={styles.header}>Récent</Text>
-                <View style={styles.fetch}>
-                    <FetchButton fetchReportsUser={false}/>
-                </View>
-                <FlatList data={ props.reports? Object.keys(props.reports): []}renderItem={renderItem} keyExtractor={item => item.id}/>
-            </ScrollView>
-        );
+    return (
+        <ScrollView style={styles.container} persistentScrollbar={true}>
+            <Text style={styles.header}>Récent</Text>
+            <View style={styles.fetch}>
+                <FetchButton admin={false}/>
+            </View>
+            <FlatList data={props.reports? Object.keys(props.reports): []} renderItem={renderItem} keyExtractor={item => item.id}/>
+        </ScrollView>
+    );
 });
 
 function mapStateToProps(state) {
@@ -52,9 +52,8 @@ function mapStateToProps(state) {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 27,
-        height: 100,
-        marginBottom: 70,
+        marginTop: "5%",
+        height: "100%",
     },
     header: {
         // fontFamily: 'Helvetica Neue',
@@ -65,11 +64,10 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     listitem: {
-        marginHorizontal: 7,
-        marginVertical: 3,
-        marginBottom: 3,
-        paddingHorizontal: 10,
-        paddingVertical: 10,
+        marginHorizontal: "2%",
+        marginVertical: '1.2%',
+        paddingHorizontal: '2.5%',
+        paddingVertical: '2.5%',
         flexDirection: "row",
         borderRadius: 10,
         backgroundColor: "white",
@@ -85,6 +83,12 @@ const styles = StyleSheet.create({
         },
         shadowRadius: 5,
         shadowOpacity: 0.3,
+    },
+    bottom: {
+        marginBottom: '5%',
+    },
+    top: {
+        marginTop: '2%',
     },
     timelist: {
         color: '#555555',

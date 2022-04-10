@@ -68,7 +68,7 @@ const replaceIdsWithNames = (
                 ).forEach((village) => {
                   if (
                     data.provinces[province].health_zones[healthZone]
-                      .health_areas[healthArea].villages[village].id ===
+                      .health_areas[healthArea].villages[village] ===
                     villageId
                   ) {
                     result.villageName = village;
@@ -116,8 +116,8 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   const [onchocerciasisFirst, setOnchocerciasisFirst] = useState(false);
   const [onchocerciasisSecond, setOnchocerciasisSecond] = useState(false);
   const [lymphaticFilariasis, setLymphaticFilariasis] = useState(false);
-  const [LFMectizanAlbendazole, setLFMectizanAlbendazole] = useState(false);
-  const [numCyclesLFMectizanAlbendazole, setNumCyclesLFMectizanAlbendazole] =
+  const [LFIvermectineAlbendazole, setLFIvermectineAlbendazole] = useState(false);
+  const [numCyclesLFIvermectineAlbendazole, setNumCyclesLFIvermectineAlbendazole] =
     useState(0);
   const [numCyclesLFAlbendazole, setNumCyclesLFAlbendazole] = useState(0);
   const [LFAlbendazoleFirst, setLFAlbendazoleFirst] = useState(false);
@@ -139,10 +139,10 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   // Update LF rounds when LF is not selected
   useEffect(() => {
     if (!lymphaticFilariasis) {
-      setLFMectizanAlbendazole(false);
+      setLFIvermectineAlbendazole(false);
       setLFAlbendazoleFirst(false);
       setLFAlbendazoleSecond(false);
-      setNumCyclesLFMectizanAlbendazole(0);
+      setNumCyclesLFIvermectineAlbendazole(0);
       setNumCyclesLFAlbendazole(0);
     }
   }, [lymphaticFilariasis]);
@@ -308,33 +308,33 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     );
   }, [numMenBlind, numWomenBlind, numMenTrichiasis, numWomenTrichiasis, numMenGuineaWorm, numWomenGuineaWorm, numMenLLowerMembers, numMenRLowerMembers, numMenLUpperLimbs, numMenRUpperLimbs, numWomenLLowerMembers, numWomenRLowerMembers, numWomenRUpperLimbs, numWomenLUpperLimbs, numWomenLeftBreast, numWomenRightBreast]);
 
-  // Processing: Mectizan state
-  const [numYoungMenMectizan, setNumYoungMenMectizan] = useState(0);
-  const [numOldWomenMectizan, setNumOldWomenMectizan] = useState(0);
-  const [numOldMenMectizan, setNumOldMenMectizan] = useState(0);
-  const [numYoungWomenMectizan, setNumYoungWomenMectizan] = useState(0);
-  const [totalNumMenMectizan, setTotalMenMectizan] = useState(
-    numYoungMenMectizan + numOldMenMectizan
+  // Processing: Ivermectine state
+  const [numYoungMenIvermectine, setNumYoungMenIvermectine] = useState(0);
+  const [numOldWomenIvermectine, setNumOldWomenIvermectine] = useState(0);
+  const [numOldMenIvermectine, setNumOldMenIvermectine] = useState(0);
+  const [numYoungWomenIvermectine, setNumYoungWomenIvermectine] = useState(0);
+  const [totalNumMenIvermectine, setTotalMenIvermectine] = useState(
+    numYoungMenIvermectine + numOldMenIvermectine
   );
-  const [totalNumWomenMectizan, setTotalWomenMectizan] = useState(
-    numYoungWomenMectizan + numOldWomenMectizan
+  const [totalNumWomenIvermectine, setTotalWomenIvermectine] = useState(
+    numYoungWomenIvermectine + numOldWomenIvermectine
   );
-  const [totalNumMectizan, setTotalNumMectizan] = useState(
-    totalNumMenMectizan + totalNumWomenMectizan
+  const [totalNumIvermectine, setTotalNumIvermectine] = useState(
+    totalNumMenIvermectine + totalNumWomenIvermectine
   );
-  const [totalCoverageMectizan, setTotalCoverageMectizan] = useState(
-    (totalNumMectizan * 100) / totalNumPersons
+  const [totalCoverageIvermectine, setTotalCoverageIvermectine] = useState(
+    (totalNumIvermectine * 100) / totalNumPersons
   );
 
   // Update totals
   useEffect(() => {
-    setTotalMenMectizan(numYoungMenMectizan + numOldMenMectizan);
-    setTotalWomenMectizan(numYoungWomenMectizan + numOldWomenMectizan);
-    setTotalNumMectizan(totalNumMenMectizan + totalNumWomenMectizan);
-    setTotalCoverageMectizan((totalNumMectizan * 100) / totalNumPersons);
-  }, [numYoungMenMectizan, numOldMenMectizan, numYoungWomenMectizan, numOldWomenMectizan, totalNumMenMectizan, totalNumWomenMectizan, totalNumMectizan, totalNumPersons]);
+    setTotalMenIvermectine(numYoungMenIvermectine + numOldMenIvermectine);
+    setTotalWomenIvermectine(numYoungWomenIvermectine + numOldWomenIvermectine);
+    setTotalNumIvermectine(totalNumMenIvermectine + totalNumWomenIvermectine);
+    setTotalCoverageIvermectine((totalNumIvermectine * 100) / totalNumPersons);
+  }, [numYoungMenIvermectine, numOldMenIvermectine, numYoungWomenIvermectine, numOldWomenIvermectine, totalNumMenIvermectine, totalNumWomenIvermectine, totalNumIvermectine, totalNumPersons]);
 
-  // Processing: Mectizan and Albendazole state
+  // Processing: Ivermectine and Albendazole state
   const [numYoungMenMectAlb, setNumYoungMenMectAlb] = useState(0);
   const [numOldWomenMectAlb, setNumOldWomenMectAlb] = useState(0);
   const [numOldMenMectAlb, setNumOldMenMectAlb] = useState(0);
@@ -482,7 +482,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   // update the total amount of ivermectin remaining once the other values change
   useEffect(() => {
     setIvermectinRemaining(ivermectinReceived - (ivermectinUsed + ivermectinLost));
-  }, [ivermectinUsed, ivermectinLost]);
+  }, [ivermectinUsed, ivermectinLost, ivermectinReceived]);
 
   // Drug Management: Albendazole
   const [albendazoleReceived, setAlbendazoleReceived] = useState(0);
@@ -498,7 +498,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     setAlbendazoleRemaining(
       albendazoleReceived - (albendazoleUsed + albendazoleLost)
     );
-  }, [albendazoleUsed, albendazoleLost]);
+  }, [albendazoleUsed, albendazoleLost, albendazoleReceived]);
 
   // Drug Management: Praziquantel
   const [praziquantelReceived, setPraziquantelReceived] = useState(0);
@@ -514,7 +514,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     setPraziquantelRemaining(
         praziquantelReceived - (praziquantelUsed + praziquantelLost)
     );
-  }, [praziquantelUsed, praziquantelLost]);
+  }, [praziquantelUsed, praziquantelLost, praziquantelReceived]);
 
   const pages = [
     <IdentificationForm
@@ -549,16 +549,16 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       onchocerciasisSecond={onchocerciasisSecond}
       setLymphaticFilariasis={setLymphaticFilariasis}
       lymphaticFilariasis={lymphaticFilariasis}
-      setLFMectizanAlbendazole={setLFMectizanAlbendazole}
-      LFMectizanAlbendazole={LFMectizanAlbendazole}
+      setLFIvermectineAlbendazole={setLFIvermectineAlbendazole}
+      LFIvermectineAlbendazole={LFIvermectineAlbendazole}
       setLFAlbendazoleFirst={setLFAlbendazoleFirst}
       LFAlbendazoleFirst={LFAlbendazoleFirst}
       setLFAlbendazoleSecond={setLFAlbendazoleSecond}
       LFAlbendazoleSecond={LFAlbendazoleSecond}
       setNumCyclesOnchocerciasis={setNumCyclesOnchocerciasis}
       numCyclesOnchocerciasis={numCyclesOnchocerciasis}
-      setNumCyclesLFMectizanAlbendazole={setNumCyclesLFMectizanAlbendazole}
-      numCyclesLFMectizanAlbendazole={numCyclesLFMectizanAlbendazole}
+      setNumCyclesLFIvermectineAlbendazole={setNumCyclesLFIvermectineAlbendazole}
+      numCyclesLFIvermectineAlbendazole={numCyclesLFIvermectineAlbendazole}
       setNumCyclesLFAlbendazole={setNumCyclesLFAlbendazole}
       numCyclesLFAlbendazole={numCyclesLFAlbendazole}
       setSchistosomiasis={setSchistosomiasis}
@@ -674,20 +674,28 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       validate={props.validate}
     />,
     <ProcessingForm
-      // Mectizan
-      setNumYoungMenMectizan={setNumYoungMenMectizan}
-      setNumOldMenMectizan={setNumOldMenMectizan}
-      setNumYoungWomenMectizan={setNumYoungWomenMectizan}
-      setNumOldWomenMectizan={setNumOldWomenMectizan}
-      numYoungMenMectizan={numYoungMenMectizan}
-      numYoungWomenMectizan={numYoungWomenMectizan}
-      numOldMenMectizan={numOldMenMectizan}
-      numOldWomenMectizan={numOldWomenMectizan}
-      totalNumWomenMectizan={totalNumWomenMectizan}
-      totalNumMenMectizan={totalNumMenMectizan}
-      totalNumMectizan={totalNumMectizan}
-      totalCoverageMectizan={totalCoverageMectizan}
-      // Mectizan and Albendazole
+      // Treatments
+      onchocerciasis={onchocerciasis}
+      lymphaticFilariasis={lymphaticFilariasis}
+      LFIvermectineAlbendazole={LFIvermectineAlbendazole}
+      LFAlbendazoleFirst={LFAlbendazoleFirst}
+      LFAlbendazoleSecond={LFAlbendazoleSecond}
+      schistosomiasis={schistosomiasis}
+      soilTransmittedHelminthiasis={soilTransmittedHelminthiasis}
+      // Ivermectine
+      setNumYoungMenIvermectine={setNumYoungMenIvermectine}
+      setNumOldMenIvermectine={setNumOldMenIvermectine}
+      setNumYoungWomenIvermectine={setNumYoungWomenIvermectine}
+      setNumOldWomenIvermectine={setNumOldWomenIvermectine}
+      numYoungMenIvermectine={numYoungMenIvermectine}
+      numYoungWomenIvermectine={numYoungWomenIvermectine}
+      numOldMenIvermectine={numOldMenIvermectine}
+      numOldWomenIvermectine={numOldWomenIvermectine}
+      totalNumWomenIvermectine={totalNumWomenIvermectine}
+      totalNumMenIvermectine={totalNumMenIvermectine}
+      totalNumIvermectine={totalNumIvermectine}
+      totalCoverageIvermectine={totalCoverageIvermectine}
+      // Ivermectine and Albendazole
       setNumYoungMenMectAlb={setNumYoungMenMectAlb}
       setNumOldMenMectAlb={setNumOldMenMectAlb}
       setNumYoungWomenMectAlb={setNumYoungWomenMectAlb}
@@ -757,6 +765,11 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       validate={props.validate}
     />,
     <DrugManagementForm
+      // Treatments
+      onchocerciasis={onchocerciasis}
+      lymphaticFilariasis={lymphaticFilariasis}
+      schistosomiasis={schistosomiasis}
+      soilTransmittedHelminthiasis={soilTransmittedHelminthiasis}
       // Ivermectin
       ivermectinReceived={ivermectinReceived}
       ivermectinUsed={ivermectinUsed}
@@ -825,14 +838,14 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     setOnchocerciasisFirst(report.onchocerciasis.first_round);
     setOnchocerciasisSecond(report.onchocerciasis.second_round);
     setLymphaticFilariasis(
-      report.lymphatic_filariasis.mectizan_and_albendazole ||
+      report.lymphatic_filariasis.ivermectine_and_albendazole ||
         report.lymphatic_filariasis.albendazole_alone.first_round ||
         report.lymphatic_filariasis.albendazole_alone.second_round
     );
-    setLFMectizanAlbendazole(
-      report.lymphatic_filariasis.mectizan_and_albendazole
+    setLFIvermectineAlbendazole(
+      report.lymphatic_filariasis.ivermectine_and_albendazole
     );
-    setNumCyclesLFMectizanAlbendazole(0);
+    setNumCyclesLFIvermectineAlbendazole(0);
     setNumCyclesLFAlbendazole(0);
     setLFAlbendazoleFirst(
       report.lymphatic_filariasis.albendazole_alone.first_round
@@ -900,19 +913,19 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     setNumWomenLeftBreast(report.lymphedema.women.breast.left);
     setNumWomenRightBreast(report.lymphedema.women.breast.right);
 
-    // Processing: Mectizan state
-    setNumYoungMenMectizan(report.mectizan.men.fiveToFourteen);
-    setNumOldWomenMectizan(report.mectizan.men.fifteenAndOver);
-    setNumOldMenMectizan(report.mectizan.men.fifteenAndOver);
-    setNumYoungWomenMectizan(report.mectizan.women.fiveToFourteen);
+    // Processing: Ivermectine state
+    setNumYoungMenIvermectine(report.ivermectine.men.fiveToFourteen);
+    setNumOldWomenIvermectine(report.ivermectine.men.fifteenAndOver);
+    setNumOldMenIvermectine(report.ivermectine.men.fifteenAndOver);
+    setNumYoungWomenIvermectine(report.ivermectine.women.fiveToFourteen);
 
-    // Processing: Mectizan and Albendazole state
-    setNumYoungMenMectAlb(report.mectizan_and_albendazole.men.fiveToFourteen);
-    setNumOldMenMectAlb(report.mectizan_and_albendazole.men.fifteenAndOver);
+    // Processing: Ivermectine and Albendazole state
+    setNumYoungMenMectAlb(report.ivermectine_and_albendazole.men.fiveToFourteen);
+    setNumOldMenMectAlb(report.ivermectine_and_albendazole.men.fifteenAndOver);
     setNumYoungWomenMectAlb(
-      report.mectizan_and_albendazole.women.fiveToFourteen
+      report.ivermectine_and_albendazole.women.fiveToFourteen
     );
-    setNumOldWomenMectAlb(report.mectizan_and_albendazole.women.fifteenAndOver);
+    setNumOldWomenMectAlb(report.ivermectine_and_albendazole.women.fifteenAndOver);
 
     setNumSideEffectsReported(report.side_effects_num);
 
@@ -984,7 +997,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       second_round: onchocerciasisSecond,
     },
     lymphatic_filariasis: {
-      mectizan_and_albendazole: LFMectizanAlbendazole,
+      ivermectine_and_albendazole: LFIvermectineAlbendazole,
       albendazole_alone: {
         first_round: LFAlbendazoleFirst,
         second_round: LFAlbendazoleSecond,
@@ -1066,17 +1079,17 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     },
 
     // IV. PROCESSING
-    mectizan: {
+    ivermectine: {
       men: {
-        fiveToFourteen: numYoungMenMectizan,
-        fifteenAndOver: numOldMenMectizan,
+        fiveToFourteen: numYoungMenIvermectine,
+        fifteenAndOver: numOldMenIvermectine,
       },
       women: {
-        fiveToFourteen: numYoungWomenMectizan,
-        fifteenAndOver: numOldWomenMectizan,
+        fiveToFourteen: numYoungWomenIvermectine,
+        fifteenAndOver: numOldWomenIvermectine,
       },
     },
-    mectizan_and_albendazole: {
+    ivermectine_and_albendazole: {
       men: {
         fiveToFourteen: numYoungMenMectAlb,
         fifteenAndOver: numOldMenMectAlb,
@@ -1209,7 +1222,7 @@ const styles = StyleSheet.create({
     width: "100%",
     top: Platform.OS === "android" ? StatusBar.currentHeight : 45,
     bottom: 0,
-    backgroundColor: "#EC1C24",
+    backgroundColor: "#cb0d00",
     borderTopLeftRadius: 11,
     borderTopRightRadius: 11,
 

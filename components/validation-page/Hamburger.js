@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     hamburger: {
         height: 54,
         width: 54,
-        backgroundColor: '#EC1C24',
+        backgroundColor: '#cb0d00',
         borderRadius: 27,
         alignContent: "center",
         marginLeft: 15,
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
             borderRadius: 20,
             alignContent: "center",
             padding: 20,
-            backgroundColor: '#EC1C24',
+            backgroundColor: '#cb0d00',
         },
     },
 });

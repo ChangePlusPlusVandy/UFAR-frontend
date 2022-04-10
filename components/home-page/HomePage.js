@@ -21,15 +21,15 @@ export default function HomePage(props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#EC1C24",
+    backgroundColor: "#cb0d00",
     height: "100%",
     width: "100%",
     justifyContent: 'center'
   },
   image: {
-    height: 79,
-    width: 360,
-    bottom: 200,
+    height: '9.4%',
+    width: '92%',
+    bottom: '24%',
     alignSelf:'center',
   },
   buttonsContainer: {

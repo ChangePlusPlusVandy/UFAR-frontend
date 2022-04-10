@@ -15,7 +15,7 @@ export default function TreatmentInformationForm(props) {
     });
 
     const toggleLymphaticFilariasis = () => props.setLymphaticFilariasis(prev => !prev);
-    const toggleLFMectizanAlbendazole = () => props.setLFMectizanAlbendazole(prev => !prev);
+    const toggleLFIvermectineAlbendazole = () => props.setLFIvermectineAlbendazole(prev => !prev);
     const toggleLFAlbendazoleFirst = () => props.setLFAlbendazoleFirst(prev => {
         props.setLFAlbendazoleSecond(prev); 
         return !prev;
@@ -49,11 +49,11 @@ export default function TreatmentInformationForm(props) {
                                 <Text style={styles.choiceLabel}>Onchocercose</Text>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>1er tour</Text>
-                                    <CheckBox isChecked={props.onchocerciasisFirst} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisFirst} fillColor='#EC1C24' disabled={props.validate}/>
+                                    <CheckBox isChecked={props.onchocerciasisFirst} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisFirst} fillColor='#cb0d00' disabled={props.validate}/>
                                 </View>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>2e tour</Text>
-                                    <CheckBox isChecked={props.onchocerciasisSecond} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisSecond} fillColor='#EC1C24' disabled={props.validate}/>
+                                    <CheckBox isChecked={props.onchocerciasisSecond} style={styles.subfieldCheckBox} onPress={toggleOnchocerciasisSecond} fillColor='#cb0d00' disabled={props.validate}/>
                              </View>
                             </View>
                         </View>
@@ -68,13 +68,13 @@ export default function TreatmentInformationForm(props) {
                         <View style={styles.singleRowContainer}>
                             <View style={styles.inputCyclesContainer}>
                                 <Text style={styles.inputSubfieldLabel}># de cycle</Text>
-                                <TextInput style={styles.inputCycles} defaultValue={props.numCyclesLFMectizanAlbendazole.toString()} onChange={(e) => props.setNumCyclesLFMectizanAlbendazole(parseInt(e.nativeEvent.text) || 0)} />
+                                <TextInput style={styles.inputCycles} defaultValue={props.numCyclesLFIvermectineAlbendazole.toString()} onChange={(e) => props.setNumCyclesLFIvermectineAlbendazole(parseInt(e.nativeEvent.text) || 0)} />
                             </View>
                             <View style={styles.inputSubfieldDetailsContainer}>
-                                <Text style={styles.choiceLabel}>Ivermectin + Albendazole</Text>
+                                <Text style={styles.choiceLabel}>Ivermectine + Albendazole</Text>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>Sélectionner</Text>
-                                    <CheckBox isChecked={props.LFMectizanAlbendazole} style={styles.subfieldCheckBox} onPress={toggleLFMectizanAlbendazole} fillColor='#EC1C24' disabled={props.validate}/>
+                                    <CheckBox isChecked={props.LFIvermectineAlbendazole} style={styles.subfieldCheckBox} onPress={toggleLFIvermectineAlbendazole} fillColor='#cb0d00' disabled={props.validate}/>
                                 </View>
                             </View>
                         </View>
@@ -88,11 +88,11 @@ export default function TreatmentInformationForm(props) {
                                 <Text style={styles.choiceLabel}>Albendazole seul</Text>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>1er tour</Text>
-                                    <CheckBox isChecked={props.LFAlbendazoleFirst} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleFirst} fillColor='#EC1C24' disabled={props.validate}/>
+                                    <CheckBox isChecked={props.LFAlbendazoleFirst} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleFirst} fillColor='#cb0d00' disabled={props.validate}/>
                                 </View>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>2e tour</Text>
-                                    <CheckBox isChecked={props.LFAlbendazoleSecond} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleSecond} fillColor='#EC1C24' disabled={props.validate}/>
+                                    <CheckBox isChecked={props.LFAlbendazoleSecond} style={styles.subfieldCheckBox} onPress={toggleLFAlbendazoleSecond} fillColor='#cb0d00' disabled={props.validate}/>
                                 </View>
                             </View>
                         </View>
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
         fontSize: 9,
         lineHeight: 13,
-        color: '#EC1C24',
+        color: '#cb0d00',
     },
     inputField: {
         marginVertical: 5,
@@ -190,10 +190,10 @@ const styles = StyleSheet.create({
         left: 10,
     },
     subfieldCheckBox: {
-        borderColor: '#EC1C24',
+        borderColor: '#cb0d00',
     },
     choiceLabel: {
-        color: '#EC1C24',
+        color: '#cb0d00',
         fontFamily: Platform.OS === 'android' ? 'sans-serif' : 'Avenir-Roman',
         fontSize: 18,
         lineHeight: 25,
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end'
     },
     horizontalDivider: {
-        backgroundColor: '#EC1C24',
+        backgroundColor: '#cb0d00',
         height: 1,
         margin: 5
     }

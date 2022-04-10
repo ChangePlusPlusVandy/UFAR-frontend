@@ -1,8 +1,11 @@
 import React, {useContext} from 'react';
-import {StyleSheet , TouchableOpacity, View} from 'react-native';
+import {StyleSheet , TouchableOpacity, View, Dimensions} from 'react-native';
 import {Icon} from 'react-native-elements';
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 import { AuthContext } from '../../src/context/AuthContext';
+
+const {height, width} = Dimensions.get('window');
+const buttonDiameter = Math.round(height * 0.072)
 
 export default function Hamburger (props) {
 
@@ -12,7 +15,7 @@ export default function Hamburger (props) {
         <TouchableOpacity style={styles.hamburger}>
             <Menu name="hamburger">
                 <MenuTrigger>
-                    <Icon name="menu" color = '#FFFFFF' size = {44} iconStyle = {styles.icon} />
+                    <Icon name="menu" color = '#FFFFFF' size = {41} iconStyle = {styles.icon} />
                 </MenuTrigger>
                 <MenuOptions customStyles = {styles.menuOptions}>
                     <MenuOption onSelect={() => props.navigation.navigate('Home')}>
@@ -42,13 +45,13 @@ export default function Hamburger (props) {
 
 const styles = StyleSheet.create({
     hamburger: {
-        height: 54,
-        width: 54,
-        backgroundColor: '#EC1C24',
-        borderRadius: 27,
+        height: buttonDiameter,
+        width: buttonDiameter,
+        borderRadius: Math.floor(buttonDiameter/2),
+        backgroundColor: '#cb0d00',
         alignContent: "center",
         marginLeft: 15,
-        marginTop: 30,
+        marginTop: '8%',
 
         /* Android Drop Shadow Styling */
         elevation: 10,
@@ -64,15 +67,15 @@ const styles = StyleSheet.create({
     },
     icon:{
         marginTop: 5,
-        marginLeft: 2,
+        marginLeft: 0,
     },
     menuOptions:{
         optionsContainer:{
-            width: 85,
+            width: '21%',
             borderRadius: 20,
             alignContent: "center",
-            padding: 20,
-            backgroundColor: '#EC1C24',
+            padding: '23%',
+            backgroundColor: '#cb0d00',
         },
     },
 })

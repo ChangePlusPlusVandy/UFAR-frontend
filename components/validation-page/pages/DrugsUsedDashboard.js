@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {StyleSheet , View, Text, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryGroup, VictoryLabel } from 'victory-native'
+import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryGroup, VictoryLabel, VictoryLegend } from 'victory-native'
 
 const {height, width} = Dimensions.get('window');
 const BAR_WIDTH = Math.round(height*0.017)
@@ -9,7 +9,7 @@ const BAR_WIDTH = Math.round(height*0.017)
 // the way this works is a bit odd, you create a 3 overlaid and offset bar charts
 // Say the data looks like this
 const regionData = {
-    "RegionA": [12, 37, 49], // where 12 is Mectizan, 37 is Albendazole...
+    "RegionA": [12, 37, 49], // where 12 is Ivermectine, 37 is Albendazole...
     "RegionB": [34, 25, 56],
     "RegionC": [22, 67, 98],
 }
@@ -43,7 +43,6 @@ export default function DrugsUsedDashboard({getDashboard}) {
     return (
         <View style={styles.container}>
           <ScrollView>
-          <Text style={styles.chartTitle}>Graph Title</Text>
             <VictoryChart
               domainPadding={Math.round(width*0.076)} // makes the data pad from end of axes
               domain={{ y: [0, 100]}} 
@@ -53,7 +52,7 @@ export default function DrugsUsedDashboard({getDashboard}) {
                 <VictoryGroup // DO NOT use VictoryAxis with this component
                 horizontal
                 offset={Math.round(height*0.017)}
-                colorScale={["#84BD62", "#EC1C24", "#55A5C4"]}
+                colorScale={["#84BD62", "#cb0d00", "#55A5C4"]}
                 >
                     <VictoryBar
                         style={styles.barChart}
@@ -87,6 +86,17 @@ export default function DrugsUsedDashboard({getDashboard}) {
                     />
                 </VictoryGroup>
             </VictoryChart>
+            <Text style={styles.chartTitle}>Graph Title</Text>
+            <VictoryLegend y={10} x = {35}
+  	            title=""
+                orientation="horizontal"
+                gutter={20}
+                data={[
+                  { name: "Praziquantel", symbol: { fill: "#84BD62" } },
+                  { name: "Albendazole", symbol: { fill: "#cb0d00" } },
+                  { name: "Ivermectine", symbol: { fill: "#55A5C4" } }
+                ]}
+              />
           </ScrollView>
           <Text style={styles.error}>{errorMessage}</Text>
         </View>
@@ -97,6 +107,7 @@ export default function DrugsUsedDashboard({getDashboard}) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFFFF",
+    height: 1000,
   },
   chartTitle: {
     textAlign: 'center',
