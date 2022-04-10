@@ -71,8 +71,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                 >
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
-                            <Text style={styles.modalText}>Offline Mode: report will be submitted later
-                            once you're back online</Text>
+                            <Text style={styles.modalText}>Mode hors-ligne: le rapport sera soumis ultérieurement
+                             une fois que vous êtes de retour en ligne</Text>
                             <Pressable
                             style={styles.button}
                             onPress={() => {

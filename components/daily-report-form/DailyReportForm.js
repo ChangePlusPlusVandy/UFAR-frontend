@@ -26,7 +26,6 @@ import DrugManagementForm from "./pages/DrugManagementForm";
 import data from "./pages/locations";
 import { connect } from "react-redux";
 
-import { convertFromYYYYMMDDToDDMMYYYY } from "../../src/utils.js";
 
 const replaceIdsWithNames = (
   provinceId,

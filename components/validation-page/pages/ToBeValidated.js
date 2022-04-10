@@ -8,6 +8,7 @@ import FetchButton from '../FetchButton';
 
 import { connect } from 'react-redux';
 import { convertFromYYYYMMDDToDDMMYYYY } from '../../../src/utils';
+import { getReports } from '../../../src/actions.js';
 
 export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidated(props) {
     const [landingPage, setLandingPage] = React.useState(true);
@@ -38,7 +39,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidat
             <View style={styles.flexbox}>
                 <RightArrow setActivePage={props.setActivePage} />
                 <Text style={styles.header}>À Valider</Text>
-                <FetchButton admin={true}/>
+                <FetchButton fetchReportsAdmin={true}/>
             </View>
             <FlatList data={props.reportIds} renderItem={renderItem} keyExtractor={id => id}/>
         </View> 
@@ -60,7 +61,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
     return {
-        getReports: (healthZoneId) => dispatch(getReports(healthZoneId))
+        getReports: (healthZoneId, authAxios) => dispatch(getReports(healthZoneId, authAxios)),
     };
 }
 

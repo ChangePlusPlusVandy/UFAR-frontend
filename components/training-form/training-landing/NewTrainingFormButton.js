@@ -3,13 +3,13 @@ import {Platform, Pressable, StatusBar, StyleSheet, Text, View} from 'react-nati
 import { Icon } from 'react-native-elements';
 
 
-export default function NewReportButton(props){
+export default function NewTrainingFormButton(props){
 
     return(
         <View style={{...styles.container, ...styles.containerInactive}}>
-            <Pressable onPress={() => props.setBridgeActivePage(1)} style={styles.newReportPressable} >
+            <Pressable onPress={() => props.setLandingPage(false)} style={styles.newReportPressable} >
                 <Icon solid={true} name='plus' type='entypo' color='white' size={30}/>
-                <Text style={styles.newReportText}>Nouveau Rapport</Text>
+                <Text style={styles.newReportText}>New Training Form</Text>
             </Pressable>
         </View>
     )
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         width: '100%',
         top: Platform.OS === 'android' ? StatusBar.currentHeight : 45,
         bottom: 0,
-        backgroundColor: '#cb0d00',
+        backgroundColor: '#EC1C24',
         borderTopLeftRadius: 11,
         borderTopRightRadius: 11,
         
