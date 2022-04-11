@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 
 import SlideshowPaginator from "../SlideshowPaginator";
 
-import ProcessingIvermectineForm from "./processing-pages/ProcessingIvermectineForm";
+import ProcessingIvermectineForm from "./processing-pages/ProcessingMectizanForm";
 import ProcessingMectAlbForm from "./processing-pages/ProcessingMectAlbForm";
 import ProcessingAlbendazoleForm from "./processing-pages/ProcessingAlbendazoleForm";
 import ProcessingPraziquantelForm from "./processing-pages/ProcessingPraziquantelForm";
