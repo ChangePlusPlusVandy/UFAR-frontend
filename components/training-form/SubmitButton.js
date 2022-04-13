@@ -35,6 +35,8 @@ export default function SubmitButton(props){
         }
         else {
             try {
+                // remove _id from form since a new one will be created for the new form
+                delete form._id;
                 const response = await authAxios.post('form/insertTrainingForm',
                     JSON.stringify(form),
                     {
