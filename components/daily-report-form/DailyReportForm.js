@@ -221,10 +221,10 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   ] = useState(0);
 
   // Update coverage
+  var value = ( numHouseholdsTreated / numHouseholdsVisited) * 100
+  value = value.toFixed(1);
   useEffect(() => {
-    setGeographicalCoverageOfHouseholds(
-      (numHouseholdsTreated / numHouseholdsVisited) * 100
-    );
+    setGeographicalCoverageOfHouseholds(value);
   }, [numHouseholdsVisited, numHouseholdsTreated]);
 
   // Morbidity Cases state
