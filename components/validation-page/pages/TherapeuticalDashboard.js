@@ -47,17 +47,20 @@ export default function TherapeuticalDashboard({getDashboard}) {
     <View style={styles.container}>
       <ScrollView>
         <Text style={styles.chartTitle}>Therapeutic Coverage</Text>
-        <RNPickerSelect
-            value={therapeutic}
-            placeholder={{ label: "Select your therapy of choice", value: null }}
-            onValueChange={(value) => setTherapeutic(value)}
-            items={[
-                { label: 'Ivermectine', value: 'ivermectine' },
-                { label: 'Albendazole', value: 'albendazole' },
-                { label: 'Ivermectine & Albendazole', value: 'ivermectine_and_albendazole' },
-                { label: 'Praziquantel', value: 'praziquantel' },
-            ]}
-        />
+        <View>
+          <RNPickerSelect
+              value={therapeutic}
+              placeholder={{ label: "Select your therapy of choice", value: null }}
+              onValueChange={(value) => setTherapeutic(value)}
+              items={[
+                  { label: 'Ivermectine', value: 'ivermectine' },
+                  { label: 'Albendazole', value: 'albendazole' },
+                  { label: 'Ivermectine & Albendazole', value: 'ivermectine_and_albendazole' },
+                  { label: 'Praziquantel', value: 'praziquantel' },
+              ]}
+          />
+          <Text style={{position: 'absolute', bottom: 0, left: 0}}>{''}</Text>
+        </View>
         <VictoryChart
             theme={VictoryTheme.grayscale}
             domainPadding={{x: Math.round(width*0.05)}}

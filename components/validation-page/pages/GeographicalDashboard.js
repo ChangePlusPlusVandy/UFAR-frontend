@@ -7,9 +7,6 @@ import {Icon} from 'react-native-elements';
 const {height, width} = Dimensions.get('window');
 const BAR_WIDTH = Math.round(height*0.017)
 
-// axios
-import {AxiosContext} from '../../../src/context/AxiosContext';
-
 export default function GeographicalDashboard({getDashboard}) {
   const [data, setData] = React.useState([{ regionName: "", percentage: 0}]);
   const [errorMessage, setErrorMessage] = React.useState('');

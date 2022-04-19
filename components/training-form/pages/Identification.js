@@ -27,7 +27,7 @@ export default function IdentificationForm(props) {
           // editable={!props.view}
           style={styles.inputField}
           onChange={(e) => props.setContactNumber(parseInt(e.nativeEvent.text || 0))}
-          defaultValue={props.contactNumber}
+          defaultValue={props.contactNumber.toString()}
           value={props.contactNumber && props.contactNumber.toString()}
           placeholder="Numero de contact"
         />
@@ -73,6 +73,7 @@ export default function IdentificationForm(props) {
             placeholder={{ label: "Mois de rapportage", value: null }}
             Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
           />
+          <Text style={{position: 'absolute', bottom: 0, left: 0}}>{''}</Text>
         </View>
         <View style={styles.RNPickerSelectContainer}>
           <RNPickerSelect
