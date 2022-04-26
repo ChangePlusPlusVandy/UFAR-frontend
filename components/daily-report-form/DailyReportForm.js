@@ -110,6 +110,10 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   const [villageName, setVillageName] = useState("");
   const [villageId, setVillageId] = useState("");
 
+  const [numVillages, setNumVillages] = useState(0);
+
+  const [dateOfEntry, setDateOfEntry] = useState(new Date(Date.now()));
+
   // Treatment Information state
   const [onchocerciasis, setOnchocerciasis] = useState(false);
   const [numCyclesOnchocerciasis, setNumCyclesOnchocerciasis] = useState(0);
@@ -524,6 +528,10 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       provinceName={provinceName}
       provinceId={provinceId}
       setProvinceId={setProvinceId}
+      dateOfEntry={dateOfEntry}
+      setDateOfEntry={setDateOfEntry}
+      numVillages={numVillages}
+      setNumVillages={setNumVillages}
       setHealthZoneName={setHealthZoneName}
       healthZoneName={healthZoneName}
       healthZoneId={healthZoneId}
