@@ -202,7 +202,7 @@ export default function IdentificationForm(props) {
             // Icon={() => <Chevron size={1.5} color="#9D9D9D" />} // makes the icon disappear
           />
         </View>
-        {/* <TextInput style={styles.inputField} placeholder="GPS Location (autofill)" /> */}
+        <TextInput style={styles.inputField} placeholder="GPS Location (autofill)" />
         <Text style={styles.inputLabel}>
           Heure et Date de la saisie
         </Text>
