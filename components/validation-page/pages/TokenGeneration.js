@@ -42,6 +42,8 @@ export default function TokenGeneration(props){
                     }
                 }
             );
+
+           
                 
             if (response.status == 200) {
                 // todo: get uuid token and store it (state for now)
@@ -55,7 +57,7 @@ export default function TokenGeneration(props){
             }
 
         } catch (error) {
-            setErrorMessage("Cannot get token " + error);
+            setErrorMessage("Cannot get token error: " + error.response.data.message);
         }
     };
 
