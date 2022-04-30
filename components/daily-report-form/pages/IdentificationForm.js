@@ -193,12 +193,38 @@ export default function IdentificationForm(props) {
               placeholder: styles.placeholder,
             }}
             onValueChange={(value) => {
-              console.log(value) // can't edit so just log
+              props.setVillageName(value);
+
+              // set village id
+              value &&
+                props.setVillageId(
+                  data.provinces[props.provinceName].health_zones[
+                    props.healthZoneName
+                  ].health_areas[props.healthAreaName].villages[value]
+                );
+            }}
+            items={getVillages()}
+            disabled={props.validate}
+            value={props.villageName}
+            placeholder={{ label: "Nom du Village/Communauté", value: null }}
+            Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
+          />
+        </View>
+        <View style={styles.RNPickerSelectContainer}>
+          <RNPickerSelect
+            useNativeAndroidPickerStyle={false}
+            style={{
+              inputAndroid: styles.RNPickerSelectInput,
+              iconContainer: styles.RNPickerSelectIconContainer,
+              placeholder: styles.placeholder,
+            }}
+            onValueChange={(value) => {
+              console.log("value",value) // can't edit so just log
             }}
             items={getVillages().toString()} // this doesn't matter so just put whatever, mandatory though
             disabled={true}
-            value={props.numVillages.toString()}
-            placeholder={{ label: props.numVillages == 0 ? "Nom du Village/Communauté" : props.numVillages.toString() }}
+            value={`${props.numVillages.toString()} Villages`}
+            placeholder={{ label: props.numVillages == 0 ? "Nom du Village/Communauté" : `${props.numVillages.toString()} Villages`, value: null }}
             // Icon={() => <Chevron size={1.5} color="#9D9D9D" />} // makes the icon disappear
           />
         </View>

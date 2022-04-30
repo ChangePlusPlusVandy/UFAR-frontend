@@ -823,6 +823,8 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         report.village
       );
 
+    setDateOfEntry(report.date);
+
     setReportId(props.currentReportId? props.currentReportId: "");
     setIs_validated(report.is_validated);
 
@@ -996,7 +998,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     health_zone: healthZoneId,
     village: villageId,
     // DATE
-    date: (new Date(Date.now())).toISOString(),
+    date: dateOfEntry.toISOString(),
     // 1.11 diseases treated
     onchocerciasis: {
       first_round: onchocerciasisFirst,
