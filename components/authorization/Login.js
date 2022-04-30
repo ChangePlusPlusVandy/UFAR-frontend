@@ -75,7 +75,7 @@ export default function Login(props){
             }
 
         } catch (error) {
-            setErrorMessage("Login Failed: " + error);
+            setErrorMessage("Login Failed: " + error.response.data.message);
             // Alert.alert('Login Failed', error.response?.data?.message);
         }
     };

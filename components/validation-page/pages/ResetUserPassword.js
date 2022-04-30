@@ -39,7 +39,7 @@ export default function ResetUserPassword(props){
             }
 
         } catch (error) {
-            setErrorMessage("Cannot reset password: " + error);
+            setErrorMessage("Cannot reset password: " + error.response.data.message);
         }
     };
 
