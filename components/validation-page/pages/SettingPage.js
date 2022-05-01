@@ -4,7 +4,9 @@ import {StyleSheet, Text, View, Dimensions} from 'react-native';
 
 export default function SettingsPage(){
 
-    const authContext = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
+    
+  console.log(authContext.authState.user);
 
     return (
         <View style = {styles.container}>
@@ -13,8 +15,8 @@ export default function SettingsPage(){
             <Text style={styles.inputField}>{authContext.authState.user?.name || ""}</Text>
             <Text style={styles.inputLabelBigger}>Rôle</Text>
             <Text style={styles.inputField}>{authContext.authState.user?.role || ""}</Text>
-            <Text style={styles.inputLabelBigger}>Zone de Santé</Text>
-            <Text style={styles.inputField}>{authContext.authState.user?.token || ""}</Text>
+            {/* <Text style={styles.inputLabelBigger}>Zone de Santé</Text>
+            <Text style={styles.inputField}>{authContext.authState.user?.health_zone || ""}</Text> */}
         </View>
     );
 
