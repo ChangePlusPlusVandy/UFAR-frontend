@@ -17,7 +17,7 @@ export default function Dashboards() {
     const {authAxios} = useContext(AxiosContext);
     const authContext = useContext(AuthContext);
     
-    const getDashboard = async (dashboard, id=authContext.authState.user.health_zone) => {
+    const getDashboard = async (dashboard, id=authContext.authState.user.health_zone.id) => {
         try {
             const response = await authAxios.post(`/data/${id}/${dashboard}`,
                 {

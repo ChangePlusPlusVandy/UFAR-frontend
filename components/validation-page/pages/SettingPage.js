@@ -15,8 +15,8 @@ export default function SettingsPage(){
             <Text style={styles.inputField}>{authContext.authState.user?.name || ""}</Text>
             <Text style={styles.inputLabelBigger}>Rôle</Text>
             <Text style={styles.inputField}>{authContext.authState.user?.role || ""}</Text>
-            {/* <Text style={styles.inputLabelBigger}>Zone de Santé</Text>
-            <Text style={styles.inputField}>{authContext.authState.user?.health_zone || ""}</Text> */}
+            <Text style={styles.inputLabelBigger}>Zone de Santé</Text>
+            <Text style={styles.inputField}>{authContext.authState.user?.health_zone.name || ""}</Text>
         </View>
     );
 

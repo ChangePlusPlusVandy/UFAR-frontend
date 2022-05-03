@@ -24,7 +24,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function FetchButton
     return (
         <View style={styles.flexbox}>
             <TouchableOpacity style={styles.checkbadge} onPress={()=>{
-                props.admin? props.getReports(authContext.authState.user.health_zone, authAxios): 
+                props.admin? props.getReports(authContext.authState.user.health_zone.id, authAxios): 
                 props.getReportsUser(authContext.authState.user?._id, authAxios);
             }}>
                 <Icon name="cycle" color = '#FFFFFF' size = {25} iconStyle = {styles.icon} type="entypo" />
