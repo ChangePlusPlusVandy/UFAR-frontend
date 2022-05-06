@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, TextInput} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import GenerateTokenButton from '../GenerateTokenButton';
 import data from '../../daily-report-form/pages/locations';
+import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 
 // authorization
 import { AxiosContext } from '../../../src/context/AxiosContext';
@@ -10,7 +11,15 @@ import { AxiosContext } from '../../../src/context/AxiosContext';
 export default function TokenGeneration(props){
     const {authAxios} = useContext(AxiosContext);
 
+    const [date, setDate] = React.useState(new Date(Date.now()));
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate;
+        setDate(currentDate);
+     };
+
     const [ healthZoneId, setHealthZoneId ] = React.useState('');
+    const [expirationDate, setExpirationDate] = React.useState(new Date(Date.now()));
     const [ role, setRole ] = React.useState('');
     const [ token, setToken ] = React.useState('');
     const [ errorMessage, setErrorMessage ] = React.useState('');
@@ -71,7 +80,7 @@ export default function TokenGeneration(props){
                     }}
                     items={getHealthZones()}
                     value={healthZoneId}
-                    placeholder={{label: 'Select Healht Zone', value: null}}
+                    placeholder={{label: 'Select Health Zone', value: null}}
                 />
             </View>
             <View style={styles.RNPickerSelectContainer}>
@@ -85,6 +94,26 @@ export default function TokenGeneration(props){
                     value={role}
                     placeholder={{label: 'Select Role', value: null}}
                 />
+            <View style={styles.RNPickerSelectContainer}>
+                <Text style={styles.selecting}>Select Token Expiration Date</Text>
+                <TextInput
+                    onPressIn={() => {
+                        DateTimePickerAndroid.open({
+                        value: expirationDate,
+                        onChange: (event, selectedDate) => {
+                            setExpirationDate(selectedDate);
+                        },
+                        mode: 'date',
+                        is24Hour: true
+                        })
+                    }
+                    }
+                    editable={!props.validate}
+                    style={styles.RNPickerSelectInput}
+                    value={new Date(expirationDate).toLocaleDateString()}
+                    placeholder="Select Date"
+        />
+        </View>
             </View>
             <TextInput style={styles.error}>{errorMessage}</TextInput>
             <GenerateTokenButton generateToken={generateToken}/>
@@ -136,6 +165,12 @@ const styles = StyleSheet.create({
     },
     error:{
         color: 'red',
+        fontSize: 12,
+        fontStyle: 'italic',
+    },
+    selecting:{
+        paddingTop: 8,
+        color: 'black',
         fontSize: 12,
         fontStyle: 'italic',
     },
