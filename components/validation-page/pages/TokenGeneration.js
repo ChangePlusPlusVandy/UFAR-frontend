@@ -44,7 +44,7 @@ export default function TokenGeneration(props){
     const generateToken = async () => {
         try {
             const response = await authAxios.post('/auth/newuuid',
-                JSON.stringify({health_zone: healthZoneId, role: role}),
+                JSON.stringify({health_zone: healthZoneId, role: role, expiration_date: expirationDate}),
                 {
                     headers: {
                         'Content-Type': 'application/json',

@@ -3,6 +3,7 @@ import React from 'react';
 // import { StatusBar } from 'expo-status-bar';
 import DailyReportForm from './DailyReportForm';
 import NewReportButton from './NewReportButtom';
+import SettingsPage from './SettingPage';
 import ResetUserPassword from '../validation-page/pages/ResetUserPassword';
 import RecentsList from '../nurse-landing-page/RecentsList';
 import GreetingHeader from '../nurse-landing-page/GreetingHeader';
@@ -28,7 +29,8 @@ export default function Bridge(props){
         />,
         <View style={styles.container}>
             <ResetUserPassword />
-        </View> 
+        </View>,
+        <SettingsPage/>
     ];
 
     return(
@@ -36,7 +38,7 @@ export default function Bridge(props){
             <NetworkBar />
             <StatusBar style="auto" />
             <GreetingHeader setBridgeActivePage={setBridgeActivePage} navigation={props.navigation}/>
-            {bridgeActivePage != 2 && 
+            {bridgeActivePage < 2 && 
             <RecentsList 
                 setCurrentReportId={setCurrentReportId}
                 setEdit={setEdit} 
