@@ -1,17 +1,15 @@
 // source: https://github.com/cristian-rita/react-native-jwt-example/blob/main/src/context/AxiosContext.js
 
-import React, {createContext, useContext} from 'react';
-import axios from 'axios';
-import {AuthContext} from './AuthContext';
-import { DEV_DOMAIN } from "@env" 
+import React, { createContext, useContext } from "react";
+import axios from "axios";
+import { AuthContext } from "./AuthContext";
+import { DEV_DOMAIN } from "@env";
 
 const AxiosContext = createContext();
-const {Provider} = AxiosContext;
+const { Provider } = AxiosContext;
 
-
-const AxiosProvider = ({children}) => {
-
-  console.log("DEV_DOMAIN axios", DEV_DOMAIN);
+const AxiosProvider = ({ children }) => {
+  console.log("DEV_DOMAIN DEV dev", DEV_DOMAIN);
 
   const authContext = useContext(AuthContext);
 
@@ -24,41 +22,41 @@ const AxiosProvider = ({children}) => {
   });
 
   authAxios.interceptors.request.use(
-    config => {
+    (config) => {
       if (!config.headers.Authorization) {
         config.headers.Authorization = `Bearer ${authContext.getAccessToken()}`;
       }
 
       return config;
     },
-    error => {
+    (error) => {
       return Promise.reject(error);
-    },
+    }
   );
 
   // if token is expired, logout and redirect to login page
   authAxios.interceptors.response.use(
-    response => {
+    (response) => {
       return response;
     },
-    error => {
+    (error) => {
       if (error.response?.status === 401) {
         authContext.logout();
       }
       return Promise.reject(error);
-    },
+    }
   );
-  
 
   return (
     <Provider
       value={{
         authAxios,
         publicAxios,
-      }}>
+      }}
+    >
       {children}
     </Provider>
   );
 };
 
-export {AxiosContext, AxiosProvider};
+export { AxiosContext, AxiosProvider };
