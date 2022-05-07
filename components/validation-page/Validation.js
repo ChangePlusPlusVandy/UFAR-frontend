@@ -8,6 +8,8 @@ import Dashboards from './pages/Dashboards';
 import NetworkBar from '../nurse-landing-page/NetworkBar';
 import TokenGenerationPage from './pages/UserManagement';
 import SettingsPage from './pages/SettingPage';
+import TrainingForm from '../training-form/TrainingForm';
+import TrainingPage from '../training-form/training-landing/TrainingPage';
 
 import { connect } from 'react-redux';
 
@@ -25,6 +27,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function Validation 
         />,
         <Dashboards/>,
         <TokenGenerationPage/>,
+        <TrainingPage/>,
         <SettingsPage/>
     ]
 
@@ -54,6 +57,6 @@ function mapDispatchToProps(dispatch){
 const styles = StyleSheet.create({
     admin: {
         flex: 1,
-        backgroundColor: '#EC1C24',
+        backgroundColor: '#cb0d00',
     },
 })

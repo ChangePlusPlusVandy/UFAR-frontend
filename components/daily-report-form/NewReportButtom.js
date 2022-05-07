@@ -9,7 +9,7 @@ export default function NewReportButton(props){
         <View style={{...styles.container, ...styles.containerInactive}}>
             <Pressable onPress={() => props.setBridgeActivePage(1)} style={styles.newReportPressable} >
                 <Icon solid={true} name='plus' type='entypo' color='white' size={30}/>
-                <Text style={styles.newReportText}>New Report</Text>
+                <Text style={styles.newReportText}>Nouveau Rapport</Text>
             </Pressable>
         </View>
     )
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         width: '100%',
         top: Platform.OS === 'android' ? StatusBar.currentHeight : 45,
         bottom: 0,
-        backgroundColor: '#EC1C24',
+        backgroundColor: '#cb0d00',
         borderTopLeftRadius: 11,
         borderTopRightRadius: 11,
         

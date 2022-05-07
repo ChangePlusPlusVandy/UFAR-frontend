@@ -18,6 +18,7 @@ export default function NextButton({setActivePage}) {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
+        marginBottom: 0,
     },
     button: {
         backgroundColor: '#59AECF',

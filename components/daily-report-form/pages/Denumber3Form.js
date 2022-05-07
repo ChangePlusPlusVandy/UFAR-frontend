@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function Denumber3Form(props) {
+
   return (
     <View>
       <Text style={styles.header}>Ménages</Text>
@@ -21,9 +22,10 @@ export default function Denumber3Form(props) {
         <TextInput
           editable={!props.validate}
           style={styles.inputField}
-          onChange={(e) =>
-            props.setNumHouseholdsTreated(parseInt(e.nativeEvent.text) || 0)
-          }
+          onChange={(e) =>{
+            var value = parseInt(e.nativeEvent.text) || 0;
+            (value <= props.numHouseholdsVisited) && props.setNumHouseholdsTreated(parseInt(e.nativeEvent.text) || 0)
+          }}
           defaultValue={(props.numHouseholdsTreated || "0").toString()}
         />
 

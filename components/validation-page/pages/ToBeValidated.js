@@ -8,10 +8,9 @@ import FetchButton from '../FetchButton';
 
 import { connect } from 'react-redux';
 import { convertFromYYYYMMDDToDDMMYYYY } from '../../../src/utils';
+import { getReports } from '../../../src/actions.js';
 
 export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidated(props) {
-
-
     const [landingPage, setLandingPage] = React.useState(true);
     const [ currentReport, setCurrentReport ] = React.useState(null);
     const [ currentReportId, setCurrentReportId ] = React.useState(null);
@@ -19,8 +18,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidat
     // Note: the conversion of the date is different from the  validated component bcs this
     // component deals with a report object immidiatly from the backend, which has a different format 
     // for date.
-    const renderItem = ({item}) => (
-        <View style={styles.listitem}>
+    const renderItem = ({item, index}) => (
+        <View style={(index == (props.reportIds.length - 1))? {...styles.listitem, ...styles.bottom}: (index == 0)? {...styles.top, ...styles.listitem}: {...styles.listitem} }>
             <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY(props.validationReports[item].report.date.split('T')[0])}</Text>
             <Text style={styles.namelist}>{`Jour #${props.validationReports[item].report.DMM_day}`}</Text>
             <TouchableOpacity style={styles.validate}>
@@ -40,7 +39,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidat
             <View style={styles.flexbox}>
                 <RightArrow setActivePage={props.setActivePage} />
                 <Text style={styles.header}>À Valider</Text>
-                <FetchButton admin={true}/>
+                <FetchButton fetchReportsAdmin={true}/>
             </View>
             <FlatList data={props.reportIds} renderItem={renderItem} keyExtractor={id => id}/>
         </View> 
@@ -62,7 +61,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
     return {
-        getReports: (healthZoneId) => dispatch(getReports(healthZoneId))
+        getReports: (healthZoneId, authAxios) => dispatch(getReports(healthZoneId, authAxios)),
     };
 }
 
@@ -101,11 +100,10 @@ const styles = StyleSheet.create({
         flex: 4,
     },
     listitem: {
-        marginHorizontal: 7,
-        marginVertical: 3,
-        marginBottom: 3,
-        paddingHorizontal: 10,
-        paddingVertical: 10,
+        marginHorizontal: "2%",
+        marginVertical: '1.2%',
+        paddingHorizontal: '2.5%',
+        paddingVertical: '2.5%',
         flexDirection: "row",
         borderRadius: 10,
         backgroundColor: "white",
@@ -121,6 +119,12 @@ const styles = StyleSheet.create({
         },
         shadowRadius: 5,
         shadowOpacity: 0.3,
+    },
+    bottom: {
+        marginBottom: '5%',
+    },
+    top: {
+        marginTop: '3%',
     },
     timelist: {
         color: '#555555',

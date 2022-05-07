@@ -28,6 +28,9 @@ export default function Hamburger (props) {
                         <Icon name="users" type="font-awesome" color = '#FFF' size = {30} iconStyle = {styles.icon} />
                     </MenuOption>
                     <MenuOption onSelect={() => props.setActivePage(4)}>
+                        <Icon name="book" type="foundation" color = '#FFF' size = {30} iconStyle = {styles.icon} />
+                    </MenuOption>
+                    <MenuOption>
                         <Icon name="settings" color = '#FFF' size = {30} iconStyle = {styles.icon} />
                     </MenuOption>
                     <MenuOption>
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
     hamburger: {
         height: 54,
         width: 54,
-        backgroundColor: '#EC1C24',
+        backgroundColor: '#cb0d00',
         borderRadius: 27,
         alignContent: "center",
         marginLeft: 15,
@@ -77,7 +80,7 @@ const styles = StyleSheet.create({
             borderRadius: 20,
             alignContent: "center",
             padding: 20,
-            backgroundColor: '#EC1C24',
+            backgroundColor: '#cb0d00',
         },
     },
 });

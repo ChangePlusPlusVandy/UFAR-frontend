@@ -1,6 +1,3 @@
-import uuid from 'react-native-uuid';
-
-
 // Note: Every action function should have an identifier that is unique to the action as
 // the last parameter. This is used to detect if an action has already been dispatched.
 
@@ -222,11 +219,11 @@ export const saveEditReport = (report, authAxios, id) => {
                 dispatch({type: 'ADD_REPORT', report: report, id: id, isSubmitted: true})
             }  else {
                 dispatch({type: 'ADD_REPORT', report: report, id: id, isSubmitted: false})
-                console.log("report not succesfully validated: ", response);
+                console.log("report not succesfully edited: ", response);
             }
         } catch (err) {
             dispatch({type: 'ADD_REPORT', report: report, id: id, isSubmitted: false})
-            console.log("error while validating report: ", err);
+            console.log("error while edit report: ", err);
         }
     }
 

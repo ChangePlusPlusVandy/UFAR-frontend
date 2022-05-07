@@ -53,6 +53,8 @@ export default function Login(props){
 
                 const user = jwt_decode(accessToken);
 
+                console.log("user: ", user);
+
                 if (user.user.role.toLowerCase() === options.filter(o => o.value === userOption)[0].label.toLowerCase()) {
                     authContext.setAuthState({
                         accessToken,
@@ -73,7 +75,7 @@ export default function Login(props){
             }
 
         } catch (error) {
-            setErrorMessage("Login Failed: " + error);
+            setErrorMessage("Login Failed: " + error.response.data.message);
             // Alert.alert('Login Failed', error.response?.data?.message);
         }
     };
@@ -87,7 +89,7 @@ export default function Login(props){
                 onPress={ value => 
                     setUserOption(value)
                 } 
-                buttonColor='#EC1C24'
+                buttonColor='#cb0d00'
                 style={styles.switch}
                 fontSize={15}
                 backgroundColor='#C7C6C1'

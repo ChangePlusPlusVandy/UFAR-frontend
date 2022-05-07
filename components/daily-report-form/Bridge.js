@@ -48,9 +48,6 @@ export default function Bridge(props){
             {pages[bridgeActivePage]}
         </>
     )
-    // return (
-    
-    // )
 }
 
 const styles = StyleSheet.create({

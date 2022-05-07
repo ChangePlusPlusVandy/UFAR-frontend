@@ -39,7 +39,7 @@ export default function ResetUserPassword(props){
             }
 
         } catch (error) {
-            setErrorMessage("Cannot reset password: " + error);
+            setErrorMessage("Cannot reset password: " + error.response.data.message);
         }
     };
 
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
-        color: '#EC1C24',
+        color: '#cb0d00',
         fontSize: 18,
         alignSelf: 'center',
     },

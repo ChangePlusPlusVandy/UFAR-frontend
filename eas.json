@@ -1,0 +1,22 @@
+{
+  "cli": {
+    "version": ">= 0.50.0"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {
+      "env": {
+        "DEV_DOMAIN": "http://ec2-3-129-11-220.us-east-2.compute.amazonaws.com:3000"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

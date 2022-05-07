@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 export default connect(mapStateToProps)(function NetworkBar(props){
     return (
         <View style={props.isConnected? styles.online: styles.offline}>
-            {!props.isConnected && <Text style={styles.text}>Offline Mode</Text>}
+            {!props.isConnected && <Text style={styles.text}>Mode Hors-Ligne</Text>}
         </View>
     );
 
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: -5,
     },
     // nothing if the user is online
     online: {},
