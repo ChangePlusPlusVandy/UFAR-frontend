@@ -116,6 +116,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   const [numCyclesOnchocerciasis, setNumCyclesOnchocerciasis] = useState(0);
   const [onchocerciasisFirst, setOnchocerciasisFirst] = useState(false);
   const [onchocerciasisSecond, setOnchocerciasisSecond] = useState(false);
+
   const [lymphaticFilariasis, setLymphaticFilariasis] = useState(false);
   const [LFIvermectineAlbendazole, setLFIvermectineAlbendazole] = useState(false);
   const [numCyclesLFIvermectineAlbendazole, setNumCyclesLFIvermectineAlbendazole] =
@@ -123,10 +124,22 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   const [numCyclesLFAlbendazole, setNumCyclesLFAlbendazole] = useState(0);
   const [LFAlbendazoleFirst, setLFAlbendazoleFirst] = useState(false);
   const [LFAlbendazoleSecond, setLFAlbendazoleSecond] = useState(false);
+
   const [schistosomiasis, setSchistosomiasis] = useState(false);
+  const [numCyclesSchistosomiasis, setNumCyclesSchistosomiasis] = useState(0);
+  const [schistosomiasisFirst, setSchistosomiasisFirst] = useState(false);
+  const [schistosomiasisSecond, setSchistosomiasisSecond] = useState(false);
+
   const [soilTransmittedHelminthiasis, setSoilTransmittedHelminthiasis] =
     useState(false);
+  const [numCyclesSTH, setNumCyclesSTH] = useState(0);
+  const [STHFirst, setSTHFirst] = useState(false);
+  const [STHSecond, setSTHSecond] = useState(false);
+
   const [trachoma, setTrachoma] = useState(false);
+  const [numCyclesTrachoma, setNumCyclesTrachoma] = useState(0);
+  const [trachomaFirst, setTrachomaFirst] = useState(false);
+  const [trachomaSecond, setTrachomaSecond] = useState(false);
 
   // Update onchocerciasis rounds when onchocerciasis is not selected
   useEffect(() => {
@@ -147,6 +160,33 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       setNumCyclesLFAlbendazole(0);
     }
   }, [lymphaticFilariasis]);
+
+  // Update schistosomiasis rounds when schistosomiasis is not selected
+  useEffect(() => {
+    if (!schistosomiasis) {
+      setSchistosomiasisFirst(false);
+      setSchistosomiasisSecond(false);
+      setNumCyclesSchistosomiasis(0);
+    }
+  }, [schistosomiasis]);
+
+  // Update soil-transmitted helminthiasis rounds when soil-transmitted helminthiasis is not selected
+  useEffect(() => {
+    if (!soilTransmittedHelminthiasis) {
+      setSTHFirst(false);
+      setSTHSecond(false);
+      setNumCyclesSTH(0);
+    }
+  }, [soilTransmittedHelminthiasis]);
+
+  // Update trachoma rounds when soil-transmitted trachoma is not selected
+  useEffect(() => {
+    if (!trachoma) {
+      setTrachomaFirst(false);
+      setTrachomaSecond(false);
+      setNumCyclesTrachoma(0);
+    }
+  }, [trachoma]);
 
   // Dates state
   const [DCTrainingCompletionDate, setDCTrainingCompletionDate] = useState(new Date(Date.now()));
@@ -548,6 +588,9 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       onchocerciasisFirst={onchocerciasisFirst}
       setOnchocerciasisSecond={setOnchocerciasisSecond}
       onchocerciasisSecond={onchocerciasisSecond}
+      setNumCyclesOnchocerciasis={setNumCyclesOnchocerciasis}
+      numCyclesOnchocerciasis={numCyclesOnchocerciasis}
+
       setLymphaticFilariasis={setLymphaticFilariasis}
       lymphaticFilariasis={lymphaticFilariasis}
       setLFIvermectineAlbendazole={setLFIvermectineAlbendazole}
@@ -556,18 +599,38 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       LFAlbendazoleFirst={LFAlbendazoleFirst}
       setLFAlbendazoleSecond={setLFAlbendazoleSecond}
       LFAlbendazoleSecond={LFAlbendazoleSecond}
-      setNumCyclesOnchocerciasis={setNumCyclesOnchocerciasis}
-      numCyclesOnchocerciasis={numCyclesOnchocerciasis}
       setNumCyclesLFIvermectineAlbendazole={setNumCyclesLFIvermectineAlbendazole}
       numCyclesLFIvermectineAlbendazole={numCyclesLFIvermectineAlbendazole}
       setNumCyclesLFAlbendazole={setNumCyclesLFAlbendazole}
       numCyclesLFAlbendazole={numCyclesLFAlbendazole}
+
       setSchistosomiasis={setSchistosomiasis}
       schistosomiasis={schistosomiasis}
+      setSchistosomiasisFirst={setSchistosomiasisFirst}
+      schistosomiasisFirst={schistosomiasisFirst}
+      setSchistosomiasisSecond={setSchistosomiasisSecond}
+      schistosomiasisSecond={schistosomiasisSecond}
+      setNumCyclesSchistosomiasis={setNumCyclesSchistosomiasis}
+      numCyclesSchistosomiasis={numCyclesSchistosomiasis}
+
       setSoilTransmittedHelminthiasis={setSoilTransmittedHelminthiasis}
       soilTransmittedHelminthiasis={soilTransmittedHelminthiasis}
+      setSTHFirst={setSTHFirst}
+      STHFirst={STHFirst}
+      setSTHSecond={setSTHSecond}
+      STHSecond={STHSecond}
+      setNumCyclesSTH={setNumCyclesSTH}
+      numCyclesSTH={numCyclesSTH}
+
       setTrachoma={setTrachoma}
       trachoma={trachoma}
+      setTrachomaFirst={setTrachomaFirst}
+      trachomaFirst={trachomaFirst}
+      setTrachomaSecond={setTrachomaSecond}
+      trachomaSecond={trachomaSecond}
+      setNumCyclesTrachoma={setNumCyclesTrachoma}
+      numCyclesTrachoma={numCyclesTrachoma}
+
       validate={props.validate}
     />,
     <DatesForm
@@ -683,6 +746,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       LFAlbendazoleSecond={LFAlbendazoleSecond}
       schistosomiasis={schistosomiasis}
       soilTransmittedHelminthiasis={soilTransmittedHelminthiasis}
+      trachoma = {trachoma}
       // Ivermectine
       setNumYoungMenIvermectine={setNumYoungMenIvermectine}
       setNumOldMenIvermectine={setNumOldMenIvermectine}
@@ -771,6 +835,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       lymphaticFilariasis={lymphaticFilariasis}
       schistosomiasis={schistosomiasis}
       soilTransmittedHelminthiasis={soilTransmittedHelminthiasis}
+      trachoma = {trachoma}
       // Ivermectin
       ivermectinReceived={ivermectinReceived}
       ivermectinUsed={ivermectinUsed}
@@ -834,10 +899,11 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     setVillageId(report.village);
 
     // Treatment Information state
-    setOnchocerciasis(report.schistosomiasis);
+    setOnchocerciasis(report.onchocerciasis);
     setNumCyclesOnchocerciasis(0);
     setOnchocerciasisFirst(report.onchocerciasis.first_round);
     setOnchocerciasisSecond(report.onchocerciasis.second_round);
+
     setLymphaticFilariasis(
       report.lymphatic_filariasis.Ivermectine_and_albendazole ||
         report.lymphatic_filariasis.albendazole_alone.first_round ||
@@ -854,9 +920,21 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     setLFAlbendazoleSecond(
       report.lymphatic_filariasis.albendazole_alone.second_round
     );
+
     setSchistosomiasis(report.schistosomiasis);
+    setNumCyclesSchistosomiasis(0);
+    setSchistosomiasisFirst(report.schistosomiasis.first_round);
+    setSchistosomiasisSecond(report.schistosomiasis.second_round);
+
     setSoilTransmittedHelminthiasis(report.soil_transmitted_helminthiasis);
+    setNumCyclesSTH(0);
+    setSTHFirst(report.soil_transmitted_helminthiasis.first_round);
+    setSTHSecond(report.soil_transmitted_helminthiasis.second_round);
+
     setTrachoma(report.trachoma);
+    setNumCyclesTrachoma(0);
+    setTrachomaFirst(report.trachoma.first_round);
+    setTrachomaSecond(report.trachoma.second_round);
 
     // Dates state
     setDCTrainingCompletionDate(
@@ -1004,9 +1082,18 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         second_round: LFAlbendazoleSecond,
       },
     },
-    schistosomiasis: schistosomiasis,
-    soil_transmitted_helminthiasis: soilTransmittedHelminthiasis,
-    trachoma: trachoma,
+    schistosomiasis: {
+      first_round: schistosomiasisFirst,
+      second_round: schistosomiasisSecond,
+    },
+    soil_transmitted_helminthiasis: {
+      first_round: STHFirst,
+      second_round: STHSecond,
+    },
+    trachoma: {
+      first_round: trachomaFirst,
+      second_round: trachomaSecond,
+    },
     dcs_training_completion_date: DCTrainingCompletionDate,
     medicines_arrival_date: medicineArrivalDate,
     MDD_start_date: MDDStartDate,

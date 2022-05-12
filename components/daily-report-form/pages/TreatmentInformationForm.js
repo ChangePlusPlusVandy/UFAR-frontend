@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Pressable, StyleSheet, Text, TextInput, View, ScrollView} from 'react-native';
 
 import CheckBox from '../CheckBox';
 
@@ -26,13 +26,39 @@ export default function TreatmentInformationForm(props) {
     });
 
     const toggleSchistosomiasis = () => props.setSchistosomiasis(prev => !prev);
+    const toggleSchistosomiasisFirst = () => props.setSchistosomiasisFirst(prev => {
+        props.setSchistosomiasisSecond(prev); 
+        return !prev;
+    });
+    const toggleSchistosomiasisSecond = () => props.setSchistosomiasisSecond(prev => {
+        props.setSchistosomiasisFirst(prev);
+        return !prev;
+    });
+
     const toggleSoilTransmittedHelminthiasis = () => props.setSoilTransmittedHelminthiasis(prev => !prev);
+    const toggleSTHFirst = () => props.setSTHFirst(prev => {
+        props.setSTHSecond(prev); 
+        return !prev;
+    });
+    const toggleSTHSecond = () => props.setSTHSecond(prev => {
+        props.setSTHFirst(prev);
+        return !prev;
+    });
+
     const toggleTrachoma = () => props.setTrachoma(prev => !prev);
+    const toggleTrachomaFirst = () => props.setTrachomaFirst(prev => {
+        props.setTrachomaSecond(prev); 
+        return !prev;
+    });
+    const toggleTrachomaSecond = () => props.setTrachomaSecond(prev => {
+        props.setTrachomaFirst(prev);
+        return !prev;
+    });
 
     return (
-        <View>
+        <View height={540}>
             <Text style={styles.header}>Maladies traitées</Text>
-            <View style={styles.inputContainer}>
+            <ScrollView style={styles.inputContainer}>
                 <Text style={styles.inputLabel}>Sélectionner</Text>
                 <Pressable disabled={props.validate} style={styles.inputField} onPress={toggleOnchocerciasis}>
                     <CheckBox isChecked={props.onchocerciasis} style={styles.checkBox} onPress={toggleOnchocerciasis} disabled={props.validate}/>
@@ -98,19 +124,86 @@ export default function TreatmentInformationForm(props) {
                         </View>
                     </View>
                 }
+
                 <Pressable disabled={props.validate} style={styles.inputField} onPress={toggleSchistosomiasis}>
                     <CheckBox isChecked={props.schistosomiasis} style={styles.checkBox} onPress={toggleSchistosomiasis} disabled={props.validate}/>
                     <Text style={styles.choiceLabel}>Schistosomiase</Text>
                 </Pressable>
+                {props.schistosomiasis && 
+                    <View style={styles.inputSubfieldContainer}>
+                        <View style={styles.singleRowContainer}>
+                            <View style={styles.inputCyclesContainer}>
+                                <Text style={styles.inputSubfieldLabel}># de cycle</Text>
+                                <TextInput style={styles.inputCycles} defaultValue={props.numCyclesSchistosomiasis.toString()} onChange={(e) => props.setNumCyclesSchistosomiasis(parseInt(e.nativeEvent.text) || 0)} />
+                            </View>
+                            <View style={styles.inputSubfieldDetailsContainer}>
+                                <Text style={styles.choiceLabel}>Schistosomiase</Text>
+                                <View>
+                                    <Text style={styles.inputSubfieldLabel}>1er tour</Text>
+                                    <CheckBox isChecked={props.schistosomiasisFirst} style={styles.subfieldCheckBox} onPress={toggleSchistosomiasisFirst} fillColor='#cb0d00' disabled={props.validate}/>
+                                </View>
+                                <View>
+                                    <Text style={styles.inputSubfieldLabel}>2e tour</Text>
+                                    <CheckBox isChecked={props.schistosomiasisSecond} style={styles.subfieldCheckBox} onPress={toggleSchistosomiasisSecond} fillColor='#cb0d00' disabled={props.validate}/>
+                             </View>
+                            </View>
+                        </View>
+                    </View>
+                }
+
                 <Pressable disabled={props.validate} style={styles.inputField} onPress={toggleSoilTransmittedHelminthiasis}>
                     <CheckBox isChecked={props.soilTransmittedHelminthiasis} style={styles.checkBox} onPress={toggleSoilTransmittedHelminthiasis} disabled={props.validate} />
                     <Text style={styles.choiceLabel}>Géohelminthiases</Text>
                 </Pressable>
+                {props.soilTransmittedHelminthiasis && 
+                    <View style={styles.inputSubfieldContainer}>
+                        <View style={styles.singleRowContainer}>
+                            <View style={styles.inputCyclesContainer}>
+                                <Text style={styles.inputSubfieldLabel}># de cycle</Text>
+                                <TextInput style={styles.inputCycles} defaultValue={props.numCyclesSTH.toString()} onChange={(e) => props.setNumCyclesSTH(parseInt(e.nativeEvent.text) || 0)} />
+                            </View>
+                            <View style={styles.inputSubfieldDetailsContainer}>
+                                <Text style={styles.choiceLabel}>Géohelminthiases</Text>
+                                <View>
+                                    <Text style={styles.inputSubfieldLabel}>1er tour</Text>
+                                    <CheckBox isChecked={props.STHFirst} style={styles.subfieldCheckBox} onPress={toggleSTHFirst} fillColor='#cb0d00' disabled={props.validate}/>
+                                </View>
+                                <View>
+                                    <Text style={styles.inputSubfieldLabel}>2e tour</Text>
+                                    <CheckBox isChecked={props.STHSecond} style={styles.subfieldCheckBox} onPress={toggleSTHSecond} fillColor='#cb0d00' disabled={props.validate}/>
+                             </View>
+                            </View>
+                        </View>
+                    </View>
+                }
+
                 <Pressable disabled={props.validate} style={styles.inputField} onPress={toggleTrachoma}>
                     <CheckBox isChecked={props.trachoma} style={styles.checkBox} onPress={toggleTrachoma} disabled={props.validate}/>
                     <Text style={styles.choiceLabel}>Trachome</Text>
                 </Pressable>
-            </View>
+                {props.trachoma && 
+                    <View style={styles.inputSubfieldContainer}>
+                        <View style={styles.singleRowContainer}>
+                            <View style={styles.inputCyclesContainer}>
+                                <Text style={styles.inputSubfieldLabel}># de cycle</Text>
+                                <TextInput style={styles.inputCycles} defaultValue={props.numCyclesTrachoma.toString()} onChange={(e) => props.setNumCyclesTrachoma(parseInt(e.nativeEvent.text) || 0)} />
+                            </View>
+                            <View style={styles.inputSubfieldDetailsContainer}>
+                                <Text style={styles.choiceLabel}>Trachome</Text>
+                                <View>
+                                    <Text style={styles.inputSubfieldLabel}>1er tour</Text>
+                                    <CheckBox isChecked={props.trachomaFirst} style={styles.subfieldCheckBox} onPress={toggleTrachomaFirst} fillColor='#cb0d00' disabled={props.validate}/>
+                                </View>
+                                <View>
+                                    <Text style={styles.inputSubfieldLabel}>2e tour</Text>
+                                    <CheckBox isChecked={props.trachomaSecond} style={styles.subfieldCheckBox} onPress={toggleTrachomaSecond} fillColor='#cb0d00' disabled={props.validate}/>
+                             </View>
+                            </View>
+                        </View>
+                    </View>
+                }
+
+            </ScrollView>
         </View>
     );
 }
