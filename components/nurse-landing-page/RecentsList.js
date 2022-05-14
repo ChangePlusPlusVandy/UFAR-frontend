@@ -35,6 +35,7 @@ export default connect(mapStateToProps)(function RecentsList(props){
     return (
         <ScrollView style={styles.container} persistentScrollbar={true}>
             <Text style={styles.header}>Récent</Text>
+            <Text style={styles.note}>Veuillez cliquer sur le bouton de récupération avant de modifier</Text>
             <View style={styles.fetch}>
                 <FetchButton fetchReportsUser={true}/>
             </View>
@@ -64,6 +65,9 @@ const styles = StyleSheet.create({
         lineHeight: 25,
         left: 17,
         marginBottom: 5,
+    },
+    note:{
+        left: "5%",
     },
     listitem: {
         marginHorizontal: "2%",
