@@ -34,7 +34,6 @@ export default function DatesForm(props) {
           editable={!props.validate}
           style={styles.inputField}
           value={new Date(props.DCTrainingCompletionDate).toLocaleDateString()}
-          // defaultValue={props.DCTrainingCompletionDate}
           placeholder="MM/DD/YYYY"
         />
         <Text style={styles.inputLabel}>Date d'arrivée de médicaments</Text>

@@ -95,7 +95,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   const [activePage, setActivePage] = useState(0);
 
   // Identification state
-  const [DMMDay, setDMMDay] = useState("");
+  const [DMMDay, setDMMDay] = useState(new Date(Date.now()));
   const [registeredNurse, setRegisteredNurse] = useState("");
 
   const [provinceName, setProvinceName] = useState("");
@@ -818,7 +818,9 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     setReportId(props.currentReportId? props.currentReportId: "");
     setIs_validated(report.is_validated);
 
-    setDMMDay(report.DMM_day);
+    // previous DMMDay, which was just a number, will be replaced by the current date
+    // On the other hand, we will display the new DMMDay, date object.
+    setDMMDay(!isNaN(report.DMM_day)? Date.now(): new Date(report.DMM_day));
     setRegisteredNurse(report.nurse);
 
     setProvinceName(provinceName);

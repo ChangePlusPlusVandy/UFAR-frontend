@@ -11,7 +11,9 @@ export default connect(mapStateToProps)(function RecentsList(props){
     const renderItem = ({item, index}) => (
         <View style={(index == (Object.keys(props.reports).length - 1))? {...styles.listitem, ...styles.bottom}: (index == 0)? {...styles.top, ...styles.listitem}: {...styles.listitem} }>
             <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(props.reports[item].report.date)).toISOString().split('T')[0])}</Text>
-            <Text style={styles.namelist}>{`Joul #${props.reports[item].report.DMM_day}`}</Text>
+            <Text style={styles.namelist}>{`Jour ${!isNaN(props.reports[item].report.DMM_day)? 
+                convertFromYYYYMMDDToDDMMYYYY((new Date(Date.now())).toISOString().split('T')[0]) : 
+                convertFromYYYYMMDDToDDMMYYYY((new Date(props.reports[item].report.DMM_day)).toISOString().split('T')[0])}`}</Text>
             <TouchableOpacity style={styles.edit}>
                 {props.reports[item].isSubmitted ? 
                 <Icon name="check" color = 'green' size = {25} /> :
@@ -34,7 +36,7 @@ export default connect(mapStateToProps)(function RecentsList(props){
         <ScrollView style={styles.container} persistentScrollbar={true}>
             <Text style={styles.header}>Récent</Text>
             <View style={styles.fetch}>
-                <FetchButton admin={false}/>
+                <FetchButton fetchReportsUser={true}/>
             </View>
             <FlatList data={props.reports? Object.keys(props.reports): []} renderItem={renderItem} keyExtractor={item => item.id}/>
         </ScrollView>
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
     },
     namelist: {
         color: '#000000',
-        fontSize: 20,
+        fontSize: 18,
         flex: 5,
     },
     edit: {
