@@ -3,6 +3,8 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import { Chevron } from "react-native-shapes";
 import data from "./locations"; // fixme: remove this
+import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+
 
 export default function IdentificationForm(props) {
   // looks up all provinces and returns an array of objects
@@ -69,8 +71,17 @@ export default function IdentificationForm(props) {
           <TextInput
             style={{ ...styles.inputField, flex: 1, marginRight: 5.5 }}
             editable={!props.validate}
-            onChange={(e) => props.setDMMDay(e.nativeEvent.text)}
-            defaultValue={props.DMMDay}
+            onPressIn={() => {
+              DateTimePickerAndroid.open({
+                value: new Date("05/13/2022"),//props.DMMDay,
+                onChange: (event, selectedDate) => {
+                  props.setDMMDay(selectedDate);
+                },
+                mode: 'date',
+                is24Hour: true
+              })
+            }}
+            value={new Date(props.DMMDay).toLocaleDateString()}
             placeholder="Jour de la DMM"
           />
           <TextInput

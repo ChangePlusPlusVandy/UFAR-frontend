@@ -22,10 +22,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(function FetchButton
     return (
         <View style={styles.flexbox}>
             <TouchableOpacity style={styles.checkbadge} onPress={()=>{
-
+                console.log("fetch clicked", props.fetchReportsUser);
                 if(props.fetchReportsAdmin){
-                    props.getReports(authContext.authState.user.health_zone, authAxios);
+                    props.getReports(authContext.authState.user.health_zone.id, authAxios);
                 } else if (props.fetchReportsUser){
+                    console.log("fetch");
                     props.getReportsUser(authContext.authState.user?._id, authAxios);
                 } else if (props.fetchTrainingFormsAdmin){
                     props.getTrainingForms();

@@ -9,7 +9,7 @@ const AxiosContext = createContext();
 const { Provider } = AxiosContext;
 
 const AxiosProvider = ({ children }) => {
-  console.log("DEV_DOMAIN DEV dev", DEV_DOMAIN);
+  console.log("axios DEV_DOMAIN DEV dev", DEV_DOMAIN);
 
   const authContext = useContext(AuthContext);
 
