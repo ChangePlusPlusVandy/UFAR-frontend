@@ -127,19 +127,13 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
 
   const [schistosomiasis, setSchistosomiasis] = useState(false);
   const [numCyclesSchistosomiasis, setNumCyclesSchistosomiasis] = useState(0);
-  const [schistosomiasisFirst, setSchistosomiasisFirst] = useState(false);
-  const [schistosomiasisSecond, setSchistosomiasisSecond] = useState(false);
 
   const [soilTransmittedHelminthiasis, setSoilTransmittedHelminthiasis] =
     useState(false);
   const [numCyclesSTH, setNumCyclesSTH] = useState(0);
-  const [STHFirst, setSTHFirst] = useState(false);
-  const [STHSecond, setSTHSecond] = useState(false);
 
   const [trachoma, setTrachoma] = useState(false);
   const [numCyclesTrachoma, setNumCyclesTrachoma] = useState(0);
-  const [trachomaFirst, setTrachomaFirst] = useState(false);
-  const [trachomaSecond, setTrachomaSecond] = useState(false);
 
   // Update onchocerciasis rounds when onchocerciasis is not selected
   useEffect(() => {
@@ -164,8 +158,6 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   // Update schistosomiasis rounds when schistosomiasis is not selected
   useEffect(() => {
     if (!schistosomiasis) {
-      setSchistosomiasisFirst(false);
-      setSchistosomiasisSecond(false);
       setNumCyclesSchistosomiasis(0);
     }
   }, [schistosomiasis]);
@@ -173,8 +165,6 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   // Update soil-transmitted helminthiasis rounds when soil-transmitted helminthiasis is not selected
   useEffect(() => {
     if (!soilTransmittedHelminthiasis) {
-      setSTHFirst(false);
-      setSTHSecond(false);
       setNumCyclesSTH(0);
     }
   }, [soilTransmittedHelminthiasis]);
@@ -182,8 +172,6 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   // Update trachoma rounds when soil-transmitted trachoma is not selected
   useEffect(() => {
     if (!trachoma) {
-      setTrachomaFirst(false);
-      setTrachomaSecond(false);
       setNumCyclesTrachoma(0);
     }
   }, [trachoma]);
@@ -606,28 +594,16 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
 
       setSchistosomiasis={setSchistosomiasis}
       schistosomiasis={schistosomiasis}
-      setSchistosomiasisFirst={setSchistosomiasisFirst}
-      schistosomiasisFirst={schistosomiasisFirst}
-      setSchistosomiasisSecond={setSchistosomiasisSecond}
-      schistosomiasisSecond={schistosomiasisSecond}
       setNumCyclesSchistosomiasis={setNumCyclesSchistosomiasis}
       numCyclesSchistosomiasis={numCyclesSchistosomiasis}
 
       setSoilTransmittedHelminthiasis={setSoilTransmittedHelminthiasis}
       soilTransmittedHelminthiasis={soilTransmittedHelminthiasis}
-      setSTHFirst={setSTHFirst}
-      STHFirst={STHFirst}
-      setSTHSecond={setSTHSecond}
-      STHSecond={STHSecond}
       setNumCyclesSTH={setNumCyclesSTH}
       numCyclesSTH={numCyclesSTH}
 
       setTrachoma={setTrachoma}
       trachoma={trachoma}
-      setTrachomaFirst={setTrachomaFirst}
-      trachomaFirst={trachomaFirst}
-      setTrachomaSecond={setTrachomaSecond}
-      trachomaSecond={trachomaSecond}
       setNumCyclesTrachoma={setNumCyclesTrachoma}
       numCyclesTrachoma={numCyclesTrachoma}
 
@@ -923,18 +899,12 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
 
     setSchistosomiasis(report.schistosomiasis);
     setNumCyclesSchistosomiasis(0);
-    setSchistosomiasisFirst(report.schistosomiasis.first_round);
-    setSchistosomiasisSecond(report.schistosomiasis.second_round);
 
     setSoilTransmittedHelminthiasis(report.soil_transmitted_helminthiasis);
     setNumCyclesSTH(0);
-    setSTHFirst(report.soil_transmitted_helminthiasis.first_round);
-    setSTHSecond(report.soil_transmitted_helminthiasis.second_round);
 
     setTrachoma(report.trachoma);
     setNumCyclesTrachoma(0);
-    setTrachomaFirst(report.trachoma.first_round);
-    setTrachomaSecond(report.trachoma.second_round);
 
     // Dates state
     setDCTrainingCompletionDate(
@@ -1082,18 +1052,9 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         second_round: LFAlbendazoleSecond,
       },
     },
-    schistosomiasis: {
-      first_round: schistosomiasisFirst,
-      second_round: schistosomiasisSecond,
-    },
-    soil_transmitted_helminthiasis: {
-      first_round: STHFirst,
-      second_round: STHSecond,
-    },
-    trachoma: {
-      first_round: trachomaFirst,
-      second_round: trachomaSecond,
-    },
+    schistosomiasis: schistosomiasis,
+    soil_transmitted_helminthiasis: soilTransmittedHelminthiasis,
+    trachoma: trachoma,
     dcs_training_completion_date: DCTrainingCompletionDate,
     medicines_arrival_date: medicineArrivalDate,
     MDD_start_date: MDDStartDate,
