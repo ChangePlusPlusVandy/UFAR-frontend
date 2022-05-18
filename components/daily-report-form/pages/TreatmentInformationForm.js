@@ -45,7 +45,7 @@ export default function TreatmentInformationForm(props) {
                         <View style={styles.singleRowContainer}>
                             <View style={styles.inputCyclesContainer}>
                                 <Text style={styles.inputSubfieldLabel}># de cycle</Text>
-                                <TextInput style={styles.inputCycles} defaultValue={props.numCyclesOnchocerciasis.toString()} onChange={(e) => props.setNumCyclesOnchocerciasis(parseInt(e.nativeEvent.text) || 0)} />
+                                <TextInput editable={!props.validate} style={styles.inputCycles} defaultValue={props.numCyclesOnchocerciasis.toString()} onChange={(e) => props.setNumCyclesOnchocerciasis(parseInt(e.nativeEvent.text) || 0)} />
                             </View>
                             <View style={styles.inputSubfieldDetailsContainer}>
                                 <Text style={styles.choiceLabel}>Onchocercose</Text>
@@ -70,7 +70,7 @@ export default function TreatmentInformationForm(props) {
                         <View style={styles.singleRowContainer}>
                             <View style={styles.inputCyclesContainer}>
                                 <Text style={styles.inputSubfieldLabel}># de cycle</Text>
-                                <TextInput style={styles.inputCycles} defaultValue={props.numCyclesLFIvermectineAlbendazole.toString()} onChange={(e) => props.setNumCyclesLFIvermectineAlbendazole(parseInt(e.nativeEvent.text) || 0)} />
+                                <TextInput editable={!props.validate} style={styles.inputCycles} defaultValue={props.numCyclesLFIvermectineAlbendazole.toString()} onChange={(e) => props.setNumCyclesLFIvermectineAlbendazole(parseInt(e.nativeEvent.text) || 0)} />
                             </View>
                             <View style={styles.inputSubfieldDetailsContainer}>
                                 <Text style={styles.choiceLabel}>Ivermectine + Albendazole</Text>
@@ -84,7 +84,7 @@ export default function TreatmentInformationForm(props) {
                         <View style={styles.singleRowContainer}>
                             <View style={styles.inputCyclesContainer}>
                                 <Text style={styles.inputSubfieldLabel}># de cycle</Text>
-                                <TextInput style={styles.inputCycles} defaultValue={props.numCyclesLFAlbendazole.toString()} onChange={(e) => props.setNumCyclesLFAlbendazole(parseInt(e.nativeEvent.text) || 0)} />
+                                <TextInput editable={!props.validate} style={styles.inputCycles} defaultValue={props.numCyclesLFAlbendazole.toString()} onChange={(e) => props.setNumCyclesLFAlbendazole(parseInt(e.nativeEvent.text) || 0)} />
                             </View>
                             <View style={styles.inputSubfieldDetailsContainer}>
                                 <Text style={styles.choiceLabel}>Albendazole seul</Text>
@@ -110,7 +110,7 @@ export default function TreatmentInformationForm(props) {
                         <View style={styles.singleRowContainer}>
                             <View style={styles.inputCyclesContainer}>
                                 <Text style={styles.inputSubfieldLabel}># de cycle</Text>
-                                <TextInput style={styles.inputCycles} defaultValue={props.numCyclesSchistosomiasis.toString()} onChange={(e) => props.setNumCyclesSchistosomiasis(parseInt(e.nativeEvent.text) || 0)} />
+                                <TextInput editable={!props.validate} style={styles.inputCycles} defaultValue={props.numCyclesSchistosomiasis.toString()} onChange={(e) => props.setNumCyclesSchistosomiasis(parseInt(e.nativeEvent.text) || 0)} />
                             </View>
                         </View>
                     </View>
@@ -125,7 +125,7 @@ export default function TreatmentInformationForm(props) {
                         <View style={styles.singleRowContainer}>
                             <View style={styles.inputCyclesContainer}>
                                 <Text style={styles.inputSubfieldLabel}># de cycle</Text>
-                                <TextInput style={styles.inputCycles} defaultValue={props.numCyclesSTH.toString()} onChange={(e) => props.setNumCyclesSTH(parseInt(e.nativeEvent.text) || 0)} />
+                                <TextInput editable={!props.validate} style={styles.inputCycles} defaultValue={props.numCyclesSTH.toString()} onChange={(e) => props.setNumCyclesSTH(parseInt(e.nativeEvent.text) || 0)} />
                             </View>
                         </View>
                     </View>
@@ -140,7 +140,7 @@ export default function TreatmentInformationForm(props) {
                         <View style={styles.singleRowContainer}>
                             <View style={styles.inputCyclesContainer}>
                                 <Text style={styles.inputSubfieldLabel}># de cycle</Text>
-                                <TextInput style={styles.inputCycles} defaultValue={props.numCyclesTrachoma.toString()} onChange={(e) => props.setNumCyclesTrachoma(parseInt(e.nativeEvent.text) || 0)} />
+                                <TextInput editable={!props.validate} style={styles.inputCycles} defaultValue={props.numCyclesTrachoma.toString()} onChange={(e) => props.setNumCyclesTrachoma(parseInt(e.nativeEvent.text) || 0)} />
                             </View>
                         </View>
                     </View>
