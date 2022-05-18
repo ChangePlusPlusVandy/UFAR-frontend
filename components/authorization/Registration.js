@@ -57,7 +57,7 @@ export default function Registration(props){
             }
 
         } catch (error) {
-            setErrorMessage("Cannot register user: " + error);
+            setErrorMessage("Cannot register user: " + error.response.data.message);
         }
     };
 

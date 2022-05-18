@@ -10,11 +10,13 @@ import { convertFromYYYYMMDDToDDMMYYYY } from '../../../src/utils';
 //uses material icons
 
 export default connect(mapStateToProps)(function RecentlyValidated(props) {
-
-    const renderItem = ({item}) => (
-        <View style={styles.listitem}>
+    const renderItem = ({item, index}) => (
+        <View style={(index == (props.reportIds.length - 1))? {...styles.listitem, ...styles.bottom}: (index == 0)? {...styles.top, ...styles.listitem}: {...styles.listitem} }>
             <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(props.validationReports[item].report.date)).toISOString().split('T')[0])}</Text>
-            <Text style={styles.namelist}>{`Jour #${props.validationReports[item].report.DMM_day}`}</Text>
+            {/**  */}
+            <Text style={styles.namelist}>{`Jour ${!isNaN(props.validationReports[item].report.DMM_day)? 
+                convertFromYYYYMMDDToDDMMYYYY((new Date(Date.now())).toISOString().split('T')[0]) : 
+                convertFromYYYYMMDDToDDMMYYYY((new Date(props.validationReports[item].report.DMM_day)).toISOString().split('T')[0])}`}</Text>
             <TouchableOpacity style={styles.edit}>
                 <Icon name="check" color = '#fff' style = {styles.icon} />
             </TouchableOpacity>
@@ -79,11 +81,10 @@ const styles = StyleSheet.create({
         flex: 11,
     },
     listitem: {
-        marginHorizontal: 7,
-        marginVertical: 3,
-        marginBottom: 3,
-        paddingHorizontal: 10,
-        paddingVertical: 10,
+        marginHorizontal: "2%",
+        marginVertical: '1.2%',
+        paddingHorizontal: '2.5%',
+        paddingVertical: '2.5%',
         flexDirection: "row",
         borderRadius: 10,
         backgroundColor: "white",
@@ -100,6 +101,12 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOpacity: 0.3,
     },
+    bottom: {
+        marginBottom: '5%',
+    },
+    top: {
+        marginTop: '3%',
+    },
     timelist: {
         color: '#555555',
         flex: 2,
@@ -108,7 +115,7 @@ const styles = StyleSheet.create({
     },
     namelist: {
         color: '#000000',
-        fontSize: 20,
+        fontSize: 18,
         flex: 5,
     },
     edit: {

@@ -8,9 +8,15 @@ const {height, width} = Dimensions.get('window');
 const BAR_WIDTH = Math.round(height*0.017)
 
 export default function TherapeuticalDashboard({getDashboard}) {
-  const [data, setData] = React.useState({"Ivermectine": [{ regionName: "", percentage: 0}]});
+  const [data, setData] = React.useState({
+    "ivermectine": [{ regionName: "", percentage: 0}],
+    "albendazole": [{ regionName: "", percentage: 0}],
+    "ivermectine_and_albendazole": [{ regionName: "", percentage: 0}],
+    "praziquantel": [{ regionName: "", percentage: 0}],
+
+  });
   const [errorMessage, setErrorMessage] = React.useState('');
-  const [therapeutic, setTherapeutic] = React.useState("Ivermectine"); // this is set by the RNPicker
+  const [therapeutic, setTherapeutic] = React.useState("ivermectine"); // this is set by the RNPicker
   
   useEffect(()=>{
     getDashboard("therapeutic_coverage")
@@ -25,7 +31,13 @@ export default function TherapeuticalDashboard({getDashboard}) {
             });
           }
         }
-        dataObject && setData(dataObject);
+
+        dataObject.albendazole.length &&
+        dataObject.ivermectine.length &&  
+        dataObject.ivermectine_and_albendazole.length  && 
+        dataObject.praziquantel.length &&  
+        setData(dataObject);
+
       }).catch(error => {
         setErrorMessage(error.message);
       });
@@ -35,17 +47,20 @@ export default function TherapeuticalDashboard({getDashboard}) {
     <View style={styles.container}>
       <ScrollView>
         <Text style={styles.chartTitle}>Therapeutic Coverage</Text>
-        <RNPickerSelect
-            value={therapeutic}
-            placeholder={{ label: "Select your therapy of choice", value: null }}
-            onValueChange={(value) => setTherapeutic(value)}
-            items={[
-                { label: 'Ivermectine', value: 'Ivermectine' },
-                { label: 'Albendazole', value: 'albendazole' },
-                { label: 'Ivermectine & Albendazole', value: 'Ivermectine_and_albendazole' },
-                { label: 'Praziquantel', value: 'praziquantel' },
-            ]}
-        />
+        <View>
+          <RNPickerSelect
+              value={therapeutic}
+              placeholder={{ label: "Select your therapy of choice", value: null }}
+              onValueChange={(value) => setTherapeutic(value)}
+              items={[
+                  { label: 'Ivermectine', value: 'ivermectine' },
+                  { label: 'Albendazole', value: 'albendazole' },
+                  { label: 'Ivermectine & Albendazole', value: 'ivermectine_and_albendazole' },
+                  { label: 'Praziquantel', value: 'praziquantel' },
+              ]}
+          />
+          <Text style={{position: 'absolute', bottom: 0, left: 0}}>{''}</Text>
+        </View>
         <VictoryChart
             theme={VictoryTheme.grayscale}
             domainPadding={{x: Math.round(width*0.05)}}

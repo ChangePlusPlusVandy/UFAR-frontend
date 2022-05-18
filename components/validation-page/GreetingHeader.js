@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     over: {
         flexDirection: "row",
         alignItems: 'center',
+        zIndex: -1,
     },
     hamburgerBun: {
         flex: 1, 
@@ -47,4 +48,5 @@ const styles = StyleSheet.create({
         lineHeight: Math.round(height*0.038),
         color: '#fff',
     },
+
 });

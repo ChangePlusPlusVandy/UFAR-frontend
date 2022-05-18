@@ -58,7 +58,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                 style={styles.button}>
                     <Icon name='sc-telegram' type='evilicon' color='white' size={45}/>
                 </Pressable>
-                <Text style={styles.text}> {props.validate? "Validate": "Submit" }</Text>
+                <Text style={styles.text}> {props.validate? "Valider": "Envoyer" }</Text>
             </View>
             <View style={styles.centeredView}>
                 <Modal
@@ -71,8 +71,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(function SubmitButto
                 >
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
-                            <Text style={styles.modalText}>Offline Mode: report will be submitted later
-                            once you're back online</Text>
+                            <Text style={styles.modalText}>Mode hors-ligne: le rapport sera soumis ultérieurement
+                             une fois que vous êtes de retour en ligne</Text>
                             <Pressable
                             style={styles.button}
                             onPress={() => {

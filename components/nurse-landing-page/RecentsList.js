@@ -6,16 +6,14 @@ import FetchButton from '../validation-page/FetchButton';
 import { convertFromYYYYMMDDToDDMMYYYY } from '../../src/utils';
 
 
-export default connect(mapStateToProps)(function RecentsList(props){    
+export default connect(mapStateToProps)(function RecentsList(props){ 
 
-    useEffect(()=>{
-        // todo: call thunk action to fetch user reports 
-    })
-
-    const renderItem = ({item}) => (
-        <View style={styles.listitem}>
+    const renderItem = ({item, index}) => (
+        <View style={(index == (Object.keys(props.reports).length - 1))? {...styles.listitem, ...styles.bottom}: (index == 0)? {...styles.top, ...styles.listitem}: {...styles.listitem} }>
             <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(props.reports[item].report.date)).toISOString().split('T')[0])}</Text>
-            <Text style={styles.namelist}>{`Joul #${props.reports[item].report.DMM_day}`}</Text>
+            <Text style={styles.namelist}>{`Jour ${!isNaN(props.reports[item].report.DMM_day)? 
+                convertFromYYYYMMDDToDDMMYYYY((new Date(Date.now())).toISOString().split('T')[0]) : 
+                convertFromYYYYMMDDToDDMMYYYY((new Date(props.reports[item].report.DMM_day)).toISOString().split('T')[0])}`}</Text>
             <TouchableOpacity style={styles.edit}>
                 {props.reports[item].isSubmitted ? 
                 <Icon name="check" color = 'green' size = {25} /> :
@@ -34,15 +32,16 @@ export default connect(mapStateToProps)(function RecentsList(props){
         </View>
     );
     
-        return (
-            <ScrollView style={styles.container} persistentScrollbar={true}>
-                <Text style={styles.header}>Récent</Text>
-                <View style={styles.fetch}>
-                    <FetchButton admin={false}/>
-                </View>
-                <FlatList data={ props.reports? Object.keys(props.reports): []}renderItem={renderItem} keyExtractor={item => item.id}/>
-            </ScrollView>
-        );
+    return (
+        <ScrollView style={styles.container} persistentScrollbar={true}>
+            <Text style={styles.header}>Récent</Text>
+            <Text style={styles.note}>Veuillez cliquer sur le bouton de récupération avant de modifier</Text>
+            <View style={styles.fetch}>
+                <FetchButton fetchReportsUser={true}/>
+            </View>
+            <FlatList data={props.reports? Object.keys(props.reports): []} renderItem={renderItem} keyExtractor={item => item.id}/>
+        </ScrollView>
+    );
 });
 
 function mapStateToProps(state) {
@@ -56,9 +55,8 @@ function mapStateToProps(state) {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 27,
-        height: 100,
-        marginBottom: 70,
+        marginTop: "5%",
+        height: "100%",
     },
     header: {
         // fontFamily: 'Helvetica Neue',
@@ -68,12 +66,14 @@ const styles = StyleSheet.create({
         left: 17,
         marginBottom: 5,
     },
+    note:{
+        left: "5%",
+    },
     listitem: {
-        marginHorizontal: 7,
-        marginVertical: 3,
-        marginBottom: 15,
-        paddingHorizontal: 10,
-        paddingVertical: 10,
+        marginHorizontal: "2%",
+        marginVertical: '1.2%',
+        paddingHorizontal: '2.5%',
+        paddingVertical: '2.5%',
         flexDirection: "row",
         borderRadius: 10,
         backgroundColor: "white",
@@ -90,6 +90,12 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOpacity: 0.3,
     },
+    bottom: {
+        marginBottom: '5%',
+    },
+    top: {
+        marginTop: '2%',
+    },
     timelist: {
         color: '#555555',
         flex: 2,
@@ -98,7 +104,7 @@ const styles = StyleSheet.create({
     },
     namelist: {
         color: '#000000',
-        fontSize: 20,
+        fontSize: 18,
         flex: 5,
     },
     edit: {

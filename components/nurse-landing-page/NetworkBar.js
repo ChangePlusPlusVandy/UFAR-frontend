@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 export default connect(mapStateToProps)(function NetworkBar(props){
     return (
         <View style={props.isConnected? styles.online: styles.offline}>
-            {!props.isConnected && <Text style={styles.text}>Offline Mode</Text>}
+            {!props.isConnected && <Text style={styles.text}>Mode Hors-Ligne</Text>}
         </View>
     );
 
