@@ -70,7 +70,10 @@ export default function TreatmentInformationForm(props) {
                         <View style={styles.singleRowContainer}>
                             <View style={styles.inputCyclesContainer}>
                                 <Text style={styles.inputSubfieldLabel}># de cycle</Text>
-                                <TextInput editable={!props.validate} style={styles.inputCycles} defaultValue={props.numCyclesLFIvermectineAlbendazole.toString()} onChange={(e) => props.setNumCyclesLFIvermectineAlbendazole(parseInt(e.nativeEvent.text) || 0)} />
+                                <TextInput editable={!props.validate} style={styles.inputCycles} 
+                                    defaultValue={props.numCyclesLymphaticFilariasis.toString()} 
+                                    onChange={(e) => props.setNumCyclesLymphaticFilariasis(parseInt(e.nativeEvent.text) || 0)} 
+                                />
                             </View>
                             <View style={styles.inputSubfieldDetailsContainer}>
                                 <Text style={styles.choiceLabel}>Ivermectine + Albendazole</Text>
@@ -82,11 +85,11 @@ export default function TreatmentInformationForm(props) {
                         </View>
                         <View style={styles.horizontalDivider} />
                         <View style={styles.singleRowContainer}>
-                            <View style={styles.inputCyclesContainer}>
+                            {/* <View style={styles.inputCyclesContainer}>
                                 <Text style={styles.inputSubfieldLabel}># de cycle</Text>
                                 <TextInput editable={!props.validate} style={styles.inputCycles} defaultValue={props.numCyclesLFAlbendazole.toString()} onChange={(e) => props.setNumCyclesLFAlbendazole(parseInt(e.nativeEvent.text) || 0)} />
-                            </View>
-                            <View style={styles.inputSubfieldDetailsContainer}>
+                            </View> */}
+                            <View style={{...styles.inputSubfieldDetailsContainer, marginLeft: "16%"}}>
                                 <Text style={styles.choiceLabel}>Albendazole seul</Text>
                                 <View>
                                     <Text style={styles.inputSubfieldLabel}>1er tour</Text>
@@ -259,6 +262,8 @@ const styles = StyleSheet.create({
     horizontalDivider: {
         backgroundColor: '#cb0d00',
         height: 1,
-        margin: 5
+        margin: 5,
+        marginLeft: "15%",
+
     }
 })

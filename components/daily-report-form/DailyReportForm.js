@@ -118,9 +118,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
 
   const [lymphaticFilariasis, setLymphaticFilariasis] = useState(false);
   const [LFIvermectineAlbendazole, setLFIvermectineAlbendazole] = useState(false);
-  const [numCyclesLFIvermectineAlbendazole, setNumCyclesLFIvermectineAlbendazole] =
-    useState(0);
-  const [numCyclesLFAlbendazole, setNumCyclesLFAlbendazole] = useState(0);
+  const [numCyclesLymphaticFilariasis, setNumCyclesLymphaticFilariasis] = useState(0);
   const [LFAlbendazoleFirst, setLFAlbendazoleFirst] = useState(false);
   const [LFAlbendazoleSecond, setLFAlbendazoleSecond] = useState(false);
 
@@ -149,8 +147,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       setLFIvermectineAlbendazole(false);
       setLFAlbendazoleFirst(false);
       setLFAlbendazoleSecond(false);
-      setNumCyclesLFIvermectineAlbendazole(0);
-      setNumCyclesLFAlbendazole(0);
+      setNumCyclesLymphaticFilariasis(0);
     }
   }, [lymphaticFilariasis]);
 
@@ -584,11 +581,9 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       LFAlbendazoleFirst={LFAlbendazoleFirst}
       setLFAlbendazoleSecond={setLFAlbendazoleSecond}
       LFAlbendazoleSecond={LFAlbendazoleSecond}
-      setNumCyclesLFIvermectineAlbendazole={setNumCyclesLFIvermectineAlbendazole}
-      numCyclesLFIvermectineAlbendazole={numCyclesLFIvermectineAlbendazole}
-      setNumCyclesLFAlbendazole={setNumCyclesLFAlbendazole}
-      numCyclesLFAlbendazole={numCyclesLFAlbendazole}
-
+      setNumCyclesLymphaticFilariasis={setNumCyclesLymphaticFilariasis}
+      numCyclesLymphaticFilariasis={numCyclesLymphaticFilariasis}
+      
       setSchistosomiasis={setSchistosomiasis}
       schistosomiasis={schistosomiasis}
       setNumCyclesSchistosomiasis={setNumCyclesSchistosomiasis}
@@ -875,7 +870,6 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
 
     // Treatment Information state
     setOnchocerciasis(report.onchocerciasis);
-    setNumCyclesOnchocerciasis(0);
     setOnchocerciasisFirst(report.onchocerciasis.first_round);
     setOnchocerciasisSecond(report.onchocerciasis.second_round);
 
@@ -887,8 +881,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     setLFIvermectineAlbendazole(
       report.lymphatic_filariasis.ivermectine_and_albendazole
     );
-    setNumCyclesLFIvermectineAlbendazole(0);
-    setNumCyclesLFAlbendazole(0);
+    
     setLFAlbendazoleFirst(
       report.lymphatic_filariasis.albendazole_alone.first_round
     );
@@ -897,13 +890,17 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     );
 
     setSchistosomiasis(report.schistosomiasis);
-    setNumCyclesSchistosomiasis(0);
 
     setSoilTransmittedHelminthiasis(report.soil_transmitted_helminthiasis);
-    setNumCyclesSTH(0);
 
     setTrachoma(report.trachoma);
-    setNumCyclesTrachoma(0);
+    
+    // 1.12 number of Treatment Cycles
+    setNumCyclesOnchocerciasis(report.numTreatmentCycles?.onchocerciasis || 0);
+    setNumCyclesLymphaticFilariasis(report.numTreatmentCycles?.lymphatic_filariasis || 0);
+    setNumCyclesSchistosomiasis(report.numTreatmentCycles?.schistosomiasis || 0);
+    setNumCyclesTrachoma(report.numTreatmentCycles?.trachoma || 0);
+    setNumCyclesSTH(report.numTreatmentCycles?.soil_transmitted_helminthiasis || 0);
 
     // Dates state
     setDCTrainingCompletionDate(
@@ -1054,6 +1051,15 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     schistosomiasis: schistosomiasis,
     soil_transmitted_helminthiasis: soilTransmittedHelminthiasis,
     trachoma: trachoma,
+
+    numTreatmentCycles: {
+      onchocerciasis: numCyclesOnchocerciasis,
+      lymphatic_filariasis: numCyclesLymphaticFilariasis, // FIXME: not implemented yet
+      schistosomiasis: numCyclesSchistosomiasis,
+      soil_transmitted_helminthiasis: numCyclesSTH,
+      trachoma: numCyclesTrachoma,
+    },
+
     dcs_training_completion_date: DCTrainingCompletionDate,
     medicines_arrival_date: medicineArrivalDate,
     MDD_start_date: MDDStartDate,
