@@ -107,8 +107,19 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   const [healthAreaName, setHealthAreaName] = useState("");
   const [healthAreaId, setHealthAreaId] = useState("");
 
+  useEffect(() => {
+    setNumVillages((provinceName && healthZoneName && healthAreaName && Object.keys(
+      data.provinces[provinceName].health_zones[healthZoneName]
+        .health_areas[healthAreaName].villages
+    ).length) || 0);
+  }, [healthAreaName])
+
   const [villageName, setVillageName] = useState("");
   const [villageId, setVillageId] = useState("");
+
+  const [numVillages, setNumVillages] = useState(0);
+
+  const [dateOfEntry, setDateOfEntry] = useState(new Date(Date.now()));
 
   // Treatment Information state
   const [onchocerciasis, setOnchocerciasis] = useState(false);
@@ -549,6 +560,10 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       provinceName={provinceName}
       provinceId={provinceId}
       setProvinceId={setProvinceId}
+      dateOfEntry={dateOfEntry}
+      setDateOfEntry={setDateOfEntry}
+      numVillages={numVillages}
+      setNumVillages={setNumVillages}
       setHealthZoneName={setHealthZoneName}
       healthZoneName={healthZoneName}
       healthZoneId={healthZoneId}
@@ -851,6 +866,8 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         report.village
       );
 
+    setDateOfEntry(new Date(report.date));
+
     setReportId(props.currentReportId? props.currentReportId: "");
     setIs_validated(report.is_validated);
 
@@ -1035,7 +1052,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     health_zone: healthZoneId,
     village: villageId,
     // DATE
-    date: (new Date(Date.now())).toISOString(),
+    date: dateOfEntry.toISOString(),
     // 1.11 diseases treated
     onchocerciasis: {
       first_round: onchocerciasisFirst,

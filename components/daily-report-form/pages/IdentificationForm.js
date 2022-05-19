@@ -5,7 +5,6 @@ import { Chevron } from "react-native-shapes";
 import data from "./locations"; // fixme: remove this
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 
-
 export default function IdentificationForm(props) {
   // looks up all provinces and returns an array of objects
   function getProvinces() {
@@ -107,7 +106,8 @@ export default function IdentificationForm(props) {
                 props.setHealthZoneName(
                   Object.keys(data.provinces[value].health_zones)[0]
                 );
-              props.setHealthAreaName(
+              
+              value && props.setHealthAreaName(
                 Object.keys(
                   data.provinces[value].health_zones[
                     Object.keys(data.provinces[value].health_zones)[0]
@@ -218,7 +218,31 @@ export default function IdentificationForm(props) {
             Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
           />
         </View>
-        {/* <TextInput style={styles.inputField} placeholder="GPS Location (autofill)" /> */}
+        <TextInput
+            style={styles.inputField}
+            editable={false}
+            value={`${props.numVillages.toString()} Villages`}
+            placeholder="nombre de villages"
+        />
+        <Text style={styles.inputLabel}>
+          Heure et Date de la saisie
+        </Text>
+        <TextInput
+          onPressIn={() => {
+              DateTimePickerAndroid.open({
+                value: props.dateOfEntry,
+                onChange: (event, selectedDate) => {
+                  props.setDateOfEntry(selectedDate);
+                },
+                mode: 'date',
+                is24Hour: true
+              })
+            }
+          }
+          editable={!props.validate}
+          style={styles.dateInputField}
+          value={new Date(props.dateOfEntry).toLocaleDateString()}
+        />
       </View>
     </View>
   );
@@ -236,9 +260,44 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginHorizontal: 34,
-    // justifyContent: "space-around",
+  },
+  dateInputContainer: {
+    marginHorizontal: 34,
+    marginVertical: 28,
+    alignItems: "center",
+  },
+  inputLabel: {
+    fontFamily: Platform.OS === "android" ? "sans-serif" : "Avenir-Roman",
+    fontSize: 12,
+    lineHeight: 13,
+    color: "white",
+    marginTop: 30,
   },
   inputField: {
+    marginVertical: 5,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    borderRadius: 17,
+    backgroundColor: "white",
+    fontFamily:
+      Platform.OS === "android" ? "sans-serif-medium" : "Avenir-Roman",
+    fontSize: 11,
+    lineHeight: 13,
+    color: "black",
+
+    /* Android Drop Shadow Styling */
+    elevation: 10,
+
+    /* iOS Drop Shadow Styling */
+    shadowColor: "black",
+    shadowOffset: {
+      width: 10,
+      height: 10,
+    },
+    shadowRadius: 10,
+    shadowOpacity: 0.3,
+  },
+  dateInputField: {
     marginVertical: 5,
     paddingVertical: 5,
     paddingHorizontal: 15,
