@@ -22,7 +22,7 @@ export default connect(mapStateToProps)(function RecentlyValidated(props) {
             </TouchableOpacity>
             <TouchableOpacity>
                 {props.validationReports[item].isSubmitted ? 
-                <Icon name="check" color = 'green' size = {25} /> :
+                <Icon name="file-download" color = 'green' size = {25} /> :
                 <Icon name="time-slot" color = 'green' size = {20} type="entypo" />}  
             </TouchableOpacity>
         </View>
