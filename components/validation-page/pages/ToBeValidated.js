@@ -21,7 +21,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(function ToBeValidat
     const renderItem = ({item, index}) => (
         <View style={(index == (props.reportIds.length - 1))? {...styles.listitem, ...styles.bottom}: (index == 0)? {...styles.top, ...styles.listitem}: {...styles.listitem} }>
             <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY(props.validationReports[item].report.date.split('T')[0])}</Text>
-            <Text style={styles.namelist}>{`Jour #${props.validationReports[item].report.DMM_day}`}</Text>
+            <Text style={styles.namelist}>{`Jour ${!isNaN(props.validationReports[item].report.DMM_day)? 
+                convertFromYYYYMMDDToDDMMYYYY((new Date(Date.now())).toISOString().split('T')[0]) : 
+                convertFromYYYYMMDDToDDMMYYYY((new Date(props.validationReports[item].report.DMM_day)).toISOString().split('T')[0])}`}</Text>
             <TouchableOpacity style={styles.validate}>
                 <Icon name="edit" color = '#000000' size = {25} 
                     onPress={() => {
@@ -134,7 +136,7 @@ const styles = StyleSheet.create({
     },
     namelist: {
         color: '#000000',
-        fontSize: 20,
+        fontSize: 18,
         flex: 5,
     },
     validate: {

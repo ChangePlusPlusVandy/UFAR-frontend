@@ -24,7 +24,7 @@ export default function Hamburger (props) {
                     <MenuOption onSelect={() => props.setBridgeActivePage(2)}>
                         <Icon name="user" type="entypo" color = '#FFF' size = {30} iconStyle = {styles.icon} />
                     </MenuOption>
-                    <MenuOption>
+                    <MenuOption onSelect={() => props.setBridgeActivePage(3)}>
                         <Icon name="settings" color = '#FFF' size = {30} iconStyle = {styles.icon} />
                     </MenuOption>
                     <MenuOption>
