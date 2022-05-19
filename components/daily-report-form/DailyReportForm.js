@@ -107,6 +107,13 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   const [healthAreaName, setHealthAreaName] = useState("");
   const [healthAreaId, setHealthAreaId] = useState("");
 
+  useEffect(() => {
+    setNumVillages((provinceName && healthZoneName && healthAreaName && Object.keys(
+      data.provinces[provinceName].health_zones[healthZoneName]
+        .health_areas[healthAreaName].villages
+    ).length) || 0);
+  }, [healthAreaName])
+
   const [villageName, setVillageName] = useState("");
   const [villageId, setVillageId] = useState("");
 
@@ -859,7 +866,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
         report.village
       );
 
-    setDateOfEntry(report.date);
+    setDateOfEntry(new Date(report.date));
 
     setReportId(props.currentReportId? props.currentReportId: "");
     setIs_validated(report.is_validated);

@@ -106,7 +106,8 @@ export default function IdentificationForm(props) {
                 props.setHealthZoneName(
                   Object.keys(data.provinces[value].health_zones)[0]
                 );
-              props.setHealthAreaName(
+              
+              value && props.setHealthAreaName(
                 Object.keys(
                   data.provinces[value].health_zones[
                     Object.keys(data.provinces[value].health_zones)[0]
@@ -167,8 +168,6 @@ export default function IdentificationForm(props) {
             onValueChange={(value) => {
               // set health area name and initialize village to prevent errors
               props.setHealthAreaName(value);
-              // ADDED: setting the health area defines the number of matching villages, so call this function
-              props.setNumVillages(getVillages().length) 
               value &&
                 props.setVillageName(
                   Object.keys(
@@ -219,25 +218,12 @@ export default function IdentificationForm(props) {
             Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
           />
         </View>
-        <View style={styles.RNPickerSelectContainer}>
-          <RNPickerSelect
-            useNativeAndroidPickerStyle={false}
-            style={{
-              inputAndroid: styles.RNPickerSelectInput,
-              iconContainer: styles.RNPickerSelectIconContainer,
-              placeholder: styles.placeholder,
-            }}
-            onValueChange={(value) => {
-              console.log("value",value) // can't edit so just log
-            }}
-            items={getVillages().toString()} // this doesn't matter so just put whatever, mandatory though
-            disabled={true}
+        <TextInput
+            style={styles.inputField}
+            editable={false}
             value={`${props.numVillages.toString()} Villages`}
-            placeholder={{ label: props.numVillages == 0 ? "Nom du Village/Communauté" : `${props.numVillages.toString()} Villages`, value: null }}
-            // Icon={() => <Chevron size={1.5} color="#9D9D9D" />} // makes the icon disappear
-          />
-        </View>
-        <TextInput style={styles.inputField} placeholder="GPS Location (autofill)" />
+            placeholder="nombre de villages"
+        />
         <Text style={styles.inputLabel}>
           Heure et Date de la saisie
         </Text>
