@@ -30,7 +30,7 @@ export default function Registration(props){
     useEffect(() => {
 
         if (passwordConfirm !== password) {
-            setErrorMessage('Passwords do not match');
+            setErrorMessage('Les mots de passe ne correspondent pas');
         } else {
             setErrorMessage('');
         }
@@ -49,15 +49,15 @@ export default function Registration(props){
                 
             if (response.status == 201) { // todo: testing
                 // alert user that account was created
-                Alert.alert("Account Created", "Please login to continue");
+                Alert.alert("Compte créé", "Veuillez vous connecter pour continuer");
                 props.navigation.navigate('Home'); 
             } else {
-                setErrorMessage("User Registration Failed: " + response.json().message);
+                setErrorMessage("Échec de l'enregistrement de l'utilisateur: " + response.json().message);
                 return;
             }
 
         } catch (error) {
-            setErrorMessage("Cannot register user: " + error.response.data.message);
+            setErrorMessage("Impossible d'enregistrer l'utilisateur: " + error.response.data.message);
         }
     };
 
@@ -66,7 +66,7 @@ export default function Registration(props){
     return (
         <View style={styles.container}>
             <Image source={{uri: IMAGE_DEF}} style={styles.image} />
-            <Text style={styles.title}>Welcome to UFAR</Text>
+            <Text style={styles.title}>Bienvenue à UFAR</Text>
             <Text>{props.user}</Text>
 
             <TextInput style={styles.input} placeholder="Username" 

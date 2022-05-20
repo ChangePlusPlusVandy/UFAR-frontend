@@ -9,9 +9,9 @@ import {AuthContext} from '../../../src/context/AuthContext';
 
 export default function Dashboards() {
     const options = [
-        { label: 'Geographical', value: 0 },
-        { label: 'Therapeutical', value: 1 },
-        { label: 'Drugs Used', value: 2 },
+        { label: 'Couverture Géographique', value: 0 },
+        { label: 'Couverture Thérapeutique', value: 1 },
+        { label: 'Mmédicaments utilisés', value: 2 },
     ];
 
     const {authAxios} = useContext(AxiosContext);
@@ -40,15 +40,15 @@ export default function Dashboards() {
 
     const dashboards = [
         {
-            title: "Geographical Coverage",
+            title: "Couverture Géographique",
             graph: <GeographicalDashboard getDashboard={getDashboard}/>,
         },
         {
-            title: "Therapeutical Coverage",
+            title: "Couverture thérapeutique",
             graph: <TherapeuticalDashboard getDashboard={getDashboard}/>,
         },
         {
-            title: "Drugs Used",
+            title: "Proportion des médicaments utilisés",
             graph: <DrugsUsedDashboard getDashboard={getDashboard}/>,
         },
     ];
@@ -57,7 +57,7 @@ export default function Dashboards() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>Dashboard</Text>
+            <Text style={styles.header}>Tableau de bord</Text>
             <SwitchSelector 
                 options={options} initial={activeDashboard} 
                 onPress={value => setActiveDashboard(value)} 

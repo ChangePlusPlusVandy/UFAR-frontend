@@ -23,7 +23,7 @@ export default function LoginButton(props) {
                 onPress={() =>
                     props.navigation.navigate('Registration')
                 }
-            >Register, Instead</Text>
+            >Inscrivez-vous, Plutôt</Text>
         </View>
     )
 }

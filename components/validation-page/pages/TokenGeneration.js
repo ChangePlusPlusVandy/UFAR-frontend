@@ -95,7 +95,7 @@ export default function TokenGeneration(props) {
           }}
           items={getHealthZones()}
           value={healthZoneId}
-          placeholder={{ label: "Select Health Zone", value: null }}
+          placeholder={{ label: "Sélectionner la Zone de Santé", value: null }}
         />
       </View>
       <View style={styles.RNPickerSelectContainer}>
@@ -111,10 +111,10 @@ export default function TokenGeneration(props) {
           }}
           items={roles}
           value={role}
-          placeholder={{ label: "Select Role", value: null }}
+          placeholder={{ label: "Sélectionner un Rôle", value: null }}
         />
       </View>
-      <Text style={styles.selecting}>Select Token Expiration Date</Text>
+      <Text style={styles.selecting}>Sélectionner un Date d'Expiration</Text>
       <View style={styles.RNPickerSelectContainer}>
         <TextInput
           onPressIn={() => {
@@ -130,18 +130,18 @@ export default function TokenGeneration(props) {
           editable={!props.validate}
           style={styles.RNPickerSelectInput}
           value={new Date(expirationDate).toLocaleDateString()}
-          placeholder="Select Date"
+          placeholder="Sélectionner une Date"
         />
       </View>
 
       <TextInput style={styles.error}>{errorMessage}</TextInput>
       <GenerateTokenButton generateToken={generateToken} />
       <View>
-        <Text>Token (press and hold to select): </Text>
+        <Text>Jeton (Appuyez et maintenez pour sélectionner): </Text>
         {token ? <Text selectable={true}>{token}</Text> : null}
       </View>
       <View>
-        <Text>Token will be lost when you leave the page</Text>
+        <Text>Le jeton sera perdu lorsque vous quitterez la page</Text>
       </View>
     </View>
   );

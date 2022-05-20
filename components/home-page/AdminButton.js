@@ -13,7 +13,7 @@ export default function AdminButton(props) {
             }>
                 {/* INSERT ICON */}
             </TouchableOpacity>
-            <Text style={styles.text}>Admin</Text>
+            <Text style={styles.text}>Chef de Zone de Santé</Text>
         </View>
     )
 }

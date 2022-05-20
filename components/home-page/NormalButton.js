@@ -12,7 +12,7 @@ export default function NormalButton(props) {
                 props.navigation.navigate('NurseMain')} style={styles.button}>
                 {/* INSERT ICON */}
             </TouchableOpacity>
-            <Text style={styles.text}>Normal</Text>
+            <Text style={styles.text}>Utilisateur</Text>
         </View>
     )
 }
