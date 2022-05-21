@@ -12,7 +12,24 @@ const getProvinces = () => {
   return provinces;
 };
 
+
 export default function IdentificationForm(props) {
+
+   // looks up all healthZones in a province and returns an array of objects
+   function getHealthZones() {
+    let healthZoneNames = [];
+
+    if (props.reportingProvince) {
+      Object.keys(data.provinces[props.reportingProvince].health_zones).forEach(
+        function (healthZone) {
+          healthZoneNames.push({ label: healthZone, value: healthZone });
+        }
+      );
+    }
+
+    return healthZoneNames;
+  }
+
   const partners = [{label: 'END Fund', value: 'END Fund'}, {label: 'SCIF', value: 'SCIF'}, {label:'Sightsavers', value: 'Sightsavers'}, {label:'GiveWell', value: 'GiveWell'}, {label:'Other', value: 'Other'}];
   const diseases = [{label:'Onchocercose', value: 'Onchocercose'}, {label:'Filariose lymphatique', value: 'Filariose lymphatique'}, {label:'Schistosomiase', value: 'Schmistosomiase'}, {label:'Géohelminthiases', value: 
 'Géohelminthiases'}];
@@ -85,9 +102,29 @@ export default function IdentificationForm(props) {
             }}
             onValueChange={(value) => {
               props.setReportingProvince(value);
+              value && props.setReportingHealthZone(
+                getHealthZones()[0].value
+              );
             }}
             items={getProvinces()}
             value={props.reportingProvince}
+            placeholder={{ label: "Province", value: null }}
+            Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
+          />
+        </View>
+        <View style={styles.RNPickerSelectContainer}>
+          <RNPickerSelect
+            useNativeAndroidPickerStyle={false}
+            style={{
+              inputAndroid: styles.RNPickerSelectInput,
+              iconContainer: styles.RNPickerSelectIconContainer,
+              placeholder: styles.placeholder,
+            }}
+            onValueChange={(value) => {
+              props.setReportingHealthZone(value);
+            }}
+            items={getHealthZones()}
+            value={props.reportingHealthZone}
             placeholder={{ label: "Province", value: null }}
             Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
           />
