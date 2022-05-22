@@ -4,6 +4,7 @@ import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import ExportButton from './ExportButton';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
+import * as Progress from 'react-native-progress';
 
 // requests
 import {AxiosContext} from '../../../src/context/AxiosContext';
@@ -29,17 +30,12 @@ export default function Export(props){
     const [startDate, setStartDate] = React.useState(new Date(Date.now()));
     const [endDate, setEndDate] = React.useState(new Date(Date.now()));
     const [csvData, setCsvData] = React.useState('');
-    const [progress, setProgress] = React.useState(0);
+
+    const [animating, setAnimating] = React.useState(false);
 
     // console.log("startDate: ", startDate);
-
-    const data = `firstname,lastname
-    Ahmed,Tomi
-    Raed,Labes
-    Yezzi,Min l3b
-    `;
-
     const fetchData = async () => {
+        setAnimating(true);
         try {
             const response = await authAxios.post('/data/download_forms',
             JSON.stringify({startDate: startDate, endDate: endDate}),
@@ -60,9 +56,11 @@ export default function Export(props){
         if (response.status == 200) {
             const data = response.data;
             // console.log("data: ", data);
+            setAnimating(false);
             await exportData(data);
         }
         } catch (error) {
+            setAnimating(false);
             Alert.alert("Error", error.message);
         }
     }
@@ -127,6 +125,9 @@ export default function Export(props){
                     </View>
                 </View>
                 <ExportButton fetchData={fetchData} />
+                <View style={{flexDirection: 'row', alignItems:'center', alignSelf: 'center', margin:"3%"}}>
+                    <Progress.CircleSnail color={['red', 'green', 'blue']} hidesWhenStopped={true} animating={animating} />
+                </View>
         </View>
     )
 
