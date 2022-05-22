@@ -45,6 +45,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
   const [identificationYear, setIdentificationYear] = useState(0);
   const [reportingMonth, setReportingMonth] = useState("");
   const [reportingProvince, setReportingProvince] = useState("");
+  const [reportingHealthZone, setReportingHealthZone] = useState(authContext.authState.user.health_zone.name);
   const [coordinatingProvince, setCoordinatingProvince] = useState("");
   const [supportingPartner, setSupportingPartner] = useState("");
   const [ASNumber, setASNumber] = useState(0);
@@ -201,6 +202,8 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
       setReportingMonth={setReportingMonth}
       reportingProvince={reportingProvince}
       setReportingProvince={setReportingProvince}
+      reportingHealthZone={reportingHealthZone}
+      setReportingHealthZone={setReportingHealthZone}
       coordinatingProvince={coordinatingProvince}
       setCoordinatingProvince={setCoordinatingProvince}
       supportingPartner={supportingPartner}
@@ -386,6 +389,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
     setNumCommunities(form.identification.numCommunities);
     setReportingMonth(form.identification.reportingMonth);
     setReportingProvince(form.identification.reportingProvince);
+    setReportingHealthZone(form.identification.reportingHealthZone);
     setCoordinatingProvince(form.identification.coordinatingProvince);
     setSupportingPartner(form.identification.supportingPartner);
     setMtnTreated(form.identification.mtnTreated);
@@ -490,6 +494,7 @@ export default connect(mapStateToProps)(function TrainingForm(props) {
       "numCommunities": numCommunities,
       "reportingMonth": reportingMonth,
       "reportingProvince": reportingProvince,
+      "reportingHealthZone": reportingHealthZone,
       "coordinatingProvince": coordinatingProvince,
       "supportingPartner": supportingPartner,
       "mtnTreated": mtnTreated,

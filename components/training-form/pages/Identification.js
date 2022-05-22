@@ -1,8 +1,9 @@
-import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import { Chevron } from "react-native-shapes";
 import data from "../../daily-report-form/pages/locations.js";
+import { AuthContext } from '../../../src/context/AuthContext';
+import React, {useContext} from 'react';
 
 const getProvinces = () => {
   var provinces = [];
@@ -13,6 +14,8 @@ const getProvinces = () => {
 };
 
 export default function IdentificationForm(props) {
+
+  const authContext = useContext(AuthContext);
   const partners = [{label: 'END Fund', value: 'END Fund'}, {label: 'SCIF', value: 'SCIF'}, {label:'Sightsavers', value: 'Sightsavers'}, {label:'GiveWell', value: 'GiveWell'}, {label:'Other', value: 'Other'}];
   const diseases = [{label:'Onchocercose', value: 'Onchocercose'}, {label:'Filariose lymphatique', value: 'Filariose lymphatique'}, {label:'Schistosomiase', value: 'Schmistosomiase'}, {label:'Géohelminthiases', value: 
 'Géohelminthiases'}];
@@ -38,6 +41,7 @@ export default function IdentificationForm(props) {
           defaultValue={props.chiefName}
           placeholder="Nom du Medecin Chef de zone"
         />
+        <Text style={styles.inputField}>{authContext.authState.user?.health_zone.name || ""}</Text>
         <TextInput
           style={styles.inputField}
           onChange={(e) => props.setASNumber(parseInt(e.nativeEvent.text || 0))}
