@@ -1,14 +1,14 @@
 import React, {useContext} from 'react';
-import { StyleSheet, Text, View, TextInput, Alert, PermissionsAndroid, Platform} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Alert, PermissionsAndroid, Platform, TouchableOpacity} from 'react-native';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import ExportButton from './ExportButton';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 import * as Progress from 'react-native-progress';
+import {Icon} from 'react-native-elements';
 
 // requests
 import {AxiosContext} from '../../../src/context/AxiosContext';
-import {AuthContext} from '../../../src/context/AuthContext';
 
 async function hasAndroidPermission() {
     const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
@@ -22,14 +22,14 @@ async function hasAndroidPermission() {
     return status === 'granted';
   }
 
-export default function Export(props){
-    const authContext = useContext(AuthContext);
+export default function Export(){
     const {authAxios} = useContext(AxiosContext);
     
     // return a date range picker
     const [startDate, setStartDate] = React.useState(new Date(Date.now()));
     const [endDate, setEndDate] = React.useState(new Date(Date.now()));
     const [csvData, setCsvData] = React.useState('');
+    const [fileName, setFileName] = React.useState('');
 
     const [animating, setAnimating] = React.useState(false);
 
@@ -55,9 +55,9 @@ export default function Export(props){
 
         if (response.status == 200) {
             const data = response.data;
-            // console.log("data: ", data);
             setAnimating(false);
-            await exportData(data);
+            setFileName(`export-${startDate.toLocaleDateString().replace(/\//g, '-')}-to-${endDate.toLocaleDateString().replace(/\//g, '-')}.csv`);
+            setCsvData(data);
         }
         } catch (error) {
             setAnimating(false);
@@ -66,14 +66,14 @@ export default function Export(props){
     }
 
 
-    const exportData = async (data) => {
-        const path = FileSystem.documentDirectory + 'export.csv';
+    const exportData = async () => {
+        const path = FileSystem.documentDirectory + fileName;
         try {
             if (Platform.OS === "android" && !(await hasAndroidPermission())) {
                 Alert.alert('Failure', 'Permission to access external storage was denied');
             }
 
-            await FileSystem.writeAsStringAsync(path, data, { encoding: FileSystem.EncodingType.UTF8 });
+            await FileSystem.writeAsStringAsync(path, csvData, { encoding: FileSystem.EncodingType.UTF8 });
             await Sharing.shareAsync(path);
             Alert.alert('Success', 'Data exported successfully');
         } catch (e) {
@@ -128,6 +128,13 @@ export default function Export(props){
                 <View style={{flexDirection: 'row', alignItems:'center', alignSelf: 'center', margin:"3%"}}>
                     <Progress.CircleSnail color={['red', 'green', 'blue']} hidesWhenStopped={true} animating={animating} />
                 </View>
+                {fileName.length? <View style={styles.item}>
+                    <Icon name="page-csv" type="foundation" color = 'black' size = {30} iconStyle = {styles.icon} />
+                    <Text style={styles.inputLabel}>{fileName}</Text>
+                    <TouchableOpacity onPressIn={() => exportData()}>
+                        <Icon name="download" type="foundation" color = 'black' size = {30} iconStyle = {styles.icon} />
+                    </TouchableOpacity>
+                </View>: null}
         </View>
     )
 
@@ -201,5 +208,30 @@ const styles = StyleSheet.create({
         },
         shadowRadius: 10,
         shadowOpacity: 0.3,
-      },
+    }, 
+    item: {
+        marginHorizontal: "2%",
+        paddingHorizontal: '2.5%',
+        paddingVertical: '1%',
+        flexDirection: "row",
+        borderRadius: 10,
+        backgroundColor: "white",
+        justifyContent: "space-between",
+
+        /* Android Drop Shadow Styling */
+        elevation: 10,
+        
+        /* iOS Drop Shadow Styling */
+        shadowColor: "black",
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        },
+        shadowRadius: 5,
+        shadowOpacity: 0.3,
+    },
+    icon:{
+        marginTop: 5,
+        marginLeft: 2,
+    },
 });
