@@ -33,9 +33,6 @@ export default function Hamburger (props) {
                     <MenuOption onSelect={() => props.setActivePage(5)}>
                         <Icon name="page-export-csv" type="foundation" color = '#FFF' size = {30} iconStyle = {styles.icon} />
                     </MenuOption>
-                    <MenuOption onSelect={() => props.setActivePage(4)}>
-                        <Icon name="archive" type="font-awesome" color = '#FFF' size = {30} iconStyle = {styles.icon} />
-                    </MenuOption>
                     <MenuOption onSelect={() => props.setActivePage(6)}>
                         <Icon name="settings" color = '#FFF' size = {30} iconStyle = {styles.icon} />
                     </MenuOption>

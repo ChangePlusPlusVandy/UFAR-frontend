@@ -2,17 +2,18 @@ import React, {useEffect} from 'react';
 import {StyleSheet , View, Text, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import {VictoryChart, VictoryBar, VictoryAxis, VictoryTheme, VictoryGroup, VictoryLabel, VictoryLegend } from 'victory-native'
+import DateRangeFilter from './dateRangeFilter';
 
 const {height, width} = Dimensions.get('window');
 const BAR_WIDTH = Math.round(height*0.017)
 
 // the way this works is a bit odd, you create a 3 overlaid and offset bar charts
 // Say the data looks like this
-const regionData = {
-    "RegionA": [12, 37, 49], // where 12 is Ivermectine, 37 is Albendazole...
-    "RegionB": [34, 25, 56],
-    "RegionC": [22, 67, 98],
-}
+// const regionData = {
+//     "RegionA": [12, 37, 49], // where 12 is Ivermectine, 37 is Albendazole...
+//     "RegionB": [34, 25, 56],
+//     "RegionC": [22, 67, 98],
+// }
 // Then the first first VictoryBar should have the [0] index of all regions, the second should have all [1], and so on
 // I.E. Instead of adding more victorybar components if you get more regions, you just add more data points inside each one.
 // Each bar should have the same number of data points and should correspond to the number of regions
@@ -23,24 +24,31 @@ export default function DrugsUsedDashboard({getDashboard}) {
                                           "praziquantel": [{ regionName: "", percentage: 0}]});
 
   const [errorMessage, setErrorMessage] = React.useState('');
-    useEffect(() =>{
-      // call get dashboard and catch errors
-      getDashboard("drugs")
-      .then(data => {
-        var dataObject = {};
-        for (const [key, value] of Object.entries(data)){
-          for (const [key2, value2] of Object.entries(value)){
-            dataObject[key2]? dataObject[key2].push({x: key, percentage: value2}) : dataObject[key2] = [{x: key, percentage: value2}];
-          }
+
+  console.log("error message", errorMessage);
+
+  const filterData = (startDate, endDate) => {
+    // call get dashboard and catch errors
+    getDashboard("drugs", startDate, endDate)
+    .then(data => {
+      var dataObject = {};
+      for (const [key, value] of Object.entries(data)){
+        for (const [key2, value2] of Object.entries(value)){
+          dataObject[key2]? dataObject[key2].push({x: key, percentage: value2}) : dataObject[key2] = [{x: key, percentage: value2}];
         }
+      }
 
-        Object.keys(dataObject).length && setData(dataObject);
-      }).catch(error => {
-        setErrorMessage(error.message);
-      });
-    }, [])
-
+      Object.keys(dataObject).length && setData(dataObject);
+    }).catch(error => {
+      setErrorMessage(error.message);
+    });
+  }
+    
     return (
+      <View>
+        <View>
+          <DateRangeFilter filterData={filterData}/>
+        </View>
         <View style={styles.container}>
           <ScrollView>
             <VictoryChart
@@ -86,8 +94,8 @@ export default function DrugsUsedDashboard({getDashboard}) {
                     />
                 </VictoryGroup>
             </VictoryChart>
-            <Text style={styles.chartTitle}>Graph Title</Text>
-            <VictoryLegend y={10} x = {35}
+            <Text style={styles.error}>{errorMessage}</Text>
+            <VictoryLegend y={5} x = {35}
   	            title=""
                 orientation="horizontal"
                 gutter={20}
@@ -98,8 +106,8 @@ export default function DrugsUsedDashboard({getDashboard}) {
                 ]}
               />
           </ScrollView>
-          <Text style={styles.error}>{errorMessage}</Text>
         </View>
+      </View>
   )
 }
 
