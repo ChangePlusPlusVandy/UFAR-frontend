@@ -26,7 +26,10 @@ export default function Export(){
     const {authAxios} = useContext(AxiosContext);
     
     // return a date range picker
-    const [startDate, setStartDate] = React.useState(new Date(Date.now()));
+    const [startDate, setStartDate] = React.useState(
+        // set to one month in the past
+        new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000)
+    );
     const [endDate, setEndDate] = React.useState(new Date(Date.now()));
     const [csvData, setCsvData] = React.useState('');
     const [fileName, setFileName] = React.useState('');
