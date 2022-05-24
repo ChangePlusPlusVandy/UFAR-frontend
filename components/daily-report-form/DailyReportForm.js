@@ -436,14 +436,14 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     numMenPrazi + numWomenPrazi
   );
   const [totalCoveragePrazi, setTotalCoveragePrazi] = useState(
-    (totalNumPrazi * 100) / totalNumPersons
+    (totalNumPrazi * 100) / totalFiveToFourteenYears
   );
 
   // Update total
   useEffect(() => {
     setTotalNumPrazi(numMenPrazi + numWomenPrazi);
-    setTotalCoveragePrazi((totalNumPrazi * 100) / totalNumPersons);
-  }, [numMenPrazi, numWomenPrazi, totalNumPrazi, totalNumPersons]);
+    setTotalCoveragePrazi((totalNumPrazi * 100) / totalFiveToFourteenYears);
+  }, [numMenPrazi, numWomenPrazi, totalNumPrazi, totalFiveToFourteenYears]);
 
   // Processing: Albendazole (Soil-transmitted helminthiasis)
   const [numMenAlbendazoleHelminthiasis, setNumMenAlbendazoleHelminthiasis] =
@@ -461,7 +461,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
   const [
     totalCoverageAlbendazoleHelminthiasis,
     setTotalCoverageAlbendazoleHelminthiasis,
-  ] = useState((totalNumAlbendazoleHelminthiasis * 100) / totalNumPersons);
+  ] = useState((totalNumAlbendazoleHelminthiasis * 100) / totalFiveToFourteenYears);
 
   // Update total
   useEffect(() => {
@@ -469,9 +469,9 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
       numMenAlbendazoleHelminthiasis + numWomenAlbendazoleHelminthiasis
     );
     setTotalCoverageAlbendazoleHelminthiasis(
-      (totalNumAlbendazoleHelminthiasis * 100) / totalNumPersons
+      (totalNumAlbendazoleHelminthiasis * 100) / totalFiveToFourteenYears
     );
-  }, [numMenAlbendazoleHelminthiasis, numWomenAlbendazoleHelminthiasis, totalNumAlbendazoleHelminthiasis, totalNumPersons]);
+  }, [numMenAlbendazoleHelminthiasis, numWomenAlbendazoleHelminthiasis, totalNumAlbendazoleHelminthiasis, totalFiveToFourteenYears]);
 
   // Side effects state
   const [numSideEffectsReported, setNumSideEffectsReported] = useState(0);
