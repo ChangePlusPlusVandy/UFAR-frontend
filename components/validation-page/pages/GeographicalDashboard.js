@@ -8,7 +8,8 @@ const {height, width} = Dimensions.get('window');
 const BAR_WIDTH = Math.round(height*0.017)
 
 export default function GeographicalDashboard({getDashboard}) {
-  const [data, setData] = React.useState([{ regionName: "", percentage: 0}]);
+  const initialData = [{ regionName: "", percentage: 0}];
+  const [data, setData] = React.useState(initialData);
   const [errorMessage, setErrorMessage] = React.useState('');
 
   // iterate through the data object and create a new array with the data
@@ -24,7 +25,7 @@ export default function GeographicalDashboard({getDashboard}) {
           });
         }
 
-        dataArray.length && setData(dataArray);
+        dataArray.length > 0?  setData(dataArray): setData(initialData);
       }).catch(error => {
         setErrorMessage(error.message);
       });

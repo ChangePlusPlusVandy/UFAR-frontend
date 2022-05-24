@@ -9,13 +9,16 @@ const {height, width} = Dimensions.get('window');
 const BAR_WIDTH = Math.round(height*0.017)
 
 export default function TherapeuticalDashboard({getDashboard}) {
-  const [data, setData] = React.useState({
+
+  const initialData = {
     "ivermectine": [{ regionName: "", percentage: 0}],
     "albendazole": [{ regionName: "", percentage: 0}],
     "ivermectine_and_albendazole": [{ regionName: "", percentage: 0}],
     "praziquantel": [{ regionName: "", percentage: 0}],
 
-  });
+  }
+
+  const [data, setData] = React.useState(initialData);
   const [errorMessage, setErrorMessage] = React.useState('');
   const [therapeutic, setTherapeutic] = React.useState("ivermectine"); // this is set by the RNPicker
 
@@ -36,8 +39,7 @@ export default function TherapeuticalDashboard({getDashboard}) {
         dataObject.albendazole.length &&
         dataObject.ivermectine.length &&  
         dataObject.ivermectine_and_albendazole.length  && 
-        dataObject.praziquantel.length &&  
-        setData(dataObject);
+        dataObject.praziquantel.length? setData(dataObject): setData(initialData);
 
       }).catch(error => {
         setErrorMessage(error.message);

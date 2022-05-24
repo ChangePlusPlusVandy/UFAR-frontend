@@ -5,8 +5,8 @@ import {Icon} from 'react-native-elements';
 
 export default function DateRangeFilter({filterData}){
     const [startDate, setStartDate] = useState(
-        // set start date to one year in the past from today
-        new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 365))
+        // set start date in the past month
+        new Date(new Date().setDate(new Date().getDate() - 30))
     );
 
     const [endDate, setEndDate] = useState(new Date(Date.now()));

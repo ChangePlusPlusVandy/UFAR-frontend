@@ -19,13 +19,15 @@ const BAR_WIDTH = Math.round(height*0.017)
 // Each bar should have the same number of data points and should correspond to the number of regions
 // The below data is obv all dummy
 export default function DrugsUsedDashboard({getDashboard}) {
-  const [data, setData] = React.useState({"ivermectin": [{ regionName: "", percentage: 0}],
-                                          "albendazole": [{ regionName: "", percentage: 0}],
-                                          "praziquantel": [{ regionName: "", percentage: 0}]});
+
+  const initialData = {"ivermectin": [{ regionName: "", percentage: 0}],
+  "albendazole": [{ regionName: "", percentage: 0}],
+  "praziquantel": [{ regionName: "", percentage: 0}]}
+
+  const [data, setData] = React.useState(initialData);
 
   const [errorMessage, setErrorMessage] = React.useState('');
 
-  console.log("error message", errorMessage);
 
   const filterData = (startDate, endDate) => {
     // call get dashboard and catch errors
@@ -38,7 +40,7 @@ export default function DrugsUsedDashboard({getDashboard}) {
         }
       }
 
-      Object.keys(dataObject).length && setData(dataObject);
+      Object.keys(dataObject).length? setData(dataObject): setData(initialData);
     }).catch(error => {
       setErrorMessage(error.message);
     });
