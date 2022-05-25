@@ -7,6 +7,8 @@
  * if the fetch was successful. If the user is offline, the report is added to the offline queue
  * and submitted later when there's a network connection. However, the report is still aded to
  * the redux store and marked as not submitted yet. 
+ * 
+ * After submission, reports get new database ids, so we replace the uuid with the new id.
  * @param {*} report 
  * @param {*} authAxios 
  * @param {*} id -- function identifier for the offline queue
@@ -28,17 +30,19 @@ export const addReport = (report, authAxios, id) => {
                 },
             })
             if (response.status == 200){
-                dispatch({type: 'ADD_REPORT', report: report, id: id, isSubmitted: true})
+                dispatch({type: 'ADD_REPORT', report: report, newId: response.data._id, id: id, isSubmitted: true, response: "Success"});
             }  else {
-                // if there's an error, call the add action which marks it is not submitted
+                // if there's an error, call the add action which marks it is not submitted and deletes it
                 console.log("error while submitting report1: ", err);
-                dispatch({type: 'ADD_REPORT', report: report, id: id, isSubmitted: false})
+                dispatch({type: 'ADD_REPORT', report: report, newId:id, id: id, isSubmitted: false, response: response.json().message})
             }
         } catch (err) {
         
-            // if there's an error, call the add action which marks it is not submitted
-            console.log("error while submitting report2: ", err);
-            dispatch({type: 'ADD_REPORT', report: report, id: id, isSubmitted: false})
+            // if there's an error, call the add action which marks it is not submitted.
+            // Also the new id is the same as the old one, in which case we remove it
+            // TODO: probably delete the report entry from the redux store
+            console.log("error while submitting report2: ", err.response.data.message);
+            dispatch({type: 'ADD_REPORT', report: report, newId: id, id: id, isSubmitted: false, response: err.response.data.message})
 
         }
 

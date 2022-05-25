@@ -886,7 +886,7 @@ export default connect(mapStateToProps)(function DailyReportForm(props) {
     setVillageId(report.village);
 
     // Treatment Information state
-    setOnchocerciasis(report.onchocerciasis);
+    setOnchocerciasis(report.onchocerciasis.first_round || report.onchocerciasis.second_round);
     setOnchocerciasisFirst(report.onchocerciasis.first_round);
     setOnchocerciasisSecond(report.onchocerciasis.second_round);
 

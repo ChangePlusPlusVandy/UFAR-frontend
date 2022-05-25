@@ -1,5 +1,6 @@
 import React from "react";
 import UfarApp from "./src/UfarApp";
+import { Alert } from "react-native";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import { createNetworkMiddleware } from "react-native-offline";
@@ -82,16 +83,32 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_REPORT":
       // adds or updates the report in the state
-      return {
-        ...state,
-        reports: {
-          ...state.reports,
-          [action.id]: {
-            report: action.report,
-            isSubmitted: action.isSubmitted,
-          },
-        },
-      };
+
+      if (action.id == action.newId){
+        // there was an error, and the report was not submitted, so we delete it
+        reports = {...state.reports};
+        delete reports[action.id];
+        // Alert the user
+        Alert.alert(
+          "Error",
+          action.response
+        );
+        return { ...state, reports: reports };
+      } else {
+        // update old reports id with the new one
+        var reports = { ...state.reports };
+        reports[action.newId] = reports[action.id];
+        delete reports[action.id];
+        return { ...state, 
+                reports: {
+                  ...reports,
+                  [action.newId]: {
+                    report: action.report,
+                    isSubmitted: action.isSubmitted,
+                  },
+                } ,
+              };
+      }
 
     // validation cases
     case "ADD_USER_REPORTS":
