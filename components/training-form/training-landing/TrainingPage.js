@@ -31,11 +31,6 @@ export default function TrainingPage(props){
     const [provinceId, setProvinceId] = React.useState(0);
     const {authAxios} = React.useContext(AxiosContext);
 
-    // console.log("healthzoneIddd", authContext.authState.user.health_zone);
-    // console.log("province", getProvinceId(authContext.authState.user.health_zone));
-
-    // console.log("provinceID: ", getProvinceId(props.healthZoneId));
-    console.log("Form: ", currentForm);
 
     const getTrainingForms = async () => {
         // var provinceId = getProvinceId(props.healthZoneId);
