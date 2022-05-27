@@ -1,8 +1,9 @@
-import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import { Chevron } from "react-native-shapes";
 import data from "../../daily-report-form/pages/locations.js";
+import { AuthContext } from '../../../src/context/AuthContext';
+import React, {useContext} from 'react';
 
 const getProvinces = () => {
   var provinces = [];
@@ -13,6 +14,8 @@ const getProvinces = () => {
 };
 
 export default function IdentificationForm(props) {
+
+  const authContext = useContext(AuthContext);
   const partners = [{label: 'END Fund', value: 'END Fund'}, {label: 'SCIF', value: 'SCIF'}, {label:'Sightsavers', value: 'Sightsavers'}, {label:'GiveWell', value: 'GiveWell'}, {label:'Other', value: 'Other'}];
   const diseases = [{label:'Onchocercose', value: 'Onchocercose'}, {label:'Filariose lymphatique', value: 'Filariose lymphatique'}, {label:'Schistosomiase', value: 'Schmistosomiase'}, {label:'Géohelminthiases', value: 
 'Géohelminthiases'}];
@@ -27,7 +30,7 @@ export default function IdentificationForm(props) {
           // editable={!props.view}
           style={styles.inputField}
           onChange={(e) => props.setContactNumber(parseInt(e.nativeEvent.text || 0))}
-          defaultValue={props.contactNumber.toString()}
+          // defaultValue={props.contactNumber.toString()}
           value={props.contactNumber && props.contactNumber.toString()}
           placeholder="Numero de contact"
         />
@@ -38,6 +41,23 @@ export default function IdentificationForm(props) {
           defaultValue={props.chiefName}
           placeholder="Nom du Medecin Chef de zone"
         />
+        <View style={styles.RNPickerSelectContainer}>
+          <RNPickerSelect
+            useNativeAndroidPickerStyle={false}
+            style={{
+              inputAndroid: styles.RNPickerSelectInput,
+              iconContainer: styles.RNPickerSelectIconContainer,
+              placeholder: styles.placeholder,
+            }}
+            onValueChange={(value) => {
+              props.setReportingHealthZone(value);
+            }}
+            items={[{label: authContext.authState.user.health_zone.name, value: authContext.authState.user.health_zone.id}]}
+            value={props.reportingHealthZone}
+            placeholder={{ label: "Zone de Rapport", value: null }}
+            Icon={() => <Chevron size={1.5} color="#9D9D9D" />}
+          />
+        </View>
         <TextInput
           style={styles.inputField}
           onChange={(e) => props.setASNumber(parseInt(e.nativeEvent.text || 0))}

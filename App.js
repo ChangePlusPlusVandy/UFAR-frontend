@@ -23,60 +23,60 @@ import { addReport, getReports, validateReport } from "./src/actions.js";
 import { comparisonFn } from "./src/utils.js";
 
 const actions = {
-  addReport,
-  getReports,
-  validateReport,
+	addReport,
+	getReports,
+	validateReport,
 };
 
 // @credit: https://www.npmjs.com/package/react-native-offline#offline-queue
 const networkTransform = createTransform(
-  (inboundState, key) => {
-    const actionQueue = [];
+	(inboundState, key) => {
+		const actionQueue = [];
 
-    inboundState.actionQueue.forEach((action) => {
-      if (typeof action === "function") {
-        actionQueue.push({
-          function: action.meta.name,
-          args: action.meta.args,
-        });
-      } else if (typeof action === "object") {
-        actionQueue.push(action);
-      }
-    });
-    return {
-      ...inboundState,
-      actionQueue,
-    };
-  },
-  (outboundState, key) => {
-    const actionQueue = [];
+		inboundState.actionQueue.forEach((action) => {
+			if (typeof action === "function") {
+				actionQueue.push({
+					function: action.meta.name,
+					args: action.meta.args,
+				});
+			} else if (typeof action === "object") {
+				actionQueue.push(action);
+			}
+		});
+		return {
+			...inboundState,
+			actionQueue,
+		};
+	},
+	(outboundState, key) => {
+		const actionQueue = [];
 
-    outboundState.actionQueue.forEach((action) => {
-      if (action.function) {
-        const actionFunction = actions[action.function];
-        actionQueue.push(actionFunction(...action.args));
-      } else {
-        actionQueue.push(action);
-      }
-    });
+		outboundState.actionQueue.forEach((action) => {
+			if (action.function) {
+				const actionFunction = actions[action.function];
+				actionQueue.push(actionFunction(...action.args));
+			} else {
+				actionQueue.push(action);
+			}
+		});
 
-    return { ...outboundState, actionQueue };
-  },
-  // The 'network' key may change depending on what you
-  // named your network reducer.
-  { whitelist: ["network"] }
+		return { ...outboundState, actionQueue };
+	},
+	// The 'network' key may change depending on what you
+	// named your network reducer.
+	{ whitelist: ["network"] }
 );
 
 const initialState = {
-  name: "Jean Deport", // todo: get this from the server
-  reports: {}, // holds report objects for the day
-  validationReports: {}, // holds report objects for the day
+	name: "Jean Deport", // todo: get this from the server
+	reports: {}, // holds report objects for the day
+	validationReports: {}, // holds report objects for the day
 };
 
 const persistConfig = {
-  key: "root",
-  storage: AsyncStorage,
-  transforms: [networkTransform],
+	key: "root",
+	storage: AsyncStorage,
+	transforms: [networkTransform],
 };
 
 const reducer = (state = initialState, action) => {
@@ -181,44 +181,37 @@ const reducer = (state = initialState, action) => {
 };
 
 const rootReducer = combineReducers({
-  reducer,
-  network: createNetworkReducer(comparisonFn),
+	reducer,
+	network: createNetworkReducer(comparisonFn),
 });
 
 const networkMiddleware = createNetworkMiddleware({
-  queueReleaseThrottle: 200,
+	queueReleaseThrottle: 200,
 });
 
 // persist reducer
 const pReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore(
-  pReducer,
-  applyMiddleware(networkMiddleware, thunk, logger)
-);
+const store = createStore(pReducer, applyMiddleware(networkMiddleware, thunk, logger));
 const persistor = persistStore(store);
 
-console.log("dEv domain dEv dev dev", DEV_DOMAIN);
+console.log("DEV", DEV_DOMAIN);
 
 export default function App() {
-  // todo: change the ping interval to a more reasonable value
-  return (
-    <AuthProvider>
-      <AxiosProvider>
-        <MenuProvider>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <ReduxNetworkProvider
-                pingInterval={3000}
-                shouldPing={true}
-                pingServerUrl={DEV_DOMAIN}
-              >
-                <UfarApp />
-              </ReduxNetworkProvider>
-            </PersistGate>
-          </Provider>
-        </MenuProvider>
-      </AxiosProvider>
-    </AuthProvider>
-  );
+	// todo: change the ping interval to a more reasonable value
+	return (
+		<AuthProvider>
+			<AxiosProvider>
+				<MenuProvider>
+					<Provider store={store}>
+						<PersistGate loading={null} persistor={persistor}>
+							<ReduxNetworkProvider pingInterval={3000} shouldPing={true} pingServerUrl={DEV_DOMAIN}>
+								<UfarApp />
+							</ReduxNetworkProvider>
+						</PersistGate>
+					</Provider>
+				</MenuProvider>
+			</AxiosProvider>
+		</AuthProvider>
+	);
 }
