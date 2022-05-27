@@ -1,5 +1,6 @@
 import React from "react";
 import UfarApp from "./src/UfarApp";
+import { Alert } from "react-native";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import { createNetworkMiddleware } from "react-native-offline";
@@ -79,85 +80,104 @@ const persistConfig = {
 };
 
 const reducer = (state = initialState, action) => {
-	switch (action.type) {
-		case "ADD_REPORT":
-			// adds or updates the report in the state
-			return {
-				...state,
-				reports: {
-					...state.reports,
-					[action.id]: {
-						report: action.report,
-						isSubmitted: action.isSubmitted,
-					},
-				},
-			};
+  switch (action.type) {
+    case "ADD_REPORT":
+      // adds or updates the report in the state
 
-		// validation cases
-		case "ADD_USER_REPORTS":
-			if (action.reports) {
-				return { ...state, reports: { ...action.reports } };
-			} else {
-				return { ...state };
-			}
+      if (action.id == action.newId){
+        // there was an error, and the report was not submitted, so we delete it
+        reports = {...state.reports};
+        delete reports[action.id];
+        // Alert the user
+        Alert.alert(
+          "Error",
+          action.response
+        );
+        return { ...state, reports: reports };
+      } else {
+        // update old reports id with the new one
+        var reports = { ...state.reports };
+        reports[action.newId] = reports[action.id];
+        delete reports[action.id];
+        return { ...state, 
+                reports: {
+                  ...reports,
+                  [action.newId]: {
+                    report: action.report,
+                    isSubmitted: action.isSubmitted,
+                  },
+                } ,
+              };
+      }
 
-		case "SET_NAME":
-			return { ...state, name: action.name };
+    // validation cases
+    case "ADD_USER_REPORTS":
+      if (action.reports) {
+        return { ...state, reports: { ...action.reports } };
+      } else {
+        return { ...state };
+      }
 
-		case offlineActionTypes.FETCH_OFFLINE_MODE:
-			// todo: better way not to include literals
-			if (action.meta.name === "addReport" || action.meta.name === "saveEditReport") {
-				var report = action.meta.args[0];
-				console.log("action meta args", action.meta.args);
-				var id = action.meta.args[2];
-				return {
-					...state,
-					reports: {
-						...state.reports,
-						[id]: { report: report, isSbumitted: false },
-					},
-				};
-			}
+    case "SET_NAME":
+      return { ...state, name: action.name };
 
-		// validation cases
-		case "ADD_VALIDATION_REPORTS":
-			if (action.reports) {
-				return { ...state, validationReports: { ...action.reports } };
-			} else {
-				return { ...state };
-			}
+    case offlineActionTypes.FETCH_OFFLINE_MODE:
+      // todo: better way not to include literals
+      if (
+        action.meta.name === "addReport" ||
+        action.meta.name === "saveEditReport"
+      ) {
+        var report = action.meta.args[0];
+        console.log("action meta args", action.meta.args);
+        var id = action.meta.args[2];
+        return {
+          ...state,
+          reports: {
+            ...state.reports,
+            [id]: { report: report, isSbumitted: false },
+          },
+        };
+      }
 
-		case "MARK_VALIDATED_REPORT":
-			// updated reports
-			return {
-				...state,
-				validationReports: {
-					...state.validationReports,
-					[action.id]: {
-						report: {
-							...state.validationReports[action.id].report,
-							...action.report,
-							is_validated: true,
-						},
-						isSbumitted: false,
-					},
-				},
-			};
+    // validation cases
+    case "ADD_VALIDATION_REPORTS":
+      if (action.reports) {
+        return { ...state, validationReports: { ...action.reports } };
+      } else {
+        return { ...state };
+      }
 
-		case "MARK_VALIDATED_REPORT_SUBMITTED":
-			return {
-				...state,
-				validationReports: {
-					...state.validationReports,
-					[action.id]: {
-						report: action.report,
-						isSubmitted: action.isSubmitted,
-					},
-				},
-			};
-	}
+    case "MARK_VALIDATED_REPORT":
+      // updated reports
+      return {
+        ...state,
+        validationReports: {
+          ...state.validationReports,
+          [action.id]: {
+            report: {
+              ...state.validationReports[action.id].report,
+              ...action.report,
+              is_validated: true,
+            },
+            isSbumitted: false,
+          },
+        },
+      };
 
-	return state;
+    case "MARK_VALIDATED_REPORT_SUBMITTED":
+      return {
+        ...state,
+        validationReports: {
+          ...state.validationReports,
+          [action.id]: {
+            report: action.report,
+            isSubmitted: action.isSubmitted,
+          },
+        },
+      };
+  }
+
+  return state;
 };
 
 const rootReducer = combineReducers({
