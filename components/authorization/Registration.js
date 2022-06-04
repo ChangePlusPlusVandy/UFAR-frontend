@@ -69,21 +69,21 @@ export default function Registration(props){
             <Text style={styles.title}>Bienvenue à UFAR</Text>
             <Text>{props.user}</Text>
 
-            <TextInput style={styles.input} placeholder="Username" 
+            <TextInput style={styles.input} placeholder="Nom d'utilisateur" 
                 onChangeText={text => setUsername(text)}
                 value={username}
             />
-             <TextInput style={styles.input} placeholder="Token"
+             <TextInput style={styles.input} placeholder="Jeton"
                 onChange = {e => setToken(e.nativeEvent.text)}
                 // value = {password}
                 secureTextEntry={true} 
             />
-            <TextInput style={styles.input} placeholder="Password"
+            <TextInput style={styles.input} placeholder="Le Mot de Passe"
                 onChange = {(e) => setPassword(e.nativeEvent.text)}
                 // value = {password}
                 secureTextEntry={true} 
             />
-            <TextInput style={styles.input} placeholder="Verify Password"
+            <TextInput style={styles.input} placeholder="Vérifier Le Mot de Passe"
                 onChange = {(e) => {
                     setPasswordConfirm(e.nativeEvent.text);
                 }}
