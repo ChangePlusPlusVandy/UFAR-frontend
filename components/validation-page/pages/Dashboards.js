@@ -30,11 +30,11 @@ export default function Dashboards() {
             if (response && response.status == 200) {
                 return response.data;
             } else {
-                throw new Error(`${dashboard} query failed: `, response.statusText);
+                throw new Error(`${dashboard} La requête a échoué: `, response.statusText);
             }
   
         } catch (error) {
-            throw new Error (`Cannot get ${dashboard}: ` + error);
+            throw new Error (`Ne peut pas obtenir ${dashboard}: ` + error);
         }
     };
 

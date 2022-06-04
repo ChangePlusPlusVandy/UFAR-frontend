@@ -56,7 +56,7 @@ export default function DrugsUsedDashboard({getDashboard}) {
                 >
                     <VictoryBar
                         style={styles.barChart}
-                        name="Ivermectin"
+                        name="Ivermectine"
                         data={data.ivermectin} 
                         barWidth={BAR_WIDTH}
                         y="percentage"
@@ -86,7 +86,7 @@ export default function DrugsUsedDashboard({getDashboard}) {
                     />
                 </VictoryGroup>
             </VictoryChart>
-            <Text style={styles.chartTitle}>Graph Title</Text>
+            <Text style={styles.chartTitle}>Médicaments Utilisés</Text>
             <VictoryLegend y={10} x = {35}
   	            title=""
                 orientation="horizontal"

@@ -72,16 +72,16 @@ export default function TokenGeneration(props) {
         setToken(uuidToken.token);
         setErrorMessage("");
       } else {
-        setErrorMessage("Token generation failed: " + response.json().message);
+        setErrorMessage("Échec de la génération du jeton: " + response.json().message);
       }
     } catch (error) {
-      setErrorMessage("Cannot get token " + error);
+      setErrorMessage("Impossible d'obtenir le jeton: " + error);
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>New User Token</Text>
+      <Text style={styles.title}>Nouveau jeton d'utilisateur</Text>
       <View style={styles.RNPickerSelectContainer}>
         <RNPickerSelect
           useNativeAndroidPickerStyle={false}

@@ -28,24 +28,24 @@ export default function ResetUserPassword(props){
                 
             if (response && response.status == 201) {
                 // todo: Testing
-                setSuccessMessage("Password Reset Successfully");
+                setSuccessMessage("Mot de passe réinitialisé avec succès");
                 setUsername('');
                 setNewPassword('');
                 setPasswordConfirm('');
                 setErrorMessage('');
             } else {
-                setErrorMessage("User Password Reset Failed: " + response.json().message);
+                setErrorMessage("Échec de la réinitialisation du mot de passe utilisateur: " + response.json().message);
                 return;
             }
 
         } catch (error) {
-            setErrorMessage("Cannot reset password: " + error.response.data.message);
+            setErrorMessage("Impossible de réinitialiser le mot de passe: " + error.response.data.message);
         }
     };
 
     useEffect(() => {
         if (passwordConfirm !== newPassword) {
-            setErrorMessage('Passwords do not match');
+            setErrorMessage('Les mots de passe ne correspondent pas');
         } else {
             setErrorMessage('');
         }
