@@ -1,13 +1,17 @@
 import React, {useState, useContext} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import SwitchSelector from 'react-native-switch-selector';
 import GeographicalDashboard from './GeographicalDashboard';
 import TherapeuticalDashboard from './TherapeuticalDashboard';
 import DrugsUsedDashboard from './DrugsUsedDashboard';
 import {AxiosContext} from '../../../src/context/AxiosContext';
 import {AuthContext} from '../../../src/context/AuthContext';
+import {Icon} from 'react-native-elements';
+
 
 export default function Dashboards() {
+   
+
     const options = [
         { label: 'Couverture Géographique', value: 0 },
         { label: 'Couverture Thérapeutique', value: 1 },
@@ -17,9 +21,10 @@ export default function Dashboards() {
     const {authAxios} = useContext(AxiosContext);
     const authContext = useContext(AuthContext);
     
-    const getDashboard = async (dashboard, id=authContext.authState.user.health_zone.id) => {
+    const getDashboard = async (dashboard, startDate, endDate, id=authContext.authState.user.health_zone.id) => {
         try {
             const response = await authAxios.post(`/data/${id}/${dashboard}`,
+                JSON.stringify({startDate: startDate, endDate: endDate}),
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -82,8 +87,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 10,
         overflow: 'scroll',
         flex: 1,
-        marginTop: 20,
-        paddingVertical: 20,
+        paddingVertical: "1%",
         paddingHorizontal: 10,
         alignItems: 'center',
 
@@ -109,8 +113,6 @@ const styles = StyleSheet.create({
     },
     switch: {
         width: '100%',
-        marginTop: 10,
-        marginBottom: 20,
     },
     switchText: {
         fontWeight: 'bold',
@@ -127,8 +129,7 @@ const styles = StyleSheet.create({
     dashboardContainer: {
         backgroundColor: 'white',
         borderRadius: 10,
-        margin: 10,
-        paddingVertical: 20,
+        paddingVertical: "1%",
         flex: 1,
 
         /* Android Drop Shadow Styling */
@@ -141,5 +142,5 @@ const styles = StyleSheet.create({
             height: 5,
         },
         shadowRadius: 5,
-    }
+    },
 });

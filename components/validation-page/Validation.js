@@ -8,8 +8,8 @@ import Dashboards from './pages/Dashboards';
 import NetworkBar from '../nurse-landing-page/NetworkBar';
 import TokenGenerationPage from './pages/UserManagement';
 import SettingsPage from './pages/SettingPage';
-import TrainingForm from '../training-form/TrainingForm';
 import TrainingPage from '../training-form/training-landing/TrainingPage';
+import Export from './pages/Export';
 
 import { connect } from 'react-redux';
 
@@ -28,6 +28,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(function Validation 
         <Dashboards/>,
         <TokenGenerationPage/>,
         <TrainingPage/>,
+        <Export/>,
         <SettingsPage/>
     ]
 
