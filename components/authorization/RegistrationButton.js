@@ -21,7 +21,7 @@ export default function RegistrationButton({registerUser, navigation}) {
                 onPress={() =>
                     navigation.navigate('Login')
                 }
-            >Login, Instead</Text>
+            >Connectez-vous, plutôt</Text>
         </View>
     )
 }

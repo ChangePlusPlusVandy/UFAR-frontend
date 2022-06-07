@@ -66,16 +66,16 @@ export default function Login(props){
                     props.setStatus&&props.setStatus('success');
                     await props.navigation.navigate(userOption? 'NurseApp':'AdminApp');
                 } else {
-                    setErrorMessage('Not authorized user: select the right type');
+                    setErrorMessage('Utilisateur non autorisé : sélectionnez le bon type');
                 }
             
             } else {
-                setErrorMessage("Login Failed: " + response.json().message);
+                setErrorMessage("Échec de la connexion: " + response.json().message);
                 return;
             }
 
         } catch (error) {
-            setErrorMessage("Login Failed: " + error.response.data.message);
+            setErrorMessage("Échec de la connexion: " + error.response.data.message);
             // Alert.alert('Login Failed', error.response?.data?.message);
         }
     };
@@ -97,11 +97,11 @@ export default function Login(props){
 
             <Text>{props.user}</Text>
 
-            <TextInput style={styles.input} placeholder="Username" 
+            <TextInput style={styles.input} placeholder="Nom d'utilisateur" 
                 onChangeText={text => setUsername(text)}
                 // value={username}
             />
-            <TextInput style={styles.input} placeholder="Password"
+            <TextInput style={styles.input} placeholder="Mot de passe"
                 onChange = {(e) => setPassword(e.nativeEvent.text)}
                 // value = {password}
                 secureTextEntry={true} 

@@ -9,8 +9,8 @@ export default function UserManagement(props){
     const [userPage, setUserPage] = useState(0);
 
     const options = [
-        { label: 'New User Token', value: 0 },
-        { label: 'Reset User Password', value: 1 },
+        { label: 'Nouveau Jeton Utilisateur', value: 0 },
+        { label: 'Réinitialiser le Jeton Utilisateur', value: 1 },
     ];
 
     const userManagement = [
@@ -20,7 +20,7 @@ export default function UserManagement(props){
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>User Management</Text>
+            <Text style={styles.header}>Gestion des Utilisateurs</Text>
             <SwitchSelector 
                 options={options} initial={userPage} 
                 onPress={value => setUserPage(value)} 

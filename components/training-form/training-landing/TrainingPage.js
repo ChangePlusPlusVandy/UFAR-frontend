@@ -54,19 +54,19 @@ export default function TrainingPage(props){
 
                 setTrainingForms(forms);
             } else {
-                Alert.alert("Getting training Forms Failed: " + response.json().message);
+                Alert.alert("Échec de l'obtention des formulaires de formation: " + response.json().message);
                 return;
             }
     
         } catch (error) {
-            Alert.alert("Error: " + error);
+            Alert.alert("Erreur: " + error);
         }
     };
 
     const renderItem = ({item, index}) => (
         <View style={(index == (Object.values(trainingForms).length - 1))? {...styles.listitem, ...styles.bottom}: (index == 0)? {...styles.top, ...styles.listitem}: {...styles.listitem} }>
             <Text style={styles.timelist}>{convertFromYYYYMMDDToDDMMYYYY((new Date(item.date)).toISOString().split('T')[0])}</Text>
-            <Text style={styles.namelist}>{`Training Form`}</Text>
+            <Text style={styles.namelist}>{`Formulaire de formation`}</Text>
             <TouchableOpacity style={styles.edit}>
                 <Icon name="eye" color = 'green' size = {20} type="entypo" onPress={
                     () => {

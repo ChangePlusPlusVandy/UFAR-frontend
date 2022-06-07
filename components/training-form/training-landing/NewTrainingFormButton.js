@@ -9,7 +9,7 @@ export default function NewTrainingFormButton(props){
         <View style={{...styles.container, ...styles.containerInactive}}>
             <Pressable onPress={() => props.setLandingPage(false)} style={styles.newReportPressable} >
                 <Icon solid={true} name='plus' type='entypo' color='white' size={30}/>
-                <Text style={styles.newReportText}>New Training Form</Text>
+                <Text style={styles.newReportText}>Nouveau Formulaire de Formation</Text>
             </Pressable>
         </View>
     )

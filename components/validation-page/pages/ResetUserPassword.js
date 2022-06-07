@@ -28,24 +28,24 @@ export default function ResetUserPassword(props){
                 
             if (response && response.status == 201) {
                 // todo: Testing
-                setSuccessMessage("Password Reset Successfully");
+                setSuccessMessage("Mot de passe réinitialisé avec succès");
                 setUsername('');
                 setNewPassword('');
                 setPasswordConfirm('');
                 setErrorMessage('');
             } else {
-                setErrorMessage("User Password Reset Failed: " + response.json().message);
+                setErrorMessage("Échec de la réinitialisation du mot de passe utilisateur: " + response.json().message);
                 return;
             }
 
         } catch (error) {
-            setErrorMessage("Cannot reset password: " + error.response.data.message);
+            setErrorMessage("Impossible de réinitialiser le mot de passe: " + error.response.data.message);
         }
     };
 
     useEffect(() => {
         if (passwordConfirm !== newPassword) {
-            setErrorMessage('Passwords do not match');
+            setErrorMessage('Les mots de passe ne correspondent pas');
         } else {
             setErrorMessage('');
         }
@@ -53,16 +53,16 @@ export default function ResetUserPassword(props){
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Reset User Password</Text>
-            <TextInput style={styles.input} placeholder="Username" 
+            <Text style={styles.title}>Réinitialiser le Mot de Passe</Text>
+            <TextInput style={styles.input} placeholder="Nom d'utilisateur" 
                 onChangeText={(text) => setUsername(text)}
                 value={username}
             />
-            <TextInput style={styles.input} placeholder="New Password"
+            <TextInput style={styles.input} placeholder="Nouveau Mot de Passe"
                 onChange = {(e) => setNewPassword(e.nativeEvent.text)}
                 secureTextEntry={true} 
             />
-            <TextInput style={styles.input} placeholder="Verify New Password"
+            <TextInput style={styles.input} placeholder="Vérifier le Nouveau Mot de Passe"
                 onChange = {(e) => {
                     setPasswordConfirm(e.nativeEvent.text);
                 }}

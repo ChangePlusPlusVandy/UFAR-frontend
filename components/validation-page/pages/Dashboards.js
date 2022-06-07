@@ -13,9 +13,9 @@ export default function Dashboards() {
    
 
     const options = [
-        { label: 'Geographical', value: 0 },
-        { label: 'Therapeutical', value: 1 },
-        { label: 'Drugs Used', value: 2 },
+        { label: 'Couverture Géographique', value: 0 },
+        { label: 'Couverture Thérapeutique', value: 1 },
+        { label: 'Mmédicaments utilisés', value: 2 },
     ];
 
     const {authAxios} = useContext(AxiosContext);
@@ -35,25 +35,25 @@ export default function Dashboards() {
             if (response && response.status == 200) {
                 return response.data;
             } else {
-                throw new Error(`${dashboard} query failed: `, response.statusText);
+                throw new Error(`${dashboard} La requête a échoué: `, response.statusText);
             }
   
         } catch (error) {
-            throw new Error (`Cannot get ${dashboard}: ` + error);
+            throw new Error (`Ne peut pas obtenir ${dashboard}: ` + error);
         }
     };
 
     const dashboards = [
         {
-            title: "Geographical Coverage",
+            title: "Couverture Géographique",
             graph: <GeographicalDashboard getDashboard={getDashboard}/>,
         },
         {
-            title: "Therapeutical Coverage",
+            title: "Couverture thérapeutique",
             graph: <TherapeuticalDashboard getDashboard={getDashboard}/>,
         },
         {
-            title: "Drugs Used",
+            title: "Proportion des médicaments utilisés",
             graph: <DrugsUsedDashboard getDashboard={getDashboard}/>,
         },
     ];
@@ -62,7 +62,7 @@ export default function Dashboards() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>Dashboards</Text>
+            <Text style={styles.header}>Tableau de bord</Text>
             <SwitchSelector 
                 options={options} initial={activeDashboard} 
                 onPress={value => setActiveDashboard(value)} 

@@ -53,7 +53,7 @@ export default function TherapeuticalDashboard({getDashboard}) {
       </View>
       <View style={styles.container}>
         <ScrollView>
-          <Text style={styles.chartTitle}>Therapeutic Coverage</Text>
+          <Text style={styles.chartTitle}>Couverture thérapeutique</Text>
           <View>
             <RNPickerSelect
                 value={therapeutic}

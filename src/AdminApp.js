@@ -31,7 +31,7 @@ export default function AdminApp(props){
           setStatus('success');
         } else {
           setStatus('failed');
-          setErrorMessage('You are not authorized to access the Admin page');
+          setErrorMessage("Vous n'êtes pas autorisé à accéder à la page d'administration");
         }
 
       } catch (error) {
