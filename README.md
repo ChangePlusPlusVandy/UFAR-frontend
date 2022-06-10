@@ -136,6 +136,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 * Nicholas Gebo - nicholas.s.gebo@vanderbilt.edu
 * Carol He - nicholas.s.gebo@vanderbilt.edu
 * Asher Sabah - asher.e.sabah@vanderbilt.edu
+* Drew Deister - andrew.z.deister@vanderbilt.edu
 
 Project Link: [https://github.com/ChangePlusPlusVandy/UFAR-frontend](https://github.com/ChangePlusPlusVandy/UFAR-frontend)
 
